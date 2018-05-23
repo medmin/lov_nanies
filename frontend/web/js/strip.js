@@ -1,0 +1,1 @@
+$('.navbar-default').append('<div class="bottom-strip"></div>');
