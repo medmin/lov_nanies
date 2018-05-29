@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\UserProfile;
+use common\models\Nannies;
 
 /**
- * UserSearch represents the model behind the search form about `common\models\User`.
+ * NannySearch represents the model behind the search form about `common\models\Nannies`.
  */
-class NannySearch extends UserProfile
+class NannySearch extends Nannies
 {
     /**
      * @inheritdoc
@@ -40,9 +40,9 @@ class NannySearch extends UserProfile
     public function search($params, $limit='')
     {
         if($limit!=''){
-            $query = UserProfile::find()->limit($limit);
+            $query = Nannies::find()->limit($limit);
         }else{
-            $query = UserProfile::find();
+            $query = Nannies::find();
         }
         
 

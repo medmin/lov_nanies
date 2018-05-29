@@ -13,11 +13,14 @@ use trntv\filekit\behaviors\UploadBehavior;
  *
  * @property integer $id
  * @property integer $status
+ * @property string $avatar_path
+ * @property string $avatar_base_url
  * @property string $unique_link
  * @property string $reg_date
  * @property string $password
  * @property string $name
  * @property string $address
+ * @property integer $zip_code
  * @property string $biography
  * @property string $phone_home
  * @property string $phone_cell
@@ -131,6 +134,8 @@ use trntv\filekit\behaviors\UploadBehavior;
  * @property string $attach23
  * @property string $attach32
  * @property string $attach33
+ * @property string $locale
+ * @property integer $gender
  */
 class Nannies extends ActiveRecord
 {
@@ -169,6 +174,8 @@ class Nannies extends ActiveRecord
         return [
             'id' => 'ID',
             'status' => 'Status',
+            'avatar_path' => 'Avatar Path',
+            'avatar_base_url' => 'Avatar Base Url',
             'unique_link' => 'Unique Link',
             'reg_date' => 'Reg Date',
             'password' => 'Password',
@@ -287,6 +294,8 @@ class Nannies extends ActiveRecord
             'attach23' => 'Attach23',
             'attach32' => 'Attach32',
             'attach33' => 'Attach33',
+            'locale' => 'Locale',
+            'gender' => 'Gender',
         ];
     }
     

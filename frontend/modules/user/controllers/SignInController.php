@@ -104,7 +104,7 @@ class SignInController extends \yii\web\Controller
             if((Yii::$app->user->identity->step<6)||(Yii::$app->user->identity->step==7)){
                 return $this->actionContinueRegistration();
             }
-            return $this->goBack();
+            return $this->redirect(['/user/default/index']);
         }
         
         return $this->render('login', [
