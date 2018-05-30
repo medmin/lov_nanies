@@ -80,9 +80,9 @@ class UserProfile extends ActiveRecord
     {
         return [
             'user_id' => 'User ID',
-            'firstname' => 'Firstname',
-            'middlename' => 'Middlename',
-            'lastname' => 'Lastname',
+            'firstname' => 'First Name',
+            'middlename' => 'Middle Name',
+            'lastname' => 'Last Name',
             'avatar_path' => 'Avatar Path',
             'avatar_base_url' => 'Avatar Base Url',
             'locale' => 'Locale',

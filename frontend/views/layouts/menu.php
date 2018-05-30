@@ -31,8 +31,14 @@ NavBar::begin([
                 
                 ]
             ],
-            ['label' => Yii::t('frontend', 'Signup <i class="fa fa-plus navicn"></i>'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
-            ['label' => Yii::t('frontend', 'Login <i class="fa fa-plus navicn"></i>'), 'url' => ['/user/sign-in/login'], 'visible'=>Yii::$app->user->isGuest],
+            [
+                'label' => 'User',
+                'items' => [
+                    ['label' => Yii::t('frontend', 'Sign Up <i class="fa fa-plus navicn"></i>'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
+            ['label' => Yii::t('frontend', 'Log In <i class="fa fa-plus navicn"></i>'), 'url' => ['/user/sign-in/login'], 'visible'=>Yii::$app->user->isGuest],
+                ]
+            ],
+            
             [
                 'label' => Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->getPublicIdentity(),
                 'visible'=>!Yii::$app->user->isGuest,
