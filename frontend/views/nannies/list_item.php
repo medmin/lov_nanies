@@ -4,7 +4,6 @@
  * @var $model common\models\Article
  */
 use yii\helpers\Html;
-
 ?>
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 item ">
     <div class="card center-block">
@@ -36,4 +35,3 @@ use yii\helpers\Html;
             
     </div>
 </div>
-

@@ -40,11 +40,11 @@ class NanniesController extends Controller
         $radius=5;
 //        $zu=new Paypal();
         switch (true){
-            case ($_GET['radius']!=''):
+            case ( isset($_GET['radius']) ):
                 $radius=$_GET['radius'];
-            case ($_GET['position']!=''):
+            case (isset($_GET['position'])):
                 $search["NannySearch"]["position_for"]=$_GET['position'];
-            case ($_GET['zip']!=''):
+            case (isset($_GET['zip'])):
                 $location= new PostalCode($_GET['zip']);
                 $zips =$location->getPostalCodesInRange(0,$radius);
                 foreach($zips as $object){
@@ -52,7 +52,7 @@ class NanniesController extends Controller
                 }
                 $search["NannySearch"]["zip_code"]=$zips_array;
                 break;
-            case ($_GET['city']!=''):
+            case (isset($_GET['city'])):
                 $location= new PostalCode($_GET['city'].", CA");
                 $zips_array =$location->getSameCity();
                  $search["NannySearch"]["zip_code"]=$zips_array;

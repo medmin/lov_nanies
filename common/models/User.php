@@ -37,13 +37,13 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 3;
 
     const ROLE_NANNY = 'nanny';
-    const ROLE_SEEKER = 'seeker';
+    const ROLE_SEEKER = 'seeker'; // SEEKER 其实就是 parent, rbac表里用到了，但 rbac_auth_item表里竟然是seeker 的type 是1
     const ROLE_MANAGER = 'manager';
     const ROLE_ADMINISTRATOR = 'administrator';
 
     const EVENT_AFTER_SIGNUP = 'afterSignup';
     const EVENT_AFTER_LOGIN = 'afterLogin';
-    public $type;
+    public $type; // nanny == 1; parent == 2
     /**
      * @inheritdoc
      */
@@ -262,6 +262,7 @@ class User extends ActiveRecord implements IdentityInterface
         
         // Default role
         $auth = Yii::$app->authManager;
+        // type == 1 是保姆; type == 2 是parent
         if($this->type==1){
             $profile = new UserProfile();
             $profile->locale = Yii::$app->language;

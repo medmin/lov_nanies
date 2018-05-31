@@ -1,9 +1,12 @@
 <?php
-/* @var $this yii\web\View */
+/** @var $this yii\web\View
+ * @var $searchModel backend\models\search\NannySearch
+ *
+ */
 use yii\web\View;
 
 if (isset($_GET['city'])){
-    $this->title = Yii::t('frontend', 'Nannies in '.$_GET['city']);
+    $this->title = Yii::t('frontend', 'Nannies in ' . $_GET['city']);
 }else{
     $this->title = Yii::t('frontend', 'Nannies');
 }
@@ -24,7 +27,7 @@ $this->registerJs(
         <div class="row row-margin">
             <div class="tab-content tabpill-content">
             <div id="babysitters-tab" class="tab-pane fade active in">
-            <?php echo \yii\widgets\ListView::widget([
+            <?= \yii\widgets\ListView::widget([
                 'dataProvider'=>$dataProvider,
                 'pager'=>[
                     'hideOnSinglePage'=>true,

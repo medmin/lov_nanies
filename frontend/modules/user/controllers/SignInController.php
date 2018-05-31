@@ -254,7 +254,7 @@ class SignInController extends \yii\web\Controller
         if (!$token) {
             throw new BadRequestHttpException;
         }
-
+ 
         $user = $token->user;
         $user->updateAttributes([
             'status' => User::STATUS_ACTIVE
@@ -265,7 +265,8 @@ class SignInController extends \yii\web\Controller
             'body' => Yii::t('frontend', 'Your account has been successfully activated.'),
             'options' => ['class' => 'alert-success']
         ]);
-        if(\Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['nanny']->name=='nanny'){
+        $tmpArr2 = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()) ;
+        if(array_key_exists('nanny',$tmpArr2)){
             return  Yii::$app->controller->redirect(['/user/sign-in/continue-registration']);
         }else{
             return  Yii::$app->controller->redirect(['/user/sign-in/continue-family']);
