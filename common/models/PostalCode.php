@@ -59,8 +59,8 @@ class PostalCode
      */
     public function __construct($location)
     {
-        @mysql_connect('localhost', 'lovingna_new', 'newsoftware249');
-        @mysql_select_db('lovingna_new');
+//        @mysql_connect('localhost', 'lovingna_new', 'newsoftware249');
+//        @mysql_select_db('lovingna_new');
         if (is_array($location)) {
             $this->setPropertiesFromArray($location);
             $this->print_name = $this->postal_code;
