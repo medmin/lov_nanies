@@ -2,6 +2,7 @@
 
 namespace frontend\modules\user\controllers;
 
+use common\models\Nannies;
 use Yii;
 use common\base\MultiModel;
 use frontend\modules\user\models\AccountForm;
@@ -130,7 +131,7 @@ class DefaultController extends Controller
     }
     public function actionMain(){
         $user = Yii::$app->user->identity;
-        $model= Yii::$app->user->identity->userProfile;
+        $model= Nannies::findOne(Yii::$app->user->id);
         if ($model->load($_POST) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
                 'options'=>['class'=>'alert-success'],
@@ -145,7 +146,7 @@ class DefaultController extends Controller
     
     public function actionQuestionsNSchedule(){
         $user = Yii::$app->user->identity;
-        $model= Yii::$app->user->identity->userProfile;
+        $model= Nannies::findOne(Yii::$app->user->id);
         if ($model->load($_POST) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
                 'options'=>['class'=>'alert-success'],
@@ -159,7 +160,7 @@ class DefaultController extends Controller
     }
     public function actionEducationNDriving(){
         $user = Yii::$app->user->identity;
-        $model= Yii::$app->user->identity->userProfile;
+        $model= Nannies::findOne(Yii::$app->user->id);
         if ($model->load($_POST) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
                 'options'=>['class'=>'alert-success'],
@@ -173,7 +174,7 @@ class DefaultController extends Controller
     }
     public function actionHousekeeping(){
         $user = Yii::$app->user->identity;
-        $model= Yii::$app->user->identity->userProfile;
+        $model= Nannies::findOne(Yii::$app->user->id);
         if ($model->load($_POST) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
                 'options'=>['class'=>'alert-success'],
@@ -187,7 +188,7 @@ class DefaultController extends Controller
     }
     public function actionAboutYou(){
         $user = Yii::$app->user->identity;
-        $model= Yii::$app->user->identity->userProfile;
+        $model= Nannies::findOne(Yii::$app->user->id);
         if ($model->load($_POST) && $model->save()) {
             Yii::$app->session->setFlash('alert', [
                 'options'=>['class'=>'alert-success'],

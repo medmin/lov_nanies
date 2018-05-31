@@ -144,7 +144,7 @@ class Nannies extends ActiveRecord
     const STATUS_INACTIVE = -1;
     const STATUS_DELETED = -10;
 
-    public $picture;
+    public $picture, $age, $city;
 
     /**
      * @return array
@@ -178,14 +178,113 @@ class Nannies extends ActiveRecord
             [['id'], 'required'],
             [['id', 'gender'], 'integer'],
             [['status', 'zip_code', 'aviliable_for_interview', 'over_18', 'eligible_to_work', 'have_work_visa', 'employed', 'may_contact_employer', 'hours_per_week', 'weekly_salary', 'rate_communication_skills', 'laundry_and_ironing', 'housekeep_communication_skills', 'housekeep_organization_skills', 'work_at_home_with_child', 'help_with_childcare', 'crp_certified', 'first_aid_certified', 'need_crp_fa_renew', 'tb_test', 'pet_allergies', 'smoking', 'work_if_parent_smokes', 'valid_passport', 'work_if_parent_at_home', 'miles_to_commute', 'child_of_your_own', 'dog_cat_at_home', 'swim', 'uniform_dress_code', 'benefits', 'trawel_with_family', 'drive', 'have_car', 'car_insurance', 'valid_licence', 'use_car_for_work', 'city', 'gender'], 'integer'],
-            [['avatar_path', 'avatar_base_url', 'unique_link', 'password', 'name', 'address', 'biography', 'phone_home', 'phone_cell', 'email', 'date_of_birth', 'personal_comments', 'position_for', 'when_can_start', 'hourly_rate', 'wage_comment', 'availability', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'schedule_comment', 'level_of_school', 'name_of_school', 'college', 'college_location', 'subjects_studied', 'spec_training', 'certificates', 'childcare_exp', 'ages_to_work_with', 'most_exp_with', 'cared_of_twins', 'special_needs_exp', 'tutor', 'houskeeping', 'why_want_be_nanny', 'type_of_activities', 'characteristics_look_for', 'background_in_child_dev', 'number_of_children_care_for', 'sick_children', 'assist_homework', 'family_life', 'interests', 'philosophy', 'most_important', 'houskeep_years_exp', 'largest_house', 'best_describes_housekeeping', 'personal_style_of_service', 'private_household', 'not_willing_housework', 'travel_restrictions', 'crime', 'state_licence', 'company_car_insurance', 'traffic_citations', 'states_lived_in', 'traffic_citations_last5_yrs', 'car_model_year', 'extra_activities', 'type_of_family', 'short_term_goals', 'why_qualified', 'languages', 'heared_about_us', 'rate_candidate', 'notes', 'trustline', 'back_checks', 'attach1', 'attach2', 'attach3', 'attach12', 'attach13', 'attach22', 'attach23', 'attach32', 'attach33', 'locale'], 'string'],
-            [['picture', 'reg_date'], 'safe']
+            [['avatar_path', 'avatar_base_url', 'unique_link', 'password', 'name', 'address', 'biography', 'phone_home', 'phone_cell', 'email', 'date_of_birth', 'personal_comments', 'when_can_start', 'hourly_rate', 'wage_comment', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'schedule_comment', 'level_of_school', 'name_of_school', 'college', 'college_location', 'subjects_studied', 'spec_training', 'certificates', 'childcare_exp', 'ages_to_work_with', 'most_exp_with', 'cared_of_twins', 'special_needs_exp', 'tutor', 'why_want_be_nanny', 'type_of_activities', 'characteristics_look_for', 'background_in_child_dev', 'number_of_children_care_for', 'sick_children', 'assist_homework', 'family_life', 'interests', 'philosophy', 'most_important', 'houskeep_years_exp', 'largest_house', 'personal_style_of_service', 'private_household', 'not_willing_housework', 'travel_restrictions', 'crime', 'state_licence', 'company_car_insurance', 'traffic_citations', 'states_lived_in', 'traffic_citations_last5_yrs', 'car_model_year', 'extra_activities', 'type_of_family', 'short_term_goals', 'why_qualified', 'languages', 'heared_about_us', 'rate_candidate', 'notes', 'trustline', 'back_checks', 'attach1', 'attach2', 'attach3', 'attach12', 'attach13', 'attach22', 'attach23', 'attach32', 'attach33', 'locale'], 'string'],
+            [['picture', 'reg_date', 'position_for', 'availability', 'houskeeping', 'best_describes_housekeeping'], 'safe']
         ];
     }
     
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'id']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if($this->position_for!=''){
+                $a=$this->position_for;
+                $this->position_for='';
+                foreach($a as $number){
+                    $this->position_for.=$number;
+                }
+            }
+            if($this->availability!=''){
+                $a=$this->availability;
+                $this->availability='';
+                foreach($a as $number){
+                    $this->availability.=$number;
+                }
+            }
+            if($this->houskeeping!=''){
+                $a=$this->houskeeping;
+                $this->houskeeping='';
+                foreach($a as $number){
+                    $this->houskeeping.=$number;
+                }
+            }
+            if($this->best_describes_housekeeping!=''){
+                $a=$this->best_describes_housekeeping;
+                $this->best_describes_housekeeping='';
+                foreach($a as $number){
+                    $this->best_describes_housekeeping.=$number;
+                }
+            }
+
+            return true;
+        }
+        return false;
+    }
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->doArray();
+        $this->age=$this->get_age($this->date_of_birth);
+
+        // 先注释下边这个，用了一大堆放弃的mysql函数
+
+//        if($this->zip_code!=0){
+//            $this->city = new PostalCode($this->zip_code);
+//            $this->city->getCity();
+//        }else{
+//            $this->city = new PostalCode("92011");
+//            $this->city->place_name="N/A";
+//        }
+
+    }
+    public function doArray(){
+        if($this->position_for!=''){
+            $this->position_for=str_split($this->position_for);
+        }
+        else{
+            $this->position_for=array();
+        }
+        if($this->availability!=''){
+            $this->availability=str_split($this->availability);
+        }
+        else{
+            $this->availability=array();
+        }
+        if($this->houskeeping!=''){
+            $this->houskeeping=str_split($this->houskeeping);
+        }
+        else{
+            $this->houskeeping=array();
+        }
+        if($this->best_describes_housekeeping!=''){
+            $this->best_describes_housekeeping=str_split($this->best_describes_housekeeping);
+        }else{
+            $this->best_describes_housekeeping=array();
+        }
+    }
+    private function get_age($date_of_birth){
+        $year=date("Y");
+        if(preg_match("/\d[0-9]{3}/",$date_of_birth,$matches)){
+          $born= $date_of_birth."---".$matches[0]."<br>";
+          $age=$year-$matches[0];
+          if($age==$year){
+            $age="N/A";
+          }
+        }else{
+          if(preg_match("/[456789]{1}\d[0-9]{0}/",$date_of_birth,$matches)){
+            $born= $date_of_birth."---19".$matches[0]."<br>";
+            $matches[0]="19".$matches[0];
+            $age=$year-$matches[0];
+          }else{
+            //echo $row['date_of_birth']."<br>";
+            $age="N/A";
+          }
+        }
+        return $age;
     }
 
     /**
