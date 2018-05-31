@@ -12,7 +12,11 @@ $this->registerJs(
     $(document).ready(function () {
         $("html, body").animate({scrollTop: $(".slide").height()+$(".navbar").height()},"slow");
         console.log($("slide").height());
-            });
+        $("#reset_button").click(function(){
+            $(this).addClass("hidden");
+            $("#reset_pwd").removeClass("hidden");
+        })
+     });
     ',
     View::POS_READY,
     'my-button-handler'
@@ -27,16 +31,22 @@ $this->title = Yii::t('frontend', 'User Account')
     <div class="col-md-6">   
         <h2 style="color: #414141;">My NannyCare Account</h2>
         
-        <?= $form->field($model->getModel('account'), 'username')->textInput(['readOnly' => true]) ?>
+        <?= $form->field($model->getModel('account'), 'username')->textInput(['disabled' => true]) ?>
     
-        <?= $form->field($model->getModel('account'), 'email')->textInput(['readOnly' => true]) ?>
-        
-        <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>
-    
-        <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
-    
+        <?= $form->field($model->getModel('account'), 'email')->textInput(['disabled' => true]) ?>
+
+        <div class="hidden" id="reset_pwd">
+            <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>
+
+            <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
+
+            <div class="form-group">
+                <?= Html::submitButton(Yii::t('frontend', 'Confirm Reset Password'), ['class' => 'nav-btn']) ?>
+            </div>
+        </div>
+
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('frontend', 'Confirm Reset Password'), ['class' => 'nav-btn']) ?>
+            <?= Html::Button(Yii::t('frontend', 'Reset Password'), ['class' => 'nav-btn', 'id' => 'reset_button']) ?>
         </div>
     </div>
         <div class="col-md-6">

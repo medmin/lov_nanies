@@ -2,6 +2,7 @@
 
 namespace frontend\modules\user\controllers;
 
+use common\models\Nannies;
 use Yii;
 use yii\authclient\AuthAction;
 use yii\base\Exception;
@@ -123,7 +124,8 @@ class SignInController extends \yii\web\Controller
     public function actionContinueRegistration(){
         $user = Yii::$app->user->identity;
         if(Yii::$app->user->identity->step<=6){
-            $model= Yii::$app->user->identity->userProfile;
+            Nannies::initialization();
+            $model = Nannies::findOne(Yii::$app->user->id);
         }else{
             $model= Yii::$app->user->identity->families;
         }

@@ -76,18 +76,23 @@ class DefaultController extends Controller
          * print_r的结果： Array ([seeker]=> .......)
          * 如果是nanny身份，尚未测试 2018.5.20
          */
+        /**
+         * getRolesByUser 是获取指定用户（ID）在权限表（rbac_auth_assignment）中的角色（item_name）
+         * 返回一个数组，即一个用户可以有多个角色，数组的键为用户所拥有的角色名，值为一个Role对象
+         * Role对象是属性为角色表（rbac_auth_item）的字段值
+         */
         $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
         if( array_key_exists('nanny', $tmpArr) ){
             $accountForm->setUser(Yii::$app->user->identity);
             $model = new MultiModel([
                 'models' => [
                     'account' => $accountForm,
-                    'profile' => Yii::$app->user->identity->userProfile
+                    'profile' => Yii::$app->user->identity->nannies
                 ]
             ]);
-    
+
+            $locale = $model->getModel('profile')->locale;
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $locale = $model->getModel('profile')->locale;
                 Yii::$app->session->setFlash('forceUpdateLocale');
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-success'],

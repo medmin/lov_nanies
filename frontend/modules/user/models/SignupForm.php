@@ -79,7 +79,7 @@ class SignupForm extends Model
             $shouldBeActivated = $this->shouldBeActivated();
             $user = new User();
             $user->type=$this->type;
-            $user->type==2 ? $user->step=7 : '';
+            $user->type==2 ? $user->step=7 : '';  // step db default 1
             $user->username = $this->username;
             $user->email = $this->email;
             $user->status = $shouldBeActivated ? User::STATUS_NOT_ACTIVE : User::STATUS_ACTIVE;

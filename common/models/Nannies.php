@@ -139,6 +139,28 @@ use trntv\filekit\behaviors\UploadBehavior;
  */
 class Nannies extends ActiveRecord
 {
+    const STATUS_APPROVED = 1;
+    const STATUS_UNAPPROVED = 0;
+    const STATUS_INACTIVE = -1;
+    const STATUS_DELETED = -10;
+
+    public $picture;
+
+    /**
+     * @return array
+     */
+//    public function behaviors()
+//    {
+//        return [
+//            'picture' => [
+//                'class' => UploadBehavior::className(),
+//                'attribute' => 'picture',
+//                'pathAttribute' => 'avatar_path',
+//                'baseUrlAttribute' => 'avatar_base_url'
+//            ],
+//        ];
+//    }
+
     /**
      * @inheritdoc
      */
@@ -155,9 +177,9 @@ class Nannies extends ActiveRecord
         return [
             [['id'], 'required'],
             [['id', 'gender'], 'integer'],
-            [['name', 'avatar_path', 'avatar_base_url'], 'string', 'max' => 255],
-            
-            ['picture', 'safe']
+            [['status', 'zip_code', 'aviliable_for_interview', 'over_18', 'eligible_to_work', 'have_work_visa', 'employed', 'may_contact_employer', 'hours_per_week', 'weekly_salary', 'rate_communication_skills', 'laundry_and_ironing', 'housekeep_communication_skills', 'housekeep_organization_skills', 'work_at_home_with_child', 'help_with_childcare', 'crp_certified', 'first_aid_certified', 'need_crp_fa_renew', 'tb_test', 'pet_allergies', 'smoking', 'work_if_parent_smokes', 'valid_passport', 'work_if_parent_at_home', 'miles_to_commute', 'child_of_your_own', 'dog_cat_at_home', 'swim', 'uniform_dress_code', 'benefits', 'trawel_with_family', 'drive', 'have_car', 'car_insurance', 'valid_licence', 'use_car_for_work', 'city', 'gender'], 'integer'],
+            [['avatar_path', 'avatar_base_url', 'unique_link', 'password', 'name', 'address', 'biography', 'phone_home', 'phone_cell', 'email', 'date_of_birth', 'personal_comments', 'position_for', 'when_can_start', 'hourly_rate', 'wage_comment', 'availability', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'schedule_comment', 'level_of_school', 'name_of_school', 'college', 'college_location', 'subjects_studied', 'spec_training', 'certificates', 'childcare_exp', 'ages_to_work_with', 'most_exp_with', 'cared_of_twins', 'special_needs_exp', 'tutor', 'houskeeping', 'why_want_be_nanny', 'type_of_activities', 'characteristics_look_for', 'background_in_child_dev', 'number_of_children_care_for', 'sick_children', 'assist_homework', 'family_life', 'interests', 'philosophy', 'most_important', 'houskeep_years_exp', 'largest_house', 'best_describes_housekeeping', 'personal_style_of_service', 'private_household', 'not_willing_housework', 'travel_restrictions', 'crime', 'state_licence', 'company_car_insurance', 'traffic_citations', 'states_lived_in', 'traffic_citations_last5_yrs', 'car_model_year', 'extra_activities', 'type_of_family', 'short_term_goals', 'why_qualified', 'languages', 'heared_about_us', 'rate_candidate', 'notes', 'trustline', 'back_checks', 'attach1', 'attach2', 'attach3', 'attach12', 'attach13', 'attach22', 'attach23', 'attach32', 'attach33', 'locale'], 'string'],
+            [['picture', 'reg_date'], 'safe']
         ];
     }
     
@@ -297,6 +319,141 @@ class Nannies extends ActiveRecord
             'locale' => 'Locale',
             'gender' => 'Gender',
         ];
+    }
+
+    public static function initialization()
+    {
+        if (Yii::$app->user->identity->nannies === null) {
+            $model = new Nannies();
+            $model->setAttributes([
+                'id' => Yii::$app->user->id,
+                'status' => 0,
+                'avatar_path' => '',
+                'avatar_base_url' => '',
+                'unique_link' => '',
+                'reg_date' => date('Y-m-d'),
+                'password' => '',
+                'name' => '',
+                'address' => '',
+                'zip_code' => 0,
+                'biography' => '',
+                'phone_home' => '',
+                'phone_cell' => '',
+                'email' => '',
+                'aviliable_for_interview' => 1, // available
+                'over_18' => 1,
+                'date_of_birth' => '',
+                'eligible_to_work' => 0,
+                'have_work_visa' => 0,
+                'personal_comments' => '',
+                'position_for' => '',
+                'employed' => 0,
+                'may_contact_employer' => 0,
+                'when_can_start' => '',
+                'hours_per_week' => 0,
+                'hourly_rate' => '',
+                'weekly_salary' => 0,
+                'wage_comment' => '',
+                'availability' => '',
+                'sun' => '',
+                'mon' => '',
+                'tue' => '',
+                'wed' => '',
+                'thu' => '',
+                'fri' => '',
+                'sat' => '',
+                'schedule_comment' => '',
+                'level_of_school' => '',
+                'name_of_school' => '',
+                'college' => '',
+                'college_location' => '',
+                'subjects_studied' => '',
+                'spec_training' => '',
+                'certificates' => '',
+                'childcare_exp' => '',
+                'ages_to_work_with' => '',
+                'most_exp_with' => '',
+                'cared_of_twins' => '',
+                'special_needs_exp' => '',
+                'tutor' => '',
+                'houskeeping' => '',
+                'why_want_be_nanny' => '',
+                'type_of_activities' => '',
+                'characteristics_look_for' => '',
+                'background_in_child_dev' => '',
+                'number_of_children_care_for' => '',
+                'sick_children' => '',
+                'assist_homework' => '',
+                'family_life' => '',
+                'interests' => '',
+                'philosophy' => '',
+                'most_important' => '',
+                'rate_communication_skills' => 0,
+                'houskeep_years_exp' => '',
+                'largest_house' => '',
+                'laundry_and_ironing' => 0,
+                'best_describes_housekeeping' => '',
+                'housekeep_communication_skills' => 0,
+                'housekeep_organization_skills' => 0,
+                'personal_style_of_service' => '',
+                'private_household' => '',
+                'work_at_home_with_child' => 0,
+                'help_with_childcare' => 0,
+                'not_willing_housework' => '',
+                'crp_certified' => 0,
+                'first_aid_certified' => 0,
+                'need_crp_fa_renew' => 0,
+                'tb_test' => 0,
+                'pet_allergies' => 0,
+                'smoking' => 0,
+                'work_if_parent_smokes' => 0,
+                'travel_restrictions' => '',
+                'valid_passport' => 0,
+                'work_if_parent_at_home' => 0,
+                'miles_to_commute' => 0,
+                'child_of_your_own' => 0,
+                'dog_cat_at_home' => 0,
+                'swim' => 0,
+                'uniform_dress_code' => 0,
+                'crime' => '',
+                'benefits' => 0,
+                'trawel_with_family' => 0,
+                'drive' => 0,
+                'have_car' => 0,
+                'state_licence' => '',
+                'car_insurance' => 0,
+                'company_car_insurance' => '',
+                'traffic_citations' => '',
+                'states_lived_in' => '',
+                'valid_licence' => 0,
+                'use_car_for_work' => 0,
+                'traffic_citations_last5_yrs' => '',
+                'car_model_year' => '',
+                'extra_activities' => '',
+                'type_of_family' => '',
+                'short_term_goals' => '',
+                'why_qualified' => '',
+                'languages' => '',
+                'heared_about_us' => '',
+                'rate_candidate' => '',
+                'notes' => '',
+                'city' => 0,
+                'trustline' => '',
+                'back_checks' => '',
+                'attach1' => '',
+                'attach2' => '',
+                'attach3' => '',
+                'attach12' => '',
+                'attach13' => '',
+                'attach22' => '',
+                'attach23' => '',
+                'attach32' => '',
+                'attach33' => '',
+                'locale' => '',
+                'gender' => 0, // db default 2
+            ], false); // false 表示不检测字段安全，如果不设置，则会去rules找对应规则，没有的默认为NULL
+            $model->save();
+        }
     }
     
 }

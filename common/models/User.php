@@ -135,6 +135,11 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Families::className(), ['id' => 'id']);
     }
 
+    public function getNannies()
+    {
+        return $this->hasOne(Nannies::className(), ['id' => 'id']);
+    }
+
     /**
      * @inheritdoc
      */
@@ -263,15 +268,30 @@ class User extends ActiveRecord implements IdentityInterface
         // Default role
         $auth = Yii::$app->authManager;
         // type == 1 是保姆; type == 2 是parent
+        $profile = new UserProfile();
+        $profile->locale = Yii::$app->language;
+        $profile->load($profileData, '');
+        $this->link('userProfile', $profile);
         if($this->type==1){
-            $profile = new UserProfile();
-            $profile->locale = Yii::$app->language;
-            $profile->load($profileData, '');
-            $this->link('userProfile', $profile);
             $this->trigger(self::EVENT_AFTER_SIGNUP);
             $auth->assign($auth->getRole(User::ROLE_NANNY), $this->getId());
         }else{
             $profile = new Families();
+            if (empty($profileData)) {
+                $profileData = [
+                    'status' => 0,
+                    'name' => '',
+                    'address' => '',
+                    'phone' => '',
+                    'children' => '',
+                    'type_of_help' => '',
+                    'work_out_of_home' => '',
+                    'special_needs' => '',
+                    'driving' => '',
+                    'when_start' => '',
+                    'how_heared_about_us' => '',
+                ];
+            }
             $profile->load($profileData, '');
             $this->link('families', $profile);
             $this->trigger(self::EVENT_AFTER_SIGNUP);
