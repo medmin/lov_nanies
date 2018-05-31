@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\web\NotFoundHttpException;
+
 //use yii\db\ActiveRecord;
 
 /**
@@ -77,7 +79,8 @@ class PostalCode
                     $this->print_name = $this->place_name;
                     break;
                 default:
-                    throw new Exception('Invalid location type for '.__CLASS__);
+                    // 给用户抛出一个404把，不直接抛出看不懂的异常, 其实都不应该抛异常，而是返回没有
+                    throw new NotFoundHttpException(Yii::t('frontend','Invalid location type',[], Yii::$app->language));
             }
         }
     }
@@ -112,12 +115,12 @@ class PostalCode
                 $sql .= "WHERE t1.postal_code = '{$this->postal_code}' ";
                 break;
             case PostalCode::LOCATION_PLACE_NAME:
-                $place_name = @mysql_real_escape_string($this->place_name);
-                $admin_code = @mysql_real_escape_string($this->admin_code1);
+                $place_name = ($this->place_name);
+                $admin_code = ($this->admin_code1);
                 $sql .= "WHERE (t1.place_name = '$place_name' AND t1.admin_code1 = '$admin_code') AND t2.postal_code = '$postal_code_to'";
                 break;
             default:
-                throw new Exception('Invalid location type for '.__CLASS__);
+                throw new \Exception('Invalid location type for '.__CLASS__);
         }
         switch (PostalCode::locationType($location))
         {
@@ -127,17 +130,18 @@ class PostalCode
                 break;
             case PostalCode::LOCATION_PLACE_NAME:
                 $a = $this->parsePlaceName($location);
-                $place_name = @mysql_real_escape_string($a[0]);
-                $admin_code = @mysql_real_escape_string($a[1]);
+                $place_name = ($a[0]);
+                $admin_code = ($a[1]);
                 $sql .= "AND (t2.place_name = '$place_name' AND t2.admin_code1 = '$admin_code')";
                 break;
         }
+        Yii::$app->db->createCommand($sql)->query();
         $r = @mysql_query($sql);
         if (!$r) {
-            throw new Exception(mysql_error());
+            throw new \Exception(mysql_error());
         }
         if (@mysql_num_rows($r) == 0) {
-            throw new Exception("Record does not exist calculatitudeing distance between $postal_code_from and $postal_code_to");
+            throw new \Exception("Record does not exist calculatitudeing distance between $postal_code_from and $postal_code_to");
         }
         $miles = @mysql_result($r, 0);
         @mysql_free_result($r);
@@ -191,10 +195,11 @@ class PostalCode
     
     public function getSameCity(){
         $sql="SELECT * FROM {$this->mysql_table} WHERE place_name='{$this->place_name}';";
-        $r = @mysql_query($sql);
+        // $r = @mysql_query($sql);
         //echo var_dump($sql);
-        while ($row = @mysql_fetch_array($r, MYSQL_ASSOC))
-        {
+        $a = [];
+        $row = Yii::$app->db->createCommand($sql)->queryAll();
+        foreach ($row as $re) {
             $a[].=new PostalCode($row);
         }
         return $a;
@@ -229,26 +234,28 @@ class PostalCode
               ."COS(RADIANS({$this->latitude})) * POW(SIN((RADIANS({$this->longitude}) - "
               ."RADIANS(z.longitude)) / 2), 2))) >= $range_from "
               ."ORDER BY 1 ASC";
-        $r = @mysql_query($sql);
-        if (!$r) {
-            throw new Exception(mysql_error());
-        }
+//        $r = @mysql_query($sql);
+//        if (!$r) {
+//            throw new Exception(mysql_error());
+//        }
         $a = array();
-        while ($row = @mysql_fetch_array($r, MYSQL_ASSOC))
-        {
+        $row = Yii::$app->db->createCommand($sql)->queryAll();
+        foreach ($row as $re) {
             // TODO: load PostalCode from array
-            $a[$row['miles']] = new PostalCode($row);
+            $a[$re['miles']] = new PostalCode($re);
         }
         return $a;
     }
-    private function hasDbConnection()
-    {
-        if ($this->mysql_conn) {
-            return mysql_ping($this->mysql_conn);
-        } else {
-            return mysql_ping();
-        }
-    }
+    
+    // 既然没用到就先注释掉
+//    private function hasDbConnection()
+//    {
+//        if ($this->mysql_conn) {
+//            return mysql_ping($this->mysql_conn);
+//        } else {
+//            return mysql_ping();
+//        }
+//    }
     private function locationType($location)
     {
         if (PostalCode::isValidPostalCode($location)) {
@@ -278,7 +285,7 @@ class PostalCode
     {
         $words = explode(',', $location);
         if (empty($words) || count($words) != 2 || strlen(trim($words[1])) != 2) {
-            throw new Exception("Failed to parse place_name and state from string.");
+            throw new \Exception("Failed to parse place_name and state from string.");
         }
         $place_name = trim($words[0]);
         $admin_code = trim($words[1]);
@@ -292,7 +299,7 @@ class PostalCode
     private function setPropertiesFromArray($a)
     {
         if (!is_array($a)) {
-            throw new Exception("Argument is not an array");
+            throw new \Exception("Argument is not an array");
         }
         foreach ($a as $key => $value)
         {
@@ -313,9 +320,7 @@ class PostalCode
                       ."AND admin_code1 = '{$this->admin_code1}' LIMIT 1";
                 break;
         }
-        $r = mysql_query($sql);
-        $row = mysql_fetch_array($r, MYSQL_ASSOC);
-        mysql_free_result($r);
+        $row = Yii::$app->db->createCommand($sql)->queryOne();
         if (!$row)
         {
             throw new \Exception("{$this->print_name} was not found in the database.");

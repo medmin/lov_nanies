@@ -232,13 +232,13 @@ class Nannies extends ActiveRecord
 
         // 先注释下边这个，用了一大堆放弃的mysql函数
 
-//        if($this->zip_code!=0){
-//            $this->city = new PostalCode($this->zip_code);
-//            $this->city->getCity();
-//        }else{
-//            $this->city = new PostalCode("92011");
-//            $this->city->place_name="N/A";
-//        }
+        if($this->zip_code!=0){
+            $this->city = new PostalCode($this->zip_code);
+            $this->city->getCity();
+        }else{
+            $this->city = new PostalCode("92011");
+            $this->city->place_name="N/A";
+        }
 
     }
     public function doArray(){
