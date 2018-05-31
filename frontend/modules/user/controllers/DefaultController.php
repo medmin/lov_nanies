@@ -2,13 +2,13 @@
 
 namespace frontend\modules\user\controllers;
 
+use Yii;
 use common\base\MultiModel;
 use frontend\modules\user\models\AccountForm;
 use Intervention\Image\ImageManagerStatic;
 use trntv\filekit\actions\DeleteAction;
 use trntv\filekit\actions\UploadAction;
 use yii\data\ActiveDataProvider;
-use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use common\models\Refs;
@@ -70,8 +70,14 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+
         $accountForm = new AccountForm();
-        if(\Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['nanny']->name=='nanny'){
+        /** 说明：这里print_r($tmpArr)之后，是一个array，并且如果是家长，就是seeker
+         * print_r的结果： Array ([seeker]=> .......)
+         * 如果是nanny身份，尚未测试 2018.5.20
+         */
+        $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
+        if( array_key_exists('nanny', $tmpArr) ){
             $accountForm->setUser(Yii::$app->user->identity);
             $model = new MultiModel([
                 'models' => [
@@ -113,7 +119,7 @@ class DefaultController extends Controller
                 ]
             ]);
             
-            return $this->render('index_family', ['model'=>$model]);
+            return $this->render('user_index_parent', ['model'=>$model]);
         }
         
     }
@@ -290,15 +296,22 @@ class DefaultController extends Controller
     }
     
     public function actionGetCredits(){
-        if(\Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['nanny']->name=='nanny'){
+        //这里意思是，如果是家长，就调转到家长付款页面，保姆的话，就是保姆的付款页面
+        
+        $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
+        $model = Yii::$app->user;
+
+        if( array_key_exists('nanny', $tmpArr) ){
             return $this->render('prices_nannies', [
                 'model' => $model,
             ]);
         }else{
-            return $this->render('prices_families', [
+            return $this->render('get_credits_parent', [
                 'model' => $model,
             ]);
         }
+
+        // print_r(Yii::$app->user);
     }
     protected function findEmp($id)
     {

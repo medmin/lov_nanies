@@ -3,6 +3,7 @@
 use yii\web\View;
 
 $this->title = Yii::t('frontend', 'Get credits');
+//这段是干嘛的？
 $this->registerJs(
     '
     $(document).ready(function () {
@@ -65,7 +66,7 @@ $this->registerJs(
   <input type="hidden" name="night_phone_b" value="555">
   <input type="hidden" name="night_phone_c" value="1234">
   <input type="hidden" name="email" value="jdoe@zyzzyu.com">
-  <input type="image" name="submit"
+    <input type="image" name="submit"
     src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
     alt="PayPal - The safer, easier way to pay online">
 </form>

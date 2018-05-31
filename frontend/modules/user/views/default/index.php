@@ -30,14 +30,14 @@ $this->title = Yii::t('frontend', 'User Settings')
     <h2 style="color: #414141;">Account setup</h2>
     <!--<h2><?php //echo Yii::t('frontend', 'Account Settings') ?></h2>-->
         
-        <?php echo $form->field($model->getModel('account'), 'username') ?>
+        <?= $form->field($model->getModel('account'), 'username') ?>
     
-        <?php echo $form->field($model->getModel('account'), 'email') ?>
+        <?= $form->field($model->getModel('account'), 'email') ?>
     
-        <?php echo $form->field($model->getModel('account'), 'password')->passwordInput() ?>
+        <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>
     
-        <?php echo $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
-        <?php echo $form->field($model->getModel('profile'), 'picture')->widget(
+        <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
+        <?= $form->field($model->getModel('profile'), 'picture')->widget(
         Upload::classname(),
         [
             'url' => ['avatar-upload']
@@ -45,7 +45,7 @@ $this->title = Yii::t('frontend', 'User Settings')
     )->label("Photo");?>
     
         <div class="form-group">
-            <?php echo Html::submitButton(Yii::t('frontend', 'Update'), ['class' => 'nav-btn']) ?>
+            <?= Html::submitButton(Yii::t('frontend', 'Update'), ['class' => 'nav-btn']) ?>
         </div>
     </div>
         <div class="col-md-6">

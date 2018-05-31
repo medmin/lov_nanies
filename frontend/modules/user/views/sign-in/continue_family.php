@@ -4,9 +4,9 @@ use yii\widgets\ActiveForm;
 use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $model \frontend\modules\user\models\SignupForm */
+/* @var $model \common\models\Families */
 
-$this->title = Yii::t('frontend', 'Signup');
+$this->title = Yii::t('frontend', 'Sign Up');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerJs(
     '
@@ -24,26 +24,30 @@ $this->registerJs(
     <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
         <div class="row">
             <div class="col-lg-6">
-                <?php echo $form->field($model, 'name') ?>
-                <?php echo $form->field($model, 'address')->textarea(['rows' => 2])  ?>
-                <?php echo $form->field($model, 'phone') ?>
-                <?php echo $form->field($model, 'children')->textarea(['rows' => 2])  ?>
-                <?php echo $form->field($model, 'type_of_help')->textarea(['rows' => 2])  ?>
+                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'address')  ?>
+                <?= $form->field($model, 'phone') ?>
+                <?= $form->field($model, 'children')  ?>
+                <?= $form->field($model, 'type_of_help')->textInput(
+                    [
+                        'placeholder' => 'Full time ? Part time ? Live in or out ? Babysitter? Or else?'
+                    ]
+                )  ?>
                
             
             </div>
             <div class="col-lg-6">
-                <?php echo $form->field($model, 'work_out_of_home') ?>
-                <?php echo $form->field($model, 'special_needs')->textarea(['rows' => 2])  ?>
-                <?php echo $form->field($model, 'driving') ?>
-                <?php echo $form->field($model, 'when_start') ?>
-                <?php echo $form->field($model, 'how_heared_about_us')->textarea(['rows' => 2])  ?>
+                <?= $form->field($model, 'work_out_of_home') ?>
+                <?= $form->field($model, 'special_needs')  ?>
+                <?= $form->field($model, 'driving') ?>
+                <?= $form->field($model, 'when_start') ?>
+                <?= $form->field($model, 'how_heared_about_us')  ?>
             </div>
             
         
         </div>
         <div class="form-group" style="text-align: center;">
-            <?php echo Html::submitButton(Yii::t('frontend', 'Save'), ['class' => 'btn btn-inverse', 'name' => 'signup-button']) ?>
+            <?= Html::submitButton(Yii::t('frontend', 'Save'), ['class' => 'btn btn-inverse', 'name' => 'signup-button']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 </div>

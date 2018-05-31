@@ -24,7 +24,6 @@ use frontend\modules\user\models\SignupForm;
 /**
  * Class SignInController
  * @package frontend\modules\user\controllers
- * @author Eugene Terentev <eugene@terentev.net>
  */
 class SignInController extends \yii\web\Controller
 {
@@ -94,7 +93,7 @@ class SignInController extends \yii\web\Controller
         
         $model = new LoginForm();
         Yii::$app->view->params['offslide'] = 1;
-                Yii::$app->view->params['slider'] = "login";
+        Yii::$app->view->params['slider'] = "login";
         if (Yii::$app->request->isAjax) {
             $model->load($_POST);
             Yii::$app->response->format = Response::FORMAT_JSON;
