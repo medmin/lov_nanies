@@ -1,7 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use trntv\filekit\widget\Upload;
+// use trntv\filekit\widget\Upload;
+use kartik\file\FileInput;
 use yii\bootstrap\ActiveForm;
 use yii\web\View;
 /* @var $this yii\web\View */
@@ -47,12 +48,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="panel-body">
                                         <div class="col-md-6">
-                                            <?php echo $form->field($model, 'picture')->widget(
-                                                Upload::classname(),
-                                                [
-                                                    'url' => ['avatar-upload']
-                                                ]
-                                            )->label('Upload your image')?>
+                                            <?= $form->field($model, 'picture')->widget(FileInput::classname(), [
+                                                    'options' => ['accept' => 'image/*'],
+                                                ])->label('Upload your image')?>
                                             <?= $form->field($model, 'address')->textInput(['required'=>'required']) ?>
                                             <?= $form->field($model, 'zip_code')->textInput(['required'=>'required']) ?>
                                             <?= $form->field($model, 'phone_home')->textInput(['required'=>'required']) ?>
@@ -95,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     '6' => 'Evenings',
                                                     '7' => 'Weekends Only',
                                                     '8' => 'Overnights',
-                                                    '9' => 'I`m flexible',
+                                                    '9' => 'I\'m flexible',
                                                 ], ['required' => 'required'])?> 
                                            
                                             <input type="hidden" name="step" value="1"/>    

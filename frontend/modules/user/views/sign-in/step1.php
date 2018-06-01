@@ -1,7 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use trntv\filekit\widget\Upload;
+// use trntv\filekit\widget\Upload;
+use kartik\file\FileInput;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -70,16 +71,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="panel-body">
                                         <div class="col-md-6">
-                                            <?php echo $form->field($model, 'picture')->widget(
-                                                Upload::classname(),
-                                                [
-                                                    'url' => ['avatar-upload']
-                                                ]
-                                            )->label('Upload your image')?>
+                                            <?= $form->field($model, 'picture')
+                                            ->widget(FileInput::classname(), [
+                                                    'options' => ['accept' => 'image/*'],
+                                                ])->label('Upload your image')?>
                                             <?= $form->field($model, 'name')->textInput(['required'=>'required']) ?>
-                                            <?= $form->field($model, 'biography')->textArea() ?>
+                                            <?= $form->field($model, 'biography')->textArea(['rows' => '6']) ?>
                                             <?= $form->field($model, 'address')->textInput(['required'=>'required']) ?>
-                                            <?= $form->field($model, 'zip_code')->textInput(['required'=>'required']) ?>
+                                            <?= $form->field($model, 'zip_code')->textInput(['required'=>'required','type' => 'number']) ?>
                                             <?= $form->field($model, 'phone_home')->textInput(['required'=>'required']) ?>
                                             <?= $form->field($model, 'phone_cell')->textInput() ?>
                                             <?= $form->field($model, 'email')->textInput(['required'=>'required']) ?>
@@ -92,17 +91,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                             
                                         </div>
                                         <div class="col-md-6">
-                                            <?= $form->field($model, 'position_for')->checkboxList([
-                                                '1' => 'Part Time Nanny',
-                                                '2' => 'Full Time Nanny',
-                                                '3' => 'Live-in Nanny',
-                                                '4' => 'Babysitter',
-                                                '5' => 'Newborn Specialist',
-                                                '6' => 'Caregiver',
-                                                '7' => 'Housekeeper',
-                                                '8' => 'Special Needs Nanny',
-                                                '9' => 'Elderly Care',
-                                            ])?>    
+                                            <?= $form->field($model, 'position_for')->checkboxList(
+                                                [
+                                                    '1' => 'Part Time Nanny',
+                                                    '2' => 'Full Time Nanny',
+                                                    '3' => 'Live-in Nanny',
+                                                    '4' => 'Babysitter',
+                                                    '5' => 'Newborn Specialist',
+                                                    '6' => 'Caregiver',
+                                                    '7' => 'Housekeeper',
+                                                    '8' => 'Special Needs Nanny',
+                                                    '9' => 'Elderly Care',
+                                                ]
+                                            )?>    
                                             <?= $form->field($model, 'employed')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'may_contact_employer')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?> 
                                             <?= $form->field($model, 'when_can_start')->textInput() ?>

@@ -48,7 +48,8 @@
     "bower-asset/jquery-slimscroll": "^1.3",
     "bower-asset/flot": "^0.8",
     "symfony/process": "^3.0",
-    "marciocamello/yii2-paypal": "*"
+    "marciocamello/yii2-paypal": "*",
+    "kartik-v/yii2-widget-fileinput": "@dev"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

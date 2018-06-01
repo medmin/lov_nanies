@@ -73,11 +73,10 @@ class DefaultController extends Controller
     {
 
         $accountForm = new AccountForm();
-        /** 说明：这里print_r($tmpArr)之后，是一个array，并且如果是家长，就是seeker
-         * print_r的结果： Array ([seeker]=> .......)
-         * 如果是nanny身份，尚未测试 2018.5.20
-         */
-        /**
+        /** 说明：这里print_r($tmpArr)之后，是一个array，
+         * 如果是家长，就是seeker, print_r的结果： Array ([seeker]=> .......)
+         * 如果是nanny身份，就是Array ([nanny]=> .......)
+         * 
          * getRolesByUser 是获取指定用户（ID）在权限表（rbac_auth_assignment）中的角色（item_name）
          * 返回一个数组，即一个用户可以有多个角色，数组的键为用户所拥有的角色名，值为一个Role对象
          * Role对象是属性为角色表（rbac_auth_item）的字段值
@@ -302,14 +301,13 @@ class DefaultController extends Controller
     }
     
     public function actionGetCredits(){
-        //这里意思是，如果是家长，就调转到家长付款页面，保姆的话，就是保姆的付款页面
         
         $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
         $model = Yii::$app->user;
-
+        //这里意思是，如果是家长，就调转到家长付款页面，保姆的话，就是保姆的付款页面
         if( array_key_exists('nanny', $tmpArr) ){
             return $this->render('prices_nannies', [
-                'model' => $model,
+                'model' => $model
             ]);
         }else{
             return $this->render('get_credits_parent', [

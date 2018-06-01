@@ -30,10 +30,16 @@ $this->title = Yii::t('frontend', 'User Account')
     <br>
     <div class="col-md-6">   
         <h2 style="color: #414141;">My NannyCare Account</h2>
-        
-        <?= $form->field($model->getModel('account'), 'username')->textInput(['disabled' => true]) ?>
-    
-        <?= $form->field($model->getModel('account'), 'email')->textInput(['disabled' => true]) ?>
+        <div class="container">
+            <div class="row">
+                <div class="md-col-6">
+                    <?= $form->field($model->getModel('account'), 'username')->textInput(['readOnly' => true]) ?>
+                </div>
+                <div class="md-col-6">
+                    <?= $form->field($model->getModel('account'), 'email')->textInput(['readOnly' => true]) ?>
+                </div>
+            </div>
+        </div>
 
         <div class="hidden" id="reset_pwd">
             <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>

@@ -121,7 +121,8 @@ class SignInController extends \yii\web\Controller
         return $this->goHome();
     }
    
-    public function actionContinueRegistration(){
+    public function actionContinueRegistration()
+    {
         $user = Yii::$app->user->identity;
         if(Yii::$app->user->identity->step<=6){
             Nannies::initialization();

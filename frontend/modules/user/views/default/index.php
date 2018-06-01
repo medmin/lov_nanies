@@ -1,6 +1,7 @@
 <?php
 
-use trntv\filekit\widget\Upload;
+// use trntv\filekit\widget\Upload;
+use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\View;
@@ -29,27 +30,23 @@ $this->title = Yii::t('frontend', 'User Settings')
     <div class="col-md-6">   
     <h2 style="color: #414141;">Account setup</h2>
     <!--<h2><?php //echo Yii::t('frontend', 'Account Settings') ?></h2>-->
-        
-        <?= $form->field($model->getModel('account'), 'username') ?>
-    
-        <?= $form->field($model->getModel('account'), 'email') ?>
-    
+        <?= $form->field($model->getModel('account'), 'username')->textInput(['readOnly' => true]) ?>
+
+        <?= $form->field($model->getModel('account'), 'email')->textInput(['readOnly' => true]) ?>
+
         <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>
     
         <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
-        <?= $form->field($model->getModel('profile'), 'picture')->widget(
-        Upload::classname(),
-        [
-            'url' => ['avatar-upload']
-        ]
-    )->label("Photo");?>
-    
+        <?= $form->field($model->getModel('profile'), 'picture')
+                ->widget(FileInput::classname(), [
+                    'options' => ['accept' => 'image/*'],
+                ])->label("Photo");?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('frontend', 'Update'), ['class' => 'nav-btn']) ?>
         </div>
     </div>
         <div class="col-md-6">
-        <h2 style="color: #414141;">Profile details</h2>
+        <h2 style="color: #414141;">Profile Details (click to view and edit it)</h2>
             <ul class="process-label">
                 <a href="main"><li class="process-label2 active" id="label-1">Main <span><i class="fa fa-long-arrow-right"></i></span></li></a>
                 <a href="questions-n-schedule"><li class="process-label2 active" id="label-2">Questions & Schedule<span><i class="fa fa-long-arrow-right"></i></span></li></a>
