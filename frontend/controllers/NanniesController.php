@@ -37,6 +37,7 @@ class NanniesController extends Controller
     {
         $searchModel = new NannySearch();
         $search=["NannySearch" => ["status"=> "1"]];
+        $error = '';
         $radius=5;
 //        $zu=new Paypal();
         switch (true){
@@ -45,17 +46,25 @@ class NanniesController extends Controller
             case (isset($_GET['position'])):
                 $search["NannySearch"]["position_for"]=$_GET['position'];
             case (isset($_GET['zip'])):
-                $location= new PostalCode($_GET['zip']);
-                $zips =$location->getPostalCodesInRange(0,$radius);
-                foreach($zips as $object){
-                    $zips_array[]=$object->postal_code;
+                try {
+                    $location= new PostalCode($_GET['zip']);
+                    $zips =$location->getPostalCodesInRange(0,$radius);
+                    foreach($zips as $object){
+                        $zips_array[]=$object->postal_code;
+                    }
+                    $search["NannySearch"]["zip_code"]=$zips_array;
+                } catch (\Exception $e) {
+                    $error = $e->getMessage();
                 }
-                $search["NannySearch"]["zip_code"]=$zips_array;
                 break;
             case (isset($_GET['city'])):
-                $location= new PostalCode($_GET['city'].", CA");
-                $zips_array =$location->getSameCity();
-                 $search["NannySearch"]["zip_code"]=$zips_array;
+                try {
+                    $location= new PostalCode($_GET['city'].", CA");
+                    $zips_array =$location->getSameCity();
+                    $search["NannySearch"]["zip_code"]=$zips_array;
+                } catch (\Exception $e) {
+                    $error = $e->getMessage();
+                }
                 break;
             default:
                 $search=["NannySearch" => ["status"=> "1"]];
@@ -66,6 +75,7 @@ class NanniesController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'error' => $error
         ]);
         
     }

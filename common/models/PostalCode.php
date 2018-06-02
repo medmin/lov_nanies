@@ -79,7 +79,6 @@ class PostalCode
                     $this->print_name = $this->place_name;
                     break;
                 default:
-                    // 给用户抛出一个404把，不直接抛出看不懂的异常, 其实都不应该抛异常，而是返回没有
                     throw new NotFoundHttpException(Yii::t('frontend','Invalid location type',[], Yii::$app->language));
             }
         }
@@ -200,7 +199,7 @@ class PostalCode
         $a = [];
         $row = Yii::$app->db->createCommand($sql)->queryAll();
         foreach ($row as $re) {
-            $a[].=new PostalCode($row);
+            $a[] .= new PostalCode($re); // 直接使用 = 的话，$a 中的元素会是对象，使用 .= 转化为字符串，触发 __toString
         }
         return $a;
     }
@@ -298,9 +297,6 @@ class PostalCode
     }
     private function setPropertiesFromArray($a)
     {
-        if (!is_array($a)) {
-            throw new \Exception("Argument is not an array");
-        }
         foreach ($a as $key => $value)
         {
             $this->$key = $value;
@@ -319,6 +315,8 @@ class PostalCode
                       ."WHERE place_name = '{$this->place_name}' "
                       ."AND admin_code1 = '{$this->admin_code1}' LIMIT 1";
                 break;
+            default :
+                throw new NotFoundHttpException(Yii::t('frontend','Invalid location type',[], Yii::$app->language));
         }
         $row = Yii::$app->db->createCommand($sql)->queryOne();
         if (!$row)

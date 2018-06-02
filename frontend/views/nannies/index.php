@@ -1,6 +1,7 @@
 <?php
 /** @var $this yii\web\View
  * @var $searchModel backend\models\search\NannySearch
+ * @var $error string 如果有的话，就是抛出的异常
  *
  */
 use yii\web\View;
@@ -27,7 +28,7 @@ $this->registerJs(
         <div class="row row-margin">
             <div class="tab-content tabpill-content">
             <div id="babysitters-tab" class="tab-pane fade active in">
-            <?= \yii\widgets\ListView::widget([
+            <?= $error !== '' ? $error : \yii\widgets\ListView::widget([
                 'dataProvider'=>$dataProvider,
                 'pager'=>[
                     'hideOnSinglePage'=>true,
