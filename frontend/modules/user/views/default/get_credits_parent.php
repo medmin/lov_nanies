@@ -2,8 +2,8 @@
 /* @var $this yii\web\View */
 use yii\web\View;
 
-$this->title = Yii::t('frontend', 'Get credits');
-//这段是干嘛的？
+$this->title = Yii::t('frontend', 'Get Credits');
+//这段是干嘛的？原来是最下面的一个“Top”按钮，回到最上面
 $this->registerJs(
     '
     $(document).ready(function () {
@@ -22,7 +22,23 @@ $this->registerJs(
     <li class="grey">$74.99</li>
     <li>3 credits</li>
     <li>Contact 3 nannies</li>
-    <li class="grey"><a href="create-payment" class="btn btn-inverse">Buy</a></li>
+    <li class="grey">
+    <form action="/pay/parent/stripe" method="POST">
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key=<?= env('STRIPE_PK') ?>
+          data-amount="7499"
+          data-zip-code="true"
+          data-name="NannyCare.com"
+          data-description="Basic Plan (3 credits)"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto">
+        </script>
+        <input type="text" name="plan" value="Basic Plan (6 credits)" />
+        <input type="hidden" name="money" value=7499 />
+        <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
+      </form>
+    </li>
   </ul>
 </div>
 <div class="columns">
@@ -31,7 +47,23 @@ $this->registerJs(
     <li class="grey">$129.99</li>   
     <li>6 credits</li>
     <li>Contact 6 nannies</li>
-    <li class="grey"><a href="#" class="btn btn-inverse">Buy</a></li>
+    <li class="grey">
+      <form action="/pay/parent/stripe" method="POST">
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key=<?= env('STRIPE_PK') ?>
+          data-amount="12999"
+          data-zip-code="true"
+          data-name="NannyCare.com"
+          data-description="Bronze Plan (6 credits)"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto">
+        </script>
+        <input type="text" name="plan" value="Bronze Plan (6 credits)" />
+        <input type="hidden" name="money" value=12999 />
+        <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
+      </form>
+    </li>
   </ul>
 </div>
 <div class="columns">
@@ -40,7 +72,23 @@ $this->registerJs(
     <li class="grey">$199.99</li>
     <li>10 credits</li>
     <li>Contact 10 nannies</li>
-    <li class="grey"><a href="#" class="btn btn-inverse">Buy</a></li>
+    <li class="grey">
+      <form action="/pay/parent/stripe" method="POST">
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key=<?= env('STRIPE_PK') ?>
+          data-amount="19999"
+          data-zip-code="true"
+          data-name="NannyCare.com"
+          data-description="Gold Plan (10 credits)"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto">
+        </script>
+        <input type="text" name="plan" value="Gold Plan (10 credits)" />
+        <input type="hidden" name="money" value=19999 />
+        <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
+      </form>
+    </li>
   </ul>
 </div>
 <div class="columns">
@@ -49,24 +97,22 @@ $this->registerJs(
     <li class="grey">$379.99</li>
     <li>20 credits</li>
     <li>Contact 20 nannies</li>
-    <li class="grey"><a href="#" class="btn btn-inverse">Buy</a></li>
+    <li class="grey">
+      <form action="/pay/parent/stripe" method="POST">
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key= <?= env('STRIPE_PK') ?>
+          data-amount="37999"
+          data-zip-code="true"
+          data-name="NannyCare.com"
+          data-description="Platinum Plan (20 credits)"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto">
+        </script>
+        <input type="text" name="plan" value="Platinum Plan (20 credits)" />
+        <input type="hidden" name="money" value=37999 />
+        <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
+      </form>
+    </li>
   </ul>
 </div>
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-  <input type="hidden" name="cmd" value="_xclick">
-  <input type="hidden" name="business" value="yyourm-facilitator@gmail.com">
-  <input type="hidden" name="item_name" value="hat">
-  <input type="hidden" name="item_number" value="123">
-  <input type="hidden" name="amount" value="00.01">
-  <!--<input type="hidden" name="notify_url" value="http://new.lovingnannies.com/user/sign-in/confirm-payment/">-->
-  <input type="hidden" name="city" value="Berwyn">
-  <input type="hidden" name="state" value="PA">
-  <input type="hidden" name="zip" value="19312">
-  <input type="hidden" name="night_phone_a" value="610">
-  <input type="hidden" name="night_phone_b" value="555">
-  <input type="hidden" name="night_phone_c" value="1234">
-  <input type="hidden" name="email" value="jdoe@zyzzyu.com">
-    <input type="image" name="submit"
-    src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
-    alt="PayPal - The safer, easier way to pay online">
-</form>
