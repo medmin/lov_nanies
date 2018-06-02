@@ -14,6 +14,9 @@ $config = [
             'modules' => [
                 'v1' => 'frontend\modules\api\v1\Module'
             ]
+        ],
+        'pay' =>[
+            'class' => 'frontend\modules\pay\Module',
         ]
     ],
     'components' => [
