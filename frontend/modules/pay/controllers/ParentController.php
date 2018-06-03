@@ -46,14 +46,18 @@ class ParentController extends Controller
                 $service_plan = $data['plan'];
                 $money = $data['money'];
 
+                $user= User::findById($data['userid']);
+
                 $charge = \Stripe\Charge::create([
                     'amount' => $money,
                     'currency' => 'usd',
                     'description' => $service_plan,
-                    'source' => $token
+                    'source' => $token,
+                    'statement_descriptor' => 'NannyCare.com',
+                    'metadata' => ['username' => $user->username, 'email' => $email, 'user-id' =>$data['userid']],
                 ]);
 
-                $user= User::findById($data['userid']);
+                
                 $user->credits += $data['credits'];
     
                 return $user->save() ? $this->redirect('/user/default/index') : $this->redirect('/pay/stripe/error');
