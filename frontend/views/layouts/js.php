@@ -7,6 +7,5 @@
         echo "<script src='".Yii::$app->homeUrl."/js/slider/jquery.themepunch.revolution.min.js'></script>";
         echo "<script src='".Yii::$app->homeUrl."/js/owl.carousel.min.js'></script>";
         echo "<script src='".Yii::$app->homeUrl."/js/OwlCarousel2Thumbs.min.js'></script>";
-        //echo "<script src='https://www.paypalobjects.com/api/checkout.js'></script>";
         echo "<script src='".Yii::$app->homeUrl."/js/jquery.magnific-popup.js'></script>";
         echo "<script src='".Yii::$app->homeUrl."/js/strip.js'></script>";

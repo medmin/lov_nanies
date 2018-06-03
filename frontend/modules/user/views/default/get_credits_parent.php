@@ -34,8 +34,10 @@ $this->registerJs(
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
-        <input type="text" name="plan" value="Basic Plan (6 credits)" />
+        <input type="hidden" name="plan" value="Basic Plan (3 credits)" />
         <input type="hidden" name="money" value=7499 />
+        <input type="hidden" name="credits" value=3 />
+        <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>
@@ -59,8 +61,10 @@ $this->registerJs(
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
-        <input type="text" name="plan" value="Bronze Plan (6 credits)" />
+        <input type="hidden" name="plan" value="Bronze Plan (6 credits)" />
         <input type="hidden" name="money" value=12999 />
+        <input type="hidden" name="credits" value=6 />
+        <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>
@@ -84,8 +88,10 @@ $this->registerJs(
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
-        <input type="text" name="plan" value="Gold Plan (10 credits)" />
+        <input type="hidden" name="plan" value="Gold Plan (10 credits)" />
         <input type="hidden" name="money" value=19999 />
+        <input type="hidden" name="credits" value=10 />
+        <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>
@@ -109,8 +115,10 @@ $this->registerJs(
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
-        <input type="text" name="plan" value="Platinum Plan (20 credits)" />
+        <input type="hidden" name="plan" value="Platinum Plan (20 credits)" />
         <input type="hidden" name="money" value=37999 />
+        <input type="hidden" name="credits" value=20 />
+        <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>

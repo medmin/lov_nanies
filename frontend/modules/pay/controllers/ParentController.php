@@ -5,6 +5,7 @@ namespace frontend\modules\pay\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use common\models\User;
 
 class ParentController extends Controller
 {
@@ -39,6 +40,8 @@ class ParentController extends Controller
                 \Stripe\Stripe::setApiKey(env('STRIPE_SK'));
                                 
                 $token = Yii::$app->request->post('stripeToken');
+
+                //order info
                 $email = $data['stripeEmail'];
                 $service_plan = $data['plan'];
                 $money = $data['money'];
@@ -47,10 +50,13 @@ class ParentController extends Controller
                     'amount' => $money,
                     'currency' => 'usd',
                     'description' => $service_plan,
-                    'source' => $token,
+                    'source' => $token
                 ]);
+
+                $user= User::findById($data['userid']);
+                $user->credits += $data['credits'];
     
-                return redirect('/user/default/index');
+                return $user->save() ? $this->redirect('/user/default/index') : $this->redirect('/pay/stripe/error');
             }
             catch (ErrorException $e)
             {

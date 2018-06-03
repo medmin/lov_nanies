@@ -35,6 +35,18 @@ class SiteController extends Controller
         ];
     }
 
+    //https://yii2-cookbook.readthedocs.io/incoming-post/#sending-cors-headers
+    //这里添加这个可以解决cors error，但似乎只是 对于这一个路由而言
+    //因此在.htaccess或者nginx的配置文件里添加配置比较好
+    // public function behaviors()
+    // {
+    //     return [
+    //         'corsFilter' => [
+    //             'class' => \yii\filters\Cors::className(),
+    //         ],
+    //     ];
+    // }
+
     public function actionIndex()
     {
         $searchModel = new NannySearch();
