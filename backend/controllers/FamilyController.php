@@ -41,9 +41,6 @@ class FamilyController extends Controller
             'dataProvider' => $dataProvider,
         ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
     }
 
     /**

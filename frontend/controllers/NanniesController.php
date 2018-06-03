@@ -2,12 +2,12 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\UserProfile;
+use common\models\Nannies;
 use yii\web\Controller;
 use backend\models\search\NannySearch;
 use yii\web\NotFoundHttpException;
 use common\models\PostalCode;
-use common\components\Paypal;
+
 /**
  * Site controller
  */
@@ -83,12 +83,12 @@ class NanniesController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModelById($id),
         ]);
     }
-    protected function findModel($id)
+    protected function findModelById($id)
     {
-        if (($model = UserProfile::findOne($id)) !== null) {
+        if (($model = Nannies::find()->where(['id'=>$id])->one() ) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

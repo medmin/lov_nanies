@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <?php echo GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'options' => [
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             [
                 'content'=>function($data){
-                 return User::find()->where(['id'=>$data->id])->one()->email;
+                 return User::findById($data->id) ?  User::findById($data->id)->email : "";
                 },
                 'attribute' => 'email',
             ],
