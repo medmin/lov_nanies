@@ -47,7 +47,7 @@ $config = [
 
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            //'useFileTransport' => true,
+            'useFileTransport' => YII_DEBUG, // 开发环境不发送邮件，保存为文件
             'messageConfig' => [
                 'charset' => 'UTF-8',
                 'from' => env('ADMIN_EMAIL')

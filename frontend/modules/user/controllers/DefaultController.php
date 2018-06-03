@@ -82,7 +82,7 @@ class DefaultController extends Controller
          * Role对象是属性为角色表（rbac_auth_item）的字段值
          */
         $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
-        if( array_key_exists('nanny', $tmpArr) ){
+        if(array_key_exists('nanny', $tmpArr)){
             $accountForm->setUser(Yii::$app->user->identity);
             $model = new MultiModel([
                 'models' => [
@@ -115,7 +115,7 @@ class DefaultController extends Controller
                 'query' => Employment::find()->where(['email' => \Yii::$app->user->identity->email]),
             ]);
             return $this->render('index', ['model'=>$model, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
-        }else{
+        } else {
             $accountForm->setUser(Yii::$app->user->identity);
             $model = new MultiModel([
                 'models' => [

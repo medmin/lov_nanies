@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <?= $form->field($model, 'employed')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'may_contact_employer')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?> 
                                             <?= $form->field($model, 'when_can_start')->textInput() ?>
-                                            <?= $form->field($model, 'hours_per_week')->input(['type' => 'number']) ?>
+                                            <?= $form->field($model, 'hours_per_week')->input('number') ?>
                                             <?= $form->field($model, 'hourly_rate')->textInput() ?>
                                             <?= $form->field($model, 'weekly_salary')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'wage_comment')->textArea() ?>  

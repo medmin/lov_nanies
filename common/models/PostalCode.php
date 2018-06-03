@@ -134,7 +134,7 @@ class PostalCode
                 $sql .= "AND (t2.place_name = '$place_name' AND t2.admin_code1 = '$admin_code')";
                 break;
         }
-        Yii::$app->db->createCommand($sql)->query();
+//        Yii::$app->db->createCommand($sql)->query();  这个方法没有使用过，有坑，$postal_code_from 和 $postal_code_to 都是没有定义
         $r = @mysql_query($sql);
         if (!$r) {
             throw new \Exception(mysql_error());

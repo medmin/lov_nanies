@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\UserProfile;
+use common\models\Nannies;
 use common\models\Refs;
 use backend\models\UserForm;
 use backend\models\search\UserSearch;
@@ -136,16 +136,18 @@ class NanniesController extends Controller
     
     public function actionApprove($id)
     {
-        Yii::$app->authManager->revokeAll($id);
+//        Yii::$app->authManager->revokeAll($id);
+        // TODO 没有明白为什么接受保姆申请之后要删除该用户的角色，这样造成的影响是改用户没有角色在查看个人信息直接报错，估计这个沙比是复制的 actionDelete
         $model=$this->findModel($id);
         $model->status=1;
         $model->save();
+        // TODO 接受之后也没有发送邮件的功能
         return $this->goBack();
     }
     
     public function actionDereactivation($id)
     {
-        Yii::$app->authManager->revokeAll($id);
+//        Yii::$app->authManager->revokeAll($id);
         $model=$this->findModel($id);
         if($model->status=='-1'){
            $model->status=1;
@@ -158,7 +160,7 @@ class NanniesController extends Controller
     
     public function actionDeactivate($id)
     {
-        Yii::$app->authManager->revokeAll($id);
+//        Yii::$app->authManager->revokeAll($id);
         $model=$this->findModel($id);
         if($model->status=='1'){
            $model->status=-1;
@@ -171,12 +173,12 @@ class NanniesController extends Controller
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Nannies the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = UserProfile::findOne($id)) !== null) {
+        if (($model = Nannies::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
