@@ -4,6 +4,7 @@ use trntv\filekit\widget\Upload;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\View;
+
 /* @var $this yii\web\View */
 /* @var $model common\base\MultiModel */
 /* @var $form yii\widgets\ActiveForm */
@@ -64,9 +65,16 @@ $this->title = Yii::t('frontend', 'User Account')
         <h3><b>Nannies Selected:</b><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse">Select Nannies</a></span></h3>
         <div class="container">
             <ul>
+            <li><b>Click to see the profile:</b></li>
                 <?php
-                  $model->getModel('account')->credits; 
+                  $id = Yii::$app->user->id;
+                  $parentnannyrecords = \common\models\ParentNanny::find()->where(['parentid'=>$id])->all();
+                  foreach ($parentnannyrecords as $record)
+                  { 
+                    echo '<li><a href="/nannies/view?id='. $record->nannyid.'" > ' . \common\models\Nannies::find()->where(['id' => $record->nannyid])->one()->email .'</a></li>';
+                  }
                 ?>
+                
             </ul>
         </div>
     </div>

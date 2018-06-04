@@ -7,7 +7,7 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use common\models\User;
 use common\models\UserOrder;
-
+use common\models\ParentNanny;
 
 class ParentController extends Controller
 {
@@ -36,7 +36,8 @@ class ParentController extends Controller
         if (Yii::$app->request->post())
         {
             
-        $transaction = Yii::$app->db->beginTransaction();
+            $isolationLevel = \yii\db\Transaction::SERIALIZABLE;
+            $transaction = Yii::$app->db->beginTransaction($isolationLevel);
         try {
             $data = Yii::$app->request->post();
 
@@ -84,8 +85,7 @@ class ParentController extends Controller
 
             return  $this->redirect('/user/default/index');
 
-            
-            
+
         }
 
         return $this->goHome();
@@ -99,5 +99,52 @@ class ParentController extends Controller
     public function actionError()
     {
         return "Oops....Error...Please contact us! ";
+    }
+
+    public function actionContactNanny()
+    {
+        if (Yii::$app->request->post())
+        {
+            // Array ( [user_id] => 330 [nanny_id] => 31  )
+            $data=Yii::$app->request->post();
+            $parent_id = $data['user_id'];
+            $nanny_id = $data['nanny_id'];
+        
+            $r = ParentNanny::find()->where(['parentid' => $parent_id, 'nannyid' => $nanny_id])->all();
+            
+            if ( !$r )
+            {
+                $isolationLevel = \yii\db\Transaction::SERIALIZABLE;
+                $transaction = Yii::$app->db->beginTransaction($isolationLevel);
+                try 
+                {
+                    
+                    $parentnanny = new ParentNanny();
+                    $parentnanny->parentid = (int)$parent_id;
+                    $parentnanny->nannyid = (int)$nanny_id;
+                    $parentnanny->timestamp = time();
+                    $parentnanny->save();
+
+                    // here, parent is actually user
+                    $parent = User::findById($parent_id);
+                    $parent->credits -= 1;
+                    $parent->save();
+
+                    $transaction->commit();
+
+                } catch (\Exception $e) {
+                    $transaction->rollBack();
+                    return $this->redirect('/pay/stripe/error');
+                } 
+
+                return  $this->redirect('/user/default/index');
+
+            }
+            else{
+                return  $this->redirect('/user/default/index');
+            }
+
+        }
+        return 'OK';
     }
 }

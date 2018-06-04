@@ -670,7 +670,12 @@ $this->registerJs(
    <a class="btn btn-inverse" href="/user/sign-in/login">Log In Please</a>
 </div>
 <div id="contact-nanny-popup" class="white-popup mfp-with-anim mfp-hide">
-    You Have enough credits to contact this candidate. <br>Please increase your balance in your account dashboard or <a class="btn btn-inverse" href="/user/default/get-credits">Buy Credits Now</a>
+    <form action="/pay/parent/contact-nanny" method="post">
+    <input type="hidden" name="user_id" value="<?=Yii::$app->user->id ?>" />
+    <input type="hidden" name="nanny_id" value="<?=$model->id ?>" />
+    <input type="hidden" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>"/>
+    <input type="submit" class="btn btn-inverse" value="Click to Proceed" />
+    </form>
 </div>
 <div id="buy-credit-popup" class="white-popup mfp-with-anim mfp-hide">
     You don't have enough credits to contact this candidate. <br>Please increase your balance in your account dashboard or <a class="btn btn-inverse" href="/user/default/get-credits">Buy Credits Now</a>
