@@ -15,7 +15,13 @@ $this->registerJs(
     $(document).ready(function () {
         $("html, body").animate({scrollTop: $(".slide").height()+$(".navbar").height()},"slow");
         console.log($("slide").height());
-            });
+    
+        $("#reset-btn").click(function(){
+            $(this).addClass("hidden");
+            $("#reset-pw").removeClass("hidden");
+        })
+    
+    });
     ',
     View::POS_READY,
     'my-button-handler'
@@ -28,22 +34,28 @@ $this->title = Yii::t('frontend', 'User Settings')
     <br>
     <div class="row">
     <div class="col-md-6">   
-    <h2 style="color: #414141;">Account setup</h2>
+    <h2 style="color: #414141;">My NannyCare Account</h2>
     <!--<h2><?php //echo Yii::t('frontend', 'Account Settings') ?></h2>-->
         <?= $form->field($model->getModel('account'), 'username')->textInput(['readOnly' => true]) ?>
 
         <?= $form->field($model->getModel('account'), 'email')->textInput(['readOnly' => true]) ?>
-
-        <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>
-    
-        <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
-        <?= $form->field($model->getModel('profile'), 'picture')
-                ->widget(FileInput::classname(), [
-                    'options' => ['accept' => 'image/*'],
-                ])->label("Photo");?>
-        <div class="form-group">
-            <?= Html::submitButton(Yii::t('frontend', 'Update'), ['class' => 'nav-btn']) ?>
+        <div class="hidden" id="reset-pw">
+            <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>
+        
+            <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
+            <?= $form->field($model->getModel('profile'), 'picture')
+                    ->widget(FileInput::classname(), [
+                        'options' => ['accept' => 'image/*'],
+                    ])->label("Photo");?>
+            <div class="form-group">
+                <?= Html::submitButton(Yii::t('frontend', 'Update'), ['class' => 'nav-btn']) ?>
+            </div>
         </div>
+                        
+        <div class="form-group">
+            <?= Html::Button(Yii::t('frontend', 'Reset Password'), ['class' => 'nav-btn', 'id' => 'reset-btn']) ?>
+        </div>
+
     </div>
         <div class="col-md-6">
         <h2 style="color: #414141;">Profile Details (click to view and edit it)</h2>
@@ -55,8 +67,8 @@ $this->title = Yii::t('frontend', 'User Settings')
                 <a href="about-you"><li class="process-label2 active" id="label-5">About you<span><i class="fa fa-long-arrow-right"></i></span></li></a>
             </ul>
             <div style="text-align: center; margin: 30px 0 0 0;">
-            <a href="create-employment"> <span class="nav-btn">Add prev job</span><i class="fa fa-plus-circle nav-mob-btn"></i></a>
-            <a href="create-reference"> <span class="nav-btn">Add reference</span><i class="fa fa-plus-circle nav-mob-btn"></i></a>
+            <a href="create-employment"> <span class="nav-btn">Add Previous Employments</span><i class="fa fa-plus-circle nav-mob-btn"></i></a>
+            <a href="create-reference"> <span class="nav-btn">Add Reference</span><i class="fa fa-plus-circle nav-mob-btn"></i></a>
         </div>
         </div>
     </div>
@@ -78,7 +90,7 @@ $this->title = Yii::t('frontend', 'User Settings')
 
             ['class' => 'yii\grid\ActionColumn',
              
-              'template' => '{view_ref} {update_ref}',
+                'template' => '{view_ref} {update_ref}',
                 'buttons' => [
                 'view_ref' => function ($url, $model) {
                     return Html::a('<span class="fa fa-eye"></span> View', $url, [
@@ -87,8 +99,8 @@ $this->title = Yii::t('frontend', 'User Settings')
                     ]);
                 },
                 'update_ref' => function ($url, $model) {
-                    return Html::a('<span class="fa fa-edit"></span> Update', $url, [
-                                'title' => Yii::t('app', 'View'),
+                    return Html::a('<span class="fa fa-edit"></span> Edit', $url, [
+                                'title' => Yii::t('app', 'Edit'),
                                 'class'=>'btn btn-primary btn-xs',                                  
                     ]);
                 },
@@ -96,7 +108,7 @@ $this->title = Yii::t('frontend', 'User Settings')
             ],
         ],
     ]); ?>
-     <h2 style="color: #000;">Prev job places</h2>
+     <h2 style="color: #000;">Prevous Employments</h2>
     <?= GridView::widget([
         'dataProvider' => $dataProvider1,
         'columns' => [
@@ -133,8 +145,8 @@ $this->title = Yii::t('frontend', 'User Settings')
                     ]);
                 },
                 'update_emp' => function ($url, $model) {
-                    return Html::a('<span class="fa fa-edit"></span> Update', $url, [
-                                'title' => Yii::t('app', 'View'),
+                    return Html::a('<span class="fa fa-edit"></span> Edit', $url, [
+                                'title' => Yii::t('app', 'Edit'),
                                 'class'=>'btn btn-primary btn-xs',                                  
                     ]);
                 },

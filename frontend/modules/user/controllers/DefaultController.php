@@ -2,8 +2,8 @@
 
 namespace frontend\modules\user\controllers;
 
-use common\models\Nannies;
 use Yii;
+use common\models\Nannies;
 use common\base\MultiModel;
 use frontend\modules\user\models\AccountForm;
 use Intervention\Image\ImageManagerStatic;
@@ -14,15 +14,8 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use common\models\Refs;
 use common\models\Employment;
-use common\components\Paypal;
-/*use PayPal\Api\Amount;
-use PayPal\Api\Details;
-use PayPal\Api\Item;
-use PayPal\Api\ItemList;
-use PayPal\Api\Payer;
-use PayPal\Api\Payment;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;*/
+
+
 
 class DefaultController extends Controller
 {
@@ -114,7 +107,7 @@ class DefaultController extends Controller
             $dataProvider1 = new ActiveDataProvider([
                 'query' => Employment::find()->where(['email' => \Yii::$app->user->identity->email]),
             ]);
-            return $this->render('index', ['model'=>$model, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
+            return $this->render('user_index_nanny', ['model'=>$model, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
         } else {
             $accountForm->setUser(Yii::$app->user->identity);
             $model = new MultiModel([
@@ -258,7 +251,7 @@ class DefaultController extends Controller
     {
         $model=$this->findEmp($id);
         if ($model->email==\Yii::$app->user->identity->email){
-            return $this->render('view_employment', [
+            return $this->render('view_emp', [
                 'model' => $model,
             ]);
         }else{
@@ -284,13 +277,11 @@ class DefaultController extends Controller
     public function actionCreateEmployment(){
         $model = new Employment();
         if ($model->load(Yii::$app->request->post())) {
-            $model->email=\Yii::$app->user->identity->email;
-            if($model->save()){
-                
-            }else{
+            $model->email= Yii::$app->user->identity->email;
+            if(!$model->save()){
                 return $this->render('create_employment', [
-                'model' => $model,
-            ]);
+                    'model' => $model,
+                ]);
             }
             return $this->redirect(['view_emp', 'id' => $model->id]);
         } else {
@@ -328,37 +319,6 @@ class DefaultController extends Controller
     
     
     
-    public function actionCreatePayment($id){
-        /*$payer = new Payer();
-        $payer->setPaymentMethod("paypal");
-        $amount = new Amount();
-        $amount->setCurrency("USD")
-            ->setTotal(74.99)
-            ->setDetails($details);
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($itemList)
-            ->setDescription("Payment description");
-        $baseUrl="http://new.lovingnannies.com/user/default";
-        $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("$baseUrl/execute-payment?success=true")
-        ->setCancelUrl("$baseUrl/execute-payment?success=false");
-        $payment = new Payment();
-        $payment->setIntent("sale")
-            ->setPayer($payer)
-            ->setRedirectUrls($redirectUrls)
-            ->setTransactions(array($transaction));
-        $request = clone $payment;
-        try {
-            $payment->create($apiContext);
-        } catch (Exception $ex) {
-            ResultPrinter::printError("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
-            exit(1);
-        }
-        $approvalUrl = $payment->getApprovalLink();
-        ResultPrinter::printResult("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $payment);
-        return $payment;*/
-                
-    }
+    
     
 }

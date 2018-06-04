@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'years_known')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-inverse' : 'btn btn-inverse']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Confirm Edit', ['class' => $model->isNewRecord ? 'btn btn-inverse' : 'btn btn-inverse']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
