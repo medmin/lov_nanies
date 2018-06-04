@@ -4,6 +4,7 @@ use yii\widgets\DetailView;
 use trntv\filekit\widget\Upload;
 use yii\bootstrap\ActiveForm;
 use yii\web\View;
+use common\models\User;
 $this->registerJs(
     '
     if($(".profile-picture").height()<$(".hideContent").height()){
@@ -134,7 +135,7 @@ $this->registerJs(
             </div>
         </div>
         <div class="col-lg-12 popup1">
-            <a href="#test-popup" data-effect="mfp-zoom-in" style="line-height: 60px;" class="btn btn-inverse btn-contact open-popup-link mfp-zoom-in">Contact Candidate</a>
+            <a href=<?= Yii::$app->user->isGuest ? "#login-popup" : ( User::findById(Yii::$app->user->id)->credits > 0 ? "#contact-nanny-popup" : "#buy-credit-popup" ) ?>   data-effect="mfp-zoom-in" style="line-height: 60px;" class="btn btn-inverse btn-contact open-popup-link mfp-zoom-in">Contact Candidate</a>
         </div>
         <div class="col-lg-12">
             <div class="panel-group candidate">
@@ -665,7 +666,13 @@ $this->registerJs(
 <?php require_once('sidebar.php');?>
 </div>
 </div>
-<div id="test-popup" class="white-popup mfp-with-anim mfp-hide">
+<div id="login-popup" class="white-popup mfp-with-anim mfp-hide">
+   <a class="btn btn-inverse" href="/user/sign-in/login">Log In Please</a>
+</div>
+<div id="contact-nanny-popup" class="white-popup mfp-with-anim mfp-hide">
+    You Have enough credits to contact this candidate. <br>Please increase your balance in your account dashboard or <a class="btn btn-inverse" href="/user/default/get-credits">Buy Credits Now</a>
+</div>
+<div id="buy-credit-popup" class="white-popup mfp-with-anim mfp-hide">
     You don't have enough credits to contact this candidate. <br>Please increase your balance in your account dashboard or <a class="btn btn-inverse" href="/user/default/get-credits">Buy Credits Now</a>
 </div>
                     
