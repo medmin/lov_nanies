@@ -35,8 +35,8 @@ $this->title = Yii::t('frontend', 'User Settings')
     <?php $form = ActiveForm::begin(); ?>
     <br>
     <div class="row">
-    <div class="col-md-6">   
-    <h2 style="color: #414141;">My NannyCare Account</h2>
+        <div class="col-md-6">   
+        <h2 style="color: #414141;">My NannyCare Account</h2>
     <!--<h2><?php //echo Yii::t('frontend', 'Account Settings') ?></h2>-->
         <?= $form->field($model->getModel('account'), 'username')->textInput(['readOnly' => true]) ?>
 
@@ -60,7 +60,7 @@ $this->title = Yii::t('frontend', 'User Settings')
 
     </div>
         <div class="col-md-6">
-        <h2 style="color: #414141;">Profile Details (click to view or edit it)</h2>
+            <h2 style="color: #414141;">Profile Details (click to view or edit it)</h2>
             <ul class="process-label">
                 <a href="main"><li class="process-label2 active" id="label-1">Main <span><i class="fa fa-long-arrow-right"></i></span></li></a>
                 <a href="questions-n-schedule"><li class="process-label2 active" id="label-2">Questions & Schedule<span><i class="fa fa-long-arrow-right"></i></span></li></a>
@@ -69,9 +69,20 @@ $this->title = Yii::t('frontend', 'User Settings')
                 <a href="about-you"><li class="process-label2 active" id="label-5">About you<span><i class="fa fa-long-arrow-right"></i></span></li></a>
             </ul>
             <div style="text-align: center; margin: 30px 0 0 0;">
-            <a href="create-employment"> <span class="nav-btn">Add Previous Employments</span><i class="fa fa-plus-circle nav-mob-btn"></i></a>
-            <a href="create-reference"> <span class="nav-btn">Add Reference</span><i class="fa fa-plus-circle nav-mob-btn"></i></a>
-        </div>
+                <a href="create-employment"> <span class="nav-btn">Add Previous Employments</span></a>
+                <a href="create-reference"> <span class="nav-btn">Add References</span></a>
+            </div>
+            <div style="text-align: center; margin: 30px 0 0 0;">
+                <a href="/pay/nanny/monthly-should-renew?nannyid=<?=Yii::$app->user->id; ?>"><span class="nav-btn">Check My Status</span></a>
+            </div>
+            <div style="text-align: center; margin: 30px 0 0 0;" id="monthly-should-renew">
+                <a><span class="nav-btn">Your monthly listing Fee expires soon.</span></a>
+                <a href="/user/default/get-credits"><span class="nav-btn">Get Credits</span></a>
+            </div>
+            <div style="text-align: center; margin: 30px 0 0 0;" id="monthly-still-valid">
+                <a><span class="nav-btn">Your monthly listing Fee expires at: </span></a>
+                <a href="/user/default/get-credits"><span class="nav-btn">Get Credits</span></a>
+            </div>
         </div>
     </div>
 

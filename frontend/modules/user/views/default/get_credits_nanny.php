@@ -20,6 +20,7 @@ $this->registerJs(
 </div>
 
 <h3>Cost: $49.99 (one time fee)</h3>
+<p>Pay the sign up fee and then we start doing your background check and verifying your references and CPR/Firt Aid.<br />If you have paid, click the button at the bottom to skip this step.</p>
 <p>
     <form action="/pay/nanny/stripe-signup-fee" method="POST">
         <script
@@ -41,7 +42,8 @@ $this->registerJs(
 <p>This includes the cost of your background check. After you sign up, you will receive an email link to complete our background check form. You will also get a copy of the background check once it's completed. This is non refundable if your background check comes back with any misdemeanors, arrests or convictions on it.
 </p>
 
-<h3>Cost: $9.99 (monthly fee)</h3>
+<h3>Cost: $9.99 (monthly listing fee)</h3>
+<p>Pay the monthly listing fee after we receive your background check and verified your references and CPR/First Aid.</p>
 <p>
 <form action="/pay/nanny/stripe-listing-fee" method="POST">
         <script
@@ -65,6 +67,6 @@ $this->registerJs(
 
 <div class="container">
     <p>
-        <a href="/user/default/index" class="btn btn-primary btn-block">No thanks! I will pay later.</a>
+        <a href="/user/default/index" class="btn btn-primary btn-block">Skip</a>
     </p>
 </div>
