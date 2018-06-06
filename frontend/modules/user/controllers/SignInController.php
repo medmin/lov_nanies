@@ -65,7 +65,8 @@ class SignInController extends \yii\web\Controller
                         'allow' => false,
                         'roles' => ['@'],
                         'denyCallback' => function () {
-                            return Yii::$app->controller->redirect(['/user/default/index']);
+                            //既然要求登陆用户才可以访问这些action，那干脆就重定向到登录页
+                            return Yii::$app->controller->redirect(['/user/sign-in/login']);
                         }
                     ],
                     [
@@ -93,6 +94,7 @@ class SignInController extends \yii\web\Controller
     {
         
         $model = new LoginForm();
+        //这两行啥意思？
         Yii::$app->view->params['offslide'] = 1;
         Yii::$app->view->params['slider'] = "login";
         if (Yii::$app->request->isAjax) {
@@ -101,9 +103,24 @@ class SignInController extends \yii\web\Controller
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if((Yii::$app->user->identity->step<6)||(Yii::$app->user->identity->step==7)){
+            /**这里，如果是nanny，刚注册，step是1，除非填写接下来的所有信息，step就一直小于6，直到完成所有表格，step才变为8
+             * 如果注册的时候，身份选的是parent，注册后，不管是否激活，step就是7
+            */
+            //这里，身份是注册了，激活了，但未填写信息的parent
+            if (Yii::$app->user->identity->step==7){
                 return $this->actionContinueRegistration();
             }
+            //刚注册且激活了的nanny，尚未付款
+            else if (Yii::$app->user->identity->step < 6 ){
+                $userid = Yii::$app->user->id;
+                //说明护士已经支付过了signup fee
+                if (\common\models\User::findById($userid)->credits >= 4999){
+                    return $this->redirect(['/user/default/index']);
+                }
+                return $this->redirect(['/user/default/get-credits']);
+            }
+
+            //这里是所有信息填写完毕的parent和nanny
             return $this->redirect(['/user/default/index']);
         }
         
@@ -111,6 +128,7 @@ class SignInController extends \yii\web\Controller
             'model' => $model
         ]);
     }
+
 
     /**
      * @return Response

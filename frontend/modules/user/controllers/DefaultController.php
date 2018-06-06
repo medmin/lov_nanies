@@ -76,6 +76,7 @@ class DefaultController extends Controller
          */
         $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
         if(array_key_exists('nanny', $tmpArr)){
+
             $accountForm->setUser(Yii::$app->user->identity);
             $model = new MultiModel([
                 'models' => [
@@ -299,7 +300,7 @@ class DefaultController extends Controller
         $model = Yii::$app->user;
         //这里意思是，如果是家长，就调转到家长付款页面，保姆的话，就是保姆的付款页面
         if( array_key_exists('nanny', $tmpArr) ){
-            return $this->render('prices_nannies', [
+            return $this->render('get_credits_nanny', [
                 'model' => $model
             ]);
         }else{

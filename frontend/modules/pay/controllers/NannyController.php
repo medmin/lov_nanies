@@ -10,7 +10,7 @@ use common\models\UserOrder;
 use common\models\ParentNanny;
 use common\commands\AddToTimelineCommand;
 
-class ParentController extends Controller
+class NannyController extends Controller
 {
 
     /**
@@ -31,7 +31,7 @@ class ParentController extends Controller
         ];
     }
 
-    public function actionStripe()
+    public function actionStripeSignupFee()
     {
         
         if (Yii::$app->request->post())
@@ -42,7 +42,6 @@ class ParentController extends Controller
         try {
             $data = Yii::$app->request->post();
 
-          
             \Stripe\Stripe::setApiKey(env('STRIPE_SK'));
                             
             $token = Yii::$app->request->post('stripeToken');
@@ -63,19 +62,17 @@ class ParentController extends Controller
                 'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'parent', 'email' => $email],
             ]);
                 
-                
-                
-                $user->credits += $data['credits'];
+                $user->credits += 4999;//  one time signup fee
                 $user->save(); 
-
+                
                 $order = new UserOrder();
                 $order->user_id = $user->id;
-                $order->user_type = "parent";
+                $order->user_type = "nanny";
                 $order->payment_gateway = "stripe";
                 $order->payment_gateway_id = $charge->id;
                 $order->service_plan = $service_plan;
                 $order->service_money = (int)$money;
-                $order->timestamp = time();
+                $order->timestamp = time(); //paid_at, to be precise
                 $order->expired_at = strtotime('+5000 days');
                 if ($order->save()) {
                     // 订单保存成功,写入事件日志
@@ -103,6 +100,11 @@ class ParentController extends Controller
         }
 
         return $this->goHome();
+    }
+
+    public function actionStripeListingFee()
+    {
+
     }
 
     public function actionSuccess()

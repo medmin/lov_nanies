@@ -32,8 +32,8 @@ class UserOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'user_type', 'payment_gateway', 'payment_gateway_id', 'service_plan', 'service_money', 'timestamp'], 'required'],
-            [['user_id', 'service_money', 'timestamp'], 'integer'],
+            [['user_id', 'user_type', 'payment_gateway', 'payment_gateway_id', 'service_plan', 'service_money', 'timestamp', 'expired_at'], 'required'],
+            [['user_id', 'service_money', 'timestamp','expired_at'], 'integer'],
             [['user_type', 'payment_gateway'], 'string', 'max' => 20],
             [['payment_gateway_id'], 'string', 'max' => 200],
             [['service_plan'], 'string', 'max' => 100],
@@ -53,7 +53,8 @@ class UserOrder extends \yii\db\ActiveRecord
             'payment_gateway_id' => Yii::t('app', 'Payment Gateway ID'),
             'service_plan' => Yii::t('app', 'Service Plan'),
             'service_money' => Yii::t('app', 'Service Money'),
-            'timestamp' => Yii::t('app', 'Timestamp'),
+            'timestamp' => Yii::t('app', 'Paid At'),
+            'expired_at' => Yii::t('app', 'Expired At'),
         ];
     }
 }
