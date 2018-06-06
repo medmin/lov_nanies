@@ -10,6 +10,8 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $model common\base\MultiModel */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $dataProvider1 \yii\data\ActiveDataProvider */
 $this->registerJs(
     '
     $(document).ready(function () {
@@ -72,9 +74,13 @@ $this->title = Yii::t('frontend', 'User Settings')
         </div>
         </div>
     </div>
-    
-    <h2 style="color: #000;">References</h2>
-    <?= GridView::widget([
+
+    <?php
+    $h = <<<HTML
+<h2 style="color: #000;">References</h2>
+HTML;
+
+    echo $dataProvider->count == 0 ? '' : $h . GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -108,8 +114,13 @@ $this->title = Yii::t('frontend', 'User Settings')
             ],
         ],
     ]); ?>
-     <h2 style="color: #000;">Prevous Employments</h2>
-    <?= GridView::widget([
+
+    <?php
+    $h = <<<HTML
+<h2 style="color: #000;">Prevous Employments</h2>
+HTML;
+
+    echo $dataProvider1->count == 0 ? '' : $h . GridView::widget([
         'dataProvider' => $dataProvider1,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
