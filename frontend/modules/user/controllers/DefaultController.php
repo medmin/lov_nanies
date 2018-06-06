@@ -102,10 +102,12 @@ class DefaultController extends Controller
             }
             $dataProvider = new ActiveDataProvider([
                 'query' => $refs,
+                'sort' => false
             ]);
             
             $dataProvider1 = new ActiveDataProvider([
                 'query' => Employment::find()->where(['email' => \Yii::$app->user->identity->email]),
+                'sort' => false
             ]);
             return $this->render('user_index_nanny', ['model'=>$model, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
         } else {

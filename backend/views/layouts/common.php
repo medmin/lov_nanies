@@ -182,6 +182,12 @@ $bundle = BackendAsset::register($this);
                         'visible' => Yii::$app->user->can('administrator')
                     ],
                     [
+                        'label' => Yii::t('backend', 'Orders'),
+                        'icon' => '<i class="fa fa-building-o"></i>',
+                        'url' => ['/order/index'],
+                        'visible' => Yii::$app->user->can('administrator')
+                    ],
+                    [
                         'label' => Yii::t('backend', 'Other'),
                         'url' => '#',
                         'icon' => '<i class="fa fa-cogs"></i>',

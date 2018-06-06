@@ -8,6 +8,7 @@ use yii\filters\AccessControl;
 use common\models\User;
 use common\models\UserOrder;
 use common\models\ParentNanny;
+use common\commands\AddToTimelineCommand;
 
 class ParentController extends Controller
 {
@@ -75,7 +76,19 @@ class ParentController extends Controller
                 $order->service_plan = $service_plan;
                 $order->service_money = (int)$money;
                 $order->timestamp = time();
-                $order->save();
+                if ($order->save()) {
+                    // 订单保存成功,写入事件日志
+                    Yii::$app->commandBus->handle(new AddToTimelineCommand([
+                        'category' => 'order',
+                        'event' => 'parent',
+                        'data' => [
+                            'public_identity' => Yii::$app->user->identity->getPublicIdentity(),
+                            'order_id' => $order->id,
+                            'user_id' => $order->user_id,
+                            'created_at' => $order->timestamp
+                        ]
+                    ]));
+                }
 
                 $transaction->commit();
             } catch (\Exception $e) {

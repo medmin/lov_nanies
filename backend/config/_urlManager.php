@@ -3,4 +3,7 @@ return [
     'class' => yii\web\UrlManager::class,
     'enablePrettyUrl' => true,
     'showScriptName' => false,
+    'rules' => [
+        'order/<action>' => 'user-order/<action>'
+    ]
 ];
