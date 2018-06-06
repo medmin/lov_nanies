@@ -58,7 +58,7 @@ $this->title = Yii::t('frontend', 'User Settings')
 
     </div>
         <div class="col-md-6">
-        <h2 style="color: #414141;">Profile Details (click to view and edit it)</h2>
+        <h2 style="color: #414141;">Profile Details (click to view or edit it)</h2>
             <ul class="process-label">
                 <a href="main"><li class="process-label2 active" id="label-1">Main <span><i class="fa fa-long-arrow-right"></i></span></li></a>
                 <a href="questions-n-schedule"><li class="process-label2 active" id="label-2">Questions & Schedule<span><i class="fa fa-long-arrow-right"></i></span></li></a>

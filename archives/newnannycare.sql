@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `article_category` (
 --
 
 CREATE TABLE IF NOT EXISTS `employment` (
-  `id` int(11) NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` text NOT NULL,
   `employer_name` text NOT NULL,
   `employer_address` text NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `employment` (
   `was_this_a_live_in_position` text NOT NULL,
   `emloyer_comment` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
