@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\View;
 use yii\grid\GridView;
-
+use common\models\UserOrder;
 /* @var $this yii\web\View */
 /* @var $model common\base\MultiModel */
 /* @var $form yii\widgets\ActiveForm */
@@ -72,16 +72,12 @@ $this->title = Yii::t('frontend', 'User Settings')
                 <a href="create-employment"> <span class="nav-btn">Add Previous Employments</span></a>
                 <a href="create-reference"> <span class="nav-btn">Add References</span></a>
             </div>
+            <div style="text-align: center; margin: 30px 0 0 0;" id="listing-fee-expired">
+                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn btn-warning"  ?>">Your monthly listing fee is expired.</a>
+                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "btn btn-primary" : "hidden"  ?>">Your monthly listing Fee will be expired at: <span><?=  date('Y-m-d', UserOrder::NannyListingFeeStatus(Yii::$app->user->id));  ?></span></a>
+            </div>
             <div style="text-align: center; margin: 30px 0 0 0;">
-                <a href="/pay/nanny/monthly-should-renew?nannyid=<?=Yii::$app->user->id; ?>"><span class="nav-btn">Check My Status</span></a>
-            </div>
-            <div style="text-align: center; margin: 30px 0 0 0;" id="monthly-should-renew">
-                <a><span class="nav-btn">Your monthly listing Fee expires soon.</span></a>
-                <a href="/user/default/get-credits"><span class="nav-btn">Get Credits</span></a>
-            </div>
-            <div style="text-align: center; margin: 30px 0 0 0;" id="monthly-still-valid">
-                <a><span class="nav-btn">Your monthly listing Fee expires at: </span></a>
-                <a href="/user/default/get-credits"><span class="nav-btn">Get Credits</span></a>
+                <a href="/user/default/get-credits"><span class="nav-btn">Get <?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? 'More' : '' ?> Credits</span></a>
             </div>
         </div>
     </div>

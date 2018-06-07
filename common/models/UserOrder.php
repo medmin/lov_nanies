@@ -57,4 +57,21 @@ class UserOrder extends \yii\db\ActiveRecord
             'expired_at' => Yii::t('app', 'Expired At'),
         ];
     }
+
+    /**
+	* @param $nanny_id
+	* @return integer | bool
+	*
+	* 直接倒序查询最后一个expired_at，大于当前时间说明没有到期，返回这个时间戳，否则返回false
+    * 在view层使用： if (UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {...}
+	 */
+	public static function NannyListingFeeStatus($nanny_id)
+	{
+		$payrecord = UserOrder::find()->where(['user_id'=> $nanny_id, "service_money" =>999])->orderBy('expired_at DESC')->one();
+		if ($payrecord && $payrecord->expired_at > time() ) {
+			return $payrecord->expired_at;
+		} else {
+			return false;
+		}
+	}
 }

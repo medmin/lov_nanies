@@ -94,7 +94,11 @@ class SignInController extends \yii\web\Controller
     {
         
         $model = new LoginForm();
-        //这两行啥意思？
+        /**这两行啥意思？
+         * doze reply： 
+         * 这两行是原作者用来设置页面是否需要设置导航栏（可能不是导航栏，但肯定是页面上需要展示的内容）,
+         * 对应用到的地方在frontend\views\layouts\main.php文件中的第 26 行到 42 行之间
+        */
         Yii::$app->view->params['offslide'] = 1;
         Yii::$app->view->params['slider'] = "login";
         if (Yii::$app->request->isAjax) {

@@ -59,7 +59,7 @@ class NannyController extends Controller
                 'description' => $service_plan,
                 'source' => $token,
                 'statement_descriptor' => 'NannyCare.com',
-                'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'parent', 'email' => $email],
+                'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'nanny', 'email' => $email],
             ]);
                 
                 $user->credits += 4999;//  one time signup fee
@@ -78,7 +78,7 @@ class NannyController extends Controller
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
-                        'event' => 'parent',
+                        'event' => 'nanny',
                         'data' => [
                             'public_identity' => Yii::$app->user->identity->getPublicIdentity(),
                             'order_id' => $order->id,
@@ -129,7 +129,7 @@ class NannyController extends Controller
                 'description' => $service_plan,
                 'source' => $token,
                 'statement_descriptor' => 'NannyCare.com',
-                'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'parent', 'email' => $email],
+                'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'nanny', 'email' => $email],
             ]);
                 
                 $user->credits += 999;//  monthly signup fee
@@ -148,7 +148,7 @@ class NannyController extends Controller
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
-                        'event' => 'parent',
+                        'event' => 'nanny',
                         'data' => [
                             'public_identity' => Yii::$app->user->identity->getPublicIdentity(),
                             'order_id' => $order->id,
@@ -183,32 +183,4 @@ class NannyController extends Controller
         return "Oops....Error...Please contact us! ";
     }
 
-    public function actionMonthlyShouldRenew()
-    {
-       //post or get ?  if ajax is successful, it shoud use post
-            $data = Yii::$app->request->get();
-            $nannyid = $data['nannyid'];
-            $payrecords = UserOrder::find()->where(['user_id'=> $nannyid, "service_money" =>999])->all();
-            if ($payrecords)//不为空，说明是有纪录的
-            {
-                $expires_at = 0;
-                foreach ($payrecords as $record)
-                {
-                    if ($record->expired_at > $expires_at )
-                    {
-                        $expires_at = $record->expired_at;
-                    }
-                }
-
-                if ($expires_at >= time()){
-                    return "hasexpired";
-                }
-                else if ($expires_at >= strtotime('-7 days')){
-                    return "soon";
-                }
-            }
-            else {
-                return "norecord";
-            }
-    }
 }
