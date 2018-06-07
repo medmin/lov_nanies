@@ -5,6 +5,7 @@ $config = [
     'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
     'sourceLanguage'=>'en-US',
     'language'=>'en-US',
+    'timeZone' => 'America/Los_Angeles',
     'bootstrap' => ['log'],
     'components' => [
 

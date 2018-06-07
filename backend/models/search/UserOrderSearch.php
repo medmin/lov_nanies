@@ -45,6 +45,9 @@ class UserOrderSearch extends UserOrder
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['timestamp' => SORT_DESC]
+            ]
         ]);
 
         if (!($this->load($params) && $this->validate())) {

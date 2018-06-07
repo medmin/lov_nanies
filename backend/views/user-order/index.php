@@ -16,20 +16,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            // ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
             'user_id',
             'user_type',
-            'payment_gateway',
+            'attribute' => 'payment_gateway',
             'payment_gateway_id',
              'service_plan',
-             'service_money',
+             [
+                'attribute'  =>'service_money',
+                'label' => 'Amount'
+             ],
+             
              'timestamp:datetime',
+             'expired_at:datetime'
 
-            ['class' => 'yii\grid\ActionColumn'],
+            // ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
