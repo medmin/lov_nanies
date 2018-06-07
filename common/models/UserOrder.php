@@ -7,14 +7,15 @@ use Yii;
 /**
  * This is the model class for table "user_order".
  *
- * @property string $id
- * @property string $user_id
+ * @property integer $id
+ * @property integer $user_id
  * @property string $user_type
  * @property string $payment_gateway
  * @property string $payment_gateway_id
  * @property string $service_plan
- * @property string $service_money
- * @property string $timestamp
+ * @property integer $service_money
+ * @property integer $timestamp
+ * @property integer $expired_at
  */
 class UserOrder extends \yii\db\ActiveRecord
 {
@@ -59,11 +60,11 @@ class UserOrder extends \yii\db\ActiveRecord
     }
 
     /**
-	* @param $nanny_id
-	* @return integer | bool
-	*
-	* 直接倒序查询最后一个expired_at，大于当前时间说明没有到期，返回这个时间戳，否则返回false
-    * 在view层使用： if (UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {...}
+	 * @param $nanny_id
+	 * @return integer | bool
+	 *
+	 * 直接倒序查询最后一个expired_at，大于当前时间说明没有到期，返回这个时间戳，否则返回false
+     * 在view层使用： if (UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {...}
 	 */
 	public static function NannyListingFeeStatus($nanny_id)
 	{

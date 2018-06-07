@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Nannies;
+use yii\db\Query;
 
 /**
  * NannySearch represents the model behind the search form about `common\models\Nannies`.
@@ -45,6 +46,13 @@ class NannySearch extends Nannies
             $query = Nannies::find();
         }
         
+        if (Yii::$app->id === 'frontend') {
+            $attach_condition = (new Query())
+                ->select('user_id')
+                ->from('user_order')
+                ->where(['>', 'expired_at', time()]);
+            $query = $query->andWhere(['in', 'id', $attach_condition]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
