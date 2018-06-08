@@ -63,7 +63,7 @@ class NannyController extends Controller
             ]);
                 
                 $user->credits += 4999;//  one time signup fee
-                $user->save(); 
+                
                 
                 $order = new UserOrder();
                 $order->user_id = $user->id;
@@ -74,7 +74,7 @@ class NannyController extends Controller
                 $order->service_money = (int)$money;
                 $order->timestamp = time(); //paid_at, to be precise
                 $order->expired_at = strtotime('+5000 days');
-                if ($order->save()) {
+                if ($user->save() && $order->save()) {
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
@@ -86,6 +86,9 @@ class NannyController extends Controller
                             'created_at' => $order->timestamp
                         ]
                     ]));
+                }
+                else {
+                    throw new Exception('DATABASE SAVE FAILURE');
                 }
 
                 $transaction->commit();
@@ -148,7 +151,7 @@ EOT
             ]);
                 
                 $user->credits += 999;//  monthly signup fee
-                $user->save(); 
+                 
                 
                 $order = new UserOrder();
                 $order->user_id = $user->id;
@@ -159,7 +162,7 @@ EOT
                 $order->service_money = (int)$money;
                 $order->timestamp = time(); //paid_at, to be precise
                 $order->expired_at = strtotime('+30 days');
-                if ($order->save()) {
+                if ($user->save() && $order->save()) {
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
@@ -171,6 +174,9 @@ EOT
                             'created_at' => $order->timestamp
                         ]
                     ]));
+                }
+                else{
+                    throw new Exception('Database Save Failure');
                 }
 
                 $transaction->commit();

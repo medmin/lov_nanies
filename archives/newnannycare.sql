@@ -560,16 +560,17 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 CREATE TABLE IF NOT EXISTS `user_order` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `user_type` varchar(20) NOT NULL,
-  `payment_gateway` varchar(20) NOT NULL,
-  `payment_gateway_id` varchar(200) NOT NULL,
-  `service_plan` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `service_money` int(10) UNSIGNED NOT NULL,
-  `timestamp` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `user_id` int(10) unsigned NOT NULL,
+ `user_type` varchar(20) NOT NULL,
+ `payment_gateway` varchar(20) NOT NULL,
+ `payment_gateway_id` varchar(200) NOT NULL,
+ `service_plan` varchar(100) CHARACTER SET utf8 NOT NULL,
+ `service_money` int(10) unsigned NOT NULL,
+ `timestamp` int(10) unsigned NOT NULL,
+ `expired_at` int(10) unsigned NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4
 
 -- --------------------------------------------------------
 

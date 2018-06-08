@@ -64,7 +64,7 @@ class ParentController extends Controller
             ]);
                 
                 $user->credits += $data['credits'];
-                $user->save(); 
+                
 
                 $order = new UserOrder();
                 $order->user_id = $user->id;
@@ -75,7 +75,7 @@ class ParentController extends Controller
                 $order->service_money = (int)$money;
                 $order->timestamp = time();
                 $order->expired_at = strtotime('+5000 days');
-                if ($order->save()) {
+                if ( $user->save() && $order->save()) {
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
@@ -87,6 +87,9 @@ class ParentController extends Controller
                             'created_at' => $order->timestamp
                         ]
                     ]));
+                }
+                else{
+                    throw new Exception('Database Save Failure');
                 }
 
                 $transaction->commit();
@@ -150,12 +153,30 @@ EOT
                     $parentnanny->parentid = (int)$parent_id;
                     $parentnanny->nannyid = (int)$nanny_id;
                     $parentnanny->timestamp = time();
-                    $parentnanny->save();
+                    
 
                     // here, parent is actually user
                     $parent = User::findById($parent_id);
                     $parent->credits -= 1;
-                    $parent->save();
+                    
+
+                    if ($parentnanny->save() && $parent->save())
+                    {
+                        // 订单保存成功,写入事件日志
+                        Yii::$app->commandBus->handle(new AddToTimelineCommand([
+                            'category' => 'order',
+                            'event' => 'parent-get-nanny-info',
+                            'data' => [
+                                'public_identity' => Yii::$app->user->identity->getPublicIdentity(),
+                                'order_id' => $parentnanny->id,
+                                'user_id' => $parentnanny->parentid,
+                                'created_at' => $parentnanny->timestamp
+                            ]
+                        ]));
+                    }
+                    else {
+                        throw new Exception('Database Save Failure');
+                    }
 
                     $transaction->commit();
 
