@@ -7,6 +7,7 @@ use common\models\UserToken;
 use Yii;
 use common\models\User;
 use yii\base\Model;
+use yii\helpers\Html;
 
 /**
  * Password reset request form
@@ -51,15 +52,17 @@ class PasswordResetRequestForm extends Model
         if ($user) {
             $token = UserToken::create($user->id, UserToken::TYPE_PASSWORD_RESET, Time::SECONDS_IN_A_DAY);
             if ($user->save()) {
-                return Yii::$app->commandBus->handle(new SendEmailCommand([
-                    'to' => $this->email,
+                $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['/user/sign-in/reset-password', 'token' => $token->token]);
+                $result = (new \common\lib\SendEmail([
                     'subject' => Yii::t('frontend', 'Password reset for {name}', ['name'=>Yii::$app->name]),
-                    'view' => 'passwordResetToken',
-                    'params' => [
-                        'user' => $user,
-                        'token' => $token->token
-                    ]
-                ]));
+                    'to' => $this->email,
+                    'body' => 'Hello ' . Html::encode($user->username) . ',Follow the link below to reset your password:' . Html::a(Html::encode($resetLink), $resetLink)
+                ]))->handle();
+                if ($result instanceof \Exception) {
+                    return false;
+                } else {
+                    return true; // 如果没有抛出异常，只能证明调用了Mailgun,至于Mailgun有没有发送成功，需要进一步处理
+                }
             }
         }
 

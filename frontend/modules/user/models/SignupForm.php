@@ -94,14 +94,11 @@ class SignupForm extends Model
                     UserToken::TYPE_ACTIVATION,
                     Time::SECONDS_IN_A_DAY
                 );
-                Yii::$app->commandBus->handle(new SendEmailCommand([
+                (new \common\lib\SendEmail([
                     'subject' => Yii::t('frontend', 'Activation email'),
-                    'view' => 'activation',
                     'to' => $this->email,
-                    'params' => [
-                        'url' => Url::to(['/user/sign-in/activation', 'token' => $token->token], true)
-                    ]
-                ]));
+                    'body' => Yii::t('frontend', 'Thank you for registering with NannyCare.com! Please click on the link to activate your account. {url} Thank you!', ['url' => Yii::$app->formatter->asUrl(Url::to(['/user/sign-in/activation', 'token' => $token->token], true))])
+                ]))->handle();
             }
             return $user;
         }
