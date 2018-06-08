@@ -27,8 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'payment_gateway_id',
              'service_plan',
              [
-                'attribute'  =>'service_money',
-                'label' => 'Amount'
+                 'attribute'  =>'service_money',
+                 'label' => 'Amount',
+                 'value' => function($model) {
+                     return $model->service_money / 100;
+                 }
              ],
              
              'timestamp:datetime',
