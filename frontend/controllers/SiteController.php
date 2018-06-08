@@ -58,14 +58,14 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
         Yii::$app->view->params['offslide'] = 1;
-                Yii::$app->view->params['slider'] = "contact";
+        Yii::$app->view->params['slider'] = "contact";
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->contact(Yii::$app->params['adminEmail'])) {
+            if ($model->contact()) {
                 Yii::$app->getSession()->setFlash('alert', [
                     'body'=>Yii::t('frontend', 'Thank you for contacting us. We will respond to you as soon as possible.'),
                     'options'=>['class'=>'alert-success']
                 ]);
-                return $this->refresh();
+                return $this->goHome();
             } else {
                 Yii::$app->getSession()->setFlash('alert', [
                     'body'=>\Yii::t('frontend', 'There was an error sending email.'),

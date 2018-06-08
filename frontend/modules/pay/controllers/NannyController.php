@@ -93,6 +93,21 @@ class NannyController extends Controller
                 $transaction->rollBack();
                 return $this->redirect('/pay/stripe/error');
             } 
+            $money2 = (float)($money / 100);
+            (new \common\lib\SendEmail([
+                'subject' => 'We have got your payment ' . date('Y-m-d', time()),
+                'to' => [$email, 'info@nannycare.com'],
+                'body' => <<<EOT
+                <h2>Hi, {$user->username}</h2>
+                <h4>Your service plan is : {$service_plan} </h4>
+                <h4>Your payment is : {$money2}  dollars. </h4>
+                <h4>Your charge ID is: {$charge->id} </h4>
+                <h4>Thank you for your business.</h4>
+    
+                Regards,
+                Wendy Pierce
+EOT
+            ]))->handle();
 
             return  $this->redirect('/user/default/index');
 
@@ -163,6 +178,21 @@ class NannyController extends Controller
                 $transaction->rollBack();
                 return $this->redirect('/pay/stripe/error');
             } 
+            $money2 = (float)($money / 100);
+            (new \common\lib\SendEmail([
+                'subject' => 'We have got your payment ' . date('Y-m-d', time()),
+                'to' => [$email, 'info@nannycare.com'],
+                'body' => <<<EOT
+                <h2>Hi, {$user->username}</h2>
+                <h4>Your service plan is : {$service_plan} </h4>
+                <h4>Your payment is : {$money2}  dollars. </h4>
+                <h4>Your charge ID is: {$charge->id} </h4>
+                <h4>Thank you for your business.</h4>
+    
+                Regards,
+                Wendy Pierce
+EOT
+            ]))->handle();
 
             return  $this->redirect('/user/default/index');
 

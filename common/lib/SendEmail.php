@@ -21,8 +21,9 @@ class SendEmail extends Object
         try {
             $mg = Mailgun::create(env('MAILGUN_KEY'));
 //            $mg->setSslEnabled(!env('YII_DEBUG'));
-            return $mg->messages()->send('web.cardioanywhere.com', [
-                'from'    => $this->from ?? env('ROBOT_EMAIL'),
+            // $to could be an array
+            return $mg->messages()->send(env('MAIL_SERVICE_URL'), [
+                'from'    => env('NOREPLY_EMAIL'),
                 'to'      => $this->to,
                 'subject' => $this->subject,
                 'html'    => $this->body
