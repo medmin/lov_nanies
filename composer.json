@@ -50,7 +50,10 @@
     "symfony/process": "^3.0",
     "marciocamello/yii2-paypal": "*",
     "kartik-v/yii2-widget-fileinput": "@dev",
-    "stripe/stripe-php": "^6.7"
+    "stripe/stripe-php": "^6.7",
+    "mailgun/mailgun-php": "^2.5",
+    "php-http/curl-client": "^1.7",
+    "guzzlehttp/psr7": "^1.4"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

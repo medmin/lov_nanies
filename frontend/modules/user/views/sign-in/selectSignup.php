@@ -16,11 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <ul class="choose-signup">
                         <li>
                             <form method="get" action="family-signup">
-                            <button class="btn ">a parent </button></form>
+                            <input type="hidden" name="role" value="parent">
+                            <button class="btn">a parent </button></form>
                         </li>
                         <li>
                             <form method="get" action="nanny-signup">
-                            <button class="btn ">a babysitter</button></form>
+                            <input type="hidden" name="role" value="nanny">
+                            <button class="btn btn-primary">a babysitter</button></form>
                         </li>
                     </ul>
 
@@ -28,6 +30,3 @@ $this->params['breadcrumbs'][] = $this->title;
             </div> 
 </div>
 <br>
-<ul class="process-label">
-<li class="process-label2" id="label-1">Proceed to signup <span><i class="fa fa-long-arrow-right"></i></span></li>
-</ul>
