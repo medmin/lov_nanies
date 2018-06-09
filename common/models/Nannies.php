@@ -149,17 +149,19 @@ class Nannies extends ActiveRecord
     /**
      * @return array
      */
-//    public function behaviors()
-//    {
-//        return [
-//            'picture' => [
-//                'class' => UploadBehavior::className(),
-//                'attribute' => 'picture',
-//                'pathAttribute' => 'avatar_path',
-//                'baseUrlAttribute' => 'avatar_base_url'
-//            ],
-//        ];
-//    }
+    public function behaviors()
+    {
+        return [
+            'picture' => [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'picture',
+                'pathAttribute' => 'avatar_path',
+                'baseUrlAttribute' => 'avatar_base_url',
+                'uploadModelScenario' => 'default'
+            ],
+        ];
+    }
+
 
     /**
      * @inheritdoc
