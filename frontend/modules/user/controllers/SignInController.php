@@ -15,6 +15,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use common\commands\SendEmailCommand;
 use common\models\User;
+use common\models\UserOrder;
 use common\models\UserToken;
 use common\components\Paypalka;
 use frontend\modules\user\models\LoginForm;
@@ -117,8 +118,8 @@ class SignInController extends \yii\web\Controller
             //刚注册且激活了的nanny，尚未付款
             else if (Yii::$app->user->identity->step < 6 ){
                 $userid = Yii::$app->user->id;
-                //说明护士已经支付过了signup fee
-                if (\common\models\User::findById($userid)->credits >= 4999){
+                //判断保姆是否已经支付过了signup fee和monthly fee
+                if (User::findById($userid)->credits >= 4999 && UserOrder::NannyListingFeeStatus($userid)){
                     return $this->redirect(['/user/default/index']);
                 }
                 return $this->redirect(['/user/default/get-credits']);

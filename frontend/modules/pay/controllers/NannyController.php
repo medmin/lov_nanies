@@ -149,10 +149,11 @@ EOT
                 'statement_descriptor' => 'NannyCare.com',
                 'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'nanny', 'email' => $email],
             ]);
-                
-                $user->credits += 999;//  monthly signup fee
-                 
-                
+                /**这里原本是有一句：
+                 * $user->credits += 999 
+                 * 但显然保姆的credit，目的仅是记录是否支付了sign up fee
+                 * 支付了，就+4999
+                 * */
                 $order = new UserOrder();
                 $order->user_id = $user->id;
                 $order->user_type = "nanny";
@@ -162,7 +163,7 @@ EOT
                 $order->service_money = (int)$money;
                 $order->timestamp = time(); //paid_at, to be precise
                 $order->expired_at = strtotime('+30 days');
-                if ($user->save() && $order->save()) {
+                if ($order->save()) {
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',

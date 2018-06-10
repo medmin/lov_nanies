@@ -84,7 +84,7 @@ class DefaultController extends Controller
                     'profile' => Yii::$app->user->identity->nannies
                 ]
             ]);
-
+        
             $locale = $model->getModel('profile')->locale;
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 Yii::$app->session->setFlash('forceUpdateLocale');
