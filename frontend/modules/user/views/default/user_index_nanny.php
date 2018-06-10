@@ -1,7 +1,6 @@
 <?php
 
-// use trntv\filekit\widget\Upload;
-use kartik\file\FileInput;
+use trntv\filekit\widget\Upload;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\View;
@@ -46,9 +45,9 @@ $this->title = Yii::t('frontend', 'User Settings')
         
             <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
             <?= $form->field($model->getModel('profile'), 'picture')
-                    ->widget(FileInput::classname(), [
-                        'options' => ['accept' => 'image/*'],
-                    ])->label("Photo");?>
+                    ->widget(Upload::classname(), [
+                        'url'=>['avatar-upload']
+                        ])->label('Upload your image')?>
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('frontend', 'Update'), ['class' => 'nav-btn']) ?>
             </div>
