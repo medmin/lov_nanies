@@ -100,7 +100,7 @@ use common\widgets\DbText;
                     </div>
                 </div>
                 <div class="copyright">
-                    <p>&copy; With by diadea3007</p>
+                    <p>&copy; 2000 - <?=date('Y'); ?> Nannycare | All rights reserved </p>
                 </div>
             </div>
         </div>
