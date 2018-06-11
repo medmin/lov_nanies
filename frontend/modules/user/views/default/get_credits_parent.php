@@ -19,7 +19,7 @@ $this->registerJs(
 <div class="columns">
   <ul class="price">
     <li class="header">Basic</li>
-    <li class="grey">$74.99</li>
+    <li class="grey">$99</li>
     <li>3 credits</li>
     <li>Contact 3 nannies</li>
     <li class="grey">
@@ -27,7 +27,7 @@ $this->registerJs(
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key=<?= env('STRIPE_PK') ?>
-          data-amount="7499"
+          data-amount="9900"
           data-zip-code="true"
           data-name="NannyCare.com"
           data-description="Basic Plan (3 credits)"
@@ -35,7 +35,7 @@ $this->registerJs(
           data-locale="auto">
         </script>
         <input type="hidden" name="plan" value="Basic Plan (3 credits)" />
-        <input type="hidden" name="money" value=7499 />
+        <input type="hidden" name="money" value=9900 />
         <input type="hidden" name="credits" value=3 />
         <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
@@ -46,7 +46,7 @@ $this->registerJs(
 <div class="columns">
   <ul class="price">
     <li class="header" style="background-color: #DD980D;"><span style="display: block;font-size: 10px; line-height: 0;">Most Popular</span>Bronze</li>
-    <li class="grey">$129.99</li>   
+    <li class="grey">$179</li>   
     <li>6 credits</li>
     <li>Contact 6 nannies</li>
     <li class="grey">
@@ -54,7 +54,7 @@ $this->registerJs(
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key=<?= env('STRIPE_PK') ?>
-          data-amount="12999"
+          data-amount="17900"
           data-zip-code="true"
           data-name="NannyCare.com"
           data-description="Bronze Plan (6 credits)"
@@ -62,7 +62,7 @@ $this->registerJs(
           data-locale="auto">
         </script>
         <input type="hidden" name="plan" value="Bronze Plan (6 credits)" />
-        <input type="hidden" name="money" value=12999 />
+        <input type="hidden" name="money" value=17900 />
         <input type="hidden" name="credits" value=6 />
         <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
@@ -73,7 +73,7 @@ $this->registerJs(
 <div class="columns">
   <ul class="price">
     <li class="header">Gold</li>
-    <li class="grey">$199.99</li>
+    <li class="grey">$279</li>
     <li>10 credits</li>
     <li>Contact 10 nannies</li>
     <li class="grey">
@@ -81,7 +81,7 @@ $this->registerJs(
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key=<?= env('STRIPE_PK') ?>
-          data-amount="19999"
+          data-amount="27900"
           data-zip-code="true"
           data-name="NannyCare.com"
           data-description="Gold Plan (10 credits)"
@@ -89,7 +89,7 @@ $this->registerJs(
           data-locale="auto">
         </script>
         <input type="hidden" name="plan" value="Gold Plan (10 credits)" />
-        <input type="hidden" name="money" value=19999 />
+        <input type="hidden" name="money" value=27900 />
         <input type="hidden" name="credits" value=10 />
         <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
@@ -100,7 +100,7 @@ $this->registerJs(
 <div class="columns">
   <ul class="price">
     <li class="header">Platinum</li>
-    <li class="grey">$379.99</li>
+    <li class="grey">$500</li>
     <li>20 credits</li>
     <li>Contact 20 nannies</li>
     <li class="grey">
@@ -108,7 +108,7 @@ $this->registerJs(
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key= <?= env('STRIPE_PK') ?>
-          data-amount="37999"
+          data-amount="50000"
           data-zip-code="true"
           data-name="NannyCare.com"
           data-description="Platinum Plan (20 credits)"
@@ -116,7 +116,7 @@ $this->registerJs(
           data-locale="auto">
         </script>
         <input type="hidden" name="plan" value="Platinum Plan (20 credits)" />
-        <input type="hidden" name="money" value=37999 />
+        <input type="hidden" name="money" value=50000 />
         <input type="hidden" name="credits" value=20 />
         <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
