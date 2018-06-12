@@ -17,7 +17,11 @@ return [
         ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/user', 'only' => ['index', 'view', 'options']],
 
         // City Search
-        'find-a-nanny/<city:[\w-]+>-nanny' => 'nannies/index/',
-        'find-a-nanny/<city:[\w-]+>' => 'nannies/index'
+        [
+            'pattern' => 'find-a-nanny/<city:[\w-]+>-nanny',
+            'route' => 'nannies/index',
+            'suffix' => '/'         // 虽然能达到效果,但感觉这种方式不可取,相当于直接加了个后缀,并不是真正的 url 地址
+        ],
+        ['pattern' => 'find-a-nanny/<city:[\w-]+>', 'route' => 'nannies/index', 'suffix' => '/'],
     ]
 ];
