@@ -14,6 +14,10 @@ return [
 
         // Api
         ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/article', 'only' => ['index', 'view', 'options']],
-        ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/user', 'only' => ['index', 'view', 'options']]
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/user', 'only' => ['index', 'view', 'options']],
+
+        // City Search
+        'find-a-nanny/<city:[\w-]+>-nanny' => 'nannies/index/',
+        'find-a-nanny/<city:[\w-]+>' => 'nannies/index'
     ]
 ];

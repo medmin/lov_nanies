@@ -58,6 +58,8 @@ class NanniesController extends Controller
                 }
                 break;
             case (isset($_GET['city'])):
+                // 传过来的是小写和中划线,改为首字母大写和空格的组合,因为原来的就是那样,现在只是url优化,不改原来的逻辑
+                $_GET['city'] = ucwords(str_replace('-', ' ', $_GET['city']));
                 try {
                     $location= new PostalCode($_GET['city'].", CA");
                     $zips_array =$location->getSameCity();
