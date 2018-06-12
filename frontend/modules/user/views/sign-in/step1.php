@@ -1,6 +1,5 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 use trntv\filekit\widget\Upload;
 use yii\bootstrap\ActiveForm;
 
@@ -72,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <div class="col-md-6">
                                             <?= $form->field($model, 'picture')
                                                 ->widget(Upload::classname(), [
-                                                'url'=>['avatar-upload']
+                                                'url'=>['/user/default/avatar-upload']
                                                 ])->label('Upload your image')?>
                                             <?= $form->field($model, 'name')->textInput(['required'=>'required']) ?>
                                             <?= $form->field($model, 'biography')->textArea(['rows' => '6']) ?>

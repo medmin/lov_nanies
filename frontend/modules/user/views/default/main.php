@@ -1,8 +1,6 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\DetailView;
-// use trntv\filekit\widget\Upload;
-use kartik\file\FileInput;
+use trntv\filekit\widget\Upload;
 use yii\bootstrap\ActiveForm;
 use yii\web\View;
 /* @var $this yii\web\View */
@@ -48,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="panel-body">
                                         <div class="col-md-6">
-                                            <?= $form->field($model, 'picture')->widget(\trntv\filekit\widget\Upload::classname(), [
+                                            <?= $form->field($model, 'picture')->widget(Upload::classname(), [
                                                 'url'=>['avatar-upload']
                                             ])->label('Upload your image')?>
                                             <?= $form->field($model, 'address')->textInput(['required'=>'required']) ?>
