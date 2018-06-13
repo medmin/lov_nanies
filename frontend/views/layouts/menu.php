@@ -17,7 +17,17 @@ NavBar::begin([
         'encodeLabels' => false,
         'items' => [
             ['label' => Yii::t('frontend', 'Home <i class="fa fa-plus navicn"></i>'), 'url' => ['/site/index'], ],
-            ['label' => Yii::t('frontend', 'Nanny Search <i class="fa fa-plus navicn"></i>'), 'url' => ['/nannies/index'], ],
+            [
+                'label' => Yii::t('frontend', 'Nanny Search'),
+                'items' => [
+                    ['label' => Yii::t('frontend', 'All Nannies '), 'url' => ['/nannies/index']],
+                    ['label' => Yii::t('frontend', 'Newborn Specialist '), 'url' => '#'],
+                    ['label' => Yii::t('frontend', 'Caregiver '), 'url' => '#'],
+                    ['label' => Yii::t('frontend', 'Housekeeper '), 'url' => '#'],
+                    ['label' => Yii::t('frontend', 'Special Needs '), 'url' => '#'],
+                    ['label' => Yii::t('frontend', 'Elderly Care '), 'url' => '#']
+                ]
+            ],
             ['label' => Yii::t('frontend', 'For Families <i class="fa fa-plus navicn"></i>'), 'url' => ['/page/view', 'slug'=>'families']],
             ['label' => Yii::t('frontend', 'For Nannies <i class="fa fa-plus navicn"></i>'), 'url' => ['/page/view', 'slug'=>'nannies']],
             

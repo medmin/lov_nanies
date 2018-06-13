@@ -89,7 +89,7 @@ class NannyController extends Controller
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
-                        'event' => 'nanny',
+                        'event' => 'nanny-signup',
                         'data' => [
                             'public_identity' => Yii::$app->user->identity->getPublicIdentity(),
                             'order_id' => $order->id,
@@ -99,7 +99,7 @@ class NannyController extends Controller
                     ]));
                 }
                 else {
-                    throw new Exception('DATABASE SAVE FAILURE');
+                    throw new \Exception('DATABASE SAVE FAILURE');
                 }
 
                 $transaction->commit();
@@ -174,11 +174,16 @@ EOT
                 $order->service_money = (int)$money;
                 $order->timestamp = time(); //paid_at, to be precise
                 $order->expired_at = strtotime('+30 days');
+//                if ($expired_at = UserOrder::NannyListingFeeStatus($user->id)) {
+//                    $order->expired_at = $expired_at + 30 * 86400;
+//                } else {
+//                    $order->expired_at = strtotime('+30 days');
+//                }
                 if ($order->save()) {
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
-                        'event' => 'nanny',
+                        'event' => 'nanny-listing',
                         'data' => [
                             'public_identity' => Yii::$app->user->identity->getPublicIdentity(),
                             'order_id' => $order->id,
@@ -188,7 +193,7 @@ EOT
                     ]));
                 }
                 else{
-                    throw new Exception('Database Save Failure');
+                    throw new \Exception('Database Save Failure');
                 }
 
                 $transaction->commit();
