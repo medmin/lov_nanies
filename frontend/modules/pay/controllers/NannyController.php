@@ -173,12 +173,14 @@ EOT
                 $order->service_plan = $service_plan;
                 $order->service_money = (int)$money;
                 $order->timestamp = time(); //paid_at, to be precise
-                $order->expired_at = strtotime('+30 days');
-//                if ($expired_at = UserOrder::NannyListingFeeStatus($user->id)) {
-//                    $order->expired_at = $expired_at + 30 * 86400;
-//                } else {
-//                    $order->expired_at = strtotime('+30 days');
-//                }
+
+                $expired_at = UserOrder::NannyListingFeeStatus($user->id);
+
+                if ($expired_at) {
+                   $order->expired_at = $expired_at + 30 * 24 * 3600;
+                } else {
+                   $order->expired_at = strtotime('+30 days');
+                }
                 if ($order->save()) {
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
