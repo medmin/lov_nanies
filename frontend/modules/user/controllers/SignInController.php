@@ -119,7 +119,7 @@ class SignInController extends \yii\web\Controller
             else if (Yii::$app->user->identity->step < 6 ){
                 $userid = Yii::$app->user->id;
                 //判断保姆是否已经支付过了signup fee和monthly fee
-                if (User::findById($userid)->credits >= 4999 && UserOrder::NannyListingFeeStatus($userid)){
+                if (User::findById($userid)->credits >= 9999 && UserOrder::NannyListingFeeStatus($userid)){
                     return $this->redirect(['/user/default/index']);
                 }
                 return $this->redirect(['/user/default/get-credits']);

@@ -62,7 +62,7 @@ class NannyController extends Controller
                 'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'nanny', 'email' => $email],
             ]);
                 
-                $user->credits += 4999;//  one time signup fee
+                $user->credits += 9999;//  one time signup fee
                 
                 
                 $order = new UserOrder();
@@ -74,7 +74,18 @@ class NannyController extends Controller
                 $order->service_money = (int)$money;
                 $order->timestamp = time(); //paid_at, to be precise
                 $order->expired_at = strtotime('+5000 days');
-                if ($user->save() && $order->save()) {
+
+                $First90DaysFreeListing = new UserOrder();
+                $First90DaysFreeListing->user_id = $user->id;
+                $First90DaysFreeListing->user_type = "nanny";
+                $First90DaysFreeListing->payment_gateway = "stripe";
+                $First90DaysFreeListing->payment_gateway_id = $charge->id;
+                $First90DaysFreeListing->service_plan = 'First-90-Days-Free-Listing';
+                $First90DaysFreeListing->service_money = 0;
+                $First90DaysFreeListing->timestamp = time(); //paid_at, to be precise
+                $First90DaysFreeListing->expired_at = strtotime('+90 days');
+
+                if ($user->save() && $order->save() && $First90DaysFreeListing->save()) {
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
@@ -150,9 +161,9 @@ EOT
                 'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'nanny', 'email' => $email],
             ]);
                 /**这里原本是有一句：
-                 * $user->credits += 999 
-                 * 但显然保姆的credit，目的仅是记录是否支付了sign up fee
-                 * 支付了，就+4999
+                 * $user->credits += 999 ，目的是把这9.99的月费加入到User credits字段里
+                 * 但是，显然保姆的credit，目的仅是记录是否支付了sign up fee
+                 * 支付了，就+9999
                  * */
                 $order = new UserOrder();
                 $order->user_id = $user->id;
