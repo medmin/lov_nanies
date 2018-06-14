@@ -23,17 +23,17 @@ $this->registerJs(
                         <div class="blog-box">
                             <h3 class="blog-title"><?= $model->title ?></h3>
                             <p class="blog-date">21 - March - 2016</p>
-                            <div class="blog-img">
-                                <?php if ($model->thumbnail_path): ?>
-                                <?php echo Html::a(Html::img(
-                                    Yii::$app->glide->createSignedUrl([
-                                        'glide/index',
-                                        'path' => $model->thumbnail_path,
-                                    ], true),
-                                    ['class' => 'article-thumb img-rounded pull-left']
-                                ) , ['view', 'slug'=>$model->slug, ]);
-                            endif; ?>
-                            </div>
+                            <?php if ($model->thumbnail_path): ?>
+                                <div class="blog-img">
+                                    <?php echo Html::a(Html::img(
+                                        Yii::$app->glide->createSignedUrl([
+                                            'glide/index',
+                                            'path' => $model->thumbnail_path,
+                                        ], true),
+                                        ['class' => 'article-thumb img-rounded pull-left']
+                                    ) , ['view', 'slug'=>$model->slug, ]); ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <?= $model->body ?>

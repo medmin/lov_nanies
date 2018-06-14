@@ -26,6 +26,9 @@ class ArticleController extends Controller
         $dataProvider->sort = [
             'defaultOrder' => ['created_at' => SORT_DESC]
         ];
+        $dataProvider->pagination = [
+            'pageSize' => 10
+        ];
         return $this->render('index', ['dataProvider'=>$dataProvider]);
     }
 

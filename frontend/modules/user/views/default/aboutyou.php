@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="container">
                 <div class="col-lg-12">
                     <!-- >>forms -->
-                    <?php $form = ActiveForm::begin(['action' =>['questions-n-schedule']]); ?>   
+                    <?php $form = ActiveForm::begin(); ?>
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <ul class="process-label">
                                 <a href="main"><li class="process-label2" id="label-1">Main <span><i class="fa fa-long-arrow-right"></i></span></li></a>
@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <a href="education-n-driving"><li class="process-label2" id="label-3">Education & Driving <span><i class="fa fa-long-arrow-right"></i></span></li></a>
                                 <a href="housekeeping"><li class="process-label2" id="label-4">Housekeeping<span><i class="fa fa-long-arrow-right"></i></span></li></a>
                                 <a href="about-you"><li class="process-label2 active" id="label-5">About you<span><i class="fa fa-long-arrow-right"></i></span></li></a>
+                                <a href="upload-files"><li class="process-label2" id="label-6">Upload Files<span><i class="fa fa-long-arrow-right"></i></span></li></a>
                             </ul>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">

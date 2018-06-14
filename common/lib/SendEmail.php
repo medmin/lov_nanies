@@ -14,10 +14,11 @@ class SendEmail extends Object
     }
 
     /**
-     * @return \Exception|\Mailgun\Model\Message\SendResponse
+     * @return \Exception|\Mailgun\Model\Message\SendResponse|boolean
      */
     public function handle()
     {
+        if (env('IS_SEND') === false) return false;
         try {
             $mg = Mailgun::create(env('MAILGUN_KEY'));
 //            $mg->setSslEnabled(!env('YII_DEBUG'));

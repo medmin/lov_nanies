@@ -10,17 +10,36 @@
                             <div class="input-group">
                                 <input type="text" placeholder="Enter Your Zip Code" value="<?= $_GET['zip'] ?? '';?>" name="zip" class="form-control">
                             </div>
+<!--                            <select class="select-picker select2-hidden-accessible" required="" name="position" tabindex="-1" aria-hidden="true">-->
+<!--                                <option selected="" disabled="" value="">Looking for</option>-->
+<!--                                <option value="1">Part Time Nanny</option>-->
+<!--                                <option value="2">Full Time Nanny</option>-->
+<!--                                <option value="3">Live-in Nanny</option>-->
+<!--                                <option value="4">Babysitter</option>-->
+<!--                                <option value="5">Newborn Specialist</option>-->
+<!--                                <option value="6">Caregiver</option>-->
+<!--                                <option value="7">Housekeeper</option>-->
+<!--                                <option value="8">Special Needs Nanny</option>-->
+<!--                                <option value="9">Elderly Care</option>-->
+<!--                            </select>-->
                             <select class="select-picker select2-hidden-accessible" required="" name="position" tabindex="-1" aria-hidden="true">
-                                <option selected="" disabled="" value="">Looking for</option>
+                                <option selected="" disabled="" value="">Job Type</option>
                                 <option value="1">Part Time Nanny</option>
                                 <option value="2">Full Time Nanny</option>
                                 <option value="3">Live-in Nanny</option>
+                                <option value="4">Babysitter</option>
+                                <option value="">Temporary</option>
+                                <option value="">Overnight Care</option>
+                            </select>
+                            <select class="select-picker select2-hidden-accessible" required="" name="position" tabindex="-1" aria-hidden="true">
+                                <option selected="" disabled="" value="">Type of Help</option>
+                                <option value="">Nanny</option>
                                 <option value="4">Babysitter</option>
                                 <option value="5">Newborn Specialist</option>
                                 <option value="6">Caregiver</option>
                                 <option value="7">Housekeeper</option>
                                 <option value="8">Special Needs Nanny</option>
-                                <option value="9">Elderly Care</option>
+<!--                                <option value="9">Elderly Care</option>-->
                             </select>
                             
                             <select class="select-picker select2-hidden-accessible" required="" name="radius" tabindex="-1" aria-hidden="true">

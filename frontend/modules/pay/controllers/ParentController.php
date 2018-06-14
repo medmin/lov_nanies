@@ -89,7 +89,7 @@ class ParentController extends Controller
                     ]));
                 }
                 else{
-                    throw new Exception('Database Save Failure');
+                    throw new \Exception('Database Save Failure');
                 }
 
                 $transaction->commit();
@@ -175,7 +175,7 @@ EOT
                         ]));
                     }
                     else {
-                        throw new Exception('Database Save Failure');
+                        throw new \Exception('Database Save Failure');
                     }
 
                     $transaction->commit();

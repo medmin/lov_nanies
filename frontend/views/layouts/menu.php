@@ -34,6 +34,21 @@ NavBar::begin([
                 
             ['label' => Yii::t('frontend', 'Articles and Tools <i class="fa fa-plus navicn"></i>'), 'url' => ['/article/index']],
             [
+                'label' => 'Resources',
+                'items' => [
+                    ['label' => Yii::t('frontend', 'Background Checks'), 'url' => ['#']],
+                    ['label' => Yii::t('frontend', 'Sample Forms'), 'url' => ['#']],
+                    ['label' => Yii::t('frontend', 'Nanny Taxes'), 'url' => ['#']],
+                    ['label' => Yii::t('frontend', 'CPR/First Aid'), 'url' => ['#']],
+                    ['label' => Yii::t('frontend', 'INA'), 'url' => ['#']],
+                    [
+                        'label' => Yii::t('frontend', 'Recommended Practices For Screening Nannies'),
+                        'url' => ['#'],
+                        'options' => ['title' => Yii::t('frontend', 'Recommended Practices For Screening Nannies')]
+                    ],
+                ]
+            ],
+            [
                 'label' =>'About Us',
                 'items'=>[
                           ['label' => Yii::t('frontend', 'About '), 'url' => ['/page/view', 'slug'=>'about']],

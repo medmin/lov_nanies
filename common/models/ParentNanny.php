@@ -8,9 +8,11 @@ use Yii;
  * This is the model class for table "parent_nanny".
  *
  * @property int $id
- * @property int $parent_id
- * @property int $nanny_id
+ * @property int $parentid
+ * @property int $nannyid
  * @property int $timestamp
+ *
+ * @property Nannies $nanny
  */
 class ParentNanny extends \yii\db\ActiveRecord
 {
@@ -46,6 +48,10 @@ class ParentNanny extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getNanny()
+    {
+        return $this->hasOne(Nannies::className(), ['id' => 'nannyid']);
+    }
 
 }
 

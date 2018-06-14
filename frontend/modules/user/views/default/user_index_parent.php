@@ -8,6 +8,7 @@ use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $model common\base\MultiModel */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $record common\models\ParentNanny */
 $this->registerJs(
     '
     $(document).ready(function () {
@@ -58,24 +59,29 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
     </div>
     <?php ActiveForm::end(); ?>
 
-    <div class="col-md-6">
+    <div class="col-md-6 parent-profile">
         <h2 style="color: #414141;">My Profile</h2>
         <h3><b>Personal data:</b><span style="float: right;"><a href="/user/sign-in/continue-family" class="btn btn-inverse">Edit Profile</a></span></h3>
         <h3><b>Credits:</b> <?= $model->getModel('account')->credits; ?><span style="float: right;"><a href="get-credits" class="btn btn-inverse">Get Credits</a></span></h3>
         <h3><b>Nannies Selected:</b><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse">Find A Nanny</a></span></h3>
-        <div class="container">
-            <ul>
-            <li><b>Click to see the profile:</b></li>
+        <div class="nannies-selected-table">
+            <?php
+            $id = Yii::$app->user->id;
+            $parentnannyrecords = \common\models\ParentNanny::find()->where(['parentid'=>$id])->all();
+            if (count($parentnannyrecords)) :
+            ?>
+            <table class="table table-hover">
+                <thead><tr><th>Name</th><th>Email</th><th>Profile Link</th></tr></thead>
+                <tbody>
                 <?php
-                  $id = Yii::$app->user->id;
-                  $parentnannyrecords = \common\models\ParentNanny::find()->where(['parentid'=>$id])->all();
-                  foreach ($parentnannyrecords as $record)
-                  { 
-                    echo '<li><a href="/nannies/view?id='. $record->nannyid.'" > ' . \common\models\Nannies::find()->where(['id' => $record->nannyid])->one()->email .'</a></li>';
-                  }
+                    foreach ($parentnannyrecords as $record) {
+                        echo '<tr><td>'. preg_split('/\s+/', $record->nanny->name)[0] .'</td><td>'. $record->nanny->email .'</td><td>'. Html::a('Click Here', '/nannies/view?id=' . $record->nannyid) .'</td></tr>';
+                    }
                 ?>
-                
-            </ul>
+                </tbody>
+            </table>
+            <?php endif; ?>
+
         </div>
     </div>
 </div>

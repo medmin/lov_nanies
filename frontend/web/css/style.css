@@ -37,6 +37,7 @@ Our Team Page (page)
 Gallery filter (page)
 Lightbox Effect popup viewer
 Media Quaries
+Parent Account
 
 ----------------------------------------
 [Colors]       - #6E6460,#fc7b34
@@ -2094,6 +2095,8 @@ blog-post
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     color: #434343;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .blog-box ul>li>a .fa {
@@ -2462,6 +2465,11 @@ blog-post
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 0;
+}
+
+.article > ul {
+    padding-left: 40px;
+    list-style: circle outside;
 }
 
 .article-img {
@@ -7286,4 +7294,14 @@ Media Quaries
     .title-transform2 {
         padding: 20px !important;
     }
+}
+
+
+/* Parent Account */
+
+.nannies-selected-table {
+    margin-top: 15px;
+}
+.parent-profile span{
+    min-width: 140px;
 }

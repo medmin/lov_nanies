@@ -134,7 +134,7 @@ class DefaultController extends Controller
             ]);
             //$user->step=$user->step+1;
             $user->save();
-            return $this->refresh();
+            return $this->redirect('questions-n-schedule');
         }
         return $this->render('main', ['model' => $model]);
     }
@@ -149,7 +149,7 @@ class DefaultController extends Controller
             ]);
             //$user->step=$user->step+1;
             $user->save();
-            return $this->refresh();
+            return $this->redirect('education-n-driving');
         }
         return $this->render('questions-n-schedule', ['model' => $model]);
     }
@@ -163,7 +163,7 @@ class DefaultController extends Controller
             ]);
             //$user->step=$user->step+1;
             $user->save();
-            return $this->refresh();
+            return $this->redirect('housekeeping');
         }
         return $this->render('education-n-driving', ['model' => $model]);
     }
@@ -177,7 +177,7 @@ class DefaultController extends Controller
             ]);
             //$user->step=$user->step+1;
             $user->save();
-            return $this->refresh();
+            return $this->redirect('about-you');
         }
         return $this->render('housekeeping', ['model' => $model]);
     }
@@ -191,11 +191,19 @@ class DefaultController extends Controller
             ]);
             //$user->step=$user->step+1;
             $user->save();
-            return $this->refresh();
+            return $this->redirect('upload-files');
         }
         return $this->render('aboutyou', ['model' => $model]);
     }
-    
+
+    /**
+     * 用户上传文件
+     */
+    public function actionUploadFiles()
+    {
+        return $this->render('upload_files');
+    }
+
     public function actionView_ref($id)
     {
         $model=$this->findRef($id);
