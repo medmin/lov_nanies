@@ -2,7 +2,7 @@
             <div class="row row-margin">
                 <div class="widget">
                         <!-- widget >>Search For Babysitter -->
-                        <h4 class="widget-title">Search For Babysitter</h4>
+                        <h4 class="widget-title">Find A Nanny</h4>
                         <p class="widget-tag">Already registered? <a href="/user/sign-in/login">Sign In</a></p>
                         <hr class="widget-hr">
                         <!-- form >>Search For Babysitter-->

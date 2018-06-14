@@ -22,7 +22,7 @@ $this->registerJs(
     View::POS_READY,
     'my-button-handler'
 );
-$this->title = Yii::t('frontend', 'User Account')
+$this->title = Yii::t('frontend', 'Parent Account Page')
 ?>
 
 <div class="user-profile-form">
@@ -62,7 +62,7 @@ $this->title = Yii::t('frontend', 'User Account')
         <h2 style="color: #414141;">My Profile</h2>
         <h3><b>Personal data:</b><span style="float: right;"><a href="/user/sign-in/continue-family" class="btn btn-inverse">Edit Profile</a></span></h3>
         <h3><b>Credits:</b> <?= $model->getModel('account')->credits; ?><span style="float: right;"><a href="get-credits" class="btn btn-inverse">Get Credits</a></span></h3>
-        <h3><b>Nannies Selected:</b><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse">Select Nannies</a></span></h3>
+        <h3><b>Nannies Selected:</b><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse">Find A Nanny</a></span></h3>
         <div class="container">
             <ul>
             <li><b>Click to see the profile:</b></li>

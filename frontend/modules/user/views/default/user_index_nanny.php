@@ -27,7 +27,7 @@ $this->registerJs(
     View::POS_READY,
     'my-button-handler'
 );
-$this->title = Yii::t('frontend', 'User Settings')
+$this->title = Yii::t('frontend', 'Nanny Settings')
 ?>
 
 <div class="user-profile-form">

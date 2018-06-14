@@ -18,9 +18,10 @@ NavBar::begin([
         'items' => [
             ['label' => Yii::t('frontend', 'Home <i class="fa fa-plus navicn"></i>'), 'url' => ['/site/index'], ],
             [
-                'label' => Yii::t('frontend', 'Nanny Search'),
+                'label' => Yii::t('frontend', 'Find A Nanny'),
                 'items' => [
                     ['label' => Yii::t('frontend', 'All Nannies '), 'url' => ['/nannies/index']],
+                    ['label' => Yii::t('frontend', 'BabySitter '), 'url' => '#'],
                     ['label' => Yii::t('frontend', 'Newborn Specialist '), 'url' => '#'],
                     ['label' => Yii::t('frontend', 'Caregiver '), 'url' => '#'],
                     ['label' => Yii::t('frontend', 'Housekeeper '), 'url' => '#'],
@@ -28,11 +29,10 @@ NavBar::begin([
                     ['label' => Yii::t('frontend', 'Elderly Care '), 'url' => '#']
                 ]
             ],
-            ['label' => Yii::t('frontend', 'For Families <i class="fa fa-plus navicn"></i>'), 'url' => ['/page/view', 'slug'=>'families']],
-            ['label' => Yii::t('frontend', 'For Nannies <i class="fa fa-plus navicn"></i>'), 'url' => ['/page/view', 'slug'=>'nannies']],
+            ['label' => Yii::t('frontend', 'Find A Job <i class="fa fa-plus navicn"></i>'), 'url' => ['/page/view', 'slug'=>'nannies']],
             
                 
-            ['label' => Yii::t('frontend', 'Articles/Tools <i class="fa fa-plus navicn"></i>'), 'url' => ['/article/index']],
+            ['label' => Yii::t('frontend', 'Articles and Tools <i class="fa fa-plus navicn"></i>'), 'url' => ['/article/index']],
             [
                 'label' =>'About Us',
                 'items'=>[
@@ -42,7 +42,7 @@ NavBar::begin([
                 ]
             ],
             [
-                'label' => 'User',
+                'label' => 'My Account',
                 'visible'=>Yii::$app->user->isGuest,
                 'items' => [
                     ['label' => Yii::t('frontend', 'Log In <i class="fa fa-plus navicn"></i>'), 'url' => ['/user/sign-in/login']],

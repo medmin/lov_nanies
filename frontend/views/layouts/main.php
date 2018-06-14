@@ -68,7 +68,7 @@ use common\widgets\DbText;
                 <div class="row ">
                     <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                         <h2>It's easy to find what you need!</h2>
-                        <p class="heading-tag">Are you seeking special needs sitters in your neighborhood? With us, it&#8217;s easy!</p>
+                        <p class="heading-tag">Are you seeking nannies and babysitters in your neighborhood? With us, it’s easy!</p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <ul class="social-share">

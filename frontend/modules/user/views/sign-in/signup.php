@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $model \frontend\modules\user\models\SignupForm */
 
-$this->title = Yii::t('frontend', 'Signup');
+$this->title = Yii::t('frontend', 'Sign Up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
