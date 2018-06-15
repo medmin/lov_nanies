@@ -17,31 +17,30 @@ $this->registerJs(
     'my-button-handler'
 );
 ?>
-            <div class="row row-margin article">
-                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                    <div class="single-blog-post">
-                        <div class="blog-box">
-                            <h3 class="blog-title"><?= $model->title ?></h3>
-                            <p class="blog-date">21 - March - 2016</p>
-                            <?php if ($model->thumbnail_path): ?>
-                                <div class="blog-img">
-                                    <?php echo Html::a(Html::img(
-                                        Yii::$app->glide->createSignedUrl([
-                                            'glide/index',
-                                            'path' => $model->thumbnail_path,
-                                        ], true),
-                                        ['class' => 'article-thumb img-rounded pull-left']
-                                    ) , ['view', 'slug'=>$model->slug, ]); ?>
-                                </div>
-                            <?php endif; ?>
+<div class="row row-margin article">
+    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+        <div class="single-blog-post">
+            <div class="blog-box">
+                <h3 class="blog-title"><?= $model->title ?></h3>
+                <p class="blog-date">21 - March - 2016</p>
+                <?php if ($model->thumbnail_path): ?>
+                    <div class="blog-img">
+                        <?php echo Html::a(Html::img(
+                            Yii::$app->glide->createSignedUrl([
+                                'glide/index',
+                                'path' => $model->thumbnail_path,
+                            ], true),
+                            ['class' => 'article-thumb img-rounded pull-left']
+                        ) , ['view', 'slug'=>$model->slug, ]); ?>
                         </div>
-                    </div>
-                    <?= $model->body ?>
+                    <?php endif; ?>
                 </div>
-                    
-                    
-                <!-- side bar -->
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                </div>
+            </div>
+            <?= $model->body ?>
         </div>
+                
+                
+        <!-- side bar -->
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"></div>
     </div>
+</div>

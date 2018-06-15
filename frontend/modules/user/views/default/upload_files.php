@@ -14,7 +14,7 @@ $this->registerJs(
     'my-button-handler'
 );
 
-$this->title = Yii::t('frontend', 'Signup');
+$this->title = Yii::t('frontend', 'Upload Files');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="signup-process" style="margin-top:20px;">
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="row">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class=""></i> Upload Attachment</h3>
+                            <h3 class="panel-title"><i class=""></i> Upload Files</h3>
                         </div>
                         <div class="panel-body">
                             TODO

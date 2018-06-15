@@ -27,7 +27,7 @@
                                 <option value="1">Part Time Nanny</option>
                                 <option value="2">Full Time Nanny</option>
                                 <option value="3">Live-in Nanny</option>
-                                <option value="4">Babysitter</option>
+                                <option value="4">Occasional</option>
                                 <option value="">Temporary</option>
                                 <option value="">Overnight Care</option>
                             </select>
@@ -44,7 +44,7 @@
                             
                             <select class="select-picker select2-hidden-accessible" required="" name="radius" tabindex="-1" aria-hidden="true">
                                 <option selected="" disabled="" value="">Distance</option>
-                                <option value="9999">No matter</option>
+                                <option value="9999">Any Distance</option>
                                 <option value="5">5 miles radius</option>
                                 <option value="10">10 miles radius</option>
                                 <option value="25">25 miles radius</option>

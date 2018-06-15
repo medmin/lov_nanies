@@ -1,5 +1,10 @@
 <?php
 $config = [
+    'modules' => [
+        'file' => [
+            'class' => 'common\modules\file\Module',
+        ]
+    ],
     'components' => [
         'assetManager' => [
             'class' => 'yii\web\AssetManager',

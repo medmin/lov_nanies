@@ -53,7 +53,9 @@
     "stripe/stripe-php": "^6.7",
     "mailgun/mailgun-php": "^2.5",
     "php-http/curl-client": "^1.7",
-    "guzzlehttp/psr7": "^1.4"
+    "guzzlehttp/psr7": "^1.4",
+    "ramsey/uuid": "^3.7",
+    "aws/aws-sdk-php": "^3.61"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

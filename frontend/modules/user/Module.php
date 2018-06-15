@@ -3,6 +3,7 @@
 namespace frontend\modules\user;
 
 use Yii;
+
 class Module extends \yii\base\Module
 {
     /**

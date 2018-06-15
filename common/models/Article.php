@@ -2,9 +2,9 @@
 
 namespace common\models;
 
+use Yii;
 use common\models\query\ArticleQuery;
 use trntv\filekit\behaviors\UploadBehavior;
-use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;

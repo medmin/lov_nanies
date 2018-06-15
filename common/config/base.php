@@ -7,6 +7,7 @@ $config = [
     'language'=>'en-US',
     'timeZone' => 'America/Los_Angeles',
     'bootstrap' => ['log'],
+    
     'components' => [
 
         'authManager' => [
