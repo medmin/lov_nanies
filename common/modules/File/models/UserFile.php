@@ -3,8 +3,10 @@
 namespace common\modules\file\models;
 
 use Yii;
+use common\models\User;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+use yii\behaviors\TimestampBehavior;
 
 
 /**
@@ -24,6 +26,10 @@ use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
  */
 class UserFile extends \yii\db\ActiveRecord
 {
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_DELETED = 0;
+
     /**
      * @inheritdoc
      */
@@ -62,6 +68,16 @@ class UserFile extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'deleted_at' => Yii::t('app', 'Deleted At'),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
         ];
     }
 

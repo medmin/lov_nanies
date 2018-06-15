@@ -2467,7 +2467,7 @@ blog-post
     padding-bottom: 0;
 }
 
-.article > ul {
+.article  ul {
     padding-left: 40px;
     list-style: circle outside;
 }
