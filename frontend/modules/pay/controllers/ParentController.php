@@ -119,12 +119,11 @@ class ParentController extends Controller
                 'to' => [$email, 'info@nannycare.com'],
                 'body' => <<<EOT
                 <h2>Hi, {$user->username}</h2>
-                <h4>Your service plan is : {$service_plan} </h4>
-                <h4>Your payment is : {$money2}  dollars. </h4>
-                <h4>Your charge ID is: {$charge->id} </h4>
-                <h4>Thank you for your business.</h4>
-    
-                Regards,
+                <p>Your service plan is : {$service_plan} </p>
+                <p>Your payment is : {$money2}  dollars. </p>
+                <p>Your charge ID is: {$charge->id} </p>
+                <p>Thank you for your business.</p>
+                Regards,<br />
                 Wendy Pierce
 EOT
             ]))->handle();
