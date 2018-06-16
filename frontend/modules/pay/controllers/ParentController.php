@@ -77,19 +77,21 @@ class ParentController extends Controller
                 $order->expired_at = strtotime('+5000 days');
 
                 // 顺带保存一个 90 天可以发送文章的 0 元订单，解耦。
-                $NinetyDaysPosting = new UserOrder();
-                $NinetyDaysPosting->setAttributes([
-                    'user_id' => $user->id,
-                    'user_type' => 'parent',
-                    'payment_gateway' => 'stripe',
-                    'payment_gateway_id' => $charge->id,
-                    'service_plan' => 'Ninety-Days-Posting',
-                    'service_money' => 0,
-                    'timestamp' => time(),
-                    'expired_at' => strtotime('+90 days')
-                ]);
+                if ($order->service_money >= 27900) {
+                    $NinetyDaysPosting = new UserOrder();
+                    $NinetyDaysPosting->setAttributes([
+                        'user_id' => $user->id,
+                        'user_type' => 'parent',
+                        'payment_gateway' => 'stripe',
+                        'payment_gateway_id' => $charge->id,
+                        'service_plan' => 'Ninety-Days-Posting',
+                        'service_money' => 0,
+                        'timestamp' => time(),
+                        'expired_at' => strtotime('+90 days')
+                    ]);
+                }
 
-                if ( $user->save() && $order->save() && $NinetyDaysPosting->save()) {
+                if ( $user->save() && $order->save() && (isset($NinetyDaysPosting) ? $NinetyDaysPosting->save() : true)) {
                     // 订单保存成功,写入事件日志
                     Yii::$app->commandBus->handle(new AddToTimelineCommand([
                         'category' => 'order',
