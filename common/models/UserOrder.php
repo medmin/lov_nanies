@@ -75,4 +75,20 @@ class UserOrder extends \yii\db\ActiveRecord
 			return false;
 		}
 	}
+
+    /**
+     * @param $parent_id
+     * @return integer|bool
+     *
+     * 判断 parent 是否可以发送文章，有的话返回到期时间戳
+     */
+    public static function ParentPostStatus($parent_id)
+    {
+        $record = UserOrder::find()->where(['user_id' => $parent_id])->andWhere(['service_plan' => 'Ninety-Days-Posting'])->orderBy('expired_at DESC')->one();
+        if ($record && $record->expired_at > time()) {
+            return $record->expired_at;
+        } else {
+            return false;
+        }
+	}
 }

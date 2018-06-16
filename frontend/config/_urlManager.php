@@ -23,5 +23,9 @@ return [
             'suffix' => '/'         // 虽然能达到效果,但感觉这种方式不可取,相当于直接加了个后缀,并不是真正的 url 地址
         ],
         ['pattern' => 'find-a-nanny/<city:[\w-]+>', 'route' => 'nannies/index', 'suffix' => '/'],
+
+        // Find Job
+        'find-a-job/post' => 'post-job/create',
+        'find-a-job/list' => 'post-job/index'
     ]
 ];

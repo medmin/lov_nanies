@@ -29,7 +29,20 @@ NavBar::begin([
                     ['label' => Yii::t('frontend', 'Elderly Care '), 'url' => '#']
                 ]
             ],
-            ['label' => Yii::t('frontend', 'Find A Job <i class="fa fa-plus navicn"></i>'), 'url' => ['/page/view', 'slug'=>'nannies']],
+            [
+                'label' => Yii::t('frontend', 'Find A Job'),
+                'items' => [
+                    [
+                        'label' => Yii::t('frontend', 'Post A Job '),
+                        'url' => ['/find-a-job/post'],
+                        'visible' => \common\models\UserOrder::ParentPostStatus(Yii::$app->user->id) ? true : false
+                    ],
+                    [
+                        'label' => Yii::t('frontend', 'Job List '),
+                        'url' => ['/find-a-job/list']
+                    ]
+                ]
+            ],
             
                 
             ['label' => Yii::t('frontend', 'Articles and Tools <i class="fa fa-plus navicn"></i>'), 'url' => ['/article/index']],
