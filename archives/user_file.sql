@@ -4,6 +4,7 @@ CREATE TABLE `user_file` (
  `user_id` int(11) NOT NULL,
  `file_uuid` varchar(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
  `title` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+ `ext` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
  `link` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
  `status` tinyint(4) NOT NULL DEFAULT 1,
  `created_at` int(10) unsigned NOT NULL,

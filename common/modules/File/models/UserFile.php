@@ -16,6 +16,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $user_id
  * @property string $file_uuid
  * @property string $title
+ * @property string $ext 
  * @property string $link
  * @property integer $status
  * @property string $created_at
@@ -44,10 +45,11 @@ class UserFile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'title', 'link', 'created_at'], 'required'],
+            [['user_id', 'title', 'ext', 'link', 'created_at'], 'required'],
             [['user_id', 'status', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['file_uuid'], 'string', 'max' => 36],
             [['title'], 'string', 'max' => 300],
+            [['ext'], 'string', 'max' => 10],
             [['link'], 'string', 'max' => 500],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -87,6 +89,22 @@ class UserFile extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /** 
+     * @return string | false
+     */
+    public static function getExt($file_uuid)
+    {
+        $r = UserFile::find()->where('file_uuid', $file_uuid)->one();
+        
+        if ($r)
+        {
+            return $r->ext;
+        }
+        else{
+            return false;
+        }
     }
 
 }

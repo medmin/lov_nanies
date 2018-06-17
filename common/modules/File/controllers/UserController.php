@@ -15,7 +15,7 @@ use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use yii\db\Transaction;
 
 
-class NannyController extends Controller
+class UserController extends Controller
 {
     /**
      * @return array
@@ -38,7 +38,7 @@ class NannyController extends Controller
 
     public function actionIndex()
     {
-        return $this->redirect('/file/nanny/upload', 301)->send();
+        return $this->redirect('/file/user/upload', 301)->send();
     }
 
     public function actionUpload()
@@ -50,14 +50,8 @@ class NannyController extends Controller
             $data = Yii::$app->request->post('UserFile');
 
             $file = UploadedFile::getInstance($model, 'link');
-            $ext = pathinfo($file)['extension'] ;
-
-
-            if (!in_array($ext, ['tif', 'png', 'jpg', 'doc', 'docx', 'xls', 'xlsx','ppt', 'pptx', 'pdf', 'zip', 'rar', '7z', 'txt'])) 
-            {
-                Yii::$app->session->set('FileFormatError', 'The format '. $ext .' is not supported!');
-                return $this->refresh();
-            }
+            
+            $ext = $file->getExtension(); $this->extIsValid($ext);
 
             // Instantiate an Amazon S3 client which is compatiable to DO Spaces.
             $client = new S3Client([
@@ -76,8 +70,8 @@ class NannyController extends Controller
                 // Upload a file to the Space
                 $upload = $client->putObject([
                     'Bucket' => getenv('DO_SPACES_BUCKET_NAME'),
-                    'Key'    =>  'nanny/' .$data['user_id'] . '/' . $data['file_uuid'] .'.'. $ext, //这里应该用uuid，否则重名就替换了原来的文件了
-                    'Body'   => $file,
+                    'Key'    =>  'user/' .$data['user_id'] . '/' . $data['file_uuid'], //重名就替换了原来的文件，且这里是故意不用$ext的
+                    'Body'   => $file, //
                 ]);
 
                 
@@ -98,6 +92,7 @@ class NannyController extends Controller
                 $model->user_id = $data['user_id'];
                 $model->file_uuid = $data['file_uuid'];
                 $model->title = $data['title'];
+                $model->ext = $ext;
                 $model->link = $upload->get('ObjectURL');
                 $model->status = $data['status'];
                 $model->created_at = $data['created_at'];
@@ -123,7 +118,7 @@ class NannyController extends Controller
         return $this->render('upload', ['model' => $model]);
     }
 
-    public function actionDownloadViaUuid($file_uuid)
+    public function actionDownloadViaUuid($user_id, $file_uuid)
     {
         // Instantiate an Amazon S3 client which is compatiable to DO Spaces.
         $client = new S3Client([
@@ -140,7 +135,7 @@ class NannyController extends Controller
             // Get the object.
             $file = $client->getObject([
                 'Bucket' => 'nannycare',
-                'Key'    => 'nanny/' . $file_uuid,
+                'Key'    => 'user/' . $user_id . '/' . $file_uuid .'.'. UserFile::getExt($file_uuid),
             ]);
 
             // Display the object in the browser.
@@ -154,6 +149,22 @@ class NannyController extends Controller
             return $e->getMessage();
         }
 
+    }
+
+
+    private function extIsValid($ext)
+    {
+        if (!$ext )
+        {
+            Yii::$app->session->set('FileFormatError', 'The file does not have an extension!');
+            return $this->refresh();
+        }
+        else if ( !in_array($ext, ['tif', 'png', 'jpg', 'doc', 'docx', 'xls', 'xlsx','ppt', 'pptx', 'pdf', 'zip', 'rar', '7z', 'txt']))
+        {
+            Yii::$app->session->set('FileFormatError', 'The format '. $ext .' is not supported!');
+            return $this->refresh();
+        }
+    
     }
 
 
