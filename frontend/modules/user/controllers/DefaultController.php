@@ -96,7 +96,7 @@ class DefaultController extends Controller
             if(count($refs)<3){
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-danger'],
-                    'body' => Yii::t('frontend', 'We verify a <b>minimum of three</b> references listed on your profile and do verify reference letters as well. Families can request to see our reference sheets after they have interviewed with you. You`re also welcome to provide all references to the family during or after your interview. Many nannies will bring a resume along with their references to the interview and hand it to the family. Please, provide your references.', [], Yii::$app->user->identity->userProfile->locale)
+                    'body' => Yii::t('frontend', 'Thank you for signing up wth NannyCare.com. Please complete our nanny application and add your references at the bottom of this page. We require a minimum of 3 childcare related references and/or reference letters, which we call and verify. The more thorough you fill out the nanny application, the better results you will get. After we receive your application, we will contact you within 48 hours to go over your application. You will also need to show us your driver\'s license and social security card, as well as CPR/First Aid certification. We run a background check on every nanny before they are listed on our site, so please be sure to click on the background check link in your account area and complete the form. We look forward to helping you find the perfect nanny or babysitting position. Thanks!<br />~Team NannyCare.com', [], Yii::$app->user->identity->userProfile->locale)
                 ]);
             }
             $dataProvider = new ActiveDataProvider([

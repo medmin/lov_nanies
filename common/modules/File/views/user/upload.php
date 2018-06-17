@@ -10,12 +10,12 @@ use yii\web\View;
  * 
  */
 
-$this->title = Yii::t('common', 'Nanny Upload');
+$this->title = Yii::t('common', 'User Upload');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="nanny-upload">
+<div class="user-upload">
     <div class="row">
     
         <?php if (Yii::$app->session->has('FileFormatError')): ?>
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin([
                 'id' => 'upload-form',
                 'method' => 'post',
-                'action' =>   '/file/nanny/upload',
+                'action' =>   '/file/user/upload',
                 'options' => [ 'enctype' => 'multipart/form-data']
             ]); ?>
             <?= $form->field($model, 'user_id')->label(false)->hiddenInput([
@@ -47,9 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'file_uuid')->label(false)->hiddenInput([
                 'value'=> \Ramsey\Uuid\Uuid::uuid4()->toString()
             ]) ?>
-            <?= $form->field($model,'title')->label('File Name')->textInput() ?>
+            <?= $form->field($model,'title')->label('File Name')->textInput(['maxlength' => 300]) ?>
             <!-- 这里为什么用link而不用file呢，因为这里是首先把文件传到后台，然后传给digitalocean，存储的是do的url -->
-            <?= $form->field($model, 'link')->label(false)->fileInput(['multiple' => true, 'accept' => '*'/*, 'style' => 'display: none'*/]) ?>
+            <?= $form->field($model, 'link')->label(false)->fileInput() ?>
             <p class="text-muted well well-sm no-shadow">
                 Attention: <br />
                 You can upload only 1 file at once and the total size should be no more than 10M. <br>
