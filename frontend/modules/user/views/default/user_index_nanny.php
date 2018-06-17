@@ -69,15 +69,15 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
                 <a href="upload-files"><li class="process-label2 active" id="label-6">Upload Files<span><i class="fa fa-long-arrow-right"></i></span></li></a>
             </ul>
             <div style="text-align: center; margin: 30px 0 0 0;">
-                <a href="create-employment"> <span class="nav-btn">Add Previous Employments</span></a>
+                <!-- <a href="create-employment"> <span class="nav-btn">Add Previous Employments</span></a> -->
                 <a href="create-reference"> <span class="nav-btn">Add References</span></a>
+            </div>
+            <div style="text-align: center; margin: 30px 0 0 0;">
+                <a href="/user/default/get-credits"><span class="nav-btn">Buy Membership</span></a>
             </div>
             <div style="text-align: center; margin: 30px 0 0 0;" id="listing-fee-expired">
                 <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn btn-warning"  ?>">Your monthly listing fee is expired.</a>
                 <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "btn btn-primary" : "hidden"  ?>">Your monthly listing Fee will be expired at: <span><?=  date('Y-m-d', UserOrder::NannyListingFeeStatus(Yii::$app->user->id));  ?></span></a>
-            </div>
-            <div style="text-align: center; margin: 30px 0 0 0;">
-                <a href="/user/default/get-credits"><span class="nav-btn">Buy Membership</span></a>
             </div>
         </div>
     </div>
@@ -121,7 +121,7 @@ HTML;
             ],
         ],
     ]); ?>
-
+<!--
     <?php
     $h = <<<HTML
 <h2 style="color: #000;">Prevous Employments</h2>
@@ -173,5 +173,6 @@ HTML;
         ],
     ]); ?>
     <?php ActiveForm::end(); ?>
+-->
 
 </div>
