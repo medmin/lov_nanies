@@ -7,7 +7,7 @@ use yii\web\View;
 use yii\grid\GridView;
 use common\models\UserOrder;
 /* @var $this yii\web\View */
-/* @var $model common\base\MultiModel */
+/* @var $model \frontend\modules\user\models\AccountForm */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $dataProvider1 \yii\data\ActiveDataProvider */
@@ -37,17 +37,13 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
         <div class="col-md-6">   
         <h2 style="color: #414141;">My NannyCare Account</h2>
     <!--<h2><?php //echo Yii::t('frontend', 'Account Settings') ?></h2>-->
-        <?= $form->field($model->getModel('account'), 'username')->textInput(['readOnly' => true]) ?>
+        <?= $form->field($model, 'username')->textInput(['readOnly' => true]) ?>
 
-        <?= $form->field($model->getModel('account'), 'email')->textInput(['readOnly' => true]) ?>
+        <?= $form->field($model, 'email')->textInput(['readOnly' => true]) ?>
         <div class="hidden" id="reset-pw">
-            <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>
+            <?= $form->field($model, 'password')->passwordInput() ?>
         
-            <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
-            <?= $form->field($model->getModel('profile'), 'picture')
-                    ->widget(Upload::classname(), [
-                        'url'=>['avatar-upload']
-                        ])->label('Upload your image')?>
+            <?= $form->field($model, 'password_confirm')->passwordInput() ?>
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('frontend', 'Update'), ['class' => 'nav-btn']) ?>
             </div>

@@ -66,6 +66,7 @@ class DefaultController extends Controller
     {
 
         $accountForm = new AccountForm();
+        $accountForm->setUser(Yii::$app->user->identity);
         /** 说明：这里print_r($tmpArr)之后，是一个array，
          * 如果是家长，就是seeker, print_r的结果： Array ([seeker]=> .......)
          * 如果是nanny身份，就是Array ([nanny]=> .......)
@@ -77,20 +78,17 @@ class DefaultController extends Controller
         $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
         if(array_key_exists('nanny', $tmpArr)){
 
-            $accountForm->setUser(Yii::$app->user->identity);
-            $model = new MultiModel([
-                'models' => [
-                    'account' => $accountForm,
-                    'profile' => Yii::$app->user->identity->nannies
-                ]
-            ]);
-        
-            $locale = $model->getModel('profile')->locale;
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) {
+
+                (new \common\lib\SendEmail([
+                    'subject' => Yii::t('frontend', 'Password changed for {name}', ['name'=>Yii::$app->name]),
+                    'to' => Yii::$app->user->identity->email,
+                    'body' => 'Hello ' . \yii\helpers\Html::encode(Yii::$app->user->identity->username) . ', Your password was successfully changed.'
+                ]))->handle();
                 Yii::$app->session->setFlash('forceUpdateLocale');
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-success'],
-                    'body' => Yii::t('frontend', 'Your account has been successfully saved', [], $locale)
+                    'body' => Yii::t('frontend', 'Your account has been successfully saved', [], Yii::$app->user->identity->userProfile->locale)
                 ]);
                 return $this->refresh();
             }
@@ -98,7 +96,7 @@ class DefaultController extends Controller
             if(count($refs)<3){
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-danger'],
-                    'body' => Yii::t('frontend', 'We verify a <b>minimum of three</b> references listed on your profile and do verify reference letters as well. Families can request to see our reference sheets after they have interviewed with you. You`re also welcome to provide all references to the family during or after your interview. Many nannies will bring a resume along with their references to the interview and hand it to the family. Please, provide your references.', [], $locale)
+                    'body' => Yii::t('frontend', 'We verify a <b>minimum of three</b> references listed on your profile and do verify reference letters as well. Families can request to see our reference sheets after they have interviewed with you. You`re also welcome to provide all references to the family during or after your interview. Many nannies will bring a resume along with their references to the interview and hand it to the family. Please, provide your references.', [], Yii::$app->user->identity->userProfile->locale)
                 ]);
             }
             $dataProvider = new ActiveDataProvider([
@@ -110,17 +108,23 @@ class DefaultController extends Controller
                 'query' => Employment::find()->where(['email' => \Yii::$app->user->identity->email]),
                 'sort' => false
             ]);
-            return $this->render('user_index_nanny', ['model'=>$model, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
+            return $this->render('user_index_nanny', ['model'=>$accountForm, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
         } else {
-            $accountForm->setUser(Yii::$app->user->identity);
-            $model = new MultiModel([
-                'models' => [
-                    'account' => $accountForm,
-                    'profile' => Yii::$app->user->identity->families
-                ]
-            ]);
+            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) {
+                (new \common\lib\SendEmail([
+                    'subject' => Yii::t('frontend', 'Password changed for {name}', ['name'=>Yii::$app->name]),
+                    'to' => Yii::$app->user->identity->email,
+                    'body' => 'Hello ' . \yii\helpers\Html::encode(Yii::$app->user->identity->username) . ', Your password was successfully changed.'
+                ]))->handle();
+                Yii::$app->session->setFlash('forceUpdateLocale');
+                Yii::$app->session->setFlash('alert', [
+                    'options' => ['class'=>'alert-success'],
+                    'body' => Yii::t('frontend', 'Your account has been successfully saved', [], Yii::$app->user->identity->userProfile->locale)
+                ]);
+                return $this->refresh();
+            }
             
-            return $this->render('user_index_parent', ['model'=>$model]);
+            return $this->render('user_index_parent', ['model'=>$accountForm]);
         }
         
     }

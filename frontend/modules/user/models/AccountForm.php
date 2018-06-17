@@ -111,8 +111,8 @@ class AccountForm extends Model
      */
     public function save()
     {
-        $this->user->username = $this->username;
-        $this->user->email = $this->email;
+//        $this->user->username = $this->username;
+//        $this->user->email = $this->email;
         if ($this->password) {
             $this->user->setPassword($this->password);
         }

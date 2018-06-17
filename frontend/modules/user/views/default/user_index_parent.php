@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\web\View;
 
 /* @var $this yii\web\View */
-/* @var $model common\base\MultiModel */
+/* @var $model \frontend\modules\user\models\AccountForm */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $record common\models\ParentNanny */
 $this->registerJs(
@@ -32,21 +32,15 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
     <br>
     <div class="col-md-6">   
         <h2 style="color: #414141;">My NannyCare Account</h2>
-        <div class="container">
-            <div class="row">
-                <div class="md-col-6">
-                    <?= $form->field($model->getModel('account'), 'username')->textInput(['readOnly' => true]) ?>
-                </div>
-                <div class="md-col-6">
-                    <?= $form->field($model->getModel('account'), 'email')->textInput(['readOnly' => true]) ?>
-                </div>
-            </div>
-        </div>
+
+        <?= $form->field($model, 'username')->textInput(['readOnly' => true]) ?>
+
+        <?= $form->field($model, 'email')->textInput(['readOnly' => true]) ?>
 
         <div class="hidden" id="reset_pwd">
-            <?= $form->field($model->getModel('account'), 'password')->passwordInput() ?>
+            <?= $form->field($model, 'password')->passwordInput() ?>
 
-            <?= $form->field($model->getModel('account'), 'password_confirm')->passwordInput() ?>
+            <?= $form->field($model, 'password_confirm')->passwordInput() ?>
 
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('frontend', 'Confirm Reset Password'), ['class' => 'nav-btn']) ?>
@@ -62,7 +56,7 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
     <div class="col-md-6 parent-profile">
         <h2 style="color: #414141;">My Profile</h2>
         <h3><b>Personal data:</b><span style="float: right;"><a href="/user/sign-in/continue-family" class="btn btn-inverse">Edit Profile</a></span></h3>
-        <h3><b>Credits:</b> <?= $model->getModel('account')->credits; ?><span style="float: right;"><a href="get-credits" class="btn btn-inverse">Get Credits</a></span></h3>
+        <h3><b>Credits:</b> <?= $model->credits; ?><span style="float: right;"><a href="get-credits" class="btn btn-inverse">Get Credits</a></span></h3>
         <h3><b>Nannies Selected:</b><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse">Find A Nanny</a></span></h3>
         <div class="nannies-selected-table">
             <?php
