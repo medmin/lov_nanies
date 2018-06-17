@@ -14,6 +14,8 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use yii\db\Transaction;
 
+use GuzzleHttp\Psr7;
+
 
 class UserController extends Controller
 {
@@ -50,7 +52,8 @@ class UserController extends Controller
             $data = Yii::$app->request->post('UserFile');
 
             $file = UploadedFile::getInstance($model, 'link');
-            
+            $tempFile = './uploadTempDir/' . $data['file_uuid'];
+            $file->saveAs($tempFile);
             $ext = $file->getExtension(); $this->extIsValid($ext);
 
             // Instantiate an Amazon S3 client which is compatiable to DO Spaces.
@@ -70,8 +73,8 @@ class UserController extends Controller
                 // Upload a file to the Space
                 $upload = $client->putObject([
                     'Bucket' => getenv('DO_SPACES_BUCKET_NAME'),
-                    'Key'    =>  'user/' .$data['user_id'] . '/' . $data['file_uuid'], //重名就替换了原来的文件，且这里是故意不用$ext的
-                    'Body'   => $file, //
+                    'Key'    =>  'user/' .$data['user_id'] . '/' . $data['file_uuid'] .'.'. $ext, //重名就替换了原来的文件，且这里是故意不用$ext的
+                    'Body'   => fopen($tempFile, 'r')
                 ]);
 
                 
@@ -118,7 +121,7 @@ class UserController extends Controller
         return $this->render('upload', ['model' => $model]);
     }
 
-    public function actionDownloadViaUuid($user_id, $file_uuid)
+    public function actionDownload($user_id, $file_uuid)
     {
         // Instantiate an Amazon S3 client which is compatiable to DO Spaces.
         $client = new S3Client([
@@ -140,7 +143,8 @@ class UserController extends Controller
 
             // Display the object in the browser.
             header("Content-Type: {$file['ContentType']}");
-            echo $file['Body'];
+            echo $file['Body'];  // Instance of GuzzleHttp\Psr7\Stream
+            
         } 
         catch (S3Exception $e) {
             return $e->getMessage();

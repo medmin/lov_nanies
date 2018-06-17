@@ -65,6 +65,7 @@ class UserFile extends \yii\db\ActiveRecord
             'user_id' => Yii::t('app', 'User ID'),
             'file_uuid' => Yii::t('app', 'File Uuid'),
             'title' => Yii::t('app', 'Title'),
+            'ext' => Yii::t('app', 'Extension'),
             'link' => Yii::t('app', 'Link'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
@@ -96,10 +97,11 @@ class UserFile extends \yii\db\ActiveRecord
      */
     public static function getExt($file_uuid)
     {
-        $r = UserFile::find()->where('file_uuid', $file_uuid)->one();
+        $r = UserFile::find()->where(['file_uuid' => $file_uuid])->one();
         
         if ($r)
         {
+            
             return $r->ext;
         }
         else{
