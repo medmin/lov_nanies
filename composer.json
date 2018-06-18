@@ -1,5 +1,5 @@
 {
-  "name": "trntv/yii2-starter-kit",
+  "name": "NannyCare",
   "description": "New NannyCare Website",
   "keywords": [
     "yii2",
@@ -13,6 +13,12 @@
     {
       "name": "Yumin Gui",
       "email": "erichui329@gmail.com",
+      "homepage": "https://superphp.org",
+      "role": "PHP Web Developer"
+    },
+    {
+      "name": "Dongze Mao",
+      "email": "do_ze@qq.com",
       "homepage": "https://superphp.org",
       "role": "PHP Web Developer"
     }
