@@ -43,11 +43,19 @@ NavBar::begin([
                     ]
                 ]
             ],
-            
-                
-            ['label' => Yii::t('frontend', 'Articles and Tools <i class="fa fa-plus navicn"></i>'), 'url' => ['/article/index']],
             [
-                'label' => 'Resources',
+                'label' => Yii::t('frontend', 'Articles and Tools'),
+                'items' => [
+//                    ['label' => Yii::t('frontend', 'All Articles'), 'url' => ['/article/index']],
+                    ['label' => Yii::t('frontend', 'Family Articles'), 'url' => ['/article/index', 'c' => 'family']],
+                    ['label' => Yii::t('frontend', 'Nanny Articles'), 'url' => ['/article/index', 'c' => 'nanny']],
+                    ['label' => Yii::t('frontend', 'Forms For Families'), 'url' => ['/article/index', 'c' => 'forms']],
+                    ['label' => Yii::t('frontend', 'Products and Services'), 'url' => ['/article/index', 'c' => 'products']],
+                    ['label' => Yii::t('frontend', 'Blog'), 'url' => ['/article/index', 'c' => 'blog']]
+                ]
+            ],
+            [
+                'label' => Yii::t('frontend','Resources'),
                 'items' => [
                     ['label' => Yii::t('frontend', 'Background Checks'), 'url' => ['#']],
                     ['label' => Yii::t('frontend', 'Sample Forms'), 'url' => ['#']],
@@ -62,7 +70,7 @@ NavBar::begin([
                 ]
             ],
             [
-                'label' =>'About Us',
+                'label' => Yii::t('frontend','About Us'),
                 'items'=>[
                           ['label' => Yii::t('frontend', 'About '), 'url' => ['/page/view', 'slug'=>'about']],
                           ['label' => Yii::t('frontend', 'Contact '), 'url' => ['/site/contact']],
@@ -70,7 +78,7 @@ NavBar::begin([
                 ]
             ],
             [
-                'label' => 'My Account',
+                'label' => Yii::t('frontend','My Account'),
                 'visible'=>Yii::$app->user->isGuest,
                 'items' => [
                     ['label' => Yii::t('frontend', 'Log In <i class="fa fa-plus navicn"></i>'), 'url' => ['/user/sign-in/login']],

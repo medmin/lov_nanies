@@ -9,7 +9,7 @@ use yii\helpers\Html;
 <hr/>
 <div class="full-width-blog-post">
     <div class="blog-box">
-        <h3 class="blog-title"><a href="<?= $model->slug?>"><?php echo $model->title;?></a></h3>
+        <h3 class="blog-title"><a href="/<?= $model->slug?>"><?php echo $model->title;?></a></h3>
         <p class="blog-date"><?= date('j - F - Y', $model->created_at)?></p>
 
         <?php if ($model->thumbnail_path): ?>

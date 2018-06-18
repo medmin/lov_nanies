@@ -65,16 +65,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </div>
                                         <div class="col-md-6">
                                             <?= $form->field($model, 'position_for')->checkboxList([
-                                                '1' => 'Part Time Nanny',
-                                                '2' => 'Full Time Nanny',
-                                                '3' => 'Live-in Nanny',
-                                                '4' => 'Babysitter',
-                                                '5' => 'Newborn Specialist',
-                                                '6' => 'Caregiver',
-                                                '7' => 'Housekeeper',
-                                                '8' => 'Special Needs Nanny',
-                                                '9' => 'Elderly Care',
-                                            ])?>    
+                                                '1' => 'Nanny',
+                                                '2' => 'Babysitter',
+                                                '3' => 'Newborn Specialist',
+                                                '4' => 'Special Needs',
+                                                '5' => 'Caregiver',
+                                                '6' => 'Housekeeper',
+                                            ], ['required' => 'required'])?>
                                             <?= $form->field($model, 'employed')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'may_contact_employer')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?> 
                                             <?= $form->field($model, 'when_can_start')->textInput() ?>
@@ -83,16 +80,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <?= $form->field($model, 'weekly_salary')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'wage_comment')->textArea() ?>  
                                             <?= $form->field($model, 'availability')->checkboxList([
-                                                    '0' => 'Full time live in',
-                                                    '1' => 'Full time live out',
-                                                    '2' => 'Part time live out',
-                                                    '3' => 'Part time live in',
-                                                    '4' => 'Part Time Nanny',
-                                                    '5' => 'Babysitting',
-                                                    '6' => 'Evenings',
-                                                    '7' => 'Weekends Only',
-                                                    '8' => 'Overnights',
-                                                    '9' => 'I\'m flexible',
+                                                '1' => 'Full time',
+                                                '2' => 'Full time',
+                                                '3' => 'Live in',
+                                                '4' => 'Babysitter',
+                                                '5' => 'Temporary',
+                                                '6' => 'Overnight care',
                                                 ], ['required' => 'required'])?> 
                                            
                                             <input type="hidden" name="step" value="1"/>    

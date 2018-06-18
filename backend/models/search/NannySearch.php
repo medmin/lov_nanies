@@ -20,7 +20,7 @@ class NannySearch extends Nannies
     {
         return [
             [['id', 'status'], 'integer'],
-            [['name', 'address',  'email', 'position_for' ], 'string'],
+            [['name', 'address',  'email', 'position_for', 'availability'], 'string'],
             [['zip_code'], 'each', 'rule' => ['integer']]
         ];
     }
@@ -45,7 +45,7 @@ class NannySearch extends Nannies
         }else{
             $query = Nannies::find();
         }
-        
+
         if (Yii::$app->id === 'frontend') {
             $attach_condition = (new Query())
                 ->select('user_id')
@@ -61,23 +61,17 @@ class NannySearch extends Nannies
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
-        //echo var_dump($this->zip_code);
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            /*'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'logged_at' => $this->logged_at*/
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['in', 'zip_code', $this->zip_code])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'position_for', $this->position_for]);
-/*->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])*/
+            ->andFilterWhere(['like', 'position_for', $this->position_for])
+            ->andFilterWhere(['like', 'availability', $this->availability]);
         return $dataProvider;
     }
 }

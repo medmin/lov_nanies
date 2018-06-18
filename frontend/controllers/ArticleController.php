@@ -4,8 +4,9 @@ namespace frontend\controllers;
 
 use common\models\Article;
 use common\models\ArticleAttachment;
-use frontend\models\search\ArticleSearch;
+use common\models\ArticleCategory;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -15,20 +16,29 @@ use yii\web\NotFoundHttpException;
 class ArticleController extends Controller
 {
     /**
+     * @param $c string category
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($c = '')
     {
         Yii::$app->view->params['offslide'] = 1;
         Yii::$app->view->params['slider'] = "articles";
-        $searchModel = new ArticleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->sort = [
-            'defaultOrder' => ['created_at' => SORT_DESC]
-        ];
-        $dataProvider->pagination = [
-            'pageSize' => 10
-        ];
+
+        $query = Article::find()->where(['status' => Article::STATUS_PUBLISHED]);
+        if ($c && $category = ArticleCategory::findOne(['slug' => $c])) {
+            $query->andWhere(['category_id' => $category->id]);
+        }
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC
+                ]
+            ],
+            'pagination' => [
+                'pageSize' => 10
+            ]
+        ]);
         return $this->render('index', ['dataProvider'=>$dataProvider]);
     }
 

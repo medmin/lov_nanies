@@ -33,45 +33,45 @@ class NanniesController extends Controller
         ];
     }
 
-    public function actionIndex($city='')
+    public function actionIndex()
     {
         $searchModel = new NannySearch();
-        $search=["NannySearch" => ["status"=> "1"]];
+        $search = ["NannySearch" => ["status"=> "1"]];
         $error = '';
-        $radius=5;
-//        $zu=new Paypal();
-        switch (true){
-            case ( isset($_GET['radius']) ):
-                $radius=$_GET['radius'];
-            case (isset($_GET['position'])):
-                $search["NannySearch"]["position_for"]=$_GET['position'];
-            case (isset($_GET['zip'])):
-                try {
-                    $location= new PostalCode($_GET['zip']);
-                    $zips =$location->getPostalCodesInRange(0,$radius);
-                    foreach($zips as $object){
-                        $zips_array[]=$object->postal_code;
-                    }
-                    $search["NannySearch"]["zip_code"]=$zips_array;
-                } catch (\Exception $e) {
-                    $error = $e->getMessage();
-                }
-                break;
-            case (isset($_GET['city'])):
-                // 传过来的是小写和中划线,改为首字母大写和空格的组合,因为原来的就是那样,现在只是url优化,不改原来的逻辑
-                $_GET['city'] = ucwords(str_replace('-', ' ', $_GET['city']));
-                try {
-                    $location= new PostalCode($_GET['city'].", CA");
-                    $zips_array =$location->getSameCity();
-                    $search["NannySearch"]["zip_code"]=$zips_array;
-                } catch (\Exception $e) {
-                    $error = $e->getMessage();
-                }
-                break;
-            default:
-                $search=["NannySearch" => ["status"=> "1"]];
-                break;
+        $radius = 5;
+
+        if (isset($_GET['radius']) && $_GET['radius'] == true) {
+            $radius = $_GET['radius'];
         }
+
+        $search["NannySearch"]["position_for"] = $_GET['position'] ?? '';
+        $search["NannySearch"]["availability"] = $_GET['availability'] ?? '';
+
+        if (isset($_GET['zip']) && $_GET['zip']) {
+            try {
+                $location= new PostalCode($_GET['zip']);
+                $zips =$location->getPostalCodesInRange(0,$radius);
+                foreach($zips as $object){
+                    $zips_array[]=$object->postal_code;
+                }
+                $search["NannySearch"]["zip_code"] = $zips_array ?? '';
+            } catch (\Exception $e) {
+                $error = $e->getMessage();
+            }
+        }
+
+        if (isset($_GET['city']) && $_GET['city']) {
+            // 传过来的是小写和中划线,改为首字母大写和空格的组合,因为原来的就是那样,现在只是url优化,不改原来的逻辑
+            $_GET['city'] = ucwords(str_replace('-', ' ', $_GET['city']));
+            try {
+                $location= new PostalCode($_GET['city'].", CA");
+                $zips_array =$location->getSameCity();
+                $search["NannySearch"]["zip_code"]=$zips_array;
+            } catch (\Exception $e) {
+                $error = $e->getMessage();
+            }
+        }
+
         $dataProvider = $searchModel->search($search);
         
         return $this->render('index', [
