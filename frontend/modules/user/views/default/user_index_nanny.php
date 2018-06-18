@@ -52,7 +52,10 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
         <div class="form-group">
             <?= Html::Button(Yii::t('frontend', 'Reset Password'), ['class' => 'nav-btn', 'id' => 'reset-btn']) ?>
         </div>
-
+        <div class="form-group">
+            <a href="https://nannycare.quickapp.pro/apply/applicant/new/5759" target=_blank><span class="btn btn-warning">Background Check</span></a>
+        </div>
+        
     </div>
         <div class="col-md-6">
             <h2 style="color: #414141;">Profile Details (click to view or edit it)</h2>
@@ -64,15 +67,13 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
                 <a href="about-you"><li class="process-label2 active" id="label-5">About you<span><i class="fa fa-long-arrow-right"></i></span></li></a>
                 <a href="upload-files"><li class="process-label2 active" id="label-6">Upload Files<span><i class="fa fa-long-arrow-right"></i></span></li></a>
             </ul>
+            
             <div style="text-align: center; margin: 30px 0 0 0;">
                 <!-- <a href="create-employment"> <span class="nav-btn">Add Previous Employments</span></a> -->
                 <a href="create-reference"> <span class="nav-btn">Add References</span></a>
             </div>
             <div style="text-align: center; margin: 30px 0 0 0;">
                 <a href="/user/default/get-credits"><span class="nav-btn">Buy Membership</span></a>
-            </div>
-            <div style="text-align: center; margin: 30px 0 0 0;">
-            <a href="https://nannycare.quickapp.pro/apply/applicant/new/5759" target=_blank><span class="nav-btn">Background Check</span></a>
             </div>
             <div style="text-align: center; margin: 30px 0 0 0;" id="listing-fee-expired">
                 <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn btn-warning"  ?>">Your monthly listing fee is expired.</a>

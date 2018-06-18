@@ -4,7 +4,7 @@ use yii\helpers\Html;;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 NavBar::begin([
-        'brandLabel' => Html::img('@web/images/logoHN.png', ['alt'=>Yii::$app->name]),
+        'brandLabel' => Html::img('@web/images/NannyCare-Logo.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
         'brandOptions' => ['class' => 'logo-style'],
         'options' => [
