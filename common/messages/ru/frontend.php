@@ -20,7 +20,7 @@ return [
     'Activation email' => '',
     'This email has already been taken.' => '',
     'Your account has been successfully activated.' => '',
-    'Your account has been successfully created. Check your email for further instructions.' => '',
+    'Your account has been successfully created. <br /> Check your email for further instructions.' => '',
     'Your activation link: {url}' => '',
     'About' => 'О нас',
     'Account Settings' => 'Настройки аккаунта',

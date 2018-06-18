@@ -20,8 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php echo $form->field($model, 'password')->passwordInput() ?>
                 <?php echo $form->field($model, 'type')->hiddenInput(['value'=>$type])->label(false) ?>
                 <?php echo $form->field($model, 'password_repeat')->passwordInput() ?>
+                <p>
+                 <a href="http://manage.lovingnannies.com/includes/LNTermsandConditions2016.pdf" target=_blank>Click here to read the Terms and Conditions and Privacy Policy</a>    
+                </p>
+                <?php echo $form->field($model, 'legal')->checkbox() ?>
                 <div class="form-group">
-                    <?php echo Html::submitButton(Yii::t('frontend', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?php echo Html::submitButton(Yii::t('frontend', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button', 'id'=>'signup-submit-btn']) ?>
                 </div>
                 <h2><?php //echo Yii::t('frontend', 'Sign up with')  ?>:</h2>
                 <div class="form-group">

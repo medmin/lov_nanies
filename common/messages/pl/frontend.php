@@ -68,7 +68,7 @@ return [
     'We already have a user with email {email}' => 'Mamy już użytkownika o adresie email {email}',
     'Welcome to {app-name}. Email with your login information was sent to your email.' => 'Witaj w {app-name}. Wiadomość z danymi potrzebnymi do logowania zostały wysłane na twój adres email',
     'Your account has been successfully activated.' => 'Twoje konto zostało pomyślnie aktywowane',
-    'Your account has been successfully created. Check your email for further instructions.' => 'Twoje konto zostało utworzone. Sprawdź swoją skrzynkę pocztową',
+    'Your account has been successfully created. <br /> Check your email for further instructions.' => 'Twoje konto zostało utworzone. Sprawdź swoją skrzynkę pocztową',
     'Your account has been successfully saved' => 'Twoje konto zostało pomyślnie zapisane',
     'Your activation link: {url}' => 'Twój link aktywacyjny {url}',
     '{app-name} | Your login information' => '{app-name} | Twoje dane logowania',

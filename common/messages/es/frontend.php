@@ -20,7 +20,7 @@ return [
     'Activation email' => 'Email de activación',
     'This email has already been taken.' => 'Este correo ya está siendo utilizado',
     'Your account has been successfully activated.' => 'Tu cuenta ha sido activada correctamente.',
-    'Your account has been successfully created. Check your email for further instructions.' => 'Tu cuenta ha sido creada correctamente. Revisa tu correo para seguir con las instrucciones.',
+    'Your account has been successfully created. <br /> Check your email for further instructions.' => 'Tu cuenta ha sido creada correctamente. Revisa tu correo para seguir con las instrucciones.',
     'Your activation link: {url}' => 'Tu link de activación: {url}',
     'About' => 'Acerca de',
     'Account Settings' => 'Configuración de la cuenta',

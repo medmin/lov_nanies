@@ -19,6 +19,9 @@ use Yii;
  * @property string $driving
  * @property string $when_start
  * @property string $how_heared_about_us
+ * @property string $what_hours 
+ * @property string $pay_rate 
+ * @property string $housekeeping_or_cooking 
  */
 class Families extends \yii\db\ActiveRecord
 {
@@ -40,10 +43,11 @@ class Families extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'address', 'phone', 'children', 'type_of_help', 'work_out_of_home', 'when_start', 'how_heared_about_us'], 'required'],
-            [['id', 'status'], 'integer'],
+            [['id', 'status', 'name', 'address', 'phone', 'children', 'type_of_help', 'work_out_of_home', 'special_needs', 'driving', 'when_start', 'how_heared_about_us', 'what_hours', 'pay_rate', 'housekeeping_or_cooking'], 'required'],
+            [['id', 'status', 'pay_rate'], 'integer'],
             [['name', 'address', 'phone', 'children', 'type_of_help', 'work_out_of_home', 'special_needs', 'driving', 'when_start', 'how_heared_about_us'], 'string'],
             [['id'], 'unique'],
+            [['what_hours', 'housekeeping_or_cooking'], 'string', 'max' => 500], 
         ];
     }
 
@@ -65,6 +69,9 @@ class Families extends \yii\db\ActiveRecord
             'driving' => 'Any driving?',
             'when_start' => 'When are you looking for nanny to start?',
             'how_heared_about_us' => 'How did you hear about us?',
+            'what_hours' => 'What hours do you need?',//意思是保姆几点来工作
+            'pay_rate' => 'Pay rate you are offering?',
+            'housekeeping_or_cooking' => 'Is there any housekeeping or cooking? If so, please tell us what you need...',
         ];
     }
     public function getUser()

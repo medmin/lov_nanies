@@ -20,7 +20,7 @@ return [
     'Activation email' => 'Kích hoạt email',
     'This email has already been taken.' => 'Email này đã tồn tại',
     'Your account has been successfully activated.' => 'Tài khoản của bạn được kích hoạt thành công',
-    'Your account has been successfully created. Check your email for further instructions.' => 'Tài khoản đã được tạo thành công. Vui lòng kiểm tra email để biết thêm thông tin',
+    'Your account has been successfully created. <br /> Check your email for further instructions.' => 'Tài khoản đã được tạo thành công. Vui lòng kiểm tra email để biết thêm thông tin',
     'Your activation link: {url}' => 'Đường đẫn kích hoạt',
     'About' => '',
     'Account Settings' => 'Thiết lập tài khoản',

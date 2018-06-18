@@ -216,7 +216,7 @@ class SignInController extends \yii\web\Controller
                     Yii::$app->getSession()->setFlash('alert', [
                         'body' => Yii::t(
                             'frontend',
-                            'Your account has been successfully created. Check your email for further instructions.'
+                            'Your account has been successfully created. <br /> Check your email for further instructions.'
                         ),
                         'options' => ['class' => 'alert-success']
                     ]);
@@ -241,7 +241,7 @@ class SignInController extends \yii\web\Controller
                     Yii::$app->getSession()->setFlash('alert', [
                         'body' => Yii::t(
                             'frontend',
-                            'Your account has been successfully created. Check your email for further instructions.'
+                            'Your account has been successfully created. <br /> Check your email for further instructions.'
                         ),
                         'options' => ['class' => 'alert-success']
                     ]);

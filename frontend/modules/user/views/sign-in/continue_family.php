@@ -33,8 +33,8 @@ $this->registerJs(
                         'placeholder' => 'Full time ? Part time ? Live in or out ? Babysitter? Or else?'
                     ]
                 )  ?>
-               
-            
+               <?= $form->field($model, 'what_hours') ?>
+               <?= $form->field($model, 'pay_rate')    ?>     
             </div>
             <div class="col-lg-6">
                 <?= $form->field($model, 'work_out_of_home') ?>
@@ -42,6 +42,7 @@ $this->registerJs(
                 <?= $form->field($model, 'driving') ?>
                 <?= $form->field($model, 'when_start') ?>
                 <?= $form->field($model, 'how_heared_about_us')  ?>
+                <?= $form->field($model, 'housekeeping_or_cooking') ?>
             </div>
             
         

@@ -26,6 +26,8 @@ class SignupForm extends Model
     public $password_repeat;
 
     public $type;
+
+    public $legal;
     /**
      * @inheritdoc
      */
@@ -53,6 +55,9 @@ class SignupForm extends Model
             ['password', 'string', 'min' => 6],
             ['password_repeat', 'required'],
             ['password_repeat', 'compare', 'compareAttribute'=>'password', 'message'=>"Passwords don't match" ],
+            ['legal','required'],
+            ['legal', 'integer'],
+            ['legal', 'compare', 'compareValue' => 1, 'operator' => '==', 'message' => 'Please agree to the Terms and Conditions and Privacy Policy.']
         ];
     }
 
@@ -65,6 +70,7 @@ class SignupForm extends Model
             'username'=>Yii::t('frontend', 'Username'),
             'email'=>Yii::t('frontend', 'Email'),
             'password'=>Yii::t('frontend', 'Password'),
+            'legal' => 'I agree to NannyCare.com\'s Terms and Conditions and Privacy Policy.',
         ];
     }
 
