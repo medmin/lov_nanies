@@ -31,6 +31,8 @@ class UserFile extends \yii\db\ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 0;
 
+    public $file;
+
     /**
      * @inheritdoc
      */
@@ -50,6 +52,7 @@ class UserFile extends \yii\db\ActiveRecord
             [['file_uuid'], 'string', 'max' => 36],
             [['title'], 'string', 'max' => 300],
             [['ext'], 'string', 'max' => 10],
+            ['file', 'file', 'maxSize' => 10 * 1024 *1024, 'extensions' => ['tif', 'png', 'jpg', 'doc', 'docx', 'xls', 'xlsx','ppt', 'pptx', 'pdf', 'zip', 'rar', '7z', 'txt']],
             [['link'], 'string', 'max' => 500],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -92,21 +95,5 @@ class UserFile extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
-    /** 
-     * @return string | false
-     */
-    public static function getExt($file_uuid)
-    {
-        $r = UserFile::find()->where(['file_uuid' => $file_uuid])->one();
-        
-        if ($r)
-        {
-            
-            return $r->ext;
-        }
-        else{
-            return false;
-        }
-    }
 
 }

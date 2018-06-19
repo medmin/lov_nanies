@@ -2,6 +2,7 @@
 
 namespace frontend\modules\user\controllers;
 
+use common\modules\file\models\UserFile;
 use Yii;
 use common\models\Nannies;
 use common\base\MultiModel;
@@ -205,7 +206,8 @@ class DefaultController extends Controller
      */
     public function actionUploadFiles()
     {
-        return $this->render('upload_files');
+        $model = new UserFile();
+        return $this->render('upload_files', ['model' => $model]);
     }
 
     public function actionView_ref($id)

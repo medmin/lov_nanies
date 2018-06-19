@@ -77,8 +77,6 @@ You will be charged a one time fee of $99.99 and then after 90 days you will be 
 <p>This is a monthly subscription fee to be listed on our site. This can be put on hold status or cancelled at any time by the nanny. This will start only after we have received your background check and verified your references and CPR/First Aid. We will then accept you and list your profile on our site.
 </p>
 
-<div class="container">
-    <p>
-        <a href="/user/default/index" class="btn btn-primary btn-block">Skip</a>
-    </p>
-</div>
+<p>
+    <a href="/user/default/index" class="btn btn-primary btn-block">Skip</a>
+</p>
