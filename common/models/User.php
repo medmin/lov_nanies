@@ -298,6 +298,9 @@ class User extends ActiveRecord implements IdentityInterface
                     'driving' => '',
                     'when_start' => '',
                     'how_heared_about_us' => '',
+                    'what_hours' => 8, // 保姆几点来工作
+                    'pay_rate' => 0,
+                    'housekeeping_or_cooking' => ''
                 ];
             }
             $profile->load($profileData, '');
