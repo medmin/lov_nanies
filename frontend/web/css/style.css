@@ -2152,10 +2152,10 @@ blog-post
 }
 
 .single-blog-post .blog-img {
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    height: 360px;
+    /*width: 100%;*/
+    /*max-width: 100%;*/
+    /*overflow: hidden;*/
+    /*height: 360px;*/
 }
 
 .single-blog-post .blog-img img {
