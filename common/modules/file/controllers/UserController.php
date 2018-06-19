@@ -53,8 +53,8 @@ class UserController extends Controller
 
             $file = UploadedFile::getInstance($model, 'link');
             $tempFile = './uploadTempDir/' . $data['file_uuid'];
-            $file->saveAs($tempFile);
             $ext = $file->getExtension(); $this->extIsValid($ext);
+            $file->saveAs($tempFile);
 
             // Instantiate an Amazon S3 client which is compatiable to DO Spaces.
             $client = new S3Client([

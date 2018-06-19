@@ -186,6 +186,38 @@ class Nannies extends ActiveRecord
             [['picture'], 'safe']
         ];
     }
+
+    /**
+     * job_type  =>  availability
+     * @return array
+     */
+    public static function jobType()
+    {
+        return [
+            '1' => 'Full time',
+            '2' => 'Part time',
+            '3' => 'Live in',
+            '4' => 'Babysitter',
+            '5' => 'Temporary',
+            '6' => 'Overnight care',
+        ];
+    }
+
+    /**
+     * type_of_help  =>  position_for
+     * @return array
+     */
+    public static function typeOfHelp()
+    {
+        return [
+            '1' => 'Nanny',
+            '2' => 'Babysitter',
+            '3' => 'Newborn Specialist',
+            '4' => 'Special Needs',
+            '5' => 'Caregiver',
+            '6' => 'Housekeeper',
+        ];
+    }
     
     public function getUser()
     {

@@ -23,7 +23,7 @@ $this->registerJs(
     <h1 style="color: #000; margin-top:10px;">Family Information</h1>
     <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
                 <?= $form->field($model, 'address')  ?>
                 <?= $form->field($model, 'phone') ?>
@@ -36,7 +36,7 @@ $this->registerJs(
                <?= $form->field($model, 'what_hours') ?>
                <?= $form->field($model, 'pay_rate')    ?>     
             </div>
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <?= $form->field($model, 'work_out_of_home') ?>
                 <?= $form->field($model, 'special_needs')  ?>
                 <?= $form->field($model, 'driving') ?>
