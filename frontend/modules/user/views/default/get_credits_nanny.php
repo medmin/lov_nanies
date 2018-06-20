@@ -14,8 +14,8 @@ $this->registerJs(
     'my-button-handler'
 );
 ?>
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h2 style="color: #272727;">Find me a Nanny Job!</h2>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-left">
+    <h2 style="color: #272727;" class="text-center">Find me a Nanny Job!</h2>
     <p class="lead">NannyCare.com has been helping nannies and babysitters find awesome jobs since 2000. We are committed to raising the bar and making sure that all of our nannies are appreciated, treated respectfully and paid well for their services. </p>
 </div>
 

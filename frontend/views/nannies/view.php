@@ -674,7 +674,7 @@ $this->registerJs(
     <input type="hidden" name="user_id" value="<?=Yii::$app->user->id ?>" />
     <input type="hidden" name="nanny_id" value="<?=$model->id ?>" />
     <input type="hidden" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>"/>
-    <input type="submit" class="btn btn-inverse" value="Click to Proceed" />
+    <input type="submit" class="btn btn-inverse" style="max-width: 250px" value="Click to Proceed/Use Credit" />
     </form>
 </div>
 <div id="buy-credit-popup" class="white-popup mfp-with-anim mfp-hide">

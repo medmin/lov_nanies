@@ -39,6 +39,7 @@ Lightbox Effect popup viewer
 Media Quaries
 Parent Account
 Parent Job
+Nanny Account
 
 ----------------------------------------
 [Colors]       - #6E6460,#fc7b34
@@ -7400,4 +7401,11 @@ Media Quaries
 .job-detail-container {
     border-top: dashed 1px #a0a0a0;
     padding-top: 30px;
+}
+
+/* Nanny Account */
+
+.bg-check-btn {
+    background-color: #f0ad4e;
+    border-color: #eea236;
 }

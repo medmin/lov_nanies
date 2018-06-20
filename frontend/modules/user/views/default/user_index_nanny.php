@@ -53,7 +53,7 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
             <?= Html::Button(Yii::t('frontend', 'Reset Password'), ['class' => 'nav-btn', 'id' => 'reset-btn']) ?>
         </div>
         <div class="form-group">
-            <a href="https://nannycare.quickapp.pro/apply/applicant/new/5759" target=_blank><span class="btn btn-warning">Background Check</span></a>
+            <a href="https://nannycare.quickapp.pro/apply/applicant/new/5759" target=_blank><span class="btn nav-btn bg-check-btn">Background Check</span></a>
         </div>
         
     </div>
@@ -76,7 +76,7 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
                 <a href="/user/default/get-credits"><span class="nav-btn">Buy Membership</span></a>
             </div>
             <div style="text-align: center; margin: 30px 0 0 0;" id="listing-fee-expired">
-                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn btn-warning"  ?>">Your monthly listing fee is expired.</a>
+                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn nav-btn bg-check-btn"  ?>">Your monthly listing fee is expired.</a>
                 <!-- <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "btn btn-primary" : "hidden"  ?>">Your monthly listing Fee will be expired at: <span><?=  date('Y-m-d', UserOrder::NannyListingFeeStatus(Yii::$app->user->id));  ?></span></a> -->
             </div>
         </div>
