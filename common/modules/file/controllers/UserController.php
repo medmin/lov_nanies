@@ -128,6 +128,7 @@ class UserController extends Controller
             $transaction = Yii::$app->db->beginTransaction($isolationLevel);
             try
             {
+                $model->file = $_FILES;
                 $model->user_id = Yii::$app->user->id;
                 $model->file_uuid = $uuid;
                 $model->title = Yii::$app->request->post((new \ReflectionClass($model))->getShortName())['title'];
@@ -140,6 +141,7 @@ class UserController extends Controller
                     throw new \Exception('UserFile DB Save Failure');
                 }
 
+                
                 $transaction->commit();
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-success'],
@@ -152,6 +154,10 @@ class UserController extends Controller
             catch (\Exception $e)
             {
                 $transaction->rollBack();
+                echo '<pre>';
+                print_r($e->getMessage());
+                echo '</pre>';
+                exit;
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-danger'],
                     'body' => Yii::t('frontend', 'UploadFailure', [], Yii::$app->user->identity->userProfile->locale)

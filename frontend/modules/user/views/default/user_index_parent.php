@@ -1,14 +1,16 @@
 <?php
 
-use trntv\filekit\widget\Upload;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\web\View;
+use common\modules\file\models\UserFile;
 
 /* @var $this yii\web\View */
 /* @var $model \frontend\modules\user\models\AccountForm */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $record common\models\ParentNanny */
+/* @var $file_model UserFile */
+
 $this->registerJs(
     '
     $(document).ready(function () {
@@ -23,6 +25,13 @@ $this->registerJs(
     View::POS_READY,
     'my-button-handler'
 );
+
+$this->registerJs('
+    $(".upload-btn").click(function(){
+        $("#FilesList").modal("hide");
+        $("#UploadFile").modal("show");
+    })
+', View::POS_END);
 $this->title = Yii::t('frontend', 'Parent Account Page')
 ?>
 
@@ -57,6 +66,7 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
         <h2 style="color: #414141;">My Profile</h2>
         <h3><b>Personal data:</b><span style="float: right;"><a href="/user/sign-in/continue-family" class="btn btn-inverse">Edit Profile</a></span></h3>
         <h3><b>Credits:</b> <?= $model->credits; ?><span style="float: right;"><a href="get-credits" class="btn btn-inverse">Get Credits</a></span></h3>
+        <h3><b>Upload files:</b><span style="float: right;"><a  data-toggle="modal" data-target="#FilesList" class="btn btn-inverse">Files list</a></span></h3>
         <h3><b>Nannies Selected:</b><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse">Find A Nanny</a></span></h3>
         <div class="nannies-selected-table">
             <?php
@@ -79,3 +89,77 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
         </div>
     </div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="FilesListModalLabel" id="FilesList">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="FilesListModalLabel">Files List</h4>
+            </div>
+            <div class="modal-body">
+                <?php
+                $file_models = UserFile::find()->where(['user_id' => Yii::$app->user->id, 'status' => UserFile::STATUS_ACTIVE])->all();
+                if (count($file_models) == 0) {
+                    echo Yii::t('frontend', 'No file found');
+                } else {
+                    $html = '<table class="table table-hover"><thead><tr><th>#</th><th>File Name</th><th>Download Link</th></tr></thead><tbody>';
+                    foreach ($file_models as $idx => $file_model) {
+                        $html .= '<tr><td>'.($idx + 1).'</td><td>'. $file_model->title .'</td><td>'. Html::a('download', \yii\helpers\Url::to(['/file/user/download', 'user_id' => $file_model->user_id, 'file_uuid' => $file_model->file_uuid])) .'</td></tr>';
+                    }
+                    $html .= '</tbody></table>';
+                    echo $html;
+                }
+                ?>
+<!--                --><?//= \yii\grid\GridView::widget([
+//                    'dataProvider' => (new \yii\data\ActiveDataProvider([
+//                        'query' => UserFile::find()->where(['user_id' => Yii::$app->user->id, 'status' => UserFile::STATUS_ACTIVE]),
+//                        'pagination' => ['pageSize' => 20]
+//                    ])),
+//                    'columns' => [
+//                        ['class' => 'yii\grid\SerialColumn'],
+//                        'title',
+//                        [
+//                            'label' => Yii::t('frontend', 'Download'),
+//                            'value' => function($model) {
+//                                return Html::a(Yii::t('frontend', 'Download'), \yii\helpers\Url::to(['/file/user/download', 'user_id' => $model->user_id, 'file_uuid' => $model->file_uuid]));
+//                            }
+//                        ]
+//                    ]
+//                ]) ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success upload-btn">Upload File</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="UploadFileModalLabel" id="UploadFile">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="UploadFileModalLabel">Upload File</h4>
+            </div>
+            <?php $upload_form = ActiveForm::begin([
+                'options' => [
+                    'enctype' => 'multipart/form-data',
+                ],
+                'action' => '/file/user/upload'
+            ]) ?>
+            <div class="modal-body">
+                <?php
+                $upload_model = new UserFile();
+                echo $upload_form->field($upload_model, 'title')->textInput(['placeholder' => 'description file']);
+                echo $upload_form->field($upload_model, 'file')->fileInput();
+                ?>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Upload</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancle</button>
+            </div>
+            <?php ActiveForm::end() ?>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
