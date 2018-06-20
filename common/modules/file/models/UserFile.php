@@ -47,12 +47,12 @@ class UserFile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'title', 'ext', 'link', 'created_at'], 'required'],
+            [['user_id', 'title', 'ext', 'link', 'created_at', 'file'], 'required'],
             [['user_id', 'status', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['file_uuid'], 'string', 'max' => 36],
             [['title'], 'string', 'max' => 300],
             [['ext'], 'string', 'max' => 10],
-            ['file', 'file', 'maxSize' => 10 * 1024 *1024, 'extensions' => ['tif', 'png', 'jpg', 'doc', 'docx', 'xls', 'xlsx','ppt', 'pptx', 'pdf', 'zip', 'rar', '7z', 'txt']],
+            ['file', 'file', 'maxFiles' => 1, 'maxSize' => 10 * 1024 *1024, 'extensions' => ['tif', 'png', 'jpg', 'doc', 'docx', 'xls', 'xlsx','ppt', 'pptx', 'pdf', 'zip', 'rar', '7z', 'txt']],
             [['link'], 'string', 'max' => 500],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
