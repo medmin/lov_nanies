@@ -99,8 +99,12 @@ use common\widgets\DbText;
                         <?php echo DbText::widget(['key' => 'footer_instagram']) ?>
                     </div>
                 </div>
-                <div class="copyright">
-                    <p>&copy; 2000 - <?=date('Y'); ?> Nannycare | All rights reserved </p>
+                <div class="row">
+                    <p class="text-center">&copy; 2000 - <?=date('Y'); ?> Nannycare | All rights reserved </p>
+                    <p>NannyCare.com does not employ any caregiver (nanny, babysitter, newborn specialist, elderly caregiver or housekeeper) listed on our site and accepts no responsibility for provider's (client, family, user, parent) selection of a caregiver, or for any caregiver's conduct or performance. Provider is ultimately responsible for selecting a caregiver and for complying with all applicable laws that may apply when employing a household employee. Provider is fully responsible for their caregiver selection, checking references, interviewing and screening applicants and interpreting the background check results. NannyCare.com's screening services and background checks are not a substitution for a provider doing their own   thorough screening. Caregivers should never be hired on the spot or without being interviewed in-person first. Our site provides an abundance of helpful tools, articles and resources to help families make smart, safe hiring decisions.
+NannyCare.com and the slogan "We put care in finding a nanny" are registered trademarks
+© 2000-2018 NannyCare.com, Inc. All rights reserved.
+</p>
                 </div>
             </div>
         </div>

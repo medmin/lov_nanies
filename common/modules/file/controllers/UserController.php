@@ -145,7 +145,7 @@ class UserController extends Controller
                 $transaction->commit();
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-success'],
-                    'body' => Yii::t('frontend', 'UploadSuccess', [], Yii::$app->user->identity->userProfile->locale)
+                    'body' => Yii::t('frontend', 'SUCCESS: File Uploaded Successfully!', [], Yii::$app->user->identity->userProfile->locale)
                 ]);
 //                unlink($tempFile);  // 删除临时文件会出错 Resource temporarily unavailable 原因未知（可能是正在上传?）
                 $this->redirect($this->redirect_url)->send();
@@ -160,7 +160,7 @@ class UserController extends Controller
                 exit;
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-danger'],
-                    'body' => Yii::t('frontend', 'UploadFailure', [], Yii::$app->user->identity->userProfile->locale)
+                    'body' => Yii::t('frontend', 'ERROR: File Upload Failure!', [], Yii::$app->user->identity->userProfile->locale)
                 ]);
                 $this->redirect($this->redirect_url)->send();
                 return false;
