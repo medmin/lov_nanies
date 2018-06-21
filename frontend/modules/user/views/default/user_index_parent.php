@@ -111,22 +111,6 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
                     echo $html;
                 }
                 ?>
-<!--                --><?//= \yii\grid\GridView::widget([
-//                    'dataProvider' => (new \yii\data\ActiveDataProvider([
-//                        'query' => UserFile::find()->where(['user_id' => Yii::$app->user->id, 'status' => UserFile::STATUS_ACTIVE]),
-//                        'pagination' => ['pageSize' => 20]
-//                    ])),
-//                    'columns' => [
-//                        ['class' => 'yii\grid\SerialColumn'],
-//                        'title',
-//                        [
-//                            'label' => Yii::t('frontend', 'Download'),
-//                            'value' => function($model) {
-//                                return Html::a(Yii::t('frontend', 'Download'), \yii\helpers\Url::to(['/file/user/download', 'user_id' => $model->user_id, 'file_uuid' => $model->file_uuid]));
-//                            }
-//                        ]
-//                    ]
-//                ]) ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success upload-btn">Upload File</button>
@@ -154,6 +138,11 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
                 echo $upload_form->field($upload_model, 'title')->textInput(['placeholder' => 'description file']);
                 echo $upload_form->field($upload_model, 'file')->fileInput();
                 ?>
+                <p class="text-muted well well-sm no-shadow">
+                    Attention: <br />
+                    You can upload only 1 file at once and the total size should be no more than 10M. <br>
+                    Supported formats are tif, png, jpg, doc, docx, xls, xlsx, ppt, pptx, pdf, zip, rar, 7z, txt.
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">Upload</button>
