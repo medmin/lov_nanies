@@ -53,7 +53,7 @@ class UserController extends Controller
         } elseif (array_key_exists('seeker', $userRoles)) {
             $this->redirect_url = '/user/default/index';
         } else {
-            $this->redirect_url = '/'; // 这地方就是管理员了
+            $this->redirect_url = '/file/index'; // 这地方就是管理员了
         }
         if ($action->id === 'download' && (array_key_exists('nanny', $userRoles) || array_key_exists('seeker', $userRoles))) {
             // 如果是download 并且角色为 nanny 或者 seeker 的话，判断当前用户和 user_id 是否一样，不一样不能查看。杜绝管理员拥有nanny或者seeker角色的情况

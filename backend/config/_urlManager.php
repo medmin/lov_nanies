@@ -4,6 +4,7 @@ return [
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'rules' => [
-        'order/<action>' => 'user-order/<action>'
+        'order/<action>' => 'user-order/<action>',
+        'file/<action>' => 'user-file/<action>'
     ]
 ];

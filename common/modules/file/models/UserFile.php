@@ -41,6 +41,13 @@ class UserFile extends \yii\db\ActiveRecord
         return 'user_file';
     }
 
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['delete'] = []; // 定义一个空数组，不做任何rules的校验
+        return $scenarios;
+    }
+
     /**
      * @inheritdoc
      */
