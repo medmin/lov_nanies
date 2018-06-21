@@ -9,6 +9,7 @@
 namespace frontend\controllers;
 
 use common\models\UserOrder;
+use common\models\WidgetCarousel;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -43,6 +44,10 @@ class PostJobController extends Controller
             ]);
             $this->redirect(['user/default/get-credits']);
             return false;
+        }
+        if (WidgetCarousel::findOne(['key' => 'job', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
+            Yii::$app->view->params['offslide'] = true;
+            Yii::$app->view->params['slider'] = 'job';
         }
         return parent::beforeAction($action);
     }

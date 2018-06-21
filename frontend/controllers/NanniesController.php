@@ -73,7 +73,10 @@ class NanniesController extends Controller
         }
 
         $dataProvider = $searchModel->search($search);
-        
+
+        Yii::$app->view->params['offslide'] = true;
+        Yii::$app->view->params['slider'] = 'nannies';
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

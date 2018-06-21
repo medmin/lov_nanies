@@ -2,10 +2,10 @@
 
 namespace frontend\modules\user\controllers;
 
+use common\models\WidgetCarousel;
 use common\modules\file\models\UserFile;
 use Yii;
 use common\models\Nannies;
-use common\base\MultiModel;
 use frontend\modules\user\models\AccountForm;
 use Intervention\Image\ImageManagerStatic;
 use trntv\filekit\actions\DeleteAction;
@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use common\models\Refs;
 use common\models\Employment;
+use yii\web\NotFoundHttpException;
 
 
 
@@ -58,6 +59,19 @@ class DefaultController extends Controller
                 ]
             ]
         ];
+    }
+
+    public function beforeAction($action)
+    {
+        $userRoles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
+        if (array_key_exists('nanny', $userRoles) && WidgetCarousel::findOne(['key' => 'nanny_account', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
+            Yii::$app->view->params['offslide'] = true;
+            Yii::$app->view->params['slider'] = 'nanny_account';
+        } elseif (array_key_exists('seeker', $userRoles) && WidgetCarousel::findOne(['key' => 'family_account', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
+            Yii::$app->view->params['offslide'] = true;
+            Yii::$app->view->params['slider'] = 'family_account';
+        }
+        return parent::beforeAction($action);
     }
 
     /**
