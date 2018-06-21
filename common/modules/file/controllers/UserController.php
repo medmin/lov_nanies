@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         $userRoles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
         if (array_key_exists('nanny', $userRoles)) {
-            $this->redirect_url = '/user/default/upload-files';
+            $this->redirect_url = '/user/default/upload-files-list';
         } elseif (array_key_exists('seeker', $userRoles)) {
             $this->redirect_url = '/user/default/index';
         } else {
@@ -154,10 +154,6 @@ class UserController extends Controller
             catch (\Exception $e)
             {
                 $transaction->rollBack();
-                echo '<pre>';
-                print_r($e->getMessage());
-                echo '</pre>';
-                exit;
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-danger'],
                     'body' => Yii::t('frontend', 'UploadFailure', [], Yii::$app->user->identity->userProfile->locale)
@@ -200,12 +196,19 @@ class UserController extends Controller
             
         } 
         catch (S3Exception $e) {
-            return $e->getMessage();
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class'=>'alert-danger'],
+                'body' => Yii::t('frontend', $e->getMessage(), [], Yii::$app->user->identity->userProfile->locale)
+            ]);
+            $this->redirect($this->redirect_url)->send();
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class'=>'alert-danger'],
+                'body' => Yii::t('frontend', $e->getMessage(), [], Yii::$app->user->identity->userProfile->locale)
+            ]);
+            $this->redirect($this->redirect_url)->send();
         }
-        return false;
     }
 
 

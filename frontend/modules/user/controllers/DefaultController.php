@@ -210,6 +210,21 @@ class DefaultController extends Controller
         return $this->render('upload_files', ['model' => $model]);
     }
 
+    /**
+     * 文件列表页
+     */
+    public function actionUploadFilesList()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => UserFile::find()->where(['user_id' => Yii::$app->user->id, 'status' => UserFile::STATUS_ACTIVE]),
+            'pagination' => [
+                'pageSize' => 20
+            ],
+            'sort' => false
+        ]);
+        return $this->render('upload_files_list', ['dataProvider' => $dataProvider]);
+    }
+
     public function actionView_ref($id)
     {
         $model=$this->findRef($id);

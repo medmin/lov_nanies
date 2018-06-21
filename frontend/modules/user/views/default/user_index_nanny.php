@@ -66,6 +66,7 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
                 <a href="housekeeping"><li class="process-label2 active" id="label-4">Housekeeping<span><i class="fa fa-long-arrow-right"></i></span></li></a>
                 <a href="about-you"><li class="process-label2 active" id="label-5">About you<span><i class="fa fa-long-arrow-right"></i></span></li></a>
                 <a href="upload-files"><li class="process-label2 active" id="label-6">Upload Files<span><i class="fa fa-long-arrow-right"></i></span></li></a>
+                <a href="upload-files-list"><li class="process-label2 active" id="label-7">Files List<span><i class="fa fa-long-arrow-right"></i></span></li></a>
             </ul>
             
             <div style="text-align: center; margin: 30px 0 0 0;">
