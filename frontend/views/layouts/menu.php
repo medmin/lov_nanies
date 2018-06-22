@@ -95,6 +95,11 @@ NavBar::begin([
                         'url' => ['/user/default/index']
                     ],
                     [
+                        'label' => Yii::t('frontend', 'VIP Service'),
+                        'url' => 'http://www.lovingnannies.com/',
+                        'visible' => array_key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))
+                    ],
+                    [
                         'label' => Yii::t('frontend', 'Backend'),
                         'url' => Yii::getAlias('@backendUrl'),
                         'visible'=>Yii::$app->user->can('manager')

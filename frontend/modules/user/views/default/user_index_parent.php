@@ -59,6 +59,7 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
         <div class="form-group">
             <?= Html::Button(Yii::t('frontend', 'Reset Password'), ['class' => 'nav-btn', 'id' => 'reset_button']) ?>
         </div>
+<!--            <a href="http://www.lovingnannies.com/" target="_blank"><span class="btn nav-btn bg-check-btn">--><?//= Yii::t('frontend', 'VIP Service') ?><!--</span></a>-->
     </div>
     <?php ActiveForm::end(); ?>
 
