@@ -21,7 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
             'id',
-            'name:text',
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->name, Yii::$app->urlManagerFrontend->createAbsoluteUrl('/nannies/view?id='.$model->id), ['target' => '_blank']);
+                }
+            ],
             'email:email',
             'address:text',
             [
