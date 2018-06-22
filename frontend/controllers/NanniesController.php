@@ -85,8 +85,21 @@ class NanniesController extends Controller
         
     }
 
+    /**
+     * 没有使用权限而使用referrer来判断的
+     *
+     * @param $id
+     * @return string|\yii\web\Response
+     */
     public function actionView($id)
     {
+        $model = $this->findModelById($id);
+        if ($model->status !== Nannies::STATUS_APPROVED) {
+            $referer_host_path = parse_url(Yii::$app->request->referrer, PHP_URL_HOST) . parse_url(Yii::$app->request->referrer, PHP_URL_PATH);
+            if ($referer_host_path !== 'admin.lov.local/nannies/index') {
+                return $this->redirect(['/nannies/index']);
+            }
+        }
         return $this->render('view', [
             'model' => $this->findModelById($id),
         ]);
