@@ -45,9 +45,6 @@ Cost: $99.99 (one time fee includes background check & 90 day membership) Only $
 <strong style="color:black">Please note: We do not accept anyone with misdemeanors (including DUI's and DWI's), arrests or convictions on their records. If that is you, please do not apply!
 </strong></p>
 
-<p>
-You will be charged a one time fee of $99.99 and then after 90 days you will be asked to pay a monthly subscription fee of $9.99/month if you want to continue with us. If you find a job before the 90 days ends, you can put your account on hold or cancel your account at anytime. There are no refunds since our fee goes towards your background check, verifying your references and screening you. We do not make any money off of our nannies. The families pay us a little something to contact you (just like a nanny agency). 
-</p>
 <h2 style="color: #272727;background-color:yellow" class="text-center">Want to continue getting jobs through us?</h2>
 <h3>Cost: $9.99 (monthly listing fee)</h3>
 <p>After your 90 day membership expires, you can opt to remain on our site for just $9.99/month. This is a monthly subscription fee to be listed on our site. This can be put on a “hold status” or cancelled at any time.

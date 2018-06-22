@@ -60,6 +60,9 @@ class PostJobController extends Controller
             'query' => $query
         ]);
 
+        Yii::$app->view->params['offslide'] = true;
+        Yii::$app->view->params['slider'] = 'find-a-job';
+
         return $this->render('/parent_post/index', ['dataProvider' => $dataProvider]);
 
     }
