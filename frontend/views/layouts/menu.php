@@ -17,18 +17,19 @@ NavBar::begin([
         'encodeLabels' => false,
         'items' => [
             ['label' => Yii::t('frontend', 'Home <i class="fa fa-plus navicn"></i>'), 'url' => ['/site/index'], ],
-            [
-                'label' => Yii::t('frontend', 'Find A Nanny'),
-                'items' => [
-                    ['label' => Yii::t('frontend', 'All Nannies '), 'url' => ['/nannies/index']],
-                    ['label' => Yii::t('frontend', 'BabySitter '), 'url' => '/#'],
-                    ['label' => Yii::t('frontend', 'Newborn Specialist '), 'url' => '/#'],
-                    ['label' => Yii::t('frontend', 'Caregiver '), 'url' => '/#'],
-                    ['label' => Yii::t('frontend', 'Housekeeper '), 'url' => '/#'],
-                    ['label' => Yii::t('frontend', 'Special Needs '), 'url' => '/#'],
-                    ['label' => Yii::t('frontend', 'Elderly Care '), 'url' => '/#']
-                ]
-            ],
+            ['label' => Yii::t('frontend', 'Find A Nanny <i class="fa fa-plus navicn"></i>'), 'url' => ['/nannies/index'], ],
+            // [
+            //     'label' => Yii::t('frontend', 'Find A Nanny'),
+            //     'items' => [
+            //         ['label' => Yii::t('frontend', 'All Nannies '), 'url' => ['/nannies/index']],
+            //         ['label' => Yii::t('frontend', 'BabySitter '), 'url' => '/#'],
+            //         ['label' => Yii::t('frontend', 'Newborn Specialist '), 'url' => '/#'],
+            //         ['label' => Yii::t('frontend', 'Caregiver '), 'url' => '/#'],
+            //         ['label' => Yii::t('frontend', 'Housekeeper '), 'url' => '/#'],
+            //         ['label' => Yii::t('frontend', 'Special Needs '), 'url' => '/#'],
+            //         ['label' => Yii::t('frontend', 'Elderly Care '), 'url' => '/#']
+            //     ]
+            // ],
             [
                 'label' => Yii::t('frontend', 'Find A Job'),
                 'items' => [
