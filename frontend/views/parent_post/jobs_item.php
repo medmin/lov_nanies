@@ -28,6 +28,15 @@ use yii\helpers\StringHelper;
         </div>
     </div>
     <div class="job-show-detail clearfix">
-        <a href=<?= Url::to(['post-job/view', 'id' => $model->id]) ?>>See Job Details</a>
+        <?php if ($model->user_id == Yii::$app->user->id) : ?>
+            <form action="<?= Url::to(['post-job/update']) ?>" method="post">
+                <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+                <?= Html::hiddenInput('_csrf', Yii::$app->request->csrfToken)?>
+                <?= Html::hiddenInput('id', $model->id)?>
+                <button type="submit" >Update</button>
+            </form>
+        <?php else: ?>
+            <a href=<?= Url::to(['post-job/view', 'id' => $model->id]) ?>>See Job Details</a>
+        <?php endif; ?>
     </div>
 </div>

@@ -194,6 +194,12 @@ $bundle = BackendAsset::register($this);
                         'visible' => Yii::$app->user->can('administrator')
                     ],
                     [
+                        'label' => Yii::t('backend', 'Jobs'),
+                        'icon' => '<i class="fa fa-hand-paper-o"></i>',
+                        'url' => ['/job/index'],
+                        'visible' => Yii::$app->user->can('administrator')
+                    ],
+                    [
                         'label' => Yii::t('backend', 'Other'),
                         'url' => '#',
                         'icon' => '<i class="fa fa-cogs"></i>',

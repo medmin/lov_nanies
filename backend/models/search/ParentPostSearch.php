@@ -19,7 +19,7 @@ class ParentPostSearch extends ParentPost
     {
         return [
             [['id', 'user_id', 'zip_code', 'status', 'created_at', 'expired_at'], 'integer'],
-            [['job_type', 'type_of_help', 'description'], 'safe'],
+            [['job_type', 'type_of_help', 'summary', 'description'], 'safe'],
         ];
     }
 
@@ -41,23 +41,16 @@ class ParentPostSearch extends ParentPost
      */
     public function search($params)
     {
-        $query = ParentPost::find();
-
-        // add conditions that should always apply here
+        $query = ParentPost::find()->where(['<>', 'status', ParentPost::STATUS_DELETED]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -69,6 +62,7 @@ class ParentPostSearch extends ParentPost
 
         $query->andFilterWhere(['like', 'job_type', $this->job_type])
             ->andFilterWhere(['like', 'type_of_help', $this->type_of_help])
+            ->andFilterWhere(['like', 'summary', $this->summary])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

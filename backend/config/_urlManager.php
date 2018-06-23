@@ -5,6 +5,7 @@ return [
     'showScriptName' => false,
     'rules' => [
         'order/<action>' => 'user-order/<action>',
-        'file/<action>' => 'user-file/<action>'
+        'file/<action>' => 'user-file/<action>',
+        'job/<action>' => 'parent-post/<action>'
     ]
 ];

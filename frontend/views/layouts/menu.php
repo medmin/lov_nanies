@@ -1,8 +1,9 @@
 <?php
-use yii\widgets\Menu;
+
 use yii\helpers\Html;;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+
 NavBar::begin([
         'brandLabel' => Html::img('@web/images/NannyCare-Logo.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
@@ -36,11 +37,17 @@ NavBar::begin([
                     [
                         'label' => Yii::t('frontend', 'Post A Job '),
                         'url' => ['/find-a-job/post'],
-                        'visible' => \common\models\UserOrder::ParentPostStatus(Yii::$app->user->id) ? true : false
+                        'visible' => key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
+                    ],
+                    [
+                        'label' => Yii::t('frontend', 'My Jobs'),
+                        'url' => ['/find-a-job/list'],
+                        'visible' => key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
                     ],
                     [
                         'label' => Yii::t('frontend', 'Job List '),
-                        'url' => ['/find-a-job/list']
+                        'url' => ['/find-a-job/list'],
+                        'visible' => key_exists('nanny', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
                     ]
                 ]
             ],

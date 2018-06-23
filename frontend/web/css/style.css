@@ -286,7 +286,7 @@ Hover Effect
     display: inline-block;
     margin: 0px;
     max-width: 100%;
-    background-color: rgba(45, 209, 175, 0.55);
+    background-color: #E49A7D;
     color: #fff;
     overflow: hidden;
     -webkit-backface-visibility: hidden;
@@ -7319,7 +7319,7 @@ Media Quaries
 .job-summary, .job-data-group {
     float: left;
 }
-.job-show-detail > a{
+.job-show-detail > a, .job-show-detail button{
     float: right;
     min-width: 175px;
     padding: 8px 10px;
@@ -7401,6 +7401,9 @@ Media Quaries
 .job-detail-container {
     border-top: dashed 1px #a0a0a0;
     padding-top: 30px;
+}
+.job-user-email {
+    margin-left:50px;
 }
 
 /* Nanny Account */

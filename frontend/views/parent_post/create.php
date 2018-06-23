@@ -15,12 +15,19 @@ $this->registerJs(
     '
     $(document).ready(function () {
         $("html, body").animate({scrollTop: $(".slide").height()+$(".navbar").height()},"slow");
+//         br to ""
+        var str = $("#parentpost-description").val();
+        var regex = /<br\s*[\/]?>/gi;
+        $("#parentpost-description").val(str.replace(regex, ""));
      });
     '
 );
+$action_id = Yii::$app->controller->action->id;
+$this->title =  $action_id == 'create' ? Yii::t('frontend', 'Post a job') : Yii::t('frontend', 'Update Job');
 ?>
 <div class="post-job">
     <?php $form = ActiveForm::begin(); ?>
+    <?= $action_id== 'update' ? $form->field($model, 'id')->hiddenInput()->label(false) : '' ?>
     <?= $form->field($model, 'zip_code')->input('number') ?>
     <?= $form->field($model, 'job_type')->dropDownList([
         '1' => 'Full time',
