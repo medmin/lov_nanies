@@ -50,7 +50,7 @@ class PostJobController extends Controller
             // TODO message 提示用户必须购买279才能发送
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class'=>'alert-danger'],
-                'body' => Yii::t('frontend', 'Permission denied', [], Yii::$app->user->identity->userProfile->locale)
+                'body' => Yii::t('frontend', 'Please buy bronze paln(279 USD) or higer.', [], Yii::$app->user->identity->userProfile->locale)
             ]);
             $this->redirect(['user/default/get-credits']);
             return false;
@@ -58,7 +58,7 @@ class PostJobController extends Controller
         if (($action->id === 'index' || $action->id === 'view') && key_exists('nanny', $this->user_roles) && !UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class'=>'alert-danger'],
-                'body' => Yii::t('frontend', 'Permission denied', [], Yii::$app->user->identity->userProfile->locale)
+                'body' => Yii::t('frontend', 'Please buy membership (99 USD).', [], Yii::$app->user->identity->userProfile->locale)
             ]);
             return $this->redirect(['user/default/get-credits'])->send();
         }
