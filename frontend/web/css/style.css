@@ -2785,6 +2785,7 @@ blog-post
     margin: 50px auto 0;
     background-color: #6E6460;
     position: relative;
+    line-height: 1.5;
 }
 
 hr {
@@ -2875,71 +2876,6 @@ hr {
     color: #ffffff;
 }
 
-.footer-tags li,
-.footer-instagram li {
-    display: inline-block;
-    margin-right: 7px;
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
-}
-
-.footer-instagram li:hover {
-    opacity: .8;
-    filter: alpha(opacity=80);
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
-}
-
-.footer-tags li>a {
-    font-size: 16px;
-    font-weight: 400;
-    padding: 6px 18px 8px;
-    border: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #ffffff;
-    border-radius: 27px;
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
-}
-
-.footer-tags li>a:hover,
-.footer-tags li>a:focus {
-    background-color: #ffffff;
-    color: #6E6460;
-    -webkit-transition: all .3s ease;
-    transition: all .3s ease;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
-}
-
-.footer-instagram li {
-    width: 69px;
-    height: 69px;
-    background: #f2f2f2;
-    border-radius: 0;
-    border: 0;
-    margin-bottom: 10px;
-}
-
-.footer-instagram li img {
-    width: 100%;
-    height: 100%;
-}
-
 .copyright {
     position: absolute;
     left: 0;
@@ -2964,10 +2900,94 @@ hr {
     font-family: 'Lato', sans-serif;
 }
 
+.footer-left {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.footer-right {
+    padding-left: 5%;
+    /*padding-right: 5%;*/
+    border-left: 1px solid #868484;
+}
+.footer h2 {
+    font-weight: 200;
+    color: #ddd;
+    font-size: 22px;
+    margin-bottom: 24px;
+}
+.footer p {
+    font-size: 14px;
+    color: #848484;
+    font-weight: 200;
+    line-height: 1.4;
+}
+.footer li {
+    display: block;
+    width: 49%;
+    float: left;
+    font-size: 12px;
+    font-weight: 200;
+    color: #848484;
+    margin-bottom: 8px;
+}
+.footer a {
+    color: #ddd;
+    cursor: pointer;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.footer-company li{
+    width: 100%;
+}
+.footer-cities {
+    margin-top: 15px;
+    border-top: 1px solid #868484;
+}
+.footer-cities li {
+    width: 32%;
+}
+.footer-instagram li {
+    display: inline-block;
+    margin-right: 7px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+}
+
+.footer-instagram li:hover {
+    opacity: .8;
+    filter: alpha(opacity=80);
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+}
+.footer-instagram li {
+    width: 69px;
+    height: 69px;
+    background: #f2f2f2;
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+.footer-instagram li img {
+    width: 100%;
+    height: 100%;
+}
 .back-to-top {
+    line-height: 50px;
     position: absolute;
     right: 2%;
-    bottom: 198px;
+    bottom: 150px;
     width: 50px;
     height: 50px;
     background-image: url(../images/top.png);
@@ -2976,7 +2996,7 @@ hr {
     background-repeat: no-repeat;
 }
 
-.back-to-top a {
+.back-to-top a, .back-to-top a:hover {
     color: #6E6460;
     font-family: 'Lato', sans-serif;
     font-size: 10px;
@@ -7315,6 +7335,7 @@ Media Quaries
 .job-item {
     border-top: 3px solid #f8ca55;
     margin-bottom: 30px;
+    padding-left: 10px;
 }
 .job-summary, .job-data-group {
     float: left;
@@ -7404,6 +7425,17 @@ Media Quaries
 }
 .job-user-email {
     margin-left:50px;
+}
+.job-disabled {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #eee;
+}
+.job-disabled .btn:hover {
+    color: white;
+}
+.job-disabled a, .job-disabled a:hover {
+    cursor: not-allowed;
 }
 
 /* Nanny Account */

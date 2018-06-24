@@ -12,7 +12,7 @@ use yii\helpers\StringHelper;
 
 /* @var $model \common\models\ParentPost */
 ?>
-<div class="job-item clearfix">
+<div class="job-item clearfix <?= $model->expired_at < time() ? 'job-disabled' : '' ?>">
     <h1 class="job-summary"><a href="<?= Url::to(['post-job/view', 'id' => $model->id]) ?>"><?= Html::encode($model->summary) ?></a></h1>
     <aside class="job-schedule pull-right">
         <p class="job-type"><?= Nannies::jobType()[$model->job_type]; ?></p>
@@ -30,10 +30,9 @@ use yii\helpers\StringHelper;
     <div class="job-show-detail clearfix">
         <?php if ($model->user_id == Yii::$app->user->id) : ?>
             <form action="<?= Url::to(['post-job/update']) ?>" method="post">
-                <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
                 <?= Html::hiddenInput('_csrf', Yii::$app->request->csrfToken)?>
                 <?= Html::hiddenInput('id', $model->id)?>
-                <button type="submit" >Update</button>
+                <?=  $model->expired_at > time() ? Html::submitButton('Update') : Html::button('Expire', ['disabled' => 'disabled', 'class' => 'btn'])?>
             </form>
         <?php else: ?>
             <a href=<?= Url::to(['post-job/view', 'id' => $model->id]) ?>>See Job Details</a>

@@ -137,7 +137,7 @@ class PostJobController extends Controller
 
     protected function findModel($id)
     {
-        if (($model = ParentPost::findOne(['id' => $id, 'user_id' => Yii::$app->user->id])) !== null) {
+        if (($model = ParentPost::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->andWhere(['>', 'expired_at', time()])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
