@@ -32,24 +32,9 @@ NavBar::begin([
             //     ]
             // ],
             [
-                'label' => Yii::t('frontend', 'Find A Job'),
-                'items' => [
-                    [
-                        'label' => Yii::t('frontend', 'Post A Job '),
-                        'url' => ['/find-a-job/post'],
-                        'visible' => key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
-                    ],
-                    [
-                        'label' => Yii::t('frontend', 'My Jobs'),
-                        'url' => ['/find-a-job/list'],
-                        'visible' => key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
-                    ],
-                    [
-                        'label' => Yii::t('frontend', 'Job List '),
-                        'url' => ['/find-a-job/list'],
-                        'visible' => key_exists('nanny', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
-                    ]
-                ]
+                'label' => Yii::t('frontend', 'Find A Job <i class="fa fa-plus navicn"></i>'),
+                'url' => ['/find-a-job/list'],
+                'visible' => !Yii::$app->user->isGuest && key_exists('nanny', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
             ],
             [
                 'label' => Yii::t('frontend', 'Articles and Tools'),

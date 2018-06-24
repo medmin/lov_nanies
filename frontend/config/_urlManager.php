@@ -26,6 +26,9 @@ return [
 
         // Find Job
         'find-a-job/post' => 'post-job/create',
-        'find-a-job/list' => 'post-job/index'
+        'find-a-job/list' => 'post-job/index',
+        'find-a-job/update' => 'post-job/update',
+        'find-a-job/delete' => 'post-job/delete',
+        'find-a-job/detail' => 'post-job/view',
     ]
 ];

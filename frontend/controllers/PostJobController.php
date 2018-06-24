@@ -21,6 +21,7 @@ use yii\filters\VerbFilter;
 class PostJobController extends Controller
 {
     private $expired_at = 0;
+    private $user_roles;
 
     public function behaviors()
     {
@@ -35,7 +36,8 @@ class PostJobController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'update' => ['post']
+                    'update' => ['post'],
+                    'delete' => ['post']
                 ]
             ]
         ];
@@ -43,6 +45,7 @@ class PostJobController extends Controller
 
     public function beforeAction($action)
     {
+        $this->user_roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
         if ($action->id === 'create' && !($this->expired_at = UserOrder::ParentPostStatus(Yii::$app->user->id))) {
             // TODO message 提示用户必须购买279才能发送
             Yii::$app->session->setFlash('alert', [
@@ -51,6 +54,13 @@ class PostJobController extends Controller
             ]);
             $this->redirect(['user/default/get-credits']);
             return false;
+        }
+        if (($action->id === 'index' || $action->id === 'view') && key_exists('nanny', $this->user_roles) && !UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class'=>'alert-danger'],
+                'body' => Yii::t('frontend', 'Permission denied', [], Yii::$app->user->identity->userProfile->locale)
+            ]);
+            return $this->redirect(['user/default/get-credits'])->send();
         }
         if (WidgetCarousel::findOne(['key' => 'job', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
             Yii::$app->view->params['offslide'] = true;
@@ -68,17 +78,10 @@ class PostJobController extends Controller
      */
     public function actionIndex()
     {
-        $query = ParentPost::find()->where(['status' => ParentPost::STATUS_ACTIVE])->andWhere(['>', 'expired_at', time()])->orderBy('created_at DESC');
-        if (key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))) {
+        if (key_exists('seeker', $this->user_roles)) {
             $query = ParentPost::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->orderBy('created_at DESC');
-        }
-        if (key_exists('nanny', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())) && !UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {
-            // TODO message 提示用户必须订阅 99 才能查看
-            Yii::$app->session->setFlash('alert', [
-                'options' => ['class'=>'alert-danger'],
-                'body' => Yii::t('frontend', 'Permission denied', [], Yii::$app->user->identity->userProfile->locale)
-            ]);
-            return $this->redirect(['user/default/get-credits']);
+        } else {
+            $query = ParentPost::find()->where(['status' => ParentPost::STATUS_ACTIVE])->andWhere(['>', 'expired_at', time()])->orderBy('created_at DESC');
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -92,6 +95,11 @@ class PostJobController extends Controller
 
     }
 
+    /**
+     * 新建
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionCreate()
     {
         $model = new ParentPost();
@@ -109,15 +117,31 @@ class PostJobController extends Controller
 
     }
 
+    /**
+     * 详情页
+     *
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionView($id)
     {
-        $model = ParentPost::findOne($id);
+        if (key_exists('nanny', $this->user_roles)) {
+            $model = ParentPost::find()->where(['id' => $id, 'status' => ParentPost::STATUS_ACTIVE])->andWhere(['>', 'expired_at', time()])->one();
+        } else {
+            $model = ParentPost::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->one();
+        }
         if ($model === null) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
         return $this->render('/parent_post/view', ['model' => $model]);
     }
 
+    /**
+     * 更新
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionUpdate()
     {
         if ($id = Yii::$app->request->post('id')) {
@@ -135,9 +159,37 @@ class PostJobController extends Controller
         }
     }
 
+    /**
+     * 删除
+     *
+     * @return \yii\web\Response
+     */
+    public function actionDelete()
+    {
+        if ($id = Yii::$app->request->post('id')) {
+            $model = $this->findModel($id);
+            $model->status = ParentPost::STATUS_DELETED;
+            $model->save();
+        }
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * 通过 id 获取 model
+     *
+     * @param $id
+     * @return array|null|\yii\db\ActiveRecord
+     * @throws NotFoundHttpException
+     */
     protected function findModel($id)
     {
-        if (($model = ParentPost::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->andWhere(['>', 'expired_at', time()])->one()) !== null) {
+        $model = ParentPost::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED]);
+        if ($this->action->id === 'delete') {
+            $model = $model->one();
+        } else {
+            $model = $model->andWhere(['>', 'expired_at', time()])->one();
+        }
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -7336,6 +7336,7 @@ Media Quaries
     border-top: 3px solid #f8ca55;
     margin-bottom: 30px;
     padding-left: 10px;
+    padding-bottom: 10px;
 }
 .job-summary, .job-data-group {
     float: left;
@@ -7436,6 +7437,10 @@ Media Quaries
 }
 .job-disabled a, .job-disabled a:hover {
     cursor: not-allowed;
+}
+.job-show-detail .job-delete-btn {
+    margin-top: 10px;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#f8a6a6),color-stop(1,#f43838));
 }
 
 /* Nanny Account */
