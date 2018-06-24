@@ -51,8 +51,8 @@ class DbCarousel extends Carousel
                 ->where([
                     '{{%widget_carousel_item}}.status' => 1,
                     '{{%widget_carousel}}.status' => WidgetCarousel::STATUS_ACTIVE,
-                    '{{%widget_carousel}}.key' => $this->key,
                 ])
+                ->andWhere(['REGEXP', '{{%widget_carousel}}.key', '^'.str_replace(['_','-'], '[-|_]' ,$this->key).'$'])
                 ->orderBy(['order' => SORT_ASC]);
             foreach ($query->all() as $k => $item) {
                 /** @var $item \common\models\WidgetCarouselItem */

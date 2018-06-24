@@ -66,10 +66,10 @@ class DefaultController extends Controller
         $userRoles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
         if (array_key_exists('nanny', $userRoles) && WidgetCarousel::findOne(['key' => 'nanny_account', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
             Yii::$app->view->params['offslide'] = true;
-            Yii::$app->view->params['slider'] = 'nanny_account';
+            Yii::$app->view->params['slider'] = 'nanny-account';
         } elseif (array_key_exists('seeker', $userRoles) && WidgetCarousel::findOne(['key' => 'family_account', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
             Yii::$app->view->params['offslide'] = true;
-            Yii::$app->view->params['slider'] = 'family_account';
+            Yii::$app->view->params['slider'] = 'family-account';
         }
         return parent::beforeAction($action);
     }

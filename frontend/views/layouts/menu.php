@@ -4,6 +4,14 @@ use yii\helpers\Html;;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 
+
+// article category
+$article_category_models = \common\models\ArticleCategory::findAll(['status' => \common\models\ArticleCategory::STATUS_ACTIVE]);
+$article_category = [];
+foreach ($article_category_models as $c) {
+    $article_category[] = ['label' => Yii::t('frontend', $c->title), 'url' => ['/article/index', 'c' => $c->slug]];
+}
+
 NavBar::begin([
         'brandLabel' => Html::img('@web/images/NannyCare-Logo.png', ['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
@@ -38,14 +46,7 @@ NavBar::begin([
             ],
             [
                 'label' => Yii::t('frontend', 'Articles and Tools'),
-                'items' => [
-//                    ['label' => Yii::t('frontend', 'All Articles'), 'url' => ['/article/index']],
-                    ['label' => Yii::t('frontend', 'Family Articles'), 'url' => ['/article/index', 'c' => 'family']],
-                    ['label' => Yii::t('frontend', 'Nanny Articles'), 'url' => ['/article/index', 'c' => 'nanny']],
-                    ['label' => Yii::t('frontend', 'Forms For Families'), 'url' => ['/article/index', 'c' => 'forms']],
-                    ['label' => Yii::t('frontend', 'Products and Services'), 'url' => ['/article/index', 'c' => 'products']],
-                    ['label' => Yii::t('frontend', 'Blog'), 'url' => ['/article/index', 'c' => 'blog']]
-                ]
+                'items' => $article_category
             ],
             [
                 'label' => Yii::t('frontend','Resources'),

@@ -22,7 +22,7 @@ class ArticleController extends Controller
     public function actionIndex($c = '')
     {
         Yii::$app->view->params['offslide'] = 1;
-        Yii::$app->view->params['slider'] = "articles";
+        Yii::$app->view->params['slider'] =  $c != '' ? $c : "top_banner";
 
         $query = Article::find()->where(['status' => Article::STATUS_PUBLISHED]);
         if ($c && $category = ArticleCategory::findOne(['slug' => $c])) {
@@ -51,8 +51,11 @@ class ArticleController extends Controller
     {
         $model = Article::find()->published()->andWhere(['slug'=>$slug])->one();
         if (!$model) {
-            throw new NotFoundHttpException;
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        Yii::$app->view->params['offslide'] = 1;
+        Yii::$app->view->params['slider'] =  $model->category->slug;
 
         $viewFile = $model->view ?: 'view';
         return $this->render($viewFile, ['model'=>$model]);
@@ -68,7 +71,7 @@ class ArticleController extends Controller
     {
         $model = ArticleAttachment::findOne($id);
         if (!$model) {
-            throw new NotFoundHttpException;
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
 
         return Yii::$app->response->sendStreamAsFile(
