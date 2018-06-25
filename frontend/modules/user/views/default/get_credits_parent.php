@@ -21,6 +21,7 @@ $this->registerJs(
     <li class="header">Basic</li>
     <li class="grey">$149</li>
     <li>3 credits</li>
+    <li>Job Posting Not Included</li>
     <li>Contact 3 nannies</li>
     <li class="grey">
     <form action="/pay/parent/stripe" method="POST">
@@ -45,9 +46,10 @@ $this->registerJs(
 </div>
 <div class="columns">
   <ul class="price">
-    <li class="header" style="background-color: #DD980D;"><span style="display: block;font-size: 10px; line-height: 0;">Most Popular</span>Bronze</li>
+    <li class="header" style="background-color: #DD980D;"><span style="display: block;font-size: 20px; line-height: 0;">***Most Popular***</span>Bronze</li>
     <li class="grey">$279</li>   
     <li>6 credits</li>
+    <li>Free 90 Days Job Posting</li>
     <li>Contact 6 nannies</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
@@ -75,6 +77,7 @@ $this->registerJs(
     <li class="header">Gold</li>
     <li class="grey">$429</li>
     <li>10 credits</li>
+    <li>Free 90 Days Job Posting</li>
     <li>Contact 10 nannies</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
@@ -102,6 +105,7 @@ $this->registerJs(
     <li class="header">Platinum</li>
     <li class="grey">$749</li>
     <li>20 credits</li>
+    <li>Free 90 Days Job Posting</li>
     <li>Contact 20 nannies</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">

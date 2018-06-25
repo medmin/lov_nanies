@@ -30,7 +30,7 @@ $this->registerJs(
             <h4 class="media-heading"><?= $model->summary?></h4>
             <div class="job-date">
                 Posted by <?= Html::encode(Yii::$app->user->identity->username) ?> on <?= date('n/j/Y', $model->created_at)?>
-                <span class="job-user-email">Email: <?= Yii::$app->user->identity->email?></span>
+                <span class="job-user-email" style="color:#2f628f;">Email: <?= Yii::$app->user->identity->email?></span>
             </div>
             <div class="job-detail-container">
                 <?= Html::decode($model->description) ?>

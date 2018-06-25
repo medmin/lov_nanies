@@ -28,6 +28,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             <?php ActiveForm::end(); ?>
         </div>
+        <div class="col-lg-7">
+                <p>
+                    Worldwide Nanny Inc.
+                    <br>
+                    P.O. Box 231968
+                    <br>
+                    Encinitas, CA 92023
+                </p>
+                <ul>
+                    <li>Phone: (888) 638-0860</li>
+                    <li>Email: <a href="mailto:support@nannycare.com">support@NannyCare.com</a></li>
+                </ul>
+        </div>
     </div>
 
 </div>

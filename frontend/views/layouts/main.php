@@ -66,11 +66,14 @@ use common\widgets\DbText;
         <div class="footer-container container">
             <div class="row-margin">
                 <div class="row">
-                    <div class="footer-left col-md-4" >
+                    <div class="footer-left col-md-5" >
                         <h2>Contact Us</h2>
-                        <p style="color:white;">Worldwide Nanny Inc.
+                        <p style="color:white;">
+                            Worldwide Nanny Inc.
                             <br>
-                            P.O. Box 231968, Encinitas, CA 92023
+                            P.O. Box 231968
+                            <br>
+                            Encinitas, CA 92023
                         </p>
                         <ul>
                             <li style="color:white;">Phone</li>
@@ -80,18 +83,27 @@ use common\widgets\DbText;
                         </ul>
                         <hr />
                         <h2>Disclaimer</h2>
-                        <p style="color:white">NannyCare.com does not employ any caregiver (nanny, babysitter, newborn specialist, elderly caregiver or housekeeper) listed on our site and accepts no responsibility for provider's (client, family, user, parent) selection of a caregiver, or for any caregiver's conduct or performance. Provider is ultimately responsible for selecting a caregiver and for complying with all applicable laws that may apply when employing a household employee. Provider is fully responsible for their caregiver selection, checking references, interviewing and screening applicants and interpreting the background check results. NannyCare.com's screening services and background checks are not a substitution for a provider doing their own   thorough screening. Caregivers should never be hired on the spot or without being interviewed in-person first. Our site provides an abundance of helpful tools, articles and resources to help families make smart, safe hiring decisions.
+                        <p style="color:white">NannyCare.com does not employ any caregiver ( nanny, babysitter, newborn specialist, elderly caregiver or housekeeper ) listed on our site and accepts no responsibility for provider's (client, family, user, parent) selection of a caregiver, or for any caregiver's conduct or performance. Provider is ultimately responsible for selecting a caregiver and for complying with all applicable laws that may apply when employing a household employee. Provider is fully responsible for their caregiver selection, checking references, interviewing and screening applicants and interpreting the background check results. NannyCare.com's screening services and background checks are not a substitution for a provider doing their own   thorough screening. Caregivers should never be hired on the spot or without being interviewed in-person first. Our site provides an abundance of helpful tools, articles and resources to help families make smart, safe hiring decisions.
                         </p>
                         <p style="color:white">
 NannyCare.com and the slogan "We put care in finding a nanny" are registered trademarks
 © 2000-<?=date('Y'); ?> NannyCare.com, Inc. All rights reserved.
                         </p>
                     </div>
-                    <div class="footer-right col-md-8">
+                    <div class="footer-right col-md-7">
                         <div class="row">
                             <div class="col-md-4">
                                 <h2>Resources</h2>
-                                ???
+                                <ul>
+                                    <li>Our Screening Process</li>
+                                    Steps To Hiring a Nanny
+                                    What To Pay The Nanny- By City
+                                    Safety Guide For Families 
+                                    Safety Guide For Nannies
+                                    Family Articles
+                                    Nanny Articles
+                                    Nanny Forms
+                                </ul>
                             </div>
                             <div class="col-md-4 footer-company">
                                 <h2>The Company</h2>
@@ -99,9 +111,9 @@ NannyCare.com and the slogan "We put care in finding a nanny" are registered tra
                                     <li><a href="/page/about">How it works</a></li>
                                     <li><a href="/page/about">FAQ</a></li>
                                     <li><a href="/page/about">Testimonials</a></li>
+                                    <li><a href="/page/about">VIP Services</a></li>
                                     <li><a href="/page/about">Terms & Conditions</a></li>
                                     <li><a href="/page/about">Privacy Policy</a></li>
-                                    <li><a href="/page/about">????</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 ">
