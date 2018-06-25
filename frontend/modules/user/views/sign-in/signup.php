@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
@@ -8,6 +9,16 @@ use yii\widgets\ActiveForm;
 
 $this->title = Yii::t('frontend', 'Sign Up');
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerJs(
+    '
+    $(document).ready(function () {
+        $("html, body").animate({scrollTop: $(".slide").height()+$(".navbar").height()},"slow");
+        console.log($("slide").height());
+            });
+    ',
+    View::POS_READY,
+    'my-button-handler'
+);
 ?>
 <div class="site-signup">
     <h1 style="color: #000; margin-top:10px;"><?php echo Html::encode($this->title) ?></h1>

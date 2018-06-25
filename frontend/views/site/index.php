@@ -33,24 +33,21 @@ $dataProvider->totalCount=10;
         </div>
 </div>
 -->
+<?php if (Yii::$app->user->isGuest) : ?>
 <div class="site-signup"  style="background: #6E6460;margin:20px 0 0 0;">
             <div class="row row-height" style=" padding: 60px 0 40px 0; margin: 0;">
                 <div class="col-lg-12 text-center ">
                     <h1>I'm signing up as a</h1>
                     <ul class="choose-signup">
                         <li>
-                            <form method="get" action="family-signup">
-                            <input type="hidden" name="role" value="parent">
-                            <button class="btn">parent</button></form>
+                            <a href="<?= \yii\helpers\Url::to(['user/sign-in/family-signup'])?>"><button class="btn btn-primary">parent</button></a>
                         </li>
                         <li>
-                            <form method="get" action="nanny-signup">
-                            <input type="hidden" name="role" value="nanny">
-                            <button class="btn btn-primary">nanny</button></form>
+                            <a href="<?= \yii\helpers\Url::to(['user/sign-in/nanny-signup'])?>"><button class="btn btn-primary">nanny</button></a>
                         </li>
                     </ul>
 
                 </div>
             </div> 
 </div>
-
+<?php endif; ?>
