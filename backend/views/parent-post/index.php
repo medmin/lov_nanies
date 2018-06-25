@@ -31,9 +31,33 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'description:ntext',
             // 'status',
              'created_at:date',
-             'expired_at:date',
+            [
+                'attribute' => 'expired_at',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    if ($model->expired_at < time()) {
+                        return Html::tag('tag', date('M j,Y', $model->expired_at), ['style' => 'color: red']);
+                    } else {
+                        return date('M j,Y', $model->expired_at);
+                    }
+                }
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {approved}',
+                'buttons' => [
+                    'approved' => function ($url, $model, $key) {
+                        $html = '';
+                        if ($model->status == \common\models\ParentPost::STATUS_PENDING) {
 
-            ['class' => 'yii\grid\ActionColumn'],
+                            $html .= Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-ok']), $url, ['title' => 'approved']);
+                            $html .= ' ';
+                            $html .= Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-remove']), \yii\helpers\Url::to(['un-approved', 'id' => $model->id]), ['title' => 'unapproved']);
+                        }
+                        return $html;
+                    }
+                ]
+            ],
         ],
     ]); ?>
 

@@ -21,13 +21,13 @@ use yii\helpers\StringHelper;
     <div class="clear-left"></div>
     <div class="job-data-group">
         <div class="job-date">
-            Posted by <?= Html::encode(Yii::$app->user->identity->username) ?> on <?= date('n/j/Y', $model->created_at)?>
+            Posted by <?= Html::encode($model->user->username) ?> on <?= date('n/j/Y', $model->created_at)?>
         </div>
         <div class="job-description">
             <?= StringHelper::truncate($model->description, 200, '...') ?>
         </div>
     </div>
-    <?php if ($model->user_id == Yii::$app->user->id) : ?>
+    <?php if (!Yii::$app->user->isGuest && $model->user_id == Yii::$app->user->id) : ?>
     <div class="job-show-detail clearfix">
         <form action="<?= Url::to(['find-a-job/update']) ?>" method="post">
             <?= Html::hiddenInput('_csrf', Yii::$app->request->csrfToken)?>

@@ -42,7 +42,7 @@ NavBar::begin([
             [
                 'label' => Yii::t('frontend', 'Find A Job <i class="fa fa-plus navicn"></i>'),
                 'url' => ['/find-a-job/list'],
-                'visible' => !Yii::$app->user->isGuest && key_exists('nanny', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
+//                'visible' => !Yii::$app->user->isGuest && key_exists('nanny', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
             ],
             [
                 'label' => Yii::t('frontend', 'Articles and Tools'),

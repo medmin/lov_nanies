@@ -50,4 +50,6 @@ $dataProvider->totalCount=10;
                 </div>
             </div> 
 </div>
+<?php else : ?>
+<div style="margin-top: 300px"></div>
 <?php endif; ?>

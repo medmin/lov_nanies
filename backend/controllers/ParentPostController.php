@@ -106,6 +106,39 @@ class ParentPostController extends Controller
     }
 
     /**
+     * 审核通过
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function actionApproved($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = ParentPost::STATUS_ACTIVE;
+        $model->save();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * 审核失败
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function actionUnApproved($id)
+    {
+        $model = $this->findModel($id);
+        if ($remark = Yii::$app->request->post('remark')) {
+            $model->remark = $remark;
+        }
+        $model->status = ParentPost::STATUS_FAILED;
+        $model->save();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
      * Finds the ParentPost model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

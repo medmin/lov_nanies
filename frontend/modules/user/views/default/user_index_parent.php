@@ -69,7 +69,7 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
         <h3><b>Credits:</b> <?= $model->credits; ?><span style="float: right;"><a href="get-credits" class="btn btn-inverse">Get Credits</a></span></h3>
         <h3><b>Upload files:</b><span style="float: right;"><a  data-toggle="modal" data-target="#FilesList" class="btn btn-inverse">Files list</a></span></h3>
         <h3><b>Post A New Job:</b><span style="float: right;"><a href="/find-a-job/post" class="btn btn-inverse">Click</a></span></h3>
-        <h3><b>Jobs Posted:</b><span style="float: right;"><a href="/find-a-job/list" class="btn btn-inverse">Click</a></span></h3>
+        <h3><b>Jobs Posted:</b><span style="float: right;"><a href="/find-a-job/posted" class="btn btn-inverse">Click</a></span></h3>
         <h3><b>Nannies Selected:</b><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse">Find A Nanny</a></span></h3>
         <div class="nannies-selected-table">
             <?php

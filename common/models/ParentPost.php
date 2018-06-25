@@ -17,7 +17,9 @@ use yii\behaviors\TimestampBehavior;
  * @property string $description
  * @property integer $status
  * @property integer $created_at
+ * @property integer $updated_at
  * @property integer $expired_at
+ * @property string $remark
  *
  * @property User $user
  */
@@ -56,7 +58,7 @@ class ParentPost extends \yii\db\ActiveRecord
         return [
             [['user_id', 'zip_code', 'job_type', 'type_of_help', 'description', 'expired_at', 'summary'], 'required'],
             [['user_id', 'zip_code', 'expired_at'], 'integer'],
-            [['description', 'summary'], 'string'],
+            [['description', 'summary', 'remark'], 'string'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             [['job_type', 'type_of_help'], 'string', 'max' => 200],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -78,7 +80,9 @@ class ParentPost extends \yii\db\ActiveRecord
             'description' => 'Detailed Information',
             'status' => 'Status',
             'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
             'expired_at' => 'Expired At',
+            'remark' => 'Remark'
         ];
     }
 

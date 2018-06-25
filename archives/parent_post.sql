@@ -17,3 +17,5 @@ ALTER TABLE `parent_post`
   ADD CONSTRAINT `parent_post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 COMMIT;
 ALTER TABLE `parent_post` ADD `summary` VARCHAR(300) NOT NULL AFTER `type_of_help`;
+ALTER TABLE `parent_post` ADD `updated_at` INT UNSIGNED NOT NULL AFTER `created_at`;
+ALTER TABLE `parent_post` ADD `remark` VARCHAR(500) NULL AFTER `expired_at`;

@@ -7,6 +7,7 @@
 
 use common\models\Nannies;
 use yii\helpers\Html;
+use common\models\UserOrder;
 
 /* @var $this yii\web\View */
 /* @var $model \common\models\ParentPost */
@@ -29,8 +30,10 @@ $this->registerJs(
         <div class="media-body">
             <h4 class="media-heading"><?= $model->summary?></h4>
             <div class="job-date">
-                Posted by <?= Html::encode(Yii::$app->user->identity->username) ?> on <?= date('n/j/Y', $model->created_at)?>
+                Posted by <?= Html::encode($model->user->username) ?> on <?= date('n/j/Y', $model->created_at)?>
+                <?php if (!Yii::$app->user->isGuest && UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) : ?>
                 <span class="job-user-email" style="color:#2f628f;">Email: <?= Yii::$app->user->identity->email?></span>
+                <?php endif; ?>
             </div>
             <div class="job-detail-container">
                 <?= Html::decode($model->description) ?>

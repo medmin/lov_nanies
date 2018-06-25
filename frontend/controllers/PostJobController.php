@@ -28,7 +28,7 @@ class PostJobController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'index', 'view', 'update'],
+                'only' => ['create', 'update', 'delete'],
                 'rules' => [
                     ['allow' => true, 'roles' => ['@']]
                 ]
@@ -47,7 +47,6 @@ class PostJobController extends Controller
     {
         $this->user_roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
         if ($action->id === 'create' && !($this->expired_at = UserOrder::ParentPostStatus(Yii::$app->user->id))) {
-            // TODO message 提示用户必须购买279才能发送
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class'=>'alert-danger'],
                 'body' => Yii::t('frontend', 'Please buy bronze paln(279 USD) or higer.', [], Yii::$app->user->identity->userProfile->locale)
@@ -55,12 +54,15 @@ class PostJobController extends Controller
             $this->redirect(['user/default/get-credits']);
             return false;
         }
-        if (($action->id === 'index' || $action->id === 'view') && key_exists('nanny', $this->user_roles) && !UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {
-            Yii::$app->session->setFlash('alert', [
-                'options' => ['class'=>'alert-danger'],
-                'body' => Yii::t('frontend', 'Please buy membership (99 USD).', [], Yii::$app->user->identity->userProfile->locale)
-            ]);
-            return $this->redirect(['user/default/get-credits'])->send();
+//        if (($action->id === 'index' || $action->id === 'view') && key_exists('nanny', $this->user_roles) && !UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {
+//            Yii::$app->session->setFlash('alert', [
+//                'options' => ['class'=>'alert-danger'],
+//                'body' => Yii::t('frontend', 'Please buy membership (99 USD).', [], Yii::$app->user->identity->userProfile->locale)
+//            ]);
+//            return $this->redirect(['user/default/get-credits'])->send();
+//        }
+        if ($action->id === 'posted' && !key_exists('seeker', $this->user_roles)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
         if (WidgetCarousel::findOne(['key' => 'job', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
             Yii::$app->view->params['offslide'] = true;
@@ -71,18 +73,17 @@ class PostJobController extends Controller
 
     /**
      * job 列表页面
-     *   如果是 parent：直接返回他们的post 列表
-     *   如果是 nanny：判断是否有权限查看，有的话，返回列表，否则跳转购买页面。
+     * 返回所有未到期并且状态正常的job
      *
      * @return string|\yii\web\Response
      */
     public function actionIndex()
     {
-        if (key_exists('seeker', $this->user_roles)) {
-            $query = ParentPost::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->orderBy('created_at DESC');
-        } else {
-            $query = ParentPost::find()->where(['status' => ParentPost::STATUS_ACTIVE])->andWhere(['>', 'expired_at', time()])->orderBy('created_at DESC');
-        }
+//        if (key_exists('seeker', $this->user_roles)) {
+//            $query = ParentPost::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->orderBy('created_at DESC');
+//        } else {
+//        }
+        $query = ParentPost::find()->where(['status' => ParentPost::STATUS_ACTIVE])->andWhere(['>', 'expired_at', time()])->orderBy('created_at DESC');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query
@@ -93,6 +94,24 @@ class PostJobController extends Controller
 
         return $this->render('/parent_post/index', ['dataProvider' => $dataProvider]);
 
+    }
+
+    /**
+     * 获取用户自己的post
+     *
+     * @return string
+     */
+    public function actionPosted()
+    {
+        $query = ParentPost::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->orderBy('created_at DESC');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+
+        Yii::$app->view->params['offslide'] = true;
+        Yii::$app->view->params['slider'] = 'find-a-job';
+
+        return $this->render('/parent_post/index', ['dataProvider' => $dataProvider]);
     }
 
     /**
@@ -107,6 +126,7 @@ class PostJobController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->user_id = Yii::$app->user->id;
             $model->expired_at = $this->expired_at;
+            $model->updated_at = time();
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -126,11 +146,11 @@ class PostJobController extends Controller
      */
     public function actionView($id)
     {
-        if (key_exists('nanny', $this->user_roles)) {
-            $model = ParentPost::find()->where(['id' => $id, 'status' => ParentPost::STATUS_ACTIVE])->andWhere(['>', 'expired_at', time()])->one();
-        } else {
-            $model = ParentPost::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->one();
-        }
+//        if (key_exists('nanny', $this->user_roles)) {
+//        } else {
+//            $model = ParentPost::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->one();
+//        }
+        $model = ParentPost::find()->where(['id' => $id, 'status' => ParentPost::STATUS_ACTIVE])->andWhere(['>', 'expired_at', time()])->one();
         if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
@@ -149,6 +169,7 @@ class PostJobController extends Controller
             return $this->render('/parent_post/create', ['model' => $model]);
         } elseif ($form = Yii::$app->request->post('ParentPost')) {
             $model = $this->findModel($form['id']);
+            $model->updated_at = time();
             if ($model->load($form, '') && $model->save()) {
                 return $this->redirect(['index']);
             } else {

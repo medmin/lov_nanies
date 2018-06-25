@@ -30,5 +30,6 @@ return [
         'find-a-job/update' => 'post-job/update',
         'find-a-job/delete' => 'post-job/delete',
         'find-a-job/detail' => 'post-job/view',
+        'find-a-job/posted' => 'post-job/posted'
     ]
 ];
