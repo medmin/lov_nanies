@@ -46,7 +46,7 @@ use common\widgets\DbText;
         display: inline-block;
         height: 63px;
         width: 63px;
-        background: #ffffff;
+        /*background: #ffffff;*/
         color: #6E6460;
         border-radius: 50%;
         -moz-border-radius: 50%;
