@@ -118,8 +118,8 @@ class NannyController extends Controller
                 <h4>Your charge ID is: {$charge->id} </h4>
                 <h4>Thank you for your business.</h4>
     
-                Regards,
-                Wendy Pierce
+                Thank you,<br />
+                Team NannyCare.com
 EOT
             ]))->handle();
 
@@ -214,8 +214,8 @@ EOT
                 <h4>Your charge ID is: {$charge->id} </h4>
                 <h4>Thank you for your business.</h4>
     
-                Regards,
-                Wendy Pierce
+                Thank you,<br />
+                Team NannyCare.com
 EOT
             ]))->handle();
 

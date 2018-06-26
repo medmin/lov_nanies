@@ -19,6 +19,67 @@ use common\widgets\DbText;
     <?php $this->head() ?>
     <?php include(Yii::getAlias('@frontend/views/layouts/css.php'));?>
     <?php echo Html::csrfMetaTags() ?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-25957518-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+<style>
+    #footer-div-1 > h2 {
+        font-size: 30px;
+        line-height: 42px;
+        font-weight: 700;
+        color: #ffffff;
+        font-family: 'Lato', sans-serif;
+    }
+    #footer-div-1 > p {
+        font-size: 17px;
+        font-weight: 400;
+        color: #ffffff;
+        line-height: 24px;
+        margin-bottom: 37px;
+    }
+
+    #footer-div-2 > ul > li {
+        display: inline-block;
+        height: 63px;
+        width: 63px;
+        background: #ffffff;
+        color: #6E6460;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        text-align: center;
+        margin: 0 3px;
+        font-size: 36px;
+        line-height: 63px;
+        border: 2px solid #6E6460;
+        -webkit-transition: all .3s ease; 
+        transition: all .3s ease; 
+        -webkit-transition: 0.3s;
+    }
+
+    #footer-div-2 > ul > li > a {
+        display: inline-block;
+        height: 63px;
+        width: 63px;
+        background: #ffffff;
+        color: #6E6460;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        text-align: center;
+        margin: 0 3px;
+        font-size: 36px;
+        line-height: 63px;
+        border: 2px solid #6E6460;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+        -webkit-transition: 0.3s;
+        }
+</style>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -65,6 +126,21 @@ use common\widgets\DbText;
         <div class="top-strip"></div>
         <div class="footer-container container">
             <div class="row-margin">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12" id="footer-div-1">
+                        <h2>It's easy to find what you need!</h2>
+                        <p class="heading-tag">Are you seeking nannies and babysitters in your neighborhood? With us, it’s easy!</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" id="footer-div-2">
+                        <ul class="social-share">
+                            <li><a href="https://www.facebook.com/NannyCareUSA" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/NannyCareUSA" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/nannycareusa/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+              
+                <hr>
                 <div class="row">
                     <div class="footer-left col-md-5" >
                         <h2>Contact Us</h2>

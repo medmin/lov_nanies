@@ -15,14 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h1>I'm signing up as a</h1>
                     <ul class="choose-signup">
                         <li>
-                            <form method="get" action="family-signup">
-                            <input type="hidden" name="role" value="parent">
-                            <button class="btn">parent</button></form>
+                        <a href="<?= \yii\helpers\Url::to(['/user/sign-in/family-signup'])?>"><button class="btn btn-primary">parent</button></a>
                         </li>
                         <li>
-                            <form method="get" action="nanny-signup">
-                            <input type="hidden" name="role" value="nanny">
-                            <button class="btn btn-primary">nanny</button></form>
+                        <a href="<?= \yii\helpers\Url::to(['/user/sign-in/nanny-signup'])?>"><button class="btn btn-primary">nanny</button></a>
                         </li>
                     </ul>
 

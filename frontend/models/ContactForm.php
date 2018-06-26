@@ -60,7 +60,7 @@ class ContactForm extends Model
                 (new \common\lib\SendEmail([
                     'subject' => 'We have got your message ' . date('Y-m-d', time()),
                     'to' => [$this->email, 'info@nannycare.com'],
-                    'body' => '<h2>Hi, '. $this->name .'<br /></h2><h4>Your message is :' . $this->body . '<br /></h4><h4>Thank you! We will contact you soon.</h4><br />Regards,<br /> Wendy Pierce'
+                    'body' => '<h2>Hi, '. $this->name .'<br /></h2><h4>Your message is :' . $this->body . '<br /></h4><h4>Thank you! We will contact you soon.</h4><br />Thank you,<br />Team NannyCare.com'
                 ]))->handle() ;
             } 
             catch(\Exception $e)

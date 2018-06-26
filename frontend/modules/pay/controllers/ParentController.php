@@ -123,8 +123,8 @@ class ParentController extends Controller
                 <p>Your payment is : {$money2}  dollars. </p>
                 <p>Your charge ID is: {$charge->id} </p>
                 <p>Thank you for your business.</p>
-                Regards,<br />
-                Wendy Pierce
+                Thank you,<br />
+                Team NannyCare.com
 EOT
             ]))->handle();
 
