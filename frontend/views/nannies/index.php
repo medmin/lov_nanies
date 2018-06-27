@@ -22,7 +22,15 @@ $this->registerJs(
     'my-button-handler'
 );
 ?>
+
 <section class="our-blog">
+    <div class="row">
+    <div>
+    <?php echo
+    \yii\helpers\Html::img('@web/images/Family-Prices.jpg', ['alt'=>"4-steps-for-families", 'style' => "width:100%;" , 'align' => "middle"]);
+    ?>
+</div>
+    </div>
     <div class="row">
     <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
         <div class="row row-margin">
@@ -52,10 +60,11 @@ $this->registerJs(
         </div>
     </div>
     <?php require_once('sidebar.php');?>
-<div>
-    <?php echo
-    \yii\helpers\Html::img('@web/images/4-steps-for-families.jpg', ['alt'=>"4-steps-for-families", 'style' => "width:100%;" , 'align' => "middle"]);
-    ?>
-</div>
+    
+    <div>
+        <?php echo
+        \yii\helpers\Html::img('@web/images/4-steps-for-families.jpg', ['alt'=>"4-steps-for-families", 'style' => "width:100%;" , 'align' => "middle"]);
+        ?>
+    </div>
     </div>
 </section>
