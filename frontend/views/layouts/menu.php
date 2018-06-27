@@ -46,7 +46,13 @@ NavBar::begin([
             ],
             [
                 'label' => Yii::t('frontend', 'Articles and Tools'),
-                'items' => $article_category
+                'items' => [
+                    ['label' => Yii::t('frontend', 'Family articles'), 'url' => 'http://nannycare.com/family-articles/'],
+                    ['label' => Yii::t('frontend', 'Nanny articles'), 'url' => 'http://nannycare.com/nanny-articles/'],
+                    ['label' => Yii::t('frontend', 'Forms for Families'), 'url' => 'http://nannycare.com/forms-for-families/'],
+                    ['label' => Yii::t('frontend', 'Product and Services'), 'url' => 'http://nannycare.com/products-and-services/'],
+                    ['label' => Yii::t('frontend', 'Blog'), 'url' => 'http://nannycare.com/blog/'],
+                ],
             ],
             [
                 'label' => Yii::t('frontend','Resources'),
@@ -54,11 +60,11 @@ NavBar::begin([
                     ['label' => Yii::t('frontend', 'Background Checks'), 'url' => 'http://nannycare.com/background-checks/'],
                     ['label' => Yii::t('frontend', 'Sample Forms'), 'url' => 'http://nannycare.com/sample-forms/'],
                     ['label' => Yii::t('frontend', 'Nanny Taxes'), 'url' => 'http://nannycare.com/nanny-taxes/'],
-                    ['label' => Yii::t('frontend', 'CPR/First Aid'), 'url' => 'http://nannycare.com/cprfirst-aid/'],
-                    ['label' => Yii::t('frontend', 'INA'), 'url' => 'http://nannycare.com/recommended-practices-for-screening/'],
+                    ['label' => Yii::t('frontend', 'CPR/First Aid'), 'url' => 'ttp://nannycare.com/cprfirst-aid/'],
+                    ['label' => Yii::t('frontend', 'INA'), 'url' => 'http://nannycare.com/ina/'],
                     [
                         'label' => Yii::t('frontend', 'Recommended Practices For Screening Nannies'),
-                        'url' => ['#'],
+                        'url' => ['http://nannycare.com/recommended-practices-for-screening/'],
                         'options' => ['title' => Yii::t('frontend', 'Recommended Practices For Screening Nannies')]
                     ],
                 ]
