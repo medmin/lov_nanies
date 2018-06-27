@@ -52,5 +52,10 @@ $this->registerJs(
         </div>
     </div>
     <?php require_once('sidebar.php');?>
+<div>
+    <?php echo
+    \yii\helpers\Html::img('@web/images/4-steps-for-families.jpg', ['alt'=>"4-steps-for-families", 'style' => "width:100%;" , 'align' => "middle"]);
+    ?>
+</div>
     </div>
 </section>
