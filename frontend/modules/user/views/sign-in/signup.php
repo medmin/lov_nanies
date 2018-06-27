@@ -32,7 +32,7 @@ $this->registerJs(
                 <?php echo $form->field($model, 'type')->hiddenInput(['value'=>$type])->label(false) ?>
                 <?php echo $form->field($model, 'password_repeat')->passwordInput() ?>
                 <p>
-                 <a href="http://manage.lovingnannies.com/includes/LNTermsandConditions2016.pdf" target=_blank>Click here to read the Terms and Conditions and Privacy Policy</a>    
+                 <a href="https://nannycare.nyc3.digitaloceanspaces.com/assets/terms.pdf" target=_blank>Click here to read the Terms and Conditions and Privacy Policy</a>    
                 </p>
                 <?php echo $form->field($model, 'legal')->checkbox() ?>
                 <div class="form-group">
