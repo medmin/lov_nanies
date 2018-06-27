@@ -142,7 +142,7 @@ use common\widgets\DbText;
               
                 <hr>
                 <div class="row">
-                    <div class="footer-left col-md-5" >
+                    <div class="footer-left col-md-4" >
                         <h2>Contact Us</h2>
                         <p style="color:white;">
                             Worldwide Nanny Inc.
@@ -158,30 +158,31 @@ use common\widgets\DbText;
                             <li style="color:white;"><a href="mailto:support@nannycare.com">support@nannycare.com</a></li>
                         </ul>
                     </div>
-                    <div class="footer-right col-md-7">
+                    <div class="footer-right col-md-8">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4 footer-company">
                                 <h2>Resources</h2>
                                 <ul>
-                                    <li>Our Screening Process</li>
-                                    Steps To Hiring a Nanny
-                                    What To Pay The Nanny- By City
-                                    Safety Guide For Families 
-                                    Safety Guide For Nannies
-                                    Family Articles
-                                    Nanny Articles
-                                    Nanny Forms
+                                    <li><a href="http://nannycare.com/our-screening-process/">Our Screening Process</a></li>
+                                    <li><a href="http://nannycare.com/steps-to-hiring-a-nanny-or-babysitter/">Steps To Hiring a Nanny</a></li>
+                                    <li><a href="http://nannycare.com/how-much-do-i-pay-the-nanny/">How Much Do I Pay The Nanny</a></li>
+                                    <li><a href="http://nannycare.com/safety-tips-for-families/">Safety Tips For Families</a></li>
+                                    <li><a href=" http://nannycare.com/safety-tips-for-nannies/">Safety Guide For Nannies</a></li>
+                                    <li><a href=" http://nannycare.com/family-articles/">Family Articles</a></li>
+                                    <li><a href=" http://nannycare.com/nanny-articles/">Nanny articles</a></li>
+                                    <li><a href="http://nannycare.com/forms-for-families/">Nanny Forms</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 footer-company">
+                                    
                                 <h2>The Company</h2>
                                 <ul>
-                                    <li><a href="/page/about">How it works</a></li>
-                                    <li><a href="/page/about">FAQ</a></li>
-                                    <li><a href="/page/about">Testimonials</a></li>
-                                    <li><a href="/page/about">VIP Services</a></li>
-                                    <li><a href="/page/about">Terms & Conditions</a></li>
-                                    <li><a href="/page/about">Privacy Policy</a></li>
+                                    <li><a href="http://nannycare.com/how-it-works/">How it works</a></li>
+                                    <li><a href="http://nannycare.com/nannycare-coms-vip-services/">VIP Services</a></li>
+                                    <li><a href="http://nannycare.com/faq/">FAQ</a></li>
+                                    <li><a href="http://nannycare.com/testimonials/">Testimonials</a></li>
+                                    <li><a href="http://nannycare.com/terms/">Terms & Conditions</a></li>
+                                    <li><a href="http://nannycare.com/privacy-policy/">Privacy Policy</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4 ">
