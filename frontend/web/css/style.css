@@ -512,7 +512,9 @@ Navigation Bar
     color: #6E6460;
     background: transparent;
 }
-
+.logo-style {
+    padding-top: 5px;
+}
 
 /* haft circle shapes */
 

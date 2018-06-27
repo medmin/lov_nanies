@@ -157,14 +157,6 @@ use common\widgets\DbText;
                             <li style="color:white;">Email</li>
                             <li style="color:white;"><a href="mailto:support@nannycare.com">support@nannycare.com</a></li>
                         </ul>
-                        <hr />
-                        <h2>Disclaimer</h2>
-                        <p style="color:white">NannyCare.com does not employ any caregiver ( nanny, babysitter, newborn specialist, elderly caregiver or housekeeper ) listed on our site and accepts no responsibility for provider's (client, family, user, parent) selection of a caregiver, or for any caregiver's conduct or performance. Provider is ultimately responsible for selecting a caregiver and for complying with all applicable laws that may apply when employing a household employee. Provider is fully responsible for their caregiver selection, checking references, interviewing and screening applicants and interpreting the background check results. NannyCare.com's screening services and background checks are not a substitution for a provider doing their own   thorough screening. Caregivers should never be hired on the spot or without being interviewed in-person first. Our site provides an abundance of helpful tools, articles and resources to help families make smart, safe hiring decisions.
-                        </p>
-                        <p style="color:white">
-NannyCare.com and the slogan "We put care in finding a nanny" are registered trademarks
-© 2000-<?=date('Y'); ?> NannyCare.com, Inc. All rights reserved.
-                        </p>
                     </div>
                     <div class="footer-right col-md-7">
                         <div class="row">
@@ -215,30 +207,17 @@ NannyCare.com and the slogan "We put care in finding a nanny" are registered tra
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-md-12 footer-cities">
-                                <h2 class="text-left">Cities</h2>
-                                <ul>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                    <li><a href="/find-a-nanny/atlanta-nanny/">Atlanta </a></li>
-                                </ul>
-                            </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                        <h2>Disclaimer</h2>
+                        <p style="color:white">NannyCare.com does not employ any caregiver ( nanny, babysitter, newborn specialist, elderly caregiver or housekeeper ) listed on our site and accepts no responsibility for provider's (client, family, user, parent) selection of a caregiver, or for any caregiver's conduct or performance. Provider is ultimately responsible for selecting a caregiver and for complying with all applicable laws that may apply when employing a household employee. Provider is fully responsible for their caregiver selection, checking references, interviewing and screening applicants and interpreting the background check results. NannyCare.com's screening services and background checks are not a substitution for a provider doing their own   thorough screening. Caregivers should never be hired on the spot or without being interviewed in-person first. Our site provides an abundance of helpful tools, articles and resources to help families make smart, safe hiring decisions.
+                        </p>
+                        <p style="color:white">
+                            NannyCare.com and the slogan "We put care in finding a nanny" are registered trademarks
+                            © 2000-<?=date('Y'); ?> NannyCare.com, Inc. All rights reserved.
+                        </p>
                     </div>
                 </div>
             </div>
