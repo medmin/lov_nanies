@@ -60,7 +60,7 @@ NavBar::begin([
                     ['label' => Yii::t('frontend', 'Background Checks'), 'url' => 'http://nannycare.com/background-checks/'],
                     ['label' => Yii::t('frontend', 'Sample Forms'), 'url' => 'http://nannycare.com/sample-forms/'],
                     ['label' => Yii::t('frontend', 'Nanny Taxes'), 'url' => 'http://nannycare.com/nanny-taxes/'],
-                    ['label' => Yii::t('frontend', 'CPR/First Aid'), 'url' => 'ttp://nannycare.com/cprfirst-aid/'],
+                    ['label' => Yii::t('frontend', 'CPR/First Aid'), 'url' => 'http://nannycare.com/cprfirst-aid/'],
                     ['label' => Yii::t('frontend', 'INA'), 'url' => 'http://nannycare.com/ina/'],
                     [
                         'label' => Yii::t('frontend', 'Recommended Practices For Screening Nannies'),

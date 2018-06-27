@@ -167,7 +167,7 @@ use common\widgets\DbText;
                                     <li><a href="http://nannycare.com/steps-to-hiring-a-nanny-or-babysitter/">Steps To Hiring a Nanny</a></li>
                                     <li><a href="http://nannycare.com/how-much-do-i-pay-the-nanny/">How Much Do I Pay The Nanny</a></li>
                                     <li><a href="http://nannycare.com/safety-tips-for-families/">Safety Tips For Families</a></li>
-                                    <li><a href=" http://nannycare.com/safety-tips-for-nannies/">Safety Guide For Nannies</a></li>
+                                    <li><a href=" http://nannycare.com/safety-tips-for-nannies/">Safety Tips For Nannies</a></li>
                                     <li><a href=" http://nannycare.com/family-articles/">Family Articles</a></li>
                                     <li><a href=" http://nannycare.com/nanny-articles/">Nanny articles</a></li>
                                     <li><a href="http://nannycare.com/forms-for-families/">Nanny Forms</a></li>
