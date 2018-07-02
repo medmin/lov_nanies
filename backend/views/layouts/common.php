@@ -188,6 +188,13 @@ $bundle = BackendAsset::register($this);
                         'visible' => Yii::$app->user->can('administrator')
                     ],
                     [
+                        'label' => Yii::t('backend', 'Discount'),
+                        'icon' => '<i class="fa fa-dollar"></i>',
+                        'url' => ['/discount/index'],
+                        'badge' => 'new',
+                        'badgeBgClass' => 'bg-red'
+                    ],
+                    [
                         'label' => Yii::t('backend', 'Files'),
                         'icon' => '<i class="fa fa-file"></i>',
                         'url' => ['/file/index'],

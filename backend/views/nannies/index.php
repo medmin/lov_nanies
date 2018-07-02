@@ -10,6 +10,29 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('backend', 'Nannies');
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerJs('
+$(".user-discount").click(function() {
+  var username = $(this).data("username")
+  var userid = $(this).data("id")
+  $("#discountModalLabel").html(username);
+  $("#userDiscountModel .modal-body > input[name=user_id]").val(userid);
+  $("#userDiscountModel").modal("show");
+})
+$("#discount-submit").click(function() {
+  var user_id = $("#userDiscountModel .modal-body > input[name=user_id]").val();
+  var discount = $("#userDiscountModel .modal-body > input[name=discount]").val();
+  // console.log(user_id,discount);
+  $.post("/discount/add", {user_id: user_id, discount: discount}, function(data) {
+    if (data) {
+      $("#userDiscountModel").modal("hide");
+    }
+  })
+})
+$("#userDiscountModel").on("hidden.bs.modal", function(e) {
+  $("#userDiscountModel .modal-body > input[name=discount]").val("");
+  console.log("model hidden")
+})
+', \yii\web\View::POS_END)
 ?>
 <div class="user-index">
 
@@ -58,9 +81,32 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'title' => Yii::t('app', 'Deactivate'),
                     ]): "";
                 },
+                 'discount' => function ($url, $model) {
+                    return Html::tag('span', '', ['style' => 'color: #3c8dbc; cursor: pointer', 'class' => 'glyphicon glyphicon-tag user-discount', 'title' => Yii::t('app', 'Set Discount'), 'data-username' => $model->name ,' data-id' => $model->id]);
+                 }
             ],
-             'template' => '{update} {approve} {dereactivation} {deactivate} {delete}'],
+             'template' => '{update} {approve} {dereactivation} {deactivate} {delete} {discount}'],
         ],
     ]); ?>
 
 </div>
+
+<div class="modal fade" id="userDiscountModel" tabindex="-1" role="dialog" aria-labelledby="discountModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="discountModalLabel">Set Discount</h4>
+            </div>
+            <div class="modal-body">
+                <input type="number" name="discount" title="discount" placeholder="discount" class="form-control">
+                <input type="hidden" name="user_id">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="discount-submit">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+

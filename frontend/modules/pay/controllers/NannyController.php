@@ -40,36 +40,50 @@ class NannyController extends Controller
             $isolationLevel = \yii\db\Transaction::SERIALIZABLE;
             $transaction = Yii::$app->db->beginTransaction($isolationLevel);
         try {
+            $discount = \common\models\UserDiscount::getCurrentDiscount();
+            if ($discount === null) {
+                $correct_price = 9999;
+            } elseif ($discount === 0) {
+                $correct_price = 0;
+            } else {
+                $correct_price = round(99.99 * $discount / 10, 2) * 100;
+            }
+
             $data = Yii::$app->request->post();
 
-            \Stripe\Stripe::setApiKey(env('STRIPE_SK'));
-                            
-            $token = Yii::$app->request->post('stripeToken');
+            $user= User::findById(Yii::$app->user->id);
+            $user->credits += 9999;//  one time signup fee
+            $service_plan = 'Nanny SignUp Fee'; // 这些订单变量（money 以及 user_id）都不应该从 input 里边获取（即使是 hiddenInput）
+            $money = $correct_price;
+            $email = $data['stripeEmail'] ?? Yii::$app->user->identity->email;
 
-            //order info
-            $email = $data['stripeEmail'];
-            $service_plan = $data['plan'];
-            $money = $data['money'];
-            //还必须在charge前面，因为charge里面用到了这个变量
-            $user= User::findById($data['userid']);
+            if ($correct_price === (float)0) {
+                // 0 元订单不走 stripe
+                $payment_gateway = 'free order';
+                $payment_gateway_id = 'free order';
+            } else {
+                \Stripe\Stripe::setApiKey(env('STRIPE_SK'));
 
-            $charge = \Stripe\Charge::create([
-                'amount' => $money,
-                'currency' => 'usd',
-                'description' => $service_plan,
-                'source' => $token,
-                'statement_descriptor' => 'NannyCare.com',
-                'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'nanny', 'email' => $email],
-            ]);
-                
-                $user->credits += 9999;//  one time signup fee
-                
-                
+                $token = Yii::$app->request->post('stripeToken');
+
+                //order info
+                $charge = \Stripe\Charge::create([
+                    'amount' => $money,
+                    'currency' => 'usd',
+                    'description' => $service_plan,
+                    'source' => $token,
+                    'statement_descriptor' => 'NannyCare.com',
+                    'metadata' => ['user_id' =>Yii::$app->user->id, 'username' => $user->username, "user_type" => 'nanny', 'email' => $email],
+                ]);
+                $payment_gateway_id = $charge->id;
+                $payment_gateway = 'stripe';
+            }
+
                 $order = new UserOrder();
                 $order->user_id = $user->id;
                 $order->user_type = "nanny";
-                $order->payment_gateway = "stripe";
-                $order->payment_gateway_id = $charge->id;
+                $order->payment_gateway = $payment_gateway;
+                $order->payment_gateway_id = $payment_gateway_id;
                 $order->service_plan = $service_plan;
                 $order->service_money = (int)$money;
                 $order->timestamp = time(); //paid_at, to be precise
@@ -78,8 +92,8 @@ class NannyController extends Controller
                 $First90DaysFreeListing = new UserOrder();
                 $First90DaysFreeListing->user_id = $user->id;
                 $First90DaysFreeListing->user_type = "nanny";
-                $First90DaysFreeListing->payment_gateway = "stripe";
-                $First90DaysFreeListing->payment_gateway_id = $charge->id;
+                $First90DaysFreeListing->payment_gateway = $payment_gateway;
+                $First90DaysFreeListing->payment_gateway_id = $payment_gateway_id;
                 $First90DaysFreeListing->service_plan = 'First-90-Days-Free-Listing';
                 $First90DaysFreeListing->service_money = 0;
                 $First90DaysFreeListing->timestamp = time(); //paid_at, to be precise
@@ -115,7 +129,7 @@ class NannyController extends Controller
                 <h2>Hi, {$user->username}</h2>
                 <h4>Your service plan is : {$service_plan} </h4>
                 <h4>Your payment is : {$money2}  dollars. </h4>
-                <h4>Your charge ID is: {$charge->id} </h4>
+                <h4>Your charge ID is: {$payment_gateway_id} </h4>
                 <h4>Thank you for your business.</h4>
     
                 Thank you,<br />
