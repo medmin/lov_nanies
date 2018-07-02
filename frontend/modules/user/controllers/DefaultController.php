@@ -349,6 +349,7 @@ class DefaultController extends Controller
                 'model' => $model
             ]);
         }else{
+            return $this->render('coming_soon');
             return $this->render('get_credits_parent', [
                 'model' => $model,
             ]);
