@@ -60,6 +60,20 @@ class UserOrder extends \yii\db\ActiveRecord
     }
 
     /**
+     * parent service_plan
+     *
+     * @return array
+     */
+    public static function ParentServicePlans()
+    {
+        return [
+            'basic' => 'Basic Plan ($59)',
+            'bronze' => 'Bronze Plan ($149)',
+            'gold' => 'Gold Plan ($479)'
+        ];
+    }
+
+    /**
 	 * @param $nanny_id
 	 * @return integer | bool
 	 *

@@ -15,30 +15,34 @@ $this->registerJs(
     View::POS_READY,
     'my-button-handler'
 );
+$this->registerCss('
+.columns {
+  width: 33%!important
+}
+');
 ?>
 <div class="columns">
   <ul class="price">
     <li class="header">Basic</li>
-    <li class="grey">$149</li>
-    <li>3 credits</li>
+    <li class="grey">$59</li>
+    <li>1000 credits</li>
     <li>Job Posting Not Included</li>
-    <li>Contact 3 nannies</li>
+    <li>Contact 1000 nannies</li>
     <li class="grey">
     <form action="/pay/parent/stripe" method="POST">
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key=<?= env('STRIPE_PK') ?>
-          data-amount="14900"
+          data-amount="5900"
           data-zip-code="true"
           data-name="NannyCare.com"
-          data-description="Basic Plan (3 credits)"
+          data-description="Basic Plan ($59)"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
-        <input type="hidden" name="plan" value="Basic Plan (3 credits)" />
-        <input type="hidden" name="money" value=14900 />
-        <input type="hidden" name="credits" value=3 />
-        <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
+        <input type="hidden" name="plan" value="<?= \common\models\UserOrder::ParentServicePlans()['basic']?>" />
+        <input type="hidden" name="money" value=5900 />
+        <input type="hidden" name="credits" value=1000 />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>
@@ -47,26 +51,25 @@ $this->registerJs(
 <div class="columns">
   <ul class="price">
     <li class="header" style="background-color: #DD980D;"><span style="display: block;font-size: 20px; line-height: 0;">***Most Popular***</span>Bronze</li>
-    <li class="grey">$279</li>   
-    <li>6 credits</li>
+    <li class="grey">$149</li>
+    <li>3000 credits</li>
     <li>Free 90 Days Job Posting</li>
-    <li>Contact 6 nannies</li>
+    <li>Contact 3000 nannies</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key=<?= env('STRIPE_PK') ?>
-          data-amount="27900"
+          data-amount="14900"
           data-zip-code="true"
           data-name="NannyCare.com"
-          data-description="Bronze Plan (6 credits)"
+          data-description="Bronze Plan ($149)"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
-        <input type="hidden" name="plan" value="Bronze Plan (6 credits)" />
-        <input type="hidden" name="money" value=27900 />
-        <input type="hidden" name="credits" value=6 />
-        <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
+        <input type="hidden" name="plan" value="<?= \common\models\UserOrder::ParentServicePlans()['bronze']?>" />
+        <input type="hidden" name="money" value=14900 />
+        <input type="hidden" name="credits" value=3000 />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>
@@ -75,54 +78,25 @@ $this->registerJs(
 <div class="columns">
   <ul class="price">
     <li class="header">Gold</li>
-    <li class="grey">$429</li>
-    <li>10 credits</li>
-    <li>Free 90 Days Job Posting</li>
-    <li>Contact 10 nannies</li>
+    <li class="grey">$479</li>
+    <li>12000 credits</li>
+    <li>Free 1 year Job Posting</li>
+    <li>Contact 12000 nannies</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key=<?= env('STRIPE_PK') ?>
-          data-amount="42900"
+          data-amount="47900"
           data-zip-code="true"
           data-name="NannyCare.com"
-          data-description="Gold Plan (10 credits)"
+          data-description="Gold Plan ($479)"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
-        <input type="hidden" name="plan" value="Gold Plan (10 credits)" />
-        <input type="hidden" name="money" value=42900 />
-        <input type="hidden" name="credits" value=10 />
-        <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
-        <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
-      </form>
-    </li>
-  </ul>
-</div>
-<div class="columns">
-  <ul class="price">
-    <li class="header">Platinum</li>
-    <li class="grey">$749</li>
-    <li>20 credits</li>
-    <li>Free 90 Days Job Posting</li>
-    <li>Contact 20 nannies</li>
-    <li class="grey">
-      <form action="/pay/parent/stripe" method="POST">
-        <script
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key= <?= env('STRIPE_PK') ?>
-          data-amount="74900"
-          data-zip-code="true"
-          data-name="NannyCare.com"
-          data-description="Platinum Plan (20 credits)"
-          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-          data-locale="auto">
-        </script>
-        <input type="hidden" name="plan" value="Platinum Plan (20 credits)" />
-        <input type="hidden" name="money" value=74900 />
-        <input type="hidden" name="credits" value=20 />
-        <input type="hidden" name="userid" value=<?=Yii::$app->user->isGuest ? 0 : Yii::$app->user->id; ?> />
+        <input type="hidden" name="plan" value="<?= \common\models\UserOrder::ParentServicePlans()['gold']?>" />
+        <input type="hidden" name="money" value=47900 />
+        <input type="hidden" name="credits" value=12000 />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>

@@ -41,7 +41,26 @@ class ParentController extends Controller
             $transaction = Yii::$app->db->beginTransaction($isolationLevel);
         try {
             $data = Yii::$app->request->post();
-
+            $service_plan = $data['plan'];
+            switch ($service_plan) {
+                case UserOrder::ParentServicePlans()['basic']:
+                    $money = 5900;
+                    $credits = 1000;
+                    $expired_days = 0;
+                    break;
+                case UserOrder::ParentServicePlans()['bronze']:
+                    $money = 14900;
+                    $credits = 3000;
+                    $expired_days = 90;
+                    break;
+                case UserOrder::ParentServicePlans()['gold']:
+                    $money = 47900;
+                    $credits = 12000;
+                    $expired_days = 365;
+                    break;
+                default:
+                    throw new \Exception('Invalid Service Plan');
+            }
           
             \Stripe\Stripe::setApiKey(env('STRIPE_SK'));
                             
@@ -49,10 +68,8 @@ class ParentController extends Controller
 
             //order info
             $email = $data['stripeEmail'];
-            $service_plan = $data['plan'];
-            $money = $data['money'];
-            //还必须在charge前面，因为charge里面用到了这个变量
-            $user= User::findById($data['userid']);
+
+            $user= User::findById(Yii::$app->user->id);
 
             $charge = \Stripe\Charge::create([
                 'amount' => $money,
@@ -60,10 +77,10 @@ class ParentController extends Controller
                 'description' => $service_plan,
                 'source' => $token,
                 'statement_descriptor' => 'NannyCare.com',
-                'metadata' => ['user_id' =>$data['userid'], 'username' => $user->username, "user_type" => 'parent', 'email' => $email],
+                'metadata' => ['user_id' => $user->id, 'username' => $user->username, "user_type" => 'parent', 'email' => $email],
             ]);
                 
-                $user->credits += $data['credits'];
+                $user->credits += $credits;
                 
 
                 $order = new UserOrder();
@@ -76,18 +93,24 @@ class ParentController extends Controller
                 $order->timestamp = time();
                 $order->expired_at = strtotime('+5000 days');
 
-                // 顺带保存一个 90 天可以发送文章的 0 元订单，解耦。
-                if ($order->service_money >= 27900) {
+                // 如果不是 basic （即不是 59 的话，就有发帖订单）
+                if ($service_plan != UserOrder::ParentServicePlans()['basic']) {
+                    $expired_at = UserOrder::ParentPostStatus($user->id);
+                    if ($expired_at) {
+                        $expired_at = $expired_at + $expired_days * 86400;
+                    } else {
+                        $expired_at = strtotime('+' . $expired_days . ' days');
+                    }
                     $NinetyDaysPosting = new UserOrder();
                     $NinetyDaysPosting->setAttributes([
                         'user_id' => $user->id,
                         'user_type' => 'parent',
                         'payment_gateway' => 'stripe',
                         'payment_gateway_id' => $charge->id,
-                        'service_plan' => 'Ninety-Days-Posting',
+                        'service_plan' => 'Ninety-Days-Posting',  // 现在不管是 90 天还是 1 年，都统一用这个名称
                         'service_money' => 0,
                         'timestamp' => time(),
-                        'expired_at' => strtotime('+90 days')
+                        'expired_at' => $expired_at
                     ]);
                 }
 
