@@ -30,6 +30,7 @@ $("#discount-submit").click(function() {
 })
 $("#userDiscountModel").on("hidden.bs.modal", function(e) {
   $("#userDiscountModel .modal-body > input[name=discount]").val("");
+  $("#userDiscountModel .modal-body input[name=expired_at]").val("");
   console.log("model hidden")
 })
 ', \yii\web\View::POS_END)
@@ -99,7 +100,18 @@ $("#userDiscountModel").on("hidden.bs.modal", function(e) {
                 <h4 class="modal-title" id="discountModalLabel">Set Discount</h4>
             </div>
             <div class="modal-body">
-                <input type="number" name="discount" title="discount" placeholder="how many percentage off ? " class="form-control">
+                <input type="number" min="0" max="100" name="discount" title="discount" placeholder="how many percentage off ? " class="form-control" style="margin-bottom: 15px;">
+                <?= \kartik\datetime\DateTimePicker::widget([
+                    'name' => 'expired_at',
+//                    'value' => date('Y-m-d H:i:s', strtotime('+1 day')),
+                    'options' => [
+                        'placeholder' => 'select expired_at'
+                    ],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd hh:ii:ss'
+                    ]
+                ]) ?>
                 <input type="hidden" name="user_id">
             </div>
             <div class="modal-footer">

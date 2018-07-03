@@ -30,8 +30,8 @@ class UserDiscount extends \yii\db\ActiveRecord
         return [
             [['user_id', 'discount'], 'required'],
             ['discount', 'integer', 'min' => 0, 'max' => 100],
-            [['user_id', 'created_at', 'expired_at'], 'integer'],
-            [['discount'], 'number'],
+            [['user_id', 'created_at'], 'integer'],
+            ['expired_at', 'safe']
         ];
     }
 
@@ -57,7 +57,7 @@ class UserDiscount extends \yii\db\ActiveRecord
     {
         $model = self::find()
             ->where(['user_id' => 0])
-//            ->andWhere(['>', 'expired_at', time()])
+            ->andWhere(['>', 'expired_at', time()])
             ->one();
         if ($model) {
             //美式折扣是多少off，例如，30%，对应了中国的打7折
@@ -77,7 +77,7 @@ class UserDiscount extends \yii\db\ActiveRecord
         $user_id = $user_id === null ? Yii::$app->user->id : $user_id;
         $model = self::find()
             ->where(['user_id' => $user_id])
-//            ->andWhere(['>', 'expired_at', time()])
+            ->andWhere(['>', 'expired_at', time()])
             ->one();
         if ($model) {
             //美式折扣是多少off，例如，30%，对应了中国的打7折

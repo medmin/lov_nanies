@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <hr>
     <div class="callout callout-info">
-        <h3>List of Discounts For Each Nanny <?= Html::a('Set A Discount For A Nanny', ['#']); ?></h3>
+        <h3>List of Discounts For Each Nanny <?= Html::a('Set A Discount For A Nanny', ['/nannies/index?NannySearch%5Bid%5D=&NannySearch%5Bname%5D=&NannySearch%5Bemail%5D=&NannySearch%5Baddress%5D=&NannySearch%5Bstatus%5D=&sort=-id']); ?></h3>
     </div>
     <br>
     
@@ -39,9 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'User Info',
                 'format' => 'html',
                 'value' => function($model){
-                    //这里根据角色来输出不同的名字
-                    // return '<a href="">Username: ' . User::findById($model->user_id)->username . '</a>';
-                    return Html::a(User::findById($model->user_id)->username, Yii::$app->urlManagerFrontend->createAbsoluteUrl('/nannies/view?id='.$model->user_id), ['target' => '_blank']);
+                    if ($model->user_id === 0) {
+                        return Html::tag('span', 'All Nannies', ['style' => 'color: red']);
+                    } else {
+                        return Html::a(User::findById($model->user_id)->username, Yii::$app->urlManagerFrontend->createAbsoluteUrl('/nannies/view?id='.$model->user_id), ['target' => '_blank']);
+                    }
                 }
             ],
             
@@ -54,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'expired_at',
-                'format' => 'text',
+                'format' => 'html',
                 'label' => 'Expired At ( Status )',
                 'value' => function($model){
                     if ($model->expired_at  && $model->expired_at >= time() )
@@ -63,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     else if ($model->expired_at  && $model->expired_at < time())
                     {
-                        return "Expired";
+                        return Html::tag('span', 'Expired', ['style' => 'color: red']);
                     }
                     else {
                         return "Valid Forever";

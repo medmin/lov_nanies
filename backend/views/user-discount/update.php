@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\UserDiscount */
 
-$this->title = 'Update User Discount: ' . $model->user_id;
+$this->title = 'Update User Discount: ' . $model->user_id . '('. \common\models\User::findById($model->user_id)->username .')';
 $this->params['breadcrumbs'][] = ['label' => 'User Discounts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->user_id, 'url' => ['view', 'id' => $model->user_id]];
 $this->params['breadcrumbs'][] = 'Update';

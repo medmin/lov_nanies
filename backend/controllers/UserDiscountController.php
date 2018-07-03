@@ -60,8 +60,8 @@ class UserDiscountController extends Controller
     }
 
     /**
-     * Creates a new UserDiscount model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * 创建或者更新全体折扣
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -74,7 +74,9 @@ class UserDiscountController extends Controller
         }
         $model->created_at = time();
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->expired_at = $model->expired_at ? strtotime($model->expired_at) : null;
+            $model->save();
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -99,6 +101,7 @@ class UserDiscountController extends Controller
             }
             $model->discount = Yii::$app->request->post('discount');
             $model->created_at = time();
+            $model->expired_at = strtotime(Yii::$app->request->post('expired_at')) ?: null;
             return $model->save();
         }
         return false;

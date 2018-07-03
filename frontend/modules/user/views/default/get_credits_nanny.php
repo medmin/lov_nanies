@@ -31,8 +31,9 @@ if ($discount === null) {
     <p class="lead">NannyCare.com has been helping nannies and babysitters find awesome jobs since 2000. We are committed to raising the bar and making sure that all of our nannies are appreciated, treated respectfully and paid well for their services.</p>
 </div>
 
+<h3>Cost: <?= $discount === null ? '$99.99' : $discount == 0 ? '$'.$correct_price.' (<span style="text-decoration: line-through">$99.99</span>)' : ('$' . $correct_price . ' (<span style="text-decoration: line-through">$99.99</span>)') ?> (one time fee includes background check & 90 day membership)</h3>
 <p>
-Cost: <?= $discount === null ? '$99.99' : $discount == 0 ? '$'.$correct_price.' (<span style="text-decoration: line-through">$99.99</span>)' : ('$' . $correct_price . ' (<span style="text-decoration: line-through">$99.99</span>)') ?> (one time fee includes background check & 90 day membership) Only $9.99/month (monthly subscription plan) thereafter if you'd still like to find jobs with us!
+ Only $9.99/month (monthly subscription plan) thereafter if you'd still like to find jobs with us!
 </p>
 <p>
     <?php if ($correct_price === (float)0) : ?>

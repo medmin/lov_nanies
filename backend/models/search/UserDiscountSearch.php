@@ -41,7 +41,7 @@ class UserDiscountSearch extends UserDiscount
      */
     public function search($params)
     {
-        $query = UserDiscount::find()->where(['<>', 'user_id', 0]);
+        $query = UserDiscount::find();
 
         // add conditions that should always apply here
 

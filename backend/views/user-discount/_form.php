@@ -18,7 +18,18 @@ use yii\widgets\ActiveForm;
 
     <!-- <?//= $form->field($model, 'created_at')->textInput() ?> -->
 
-    <?= $form->field($model, 'expired_at')->input('integer') ?>
+    <?= $form->field($model, 'expired_at')->widget(\kartik\datetime\DateTimePicker::className(), [
+        'options' => [
+            'placeholder' => 'select date',
+            'value' => date('Y-m-d H:i:s', $model->expired_at ?: time())
+        ],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd hh:ii:ss',
+            'initialDate' => date('Y-m-d H:i:s', $model->expired_at ?: time()),
+            'todayHighlight' => true
+        ]
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
