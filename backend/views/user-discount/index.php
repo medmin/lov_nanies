@@ -75,7 +75,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete}'
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        if ($model->user_id == 0) {
+                            $url = 'create';
+                        }
+                        return Html::a(Html::tag('span', '', ['class' => "glyphicon glyphicon-pencil"]), $url, ['title' => Yii::t('yii', 'Update'), 'aria-label' => Yii::t('yii', 'Update'), 'data-pjax' => '0',]);
+                    }
+                ]
             ],
         ],
     ]); ?>
