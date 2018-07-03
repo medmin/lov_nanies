@@ -23,11 +23,11 @@ $this->registerCss('
 ?>
 <div class="columns">
   <ul class="price">
-    <li class="header">Basic</li>
+    <li class="header">1 month</li>
     <li class="grey">$59</li>
     <li>1000 credits</li>
-    <li>Job Posting Not Included</li>
     <li>Contact 1000 nannies</li>
+    <li>Job Posting Not Included</li>
     <li class="grey">
     <form action="/pay/parent/stripe" method="POST">
         <script
@@ -50,11 +50,11 @@ $this->registerCss('
 </div>
 <div class="columns">
   <ul class="price">
-    <li class="header" style="background-color: #DD980D;"><span style="display: block;font-size: 20px; line-height: 0;">***Most Popular***</span>Bronze</li>
+    <li class="header" style="background-color: #DD980D;"><!--<span style="display: block;font-size: 20px; line-height: 0;">***Most Popular***</span>-->3 months</li>
     <li class="grey">$149</li>
     <li>3000 credits</li>
-    <li>Free 90 Days Job Posting</li>
     <li>Contact 3000 nannies</li>
+    <li>Free 3 months Job Posting</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
         <script
@@ -77,11 +77,11 @@ $this->registerCss('
 </div>
 <div class="columns">
   <ul class="price">
-    <li class="header">Gold</li>
+    <li class="header">12 months</li>
     <li class="grey">$479</li>
     <li>12000 credits</li>
-    <li>Free 1 year Job Posting</li>
     <li>Contact 12000 nannies</li>
+    <li>Free 12 months Job Posting</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
         <script

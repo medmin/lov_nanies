@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'User Info',
                 'format' => 'html',
                 'value' => function($model){
-                    if ($model->user_id === 0) {
+                    if ($model->user_id == 0) {
                         return Html::tag('span', 'All Nannies', ['style' => 'color: red']);
                     } else {
                         return Html::a(User::findById($model->user_id)->username, Yii::$app->urlManagerFrontend->createAbsoluteUrl('/nannies/view?id='.$model->user_id), ['target' => '_blank']);
