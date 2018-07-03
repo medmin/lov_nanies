@@ -172,7 +172,7 @@ $bundle = BackendAsset::register($this);
                     [
                         'label' => Yii::t('backend', 'Nannies'),
                         'icon' => '<i class="fa fa-users"></i>',
-                        'url' => ['/nannies/index?NannySearch%5Bid%5D=&NannySearch%5Bname%5D=&NannySearch%5Bemail%5D=&NannySearch%5Baddress%5D=&NannySearch%5Bstatus%5D=0&sort=-id'],
+                        'url' => ['/nannies/index?NannySearch%5Bid%5D=&NannySearch%5Bname%5D=&NannySearch%5Bemail%5D=&NannySearch%5Baddress%5D=&NannySearch%5Bstatus%5D=&sort=-id'],
                         'visible' => Yii::$app->user->can('administrator')
                     ],
                     [
