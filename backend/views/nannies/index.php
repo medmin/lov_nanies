@@ -12,8 +12,8 @@ $this->title = Yii::t('backend', 'Nannies');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerJs('
 $(".user-discount").click(function() {
-  var username = $(this).data("username")
-  var userid = $(this).data("id")
+  var username = "Set A Special Discount For " + $(this).data("username");
+  var userid = $(this).data("id");
   $("#discountModalLabel").html(username);
   $("#userDiscountModel .modal-body > input[name=user_id]").val(userid);
   $("#userDiscountModel").modal("show");
@@ -99,7 +99,7 @@ $("#userDiscountModel").on("hidden.bs.modal", function(e) {
                 <h4 class="modal-title" id="discountModalLabel">Set Discount</h4>
             </div>
             <div class="modal-body">
-                <input type="number" name="discount" title="discount" placeholder="discount" class="form-control">
+                <input type="number" name="discount" title="discount" placeholder="how many percentage off ? " class="form-control">
                 <input type="hidden" name="user_id">
             </div>
             <div class="modal-footer">

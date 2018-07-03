@@ -13,16 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-discount-create">
 
-    <h1>All Nannies Discount</h1>
+    <h1>Discount ( % off ) For All Nannies</h1>
 
     <div class="user-discount-form">
 
         <?php $form = ActiveForm::begin(); ?>
 
 
-        <?= $form->field($model, 'discount')->input('number') ?>
+        <?= $form->field($model, 'discount')->input('integer') ?>
 
-        <?//= $form->field($model, 'expired_at')->textInput() ?>
+        <!-- <?//= $form->field($model, 'expired_at')->textInput() ?> -->
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

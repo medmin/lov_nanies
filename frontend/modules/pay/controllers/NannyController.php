@@ -46,7 +46,7 @@ class NannyController extends Controller
             } elseif ($discount === 0) {
                 $correct_price = 0;
             } else {
-                $correct_price = round(99.99 * $discount / 10, 2) * 100;
+                $correct_price = round(99.99 * $discount / 100, 2) * 100;
             }
 
             $data = Yii::$app->request->post();

@@ -261,16 +261,8 @@ class SignInController extends \yii\web\Controller
     {
          Yii::$app->view->params['offslide'] = 1;
         Yii::$app->view->params['slider'] = "signup";
-        $getParams = Yii::$app->request->get();
-        if (!$getParams){
-            return $this->render('selectSignup');
-        }
-        else if ($getParams['role'] == 'parent'){
-            return $this->redirect('/user/sign-in/family-signup');
-        }
-        else if ($getParams['role'] == 'nanny'){
-            return $this->redirect('/user/sign-in/nanny-signup');
-        }
+
+        return $this->render('selectSignup');
     }
 
     /**

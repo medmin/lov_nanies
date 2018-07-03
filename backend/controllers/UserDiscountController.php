@@ -38,12 +38,12 @@ class UserDiscountController extends Controller
         $searchModel = new UserDiscountSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $allDiscount = UserDiscount::getAllDiscount();
+        $offForAllNannies = UserDiscount::getAllDiscount();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'allDiscount' => $allDiscount,
+            'offForAllNannies' => $offForAllNannies,
         ]);
     }
 
@@ -66,13 +66,14 @@ class UserDiscountController extends Controller
      */
     public function actionCreate()
     {
+
         $model = UserDiscount::findOne(['user_id' => 0]);
         if (!$model) {
             $model = new UserDiscount();
             $model->user_id = 0;
         }
         $model->created_at = time();
-
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
@@ -112,7 +113,7 @@ class UserDiscountController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->user_id]);
         } else {
