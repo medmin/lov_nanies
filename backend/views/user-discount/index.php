@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::tag('span', 'Expired', ['style' => 'color: red']);
                     }
                     else {
-                        return "Valid Forever";
+                        return Html::tag('span', 'Not set and thus discount invalid', ['style' => 'color: red']);;
                     }
                 
                 }
