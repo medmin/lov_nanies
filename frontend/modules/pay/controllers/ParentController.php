@@ -45,17 +45,17 @@ class ParentController extends Controller
             switch ($service_plan) {
                 case UserOrder::ParentServicePlans()['basic']:
                     $money = 5900;
-                    $credits = 1000;
+                    $credits = 25;
                     $expired_days = 0;
                     break;
                 case UserOrder::ParentServicePlans()['bronze']:
                     $money = 14900;
-                    $credits = 3000;
+                    $credits = 100;
                     $expired_days = 90;
                     break;
                 case UserOrder::ParentServicePlans()['gold']:
                     $money = 47900;
-                    $credits = 12000;
+                    $credits = 250;
                     $expired_days = 365;
                     break;
                 default:

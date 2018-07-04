@@ -67,9 +67,9 @@ class UserOrder extends \yii\db\ActiveRecord
     public static function ParentServicePlans()
     {
         return [
-            'basic' => 'Basic Plan ($59)',
-            'bronze' => 'Bronze Plan ($149)',
-            'gold' => 'Gold Plan ($479)'
+            'basic' => '1 Month ($59)',
+            'bronze' => '3 Months ($149)',
+            'gold' => '12 Months ($479)'
         ];
     }
 

@@ -25,8 +25,8 @@ $this->registerCss('
   <ul class="price">
     <li class="header">1 month</li>
     <li class="grey">$59</li>
-    <li>1000 credits</li>
-    <li>Contact 1000 nannies</li>
+    <li>25 credits</li>
+    <li>Contact 25  Pre-screened <br />Nannies and Babysitters</li>
     <li>Job Posting Not Included</li>
     <li class="grey">
     <form action="/pay/parent/stripe" method="POST">
@@ -36,13 +36,13 @@ $this->registerCss('
           data-amount="5900"
           data-zip-code="true"
           data-name="NannyCare.com"
-          data-description="Basic Plan ($59)"
+          data-description="1 Month ($59)"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
         <input type="hidden" name="plan" value="<?= \common\models\UserOrder::ParentServicePlans()['basic']?>" />
         <input type="hidden" name="money" value=5900 />
-        <input type="hidden" name="credits" value=1000 />
+        <input type="hidden" name="credits" value=25 />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>
@@ -52,8 +52,8 @@ $this->registerCss('
   <ul class="price">
     <li class="header" style="background-color: #DD980D;"><!--<span style="display: block;font-size: 20px; line-height: 0;">***Most Popular***</span>-->3 months</li>
     <li class="grey">$149</li>
-    <li>3000 credits</li>
-    <li>Contact 3000 nannies</li>
+    <li>100 credits</li>
+    <li>Contact 100  Pre-screened <br />Nannies and Babysitters</li>
     <li>Free 3 months Job Posting</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
@@ -63,13 +63,13 @@ $this->registerCss('
           data-amount="14900"
           data-zip-code="true"
           data-name="NannyCare.com"
-          data-description="Bronze Plan ($149)"
+          data-description="3 Months ($149)"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
         <input type="hidden" name="plan" value="<?= \common\models\UserOrder::ParentServicePlans()['bronze']?>" />
         <input type="hidden" name="money" value=14900 />
-        <input type="hidden" name="credits" value=3000 />
+        <input type="hidden" name="credits" value=50 />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>
@@ -79,8 +79,8 @@ $this->registerCss('
   <ul class="price">
     <li class="header">12 months</li>
     <li class="grey">$479</li>
-    <li>12000 credits</li>
-    <li>Contact 12000 nannies</li>
+    <li>250 credits</li>
+    <li>Contact 250  Pre-screened <br />Nannies and Babysitters</li>
     <li>Free 12 months Job Posting</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
@@ -90,13 +90,13 @@ $this->registerCss('
           data-amount="47900"
           data-zip-code="true"
           data-name="NannyCare.com"
-          data-description="Gold Plan ($479)"
+          data-description="12 Months ($479)"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto">
         </script>
         <input type="hidden" name="plan" value="<?= \common\models\UserOrder::ParentServicePlans()['gold']?>" />
         <input type="hidden" name="money" value=47900 />
-        <input type="hidden" name="credits" value=12000 />
+        <input type="hidden" name="credits" value=250 />
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
       </form>
     </li>
