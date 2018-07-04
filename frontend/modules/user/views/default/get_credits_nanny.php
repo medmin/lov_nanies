@@ -15,31 +15,27 @@ $this->registerJs(
     'my-button-handler'
 );
 
-$discount = \common\models\UserDiscount::getCurrentDiscount();
-if ($discount === null) {
+$off = \common\models\UserDiscount::getDiscountForOneNanny();
+if ($off == null) {
     // 没有折扣
     $correct_price = 99.99;
-} elseif ($discount === 0) {
+} elseif ($off == 100) {
     // 0 元单
     $correct_price = 0;
 } else {
     // 打折
-    $correct_price = round(99.99 * $discount / 100, 2);
+    $correct_price = round(99.99 * (100 - $off) / 100, 2);
 }
+var_dump($off,$correct_price);
 ?>
-<!--<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-left">
-    <h2 style="color: #272727;background-color:#E49A7D" class="text-center">Find Me A Great Nanny Job!</h2>
-    <p class="lead">NannyCare.com has been helping nannies and babysitters find awesome jobs since 2000. We are committed to raising the bar and making sure that all of our nannies are appreciated, treated respectfully and paid well for their services.</p>
-</div>
 
-<h3>Cost: <?= $discount === null ? '$99.99' : $discount == 0 ? '$'.$correct_price.' (<span style="text-decoration: line-through">$99.99</span>)' : ('$' . $correct_price . ' (<span style="text-decoration: line-through">$99.99</span>)') ?> (one time fee includes background check & 90 day membership)</h3> -->
 <p>
 <?= Html::img('@web/images/Nanny-Prices-2.png', ['alt'=>'Nanny-Prices-2' , 'style' => "width:100%;" , 'align' => "middle"]) ?>
 </p>
 <div class="container">
     <div class="row">
         <div class="col-md-6" style="text-align: center;">
-            <?php if ($correct_price === (float)0) : ?>
+            <?php if ($correct_price == 0) : ?>
             <form action="/pay/nanny/stripe-signup-fee" method="POST">
                 <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
                 <button type="submit" class="stripe-button-el"><span style="display: block; min-height: 30px;">Pay 0 dollar</span></button>

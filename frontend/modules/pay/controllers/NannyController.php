@@ -40,13 +40,13 @@ class NannyController extends Controller
             $isolationLevel = \yii\db\Transaction::SERIALIZABLE;
             $transaction = Yii::$app->db->beginTransaction($isolationLevel);
         try {
-            $discount = \common\models\UserDiscount::getCurrentDiscount();
-            if ($discount === null) {
+            $off = \common\models\UserDiscount::getDiscountForOneNanny();
+            if ($off == null) {
                 $correct_price = 9999;
-            } elseif ($discount === 0) {
+            } elseif ($off == 100) {
                 $correct_price = 0;
             } else {
-                $correct_price = round(99.99 * $discount / 100, 2) * 100;
+                $correct_price = round(99.99 * (100 - $off) / 100, 2) * 100;
             }
 
             $data = Yii::$app->request->post();
@@ -57,7 +57,7 @@ class NannyController extends Controller
             $money = $correct_price;
             $email = $data['stripeEmail'] ?? Yii::$app->user->identity->email;
 
-            if ($correct_price === (float)0) {
+            if ($correct_price == 0) {
                 // 0 元订单不走 stripe
                 $payment_gateway = 'free order';
                 $payment_gateway_id = 'free order';

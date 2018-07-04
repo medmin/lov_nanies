@@ -38,7 +38,7 @@ class UserDiscountController extends Controller
         $searchModel = new UserDiscountSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $offForAllNannies = UserDiscount::getAllDiscount();
+        $offForAllNannies = UserDiscount::getDiscountForAllNannies();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -92,15 +92,17 @@ class UserDiscountController extends Controller
      */
     public function actionAdd()
     {
-        if (Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax  )
+        {
+            
             $user_id = Yii::$app->request->post('user_id');
             $model = UserDiscount::findOne($user_id);
             if (!$model) {
                 $model = new UserDiscount();
                 $model->user_id = $user_id;
+                $model->created_at = time();
             }
-            $model->discount = Yii::$app->request->post('discount');
-            $model->created_at = time();
+            $model->discount = Yii::$app->request->post('off');
             $model->expired_at = strtotime(Yii::$app->request->post('expired_at')) ?: null;
             return $model->save();
         }

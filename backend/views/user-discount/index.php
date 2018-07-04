@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h4>
             <?php
             if ($offForAllNannies !== null) {
-                echo 'Current Discount ( For All Nannies ): ' . ( 100 - $offForAllNannies ). '% off &nbsp;&nbsp;&nbsp;' . Html::a('Update Discount For All Nannies ', ['create']);
+                echo 'Current Discount ( For All Nannies ): ' . $offForAllNannies. '% off &nbsp;&nbsp;&nbsp;' . Html::a('Update Discount For All Nannies ', ['create']);
             } else {
                 echo 'You have not set the Discount For All Nannies yet! ' . Html::a('Set the Discount For All Nannies now', ['create']);
             }

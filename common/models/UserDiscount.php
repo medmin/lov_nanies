@@ -53,7 +53,7 @@ class UserDiscount extends \yii\db\ActiveRecord
      *
      * @return mixed|null
      */
-    public static function getAllDiscount()
+    public static function getDiscountForAllNannies()
     {
         $model = self::find()
             ->where(['user_id' => 0])
@@ -61,7 +61,8 @@ class UserDiscount extends \yii\db\ActiveRecord
             ->one();
         if ($model) {
             //美式折扣是多少off，例如，30%，对应了中国的打7折
-            return 100-$model->discount; 
+            $off = $model->discount; 
+            return $off;
         }
         return null;
     }
@@ -72,7 +73,7 @@ class UserDiscount extends \yii\db\ActiveRecord
      * @param null $user_id
      * @return mixed|null
      */
-    public static function getCurrentDiscount($user_id = null)
+    public static function getDiscountForOneNanny($user_id = null)
     {
         $user_id = $user_id === null ? Yii::$app->user->id : $user_id;
         $model = self::find()
@@ -81,8 +82,9 @@ class UserDiscount extends \yii\db\ActiveRecord
             ->one();
         if ($model) {
             //美式折扣是多少off，例如，30%，对应了中国的打7折
-            return 100-$model->discount;
+            $off = $model->discount; 
+            return $off;
         }
-        return self::getAllDiscount();
+        return self::getDiscountForAllNannies();
     }
 }

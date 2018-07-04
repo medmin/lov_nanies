@@ -20,13 +20,19 @@ $(".user-discount").click(function() {
 })
 $("#discount-submit").click(function() {
   var user_id = $("#userDiscountModel .modal-body > input[name=user_id]").val();
-  var discount = $("#userDiscountModel .modal-body > input[name=discount]").val();
-  // console.log(user_id,discount);
-  $.post("/discount/add", {user_id: user_id, discount: discount}, function(data) {
-    if (data) {
-      $("#userDiscountModel").modal("hide");
+  var off = $("#userDiscountModel .modal-body > input[name=discount]").val();
+  var expired_at = $("#w1").val();
+
+  if (!expired_at){
+      alert("Please Set the expiration date!");
+  }
+  else{
+        $.post("/discount/add", {user_id: user_id, off : off, expired_at : expired_at}, function(data) {
+            if (data) {
+            $("#userDiscountModel").modal("hide");
+            }
+        })
     }
-  })
 })
 $("#userDiscountModel").on("hidden.bs.modal", function(e) {
   $("#userDiscountModel .modal-body > input[name=discount]").val("");

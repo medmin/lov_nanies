@@ -96,7 +96,7 @@ NavBar::begin([
                     ],
                     [
                         'label' => Yii::t('frontend', 'VIP Service'),
-                        'url' => 'http://www.lovingnannies.com/',
+                        'url' => 'http://nannycare.com/nannycare-coms-vip-services/',
                         'visible' => array_key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))
                     ],
                     [
