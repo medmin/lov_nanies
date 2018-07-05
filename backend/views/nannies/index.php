@@ -21,7 +21,7 @@ $(".user-discount").click(function() {
 $("#discount-submit").click(function() {
   var user_id = $("#userDiscountModel .modal-body > input[name=user_id]").val();
   var off = $("#userDiscountModel .modal-body > input[name=discount]").val();
-  var expired_at = $("#w1").val();
+  var expired_at = $("#userDiscountModel .modal-body input[name=expired_at]").val();
 
   if (!expired_at){
       alert("Please Set the expiration date!");

@@ -46,7 +46,7 @@ class NannyController extends Controller
             } elseif ($off == 100) {
                 $correct_price = 0;
             } else {
-                $correct_price = round(99.99 * (100 - $off) / 100, 2) * 100;
+                $correct_price = floor(9999 * (100 - $off) / 100);
             }
 
             $data = Yii::$app->request->post();
@@ -98,6 +98,12 @@ class NannyController extends Controller
                 $First90DaysFreeListing->service_money = 0;
                 $First90DaysFreeListing->timestamp = time(); //paid_at, to be precise
                 $First90DaysFreeListing->expired_at = strtotime('+90 days');
+
+//                if ($expired_at = UserOrder::NannyListingFeeStatus($user->id)) {
+//                    $First90DaysFreeListing->expired_at = $expired_at + 30 * 24 * 3600;
+//                } else {
+//                    $First90DaysFreeListing->expired_at = strtotime('+90 days');
+//                }
 
                 if ($user->save() && $order->save() && $First90DaysFreeListing->save()) {
                     // 订单保存成功,写入事件日志

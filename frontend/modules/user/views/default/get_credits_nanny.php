@@ -24,9 +24,8 @@ if ($off == null) {
     $correct_price = 0;
 } else {
     // 打折
-    $correct_price = round(99.99 * (100 - $off) / 100, 2);
+    $correct_price = floor(99.99 * (100 - $off)) / 100; // floor(9999 * (100 - $off) / 100) / 100 的简写，用9999来计算折扣结果，不进行四舍五入，而是向下取整，再除以100，相当于保留小数点两位
 }
-var_dump($off,$correct_price);
 ?>
 
 <p>
