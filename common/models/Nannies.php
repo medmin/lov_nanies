@@ -422,7 +422,7 @@ class Nannies extends ActiveRecord
             'trawel_with_family' => 'Trawel With Family',
             'drive' => 'Drive',
             'have_car' => 'Have Car',
-            'state_licence' => 'State Licence',
+            'state_licence' => 'Which state was your license issued in?',
             'car_insurance' => 'Car Insurance',
             'company_car_insurance' => 'Company Car Insurance',
             'traffic_citations' => 'Traffic Citations',

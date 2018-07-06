@@ -581,7 +581,7 @@ $this->registerJs(
                             <p><?= $model->car_model_year?></p>
                         </div>
                         <div class="form-group">
-                            <label>State your license was issued:</label>
+                            <label>State the driver's license was issued in:</label>
                             <p><?= $model->state_licence?></p>
                         </div>
                         <div class="form-group">
