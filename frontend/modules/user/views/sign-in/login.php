@@ -20,6 +20,12 @@ $this->registerJs(
 );
 ?>
 <div class="site-login">
+    <?php if (Yii::$app->session->getFlash('LOGIN_ERROR')) : ?>
+        <p class="bg-warning">
+            Your account is not activated yet. <br />
+            <a href="/user/sign-in/manual-activation">Please click here to activate it!</a>
+        </p>
+    <?php endif ?>
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
         <div class="col-lg-5">

@@ -22,7 +22,7 @@ use frontend\modules\user\models\LoginForm;
 use frontend\modules\user\models\PasswordResetRequestForm;
 use frontend\modules\user\models\ResetPasswordForm;
 use frontend\modules\user\models\SignupForm;
-
+use yii\helpers\Url;
 /**
  * Class SignInController
  * @package frontend\modules\user\controllers
@@ -54,7 +54,7 @@ class SignInController extends \yii\web\Controller
                 'rules' => [
                     [
                         'actions' => [
-                            'signup', 'confirm-payment', 'nanny-signup', 'family-signup', 'login', 'request-password-reset', 'reset-password', 'oauth', 'activation'
+                            'signup', 'confirm-payment', 'nanny-signup', 'family-signup', 'login', 'request-password-reset', 'reset-password', 'oauth', 'activation','manual-activation'
                         ],
                         'allow' => true,
                         'roles' => ['?']
@@ -93,8 +93,9 @@ class SignInController extends \yii\web\Controller
     
     public function actionLogin()
     {
-        
+
         $model = new LoginForm();
+
         /**这两行啥意思？
          * doze reply： 
          * 这两行是原作者用来设置页面是否需要设置导航栏（可能不是导航栏，但肯定是页面上需要展示的内容）,
@@ -102,6 +103,26 @@ class SignInController extends \yii\web\Controller
         */
         Yii::$app->view->params['offslide'] = 1;
         Yii::$app->view->params['slider'] = "login";
+
+        if(Yii::$app->request->post()){
+
+            $login = Yii::$app->request->post('LoginForm')['identity'];
+
+            $userStatus = User::find()
+                        ->where(['or',
+                                ['username'=>$login ],
+                                ['email'=>$login] 
+                            ])
+                        ->one()
+                        ->status;
+
+            if ($userStatus !== 2 )
+            {
+                Yii::$app->session->setFlash('LOGIN_ERROR');
+                return $this->render('login', ['model' => $model]);
+            }
+        }
+        
         if (Yii::$app->request->isAjax) {
             $model->load($_POST);
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -134,6 +155,54 @@ class SignInController extends \yii\web\Controller
         ]);
     }
 
+
+    public function actionManualActivation()
+    {
+        if (Yii::$app->request->isPost)
+        {
+            $email = Yii::$app->request->post('myEmail');
+
+            $user = User::find()->where(['email' => $email])->one();
+
+            if (!$user)
+            {
+                Yii::$app->session->setFlash('alert');
+                return $this->render('manual-activation');
+            }
+            elseif ($user->status == 2)
+            {
+                Yii::$app->getSession()->setFlash('alert', [
+                    'body' => Yii::t(
+                        'frontend',
+                        'Your account is already activated!'
+                    ),
+                    'options' => ['class' => 'alert-success']
+                ]);
+                return Yii::$app->controller->redirect(['/user/sign-in/login']);
+            }
+
+            $token = UserToken::create(
+                $user->id,
+                UserToken::TYPE_ACTIVATION,
+                \cheatsheet\Time::SECONDS_IN_A_DAY
+            );
+            (new \common\lib\SendEmail([
+                'subject' => Yii::t('frontend', 'Activation email'),
+                'to' => $email,
+                'body' => Yii::t('frontend', 'Thank you for registering with NannyCare.com! Please click on the link to activate your account. {url} Thank you!', ['url' => Yii::$app->formatter->asUrl(Url::to(['/user/sign-in/activation', 'token' => $token->token], true))])
+            ]))->handle();
+
+            Yii::$app->getSession()->setFlash('alert', [
+                'body' => Yii::t(
+                    'frontend',
+                    'Your account has been successfully created. <br /> Check your email for further instructions.<br /> If it\'s there, check your junk box please.'
+                ),
+                'options' => ['class' => 'alert-success']
+            ]);
+            return Yii::$app->controller->redirect(['/user/sign-in/login']);
+        }
+        return $this->render('manual-activation');
+    }
 
     /**
      * @return Response
@@ -216,7 +285,7 @@ class SignInController extends \yii\web\Controller
                     Yii::$app->getSession()->setFlash('alert', [
                         'body' => Yii::t(
                             'frontend',
-                            'Your account has been successfully created. <br /> Check your email for further instructions.'
+                            'Your account has been successfully created. <br /> Check your email for further instructions.<br /> If it\'s there, check your junk box please.'
                         ),
                         'options' => ['class' => 'alert-success']
                     ]);
@@ -241,7 +310,7 @@ class SignInController extends \yii\web\Controller
                     Yii::$app->getSession()->setFlash('alert', [
                         'body' => Yii::t(
                             'frontend',
-                            'Your account has been successfully created. <br /> Check your email for further instructions.'
+                            'Your account has been successfully created. <br /> Check your email for further instructions.<br /> If it\'s there, check your junk box please.'
                         ),
                         'options' => ['class' => 'alert-success']
                     ]);
@@ -526,5 +595,8 @@ class SignInController extends \yii\web\Controller
             
         return parent::beforeAction($action);
     }
+
+
+    
     
 }
