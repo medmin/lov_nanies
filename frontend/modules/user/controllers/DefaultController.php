@@ -111,7 +111,20 @@ class DefaultController extends Controller
             if(count($refs)<3){
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-warning'],
-                    'body' => Yii::t('frontend', 'Thank you for signing up wth NannyCare.com. Please complete our nanny application and add your references at the bottom of this page. We require a minimum of 3 childcare related references and/or reference letters, which we call and verify. The more thorough you fill out the nanny application, the better results you will get. After we receive your application, we will contact you within 48 hours to go over your application. You will also need to show us your driver\'s license and social security card as well as CPR/First Aid certification. We run a background check on every nanny before they are listed on our site, so please be sure to click on the background check link in your account area and complete the form. We look forward to helping you find the perfect nanny or babysitting position. Thanks!~Team NannyCare.com', [], Yii::$app->user->identity->userProfile->locale)
+                    'body' => Yii::t('frontend', 'Thank you for registering wth NannyCare.com. To be accepted on our site, we require that our nannies & babysitters have a minimum of 2 years of childcare experience, 3 excellent references, CPR/First Aid certification and a clear preliminary background check. 
+                    <br />
+                    Step 1. Please complete your profile below (all 7 sections-skip the housekeeping if you don\'t do it) and don\'t forget to add your references at the bottom. You may upload your CPR/First Aid card, resume, reference letters and certifications (if you have them) in the "Upload Files" section. We are the only ones that can view this information besides you and use it for screening purposes. 
+                    <br />
+                    Step 2. Click on the background check link and complete the short form. This runs a preliminary background check that returns instant results. All nannies must pass the preliminary background check to be accepted. 
+                    <br />
+                    Step 3. After we receive your profile, we will contact you within 48 hours to set up a time to interview you over the phone. This should only take 15 or 20 minutes and we prefer to use Facetime or Skype. During the interview, you will need to show us your driver\'s license and proof of work eligibility (social security card or work visa/permit). 
+                    <br />
+                    Step 4. If your references are positive and preliminary background check comes back clear, we will add your profile to our site. You will be able to contact families directly about their job postings and families can view your profile and contact you as well. 
+                    <br />
+                    Thank you for taking the time to sign up with us and we look forward to helping you find the perfect nanny or babysitting job!
+                    <br />
+                    Thanks!<br />
+                    ~Team NannyCare.com', [], Yii::$app->user->identity->userProfile->locale)
                 ]);
             }
             $dataProvider = new ActiveDataProvider([
