@@ -59,14 +59,14 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
         <div class="form-group">
             <?= Html::Button(Yii::t('frontend', 'Reset Password'), ['class' => 'nav-btn', 'id' => 'reset_button']) ?>
         </div>
-<!--            <a href="http://www.lovingnannies.com/" target="_blank"><span class="btn nav-btn bg-check-btn">--><?//= Yii::t('frontend', 'VIP Service') ?><!--</span></a>-->
+<!--            <a href="http://www.lovingnannies.com/" target="_blank"><span class="btn nav-btn btn-sticking-out">--><?//= Yii::t('frontend', 'VIP Service') ?><!--</span></a>-->
     </div>
     <?php ActiveForm::end(); ?>
 
     <div class="col-md-6 parent-profile">
         <h2 style="color: #414141;">My Profile</h2>
         <h3><b>Personal data:</b><span style="float: right;"><a href="/user/sign-in/continue-family" class="btn btn-inverse">Edit Profile</a></span></h3>
-        <h3><b>Credits:</b> <?= $model->credits; ?><span style="float: right;"><a href="get-credits" class="btn btn-inverse">Buy Membership</a></span></h3>
+        <h3><b>Credits:</b> <?= $model->credits; ?><span style="float: right;"><a href="get-credits" class="btn btn-inverse btn-sticking-out" >Buy Membership</a></span></h3>
         <h3><b>Upload files:</b><span style="float: right;"><a  data-toggle="modal" data-target="#FilesList" class="btn btn-inverse">Files list</a></span></h3>
         <h3><b>Post A New Job:</b><span style="float: right;"><a href="/find-a-job/post" class="btn btn-inverse">Click</a></span></h3>
         <h3><b>Jobs Posted:</b><span style="float: right;"><a href="/find-a-job/posted" class="btn btn-inverse">Click</a></span></h3>
