@@ -195,7 +195,9 @@ class SignInController extends \yii\web\Controller
             Yii::$app->getSession()->setFlash('alert', [
                 'body' => Yii::t(
                     'frontend',
-                    'Your account has been successfully created. <br /> Check your email for further instructions.<br /> If it\'s there, check your junk box please.'
+                    'Your account has been successfully created!<br/>
+                    Please check your email for further instructions.<br/>
+                    If you don\'t see the activation email, check your junk mail folder.'
                 ),
                 'options' => ['class' => 'alert-success']
             ]);
@@ -285,7 +287,9 @@ class SignInController extends \yii\web\Controller
                     Yii::$app->getSession()->setFlash('alert', [
                         'body' => Yii::t(
                             'frontend',
-                            'Your account has been successfully created. <br /> Check your email for further instructions.<br /> If it\'s there, check your junk box please.'
+                            'Your account has been successfully created!<br/>
+                            Please check your email for further instructions.<br/>
+                            If you don\'t see the activation email, check your junk mail folder.'
                         ),
                         'options' => ['class' => 'alert-success']
                     ]);
@@ -310,7 +314,9 @@ class SignInController extends \yii\web\Controller
                     Yii::$app->getSession()->setFlash('alert', [
                         'body' => Yii::t(
                             'frontend',
-                            'Your account has been successfully created. <br /> Check your email for further instructions.<br /> If it\'s there, check your junk box please.'
+                            'Your account has been successfully created!<br/>
+                            Please check your email for further instructions.<br/>
+                            If you don\'t see the activation email, check your junk mail folder.'
                         ),
                         'options' => ['class' => 'alert-success']
                     ]);
