@@ -74,7 +74,7 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
                 <a href="create-reference"> <span class="nav-btn">Add References</span></a>
             </div>
             <div style="text-align: center; margin: 30px 0 0 0;">
-                <a href="/user/default/get-credits"><span class="nav-btn">Buy Membership</span></a>
+                <a href="/user/default/get-credits"><span class="nav-btn btn-sticking-out">Buy Membership</span></a>
             </div>
             <div style="text-align: center; margin: 30px 0 0 0;" id="listing-fee-expired">
                 <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn nav-btn btn-sticking-out"  ?>">Your monthly listing fee is expired.</a>
