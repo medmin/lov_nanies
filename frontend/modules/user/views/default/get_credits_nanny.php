@@ -29,7 +29,7 @@ if ($off == null) {
 ?>
 
 <p>
-<?= Html::img('@web/images/Nanny-Prices-2.png', ['alt'=>'Nanny-Prices-2' , 'style' => "width:100%;" , 'align' => "middle"]) ?>
+<?= Html::img('@web/images/Nanny-Prices-Free.png', ['alt'=>'Nanny-Prices-2' , 'style' => "width:100%;" , 'align' => "middle"]) ?>
 </p>
 <div class="container">
     <div class="row">
