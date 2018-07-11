@@ -2785,7 +2785,7 @@ blog-post
 
 .footer {
     margin: 50px auto 0;
-    background-color: #6E6460;
+    background-color: #669999;
     position: relative;
     line-height: 1.5;
 }
@@ -6930,9 +6930,6 @@ Media Quaries
     .navbar-default .navbar-collapse,
     .navbar-default .navbar-form {
         border: 0;
-    }
-    .logo {
-        width: 50%;
     }
     .inner-search .row-height {
         margin-top: 50px;
