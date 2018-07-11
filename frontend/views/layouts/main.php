@@ -47,7 +47,7 @@ use common\widgets\DbText;
         height: 63px;
         width: 63px;
         /*background: #ffffff;*/
-        color: #6E6460;
+        color: #669999;
         border-radius: 50%;
         -moz-border-radius: 50%;
         -webkit-border-radius: 50%;
@@ -55,7 +55,7 @@ use common\widgets\DbText;
         margin: 0 3px;
         font-size: 36px;
         line-height: 63px;
-        border: 2px solid #6E6460;
+        border: 2px solid #669999;
         -webkit-transition: all .3s ease; 
         transition: all .3s ease; 
         -webkit-transition: 0.3s;
@@ -66,7 +66,7 @@ use common\widgets\DbText;
         height: 63px;
         width: 63px;
         background: #ffffff;
-        color: #6E6460;
+        color: #669999;
         border-radius: 50%;
         -moz-border-radius: 50%;
         -webkit-border-radius: 50%;
@@ -74,11 +74,19 @@ use common\widgets\DbText;
         margin: 0 3px;
         font-size: 36px;
         line-height: 63px;
-        border: 2px solid #6E6460;
+        border: 2px solid #669999;
         -webkit-transition: all .3s ease;
         transition: all .3s ease;
         -webkit-transition: 0.3s;
         }
+    #footer-div-2 > ul > li > a:hover {
+        border-color: #ffffff;
+        color: #ffffff;
+        background: #669999;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+        -webkit-transition: 0.3s;
+    }
 </style>
 </head>
 <body>

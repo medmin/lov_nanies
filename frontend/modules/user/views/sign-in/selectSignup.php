@@ -12,13 +12,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-signup"  style="background: #6E6460; margin:20px 0 0 0;">
             <div class="row row-height" style=" padding: 60px 0 40px 0; margin: 0;">
                 <div class="col-lg-12 text-center ">
-                    <h1>I'm signing up as a</h1>
+                    <h1>Sign Me Up</h1>
                     <ul class="choose-signup">
                         <li>
-                        <a href="<?= \yii\helpers\Url::to(['/user/sign-in/family-signup'])?>"><button class="btn btn-primary">parent</button></a>
+                        <a href="<?= \yii\helpers\Url::to(['/user/sign-in/family-signup'])?>"><button class="btn btn-primary">I’m a Family</button></a>
                         </li>
                         <li>
-                        <a href="<?= \yii\helpers\Url::to(['/user/sign-in/nanny-signup'])?>"><button class="btn btn-primary">nanny</button></a>
+                        <a href="<?= \yii\helpers\Url::to(['/user/sign-in/nanny-signup'])?>"><button class="btn btn-primary">I’m a Nanny</button></a>
                         </li>
                     </ul>
 
