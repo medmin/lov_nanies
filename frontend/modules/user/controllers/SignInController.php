@@ -166,7 +166,13 @@ class SignInController extends \yii\web\Controller
 
             if (!$user)
             {
-                Yii::$app->session->setFlash('alert');
+                Yii::$app->getSession()->setFlash('alert', [
+                    'body' => Yii::t(
+                        'frontend',
+                        'Email Not found!'
+                    ),
+                    'options' => ['class' => 'alert-warning']
+                ]);
                 return $this->render('manual-activation');
             }
             elseif ($user->status == 2)
@@ -195,8 +201,8 @@ class SignInController extends \yii\web\Controller
             Yii::$app->getSession()->setFlash('alert', [
                 'body' => Yii::t(
                     'frontend',
-                    'Your account has been successfully created!<br/>
-                    Please check your email for further instructions.<br/>
+                    'The new activation email has been sent to your email address. <br/>
+                    Please check your email inbox for further instructions.<br/>
                     If you don\'t see the activation email, check your junk mail folder.'
                 ),
                 'options' => ['class' => 'alert-success']
@@ -344,7 +350,6 @@ class SignInController extends \yii\web\Controller
     /**
      * @param $token
      * @return Response
-     * @throws BadRequestHttpException
      */
     public function actionActivation($token)
     {
@@ -355,7 +360,14 @@ class SignInController extends \yii\web\Controller
             ->one();
 
         if (!$token) {
-            throw new BadRequestHttpException;
+            Yii::$app->getSession()->setFlash('alert', [
+                'body' => Yii::t(
+                    'frontend',
+                    'Your activation link is expired.<br>Please request a new activation link.'
+                ),
+                'options' => ['class' => 'alert-warning']
+            ]);
+            return Yii::$app->controller->redirect(['/user/sign-in/manual-activation']);
         }
  
         $user = $token->user;

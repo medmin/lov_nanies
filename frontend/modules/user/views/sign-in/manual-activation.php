@@ -21,12 +21,6 @@ $this->registerJs(
     
 <div class="container" style="margin:70px">
 
-    <?php if (Yii::$app->session->getFlash('alert')) : ?>
-        <p class="bg-warning">
-            Email is not found!
-        </p>
-    <?php endif ?>
-
     <form class="form-inline" action="/user/sign-in/manual-activation" method="post">
         <div class="form-group">
             <label for="myEmail" class="sr-only">My Email</label>
