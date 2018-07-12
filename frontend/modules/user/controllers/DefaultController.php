@@ -123,6 +123,8 @@ class DefaultController extends Controller
                 'query' => Employment::find()->where(['email' => \Yii::$app->user->identity->email]),
                 'sort' => false
             ]);
+            Yii::$app->view->params['offslide'] = 1;
+            Yii::$app->view->params['slider'] = "nanny-account";
             return $this->render('user_index_nanny', ['model'=>$accountForm, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
         } else {
             if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) {
@@ -138,7 +140,8 @@ class DefaultController extends Controller
                 ]);
                 return $this->refresh();
             }
-            
+            Yii::$app->view->params['offslide'] = 1;
+            Yii::$app->view->params['slider'] = "parent-account";
             return $this->render('user_index_parent', ['model'=>$accountForm]);
         }
         

@@ -28,23 +28,26 @@ $this->registerJs(
     <?php endif ?>
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <?= $form->field($model, 'identity') ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                <div style="color:#999;margin:1em 0">
-                    <?= Yii::t('frontend', 'If you forgot your password you can reset it <a href="{link}">here</a>', [
-                        'link'=>yii\helpers\Url::to(['sign-in/request-password-reset'])
-                    ]) ?>
+
+                <div class="form-group" >
+                    <?= Html::submitButton(Yii::t('frontend', 'Login'), ['class' => 'btn btn-inverse', 'name' => 'login-button', 'style' => 'max-width: 100%']) ?>
                 </div>
-                <div class="form-group">
-                    <?= Html::submitButton(Yii::t('frontend', 'Login'), ['class' => 'btn btn-inverse', 'name' => 'login-button']) ?>
+                <div class="form-group" style="color:#999;margin:1em 0">
+                    <span class="pull-left">
+                        <?= Yii::t('frontend', 'If you forgot your password you can reset it <a href="{link}">here</a>', [
+                            'link'=>yii\helpers\Url::to(['sign-in/request-password-reset'])
+                        ]) ?>
+                    </span>
+                    <span class="pull-right">
+                        <?= Html::a(Yii::t('frontend', 'Need an account? Sign up.'), ['signup']) ?>
+                    </span>
                 </div>
-                <div class="form-group">
-                    <?= Html::a(Yii::t('frontend', 'Need an account? Sign up.'), ['signup']) ?>
-                </div>
-                
+
             <?php ActiveForm::end(); ?>
         </div>
     </div>

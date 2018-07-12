@@ -217,11 +217,11 @@ input[type=email]:valid {
 .btn-inverse {
     width: 100%;
     border-radius: 27px;
-    background: #6E6460;
+    background: #669999;
     color: #ffffff;
     font-weight: 400;
     font-size: 16px;
-    border: 2px solid #6E6460;
+    border: 2px solid #669999;
     letter-spacing: .7px;
     max-width: 200px;
     font-family: 'Lato', sans-serif;
@@ -241,8 +241,8 @@ input[type=email]:valid {
     background: transparent;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
-    color: #6E6460;
-    border-color: #6E6460;
+    color: #669999;
+    border-color: #669999;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
     -ms-transition: 0.3s;
@@ -390,7 +390,7 @@ Navigation Bar
 
 .navbar-default {
     background: #ffffff;
-    height: 98px;
+    height: 150px;
     padding-top: 15px;
     border-style: solid;
     border-top-width: 3px;
@@ -479,8 +479,8 @@ Navigation Bar
 /* logo */
 
 .logo {
+    max-height: 112px;
     height: 100%;
-    max-height: 50px;
 }
 
 .navbar-brand>img {
@@ -495,7 +495,6 @@ Navigation Bar
     margin-left: 20px;
 }
 
-.navbar-brand:hover,
 .nav-quote-btn:hover,
 .navbar-brand:focus,
 .nav-quote-btn:focus {
@@ -586,7 +585,7 @@ Navigation Bar
 }
 
 .navbar-nav>li>.dropdown-menu {
-    margin-top: 0px;
+    margin-top: -40px;
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;

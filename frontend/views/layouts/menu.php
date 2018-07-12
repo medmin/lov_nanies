@@ -13,9 +13,9 @@ foreach ($article_category_models as $c) {
 }
 
 NavBar::begin([
-        'brandLabel' => Html::img('@web/images/NannyCare-Logo.png', ['alt'=>Yii::$app->name]),
+        'brandLabel' => Html::img('@web/images/NannyCare-Logo.png', ['alt'=>Yii::$app->name, 'class' => 'logo']),
         'brandUrl' => Yii::$app->homeUrl,
-        'brandOptions' => ['class' => 'logo-style'],
+        'brandOptions' => ['style' => 'height: 100%'],
         'options' => [
             'class' => 'navbar-default yamm',
         ],

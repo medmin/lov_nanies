@@ -114,7 +114,7 @@ use common\widgets\DbText;
     
     ?>
      
-    <div class="container" id="container">
+    <div class="container<?= isset($this->params['fluid']) ? '-fluid' : ''?>" id="container">
 
         <?php //echo Breadcrumbs::widget([
             //'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

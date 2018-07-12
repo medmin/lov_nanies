@@ -38,8 +38,4 @@ $this->registerJs(
         'itemView'=>'jobs_item'
     ])?>
 </div>
-<div>
-    <?php echo
-    \yii\helpers\Html::img('@web/images/4-steps-for-nannies.jpg', ['alt'=>"4-steps-for-nannies", 'style' => "width:100%;" , 'align' => "middle"]);
-    ?>
-</div>
+

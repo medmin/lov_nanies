@@ -336,6 +336,7 @@ class SignInController extends \yii\web\Controller
     {
          Yii::$app->view->params['offslide'] = 1;
         Yii::$app->view->params['slider'] = "signup";
+        Yii::$app->view->params['fluid'] = true;
 
         return $this->render('selectSignup');
     }

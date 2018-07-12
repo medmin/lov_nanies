@@ -49,6 +49,9 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            Yii::$app->view->params['fluid'] = true;
+        }
         $searchModel = new NannySearch();
         $dataProvider = $searchModel->search(["NannySearch" => ["status"=> "1"]], 6);
         return $this->render('index', ['dataProvider'=>$dataProvider]);
