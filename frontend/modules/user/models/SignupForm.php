@@ -103,7 +103,12 @@ class SignupForm extends Model
                 (new \common\lib\SendEmail([
                     'subject' => Yii::t('frontend', 'Activation email'),
                     'to' => $this->email,
-                    'body' => Yii::t('frontend', 'Thank you for registering with NannyCare.com! Please click on the link to activate your account. {url} Thank you!', ['url' => Yii::$app->formatter->asUrl(Url::to(['/user/sign-in/activation', 'token' => $token->token], true))])
+                    'body' => Yii::t('frontend', 'Hi there, <br>
+                    Thank you for registering with NannyCare.com! Please click on the link below to activate your account. We look forward to helping you and genuinely appreciate your business! <br>
+                    <br>
+                    Sincerely, <br>
+                    Team NannyCare.com<br><br>
+                    {url}', ['url' => Yii::$app->formatter->asUrl(Url::to(['/user/sign-in/activation', 'token' => $token->token], true))])
                 ]))->handle();
             }
             return $user;

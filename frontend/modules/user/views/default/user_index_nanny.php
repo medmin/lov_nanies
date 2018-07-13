@@ -78,7 +78,7 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
             </div>
             <div style="text-align: center; margin: 30px 0 0 0;" id="listing-fee-expired">
                 <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn nav-btn btn-sticking-out"  ?>">Your monthly listing fee is expired.</a>
-                <!-- <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "btn btn-primary" : "hidden"  ?>">Your monthly listing Fee will be expired at: <span><?=  date('Y-m-d', UserOrder::NannyListingFeeStatus(Yii::$app->user->id));  ?></span></a> -->
+                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "btn btn-primary" : "hidden"  ?>">Your monthly listing Fee will be expired at: <span><?=  date('Y-m-d', UserOrder::NannyListingFeeStatus(Yii::$app->user->id));  ?></span></a>
             </div>
         </div>
     </div>
