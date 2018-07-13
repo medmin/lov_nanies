@@ -22,7 +22,7 @@ NavBar::begin([
         
     ]); ?>
     <?php echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right',],
+        'options' => ['class' => 'navbar-nav navbar-right', 'style' => 'margin-top: 20px'],
         'encodeLabels' => false,
         'items' => [
             ['label' => Yii::t('frontend', 'Home <i class="fa fa-plus navicn"></i>'), 'url' => ['/site/index'], ],
