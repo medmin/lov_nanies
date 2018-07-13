@@ -63,8 +63,8 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
     </div>
         <div class="col-md-6">
             <h3 style="color: #414141;">
-            <a class="btn" style="background-color: #e39b79;border-color:#e39b79">Step 1</a>
-                Profile Details (click to view or edit it)
+            <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 1</a>
+                Profile Details (click to create, view or edit)
             </h3>
             <ul class="process-label">
                 <a href="main"><li class="process-label2 active" id="label-1">Main <span><i class="fa fa-long-arrow-right"></i></span></li></a>
@@ -77,16 +77,16 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
             </ul>
             
             <div class="form-group">
-            <a class="btn" style="background-color: #e39b79;border-color:#e39b79">Step 2</a>
+            <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 2</a>
                 <a href="create-reference"> <span class="nav-btn">Add References</span></a>
             </div>
             <div class="form-group">
-                <a class="btn" style="background-color: #e39b79;border-color:#e39b79">Step 3</a>
+                <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 3</a>
                 <a href="https://nannycare.quickapp.pro/apply/applicant/new/10085" target=_blank><span class="btn nav-btn">Background Check</span></a>
             </div>
             <div class="form-group">
-                <a class="btn" style="background-color: #e39b79;border-color:#e39b79">Step 4</a>
-                <a href="http://www.nanny.com/user/default/upload-files"><span class="btn nav-btn">Get/Renew CPR</span></a>
+                <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 4</a>
+                <a href="https://www.protrainings.com/signup/nannycare"><span class="btn nav-btn">Get/Renew CPR</span></a>
             </div>
             
         </div>
