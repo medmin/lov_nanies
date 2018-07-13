@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\web\View;
 /* @var $this yii\web\View */
@@ -38,14 +39,16 @@ $this->registerJs(
                     <?= Html::submitButton(Yii::t('frontend', 'Login'), ['class' => 'btn btn-inverse', 'name' => 'login-button', 'style' => 'max-width: 100%']) ?>
                 </div>
                 <div class="form-group" style="color:#999;margin:1em 0">
-                    <span class="pull-left">
-                        <?= Yii::t('frontend', 'If you forgot your password you can reset it <a href="{link}">here</a>', [
-                            'link'=>yii\helpers\Url::to(['sign-in/request-password-reset'])
+                    <p class="pull-left">
+                        <?= Yii::t('frontend', 'Forget your password? <a href="{link}">Click here to reset it.</a>', [
+                            'link'=>Url::to(['sign-in/request-password-reset'])
                         ]) ?>
-                    </span>
-                    <span class="pull-right">
-                        <?= Html::a(Yii::t('frontend', 'Need an account? Sign up.'), ['signup']) ?>
-                    </span>
+                    </p>
+                    <p class="pull-left">
+                        <?= Yii::t('frontend', 'Need an account? <a href="{link}">Register a new one.</a>', [
+                            'link'=>Url::to(['sign-in/signup'])
+                        ]) ?>
+                    </p>
                 </div>
 
             <?php ActiveForm::end(); ?>
