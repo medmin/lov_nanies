@@ -6,9 +6,16 @@ $config = [
     'sourceLanguage'=>'en-US',
     'language'=>'en-US',
     'timeZone' => 'America/Los_Angeles',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'queue'],
     
     'components' => [
+        'queue' => [
+            'class' => \yii\queue\db\Queue::class,
+            'db' => 'db',
+            'tableName' => '{{%queue}}',
+            'channel' => 'default',
+            'mutex' => \yii\mutex\MysqlMutex::class
+        ],
 
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use common\queue\EmailJob;
 
 /**
  * This is the model class for table "user_notify".
@@ -92,5 +93,21 @@ class UserNotify extends \yii\db\ActiveRecord
             $this->sender_id = Yii::$app->user->id;
         }
         return parent::beforeSave($insert);
+    }
+
+    /**
+     * 保存之后给用户发送邮件
+     * @param bool $insert 「true 表示是新增记录， false 为更新记录」
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            Yii::$app->queue->push(new EmailJob([
+                'email' => User::findOne($this->receiver_id)->email,
+                'subject' => $this->subject,
+                'body' => $this->content
+            ]));
+        }
     }
 }
