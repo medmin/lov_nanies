@@ -7331,6 +7331,9 @@ Media Quaries
 .parent-profile span{
     min-width: 140px;
 }
+.user-profile-form h3 {
+    margin-top: 3px;
+}
 
 /* Parent Job */
 .job-list {
