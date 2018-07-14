@@ -35,7 +35,7 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
     <br>
     <div class="row">
         <div class="col-md-6">   
-        <h2 style="color: #414141;">My NannyCare Account</h2>
+        <h2 style="background-color: #e39b79;">My NannyCare Account</h2>
     <!--<h2><?php //echo Yii::t('frontend', 'Account Settings') ?></h2>-->
         <?= $form->field($model, 'username')->textInput(['readOnly' => true]) ?>
 
@@ -52,13 +52,20 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
         <div class="form-group">
             <?= Html::Button(Yii::t('frontend', 'Reset Password'), ['class' => 'nav-btn', 'id' => 'reset-btn']) ?>
         </div>
-        <div class="form-group">
-            <a href="https://nannycare.quickapp.pro/apply/applicant/new/10085" target=_blank><span class="btn nav-btn btn-sticking-out">Background Check</span></a>
-        </div>
         
+        <div class="form-group">
+                <a href="/user/default/get-credits"><span class="nav-btn btn-sticking-out">Buy Membership</span></a>
+        </div>
+        <div class="form-group" id="listing-fee-expired">
+                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn nav-btn btn-sticking-out"  ?>">Your monthly listing fee is expired.</a>
+                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "btn nav-btn" : "hidden"  ?>"  style="background-color: #e39b79;border-color:#e39b79">Your monthly listing Fee will be expired at: <span><?=  date('Y-m-d', UserOrder::NannyListingFeeStatus(Yii::$app->user->id));  ?></span></a>
+            </div>
     </div>
         <div class="col-md-6">
-            <h2 style="color: #414141;">Profile Details (click to view or edit it)</h2>
+            <h3 style="color: #414141;">
+            <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 1</a>
+                Profile Details (click to create, view or edit)
+            </h3>
             <ul class="process-label">
                 <a href="main"><li class="process-label2 active" id="label-1">Main <span><i class="fa fa-long-arrow-right"></i></span></li></a>
                 <a href="questions-n-schedule"><li class="process-label2 active" id="label-2">Questions & Schedule<span><i class="fa fa-long-arrow-right"></i></span></li></a>
@@ -69,23 +76,25 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
                 <a href="upload-files-list"><li class="process-label2 active" id="label-7">Files List<span><i class="fa fa-long-arrow-right"></i></span></li></a>
             </ul>
             
-            <div style="text-align: center; margin: 30px 0 0 0;">
-                <!-- <a href="create-employment"> <span class="nav-btn">Add Previous Employments</span></a> -->
+            <div class="form-group">
+            <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 2</a>
                 <a href="create-reference"> <span class="nav-btn">Add References</span></a>
             </div>
-            <div style="text-align: center; margin: 30px 0 0 0;">
-                <a href="/user/default/get-credits"><span class="nav-btn btn-sticking-out">Buy Membership</span></a>
+            <div class="form-group">
+                <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 3</a>
+                <a href="https://nannycare.quickapp.pro/apply/applicant/new/10085" target=_blank><span class="btn nav-btn">Background Check</span></a>
             </div>
-            <div style="text-align: center; margin: 30px 0 0 0;" id="listing-fee-expired">
-                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn nav-btn btn-sticking-out"  ?>">Your monthly listing fee is expired.</a>
-                <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "btn btn-primary" : "hidden"  ?>">Your monthly listing Fee will be expired at: <span><?=  date('Y-m-d', UserOrder::NannyListingFeeStatus(Yii::$app->user->id));  ?></span></a>
+            <div class="form-group">
+                <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 4</a>
+                <a href="https://www.protrainings.com/signup/nannycare"><span class="btn nav-btn">Get/Renew CPR</span></a>
             </div>
+            
         </div>
     </div>
 
     <?php
     $h = <<<HTML
-<h2 style="color: #000;">References</h2>
+<h2 style="background-color: #e39b79;border-color:#e39b79">My References</h2>
 HTML;
 
     echo $dataProvider->count == 0 ? '' : $h . GridView::widget([

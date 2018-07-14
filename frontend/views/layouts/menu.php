@@ -4,14 +4,6 @@ use yii\helpers\Html;;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 
-
-// article category
-$article_category_models = \common\models\ArticleCategory::findAll(['status' => \common\models\ArticleCategory::STATUS_ACTIVE]);
-$article_category = [];
-foreach ($article_category_models as $c) {
-    $article_category[] = ['label' => Yii::t('frontend', $c->title), 'url' => ['/article/index', 'c' => $c->slug]];
-}
-
 NavBar::begin([
         'brandLabel' => Html::img('@web/images/NannyCare-Logo.png', ['alt'=>Yii::$app->name, 'class' => 'logo']),
         'brandUrl' => Yii::$app->homeUrl,
@@ -27,22 +19,10 @@ NavBar::begin([
         'items' => [
             ['label' => Yii::t('frontend', 'Home <i class="fa fa-plus navicn"></i>'), 'url' => ['/site/index'], ],
             ['label' => Yii::t('frontend', 'Find A Nanny <i class="fa fa-plus navicn"></i>'), 'url' => ['/nannies/index'], ],
-            // [
-            //     'label' => Yii::t('frontend', 'Find A Nanny'),
-            //     'items' => [
-            //         ['label' => Yii::t('frontend', 'All Nannies '), 'url' => ['/nannies/index']],
-            //         ['label' => Yii::t('frontend', 'BabySitter '), 'url' => '/#'],
-            //         ['label' => Yii::t('frontend', 'Newborn Specialist '), 'url' => '/#'],
-            //         ['label' => Yii::t('frontend', 'Caregiver '), 'url' => '/#'],
-            //         ['label' => Yii::t('frontend', 'Housekeeper '), 'url' => '/#'],
-            //         ['label' => Yii::t('frontend', 'Special Needs '), 'url' => '/#'],
-            //         ['label' => Yii::t('frontend', 'Elderly Care '), 'url' => '/#']
-            //     ]
-            // ],
+
             [
                 'label' => Yii::t('frontend', 'Find A Job <i class="fa fa-plus navicn"></i>'),
                 'url' => ['/find-a-job/list'],
-//                'visible' => !Yii::$app->user->isGuest && key_exists('nanny', Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()))
             ],
             [
                 'label' => Yii::t('frontend', 'Articles and Tools'),
@@ -116,21 +96,6 @@ NavBar::begin([
                     ]
                 ]
             ],
-            /*[
-                'label'=>Yii::t('frontend', 'Language'),
-                'dropDownOptions' =>[
-                 'class' => 'vertical-megamenu'                     
-                ],
-                'items'=>array_map(function ($code) {
-                    return [
-                        'label' => Yii::$app->params['availableLocales'][$code],
-                        'url' => ['/site/set-locale', 'locale'=>$code],
-                        'active' => Yii::$app->language === $code,
-                        
-                    ];
-                }, array_keys(Yii::$app->params['availableLocales'])),
-                
-            ]*/
         ],
     ]); ?>
 <?php NavBar::end();  ?>
