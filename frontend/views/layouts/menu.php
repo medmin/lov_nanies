@@ -15,7 +15,7 @@ foreach ($article_category_models as $c) {
 NavBar::begin([
         'brandLabel' => Html::img('@web/images/NannyCare-Logo.png', ['alt'=>Yii::$app->name, 'class' => 'logo']),
         'brandUrl' => Yii::$app->homeUrl,
-        'brandOptions' => ['style' => 'height: 100%'],
+        'brandOptions' => ['style' => 'height: 100%; padding: 0'],
         'options' => [
             'class' => 'navbar-default yamm',
         ],
@@ -87,7 +87,7 @@ NavBar::begin([
             ],
             
             [
-                'label' => Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->getPublicIdentity(),
+                'label' => Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->getPublicIdentity() . (($unread = \common\models\UserNotify::UnreadNotifyCount()) ? "<span class=\"badge theme-bg-color unread-badge\">$unread</span>" : ''),
                 'visible'=>!Yii::$app->user->isGuest,
                 'items'=>[
                     [
@@ -98,6 +98,11 @@ NavBar::begin([
                         'label' => Yii::t('frontend', 'VIP Service'),
                         'url' => 'http://nannycare.com/nannycare-coms-vip-services/',
                         'visible' => array_key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))
+                    ],
+                    [
+                        'label' => Yii::t('frontend', 'Notify') . (isset($unread) && $unread ? "($unread)" : ''),
+                        'url' => ['/user/default/notify'],
+                        'visible' => !Yii::$app->user->isGuest && (bool)$unread
                     ],
                     [
                         'label' => Yii::t('frontend', 'Backend'),

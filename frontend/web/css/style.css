@@ -585,7 +585,7 @@ Navigation Bar
 }
 
 .navbar-nav>li>.dropdown-menu {
-    margin-top: -40px;
+    margin-top: -20px;
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
@@ -599,6 +599,11 @@ Navigation Bar
 .navbar-default .navbar-nav>.open>a:hover {
     color: #6E6460;
     background: transparent;
+}
+
+.unread-badge {
+    padding: 1px 4px;
+    margin-left: 5px;
 }
 
 
@@ -7441,10 +7446,32 @@ Media Quaries
     margin-top: 10px;
     background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#f8a6a6),color-stop(1,#f43838));
 }
+.job-contact {
+    margin-top: 20px;
+}
+.job-contact-panel {
+    margin-top: 20px;
+}
+.job-contact button:hover{
+    color: #699;
+    background-color: white;
+    border: 1px solid #699;
+}
+.theme-bg-color {
+    background-color: #699;
+    color: white;
+}
+
 
 /* Nanny Account */
 
 .btn-sticking-out {
     background-color: #f0ad4e;
     border-color: #eea236;
+}
+.user-notify {
+    margin-top: 20px;
+}
+.notify-reply {
+    margin-top: 10px;
 }

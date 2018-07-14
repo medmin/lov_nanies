@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use common\models\UserNotify;
 use common\models\UserOrder;
 use common\models\WidgetCarousel;
 use Yii;
@@ -199,12 +200,16 @@ class PostJobController extends Controller
      * 通过 id 获取 model
      *
      * @param $id
+     * @param $only_id bool 是否只查询id
      * @return array|null|\yii\db\ActiveRecord
      * @throws NotFoundHttpException
      */
-    protected function findModel($id)
+    protected function findModel($id, $only_id = false)
     {
-        $model = ParentPost::find()->where(['id' => $id, 'user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED]);
+        $model = ParentPost::find()->where(['id' => $id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED]);
+        if (!$only_id) {
+            $model->andWhere(['user_id' => Yii::$app->user->id]);
+        }
         if ($this->action->id === 'delete') {
             $model = $model->one();
         } else {
@@ -214,6 +219,42 @@ class PostJobController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * 联系job
+     */
+    public function actionContact()
+    {
+        Yii::$app->response->format = 'json';
+
+        $job = $this->findModel(Yii::$app->request->post('post_id'), true);
+
+        $model = new UserNotify();
+
+        if (parse_url(Yii::$app->request->referrer, PHP_URL_PATH) === '/user/default/notify') {
+            $model->pid = Yii::$app->request->post('pid');
+            $replyNotify = UserNotify::findOne(['id' => $model->pid, 'receiver_id' => Yii::$app->user->id]);
+            if (!$replyNotify) {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+            $model->receiver_id = $replyNotify->sender_id;
+        } else {
+            $model->receiver_id = $job->user_id;
+        }
+        $model->job_post_id = $job->id;
+        $model->content = Yii::$app->request->post('content');
+        $model->subject = Yii::$app->request->post('subject');
+
+        if ($model->save()) {
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class'=>'alert-success'],
+                'body' => Yii::t('frontend', 'The message has been sent', [], Yii::$app->user->identity->userProfile->locale)
+            ]);
+            return ['status' => true];
+        } else {
+            return ['status' => false, 'message' => 'error'];
         }
     }
 }

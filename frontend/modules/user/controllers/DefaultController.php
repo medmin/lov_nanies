@@ -2,6 +2,7 @@
 
 namespace frontend\modules\user\controllers;
 
+use common\models\UserNotify;
 use common\models\WidgetCarousel;
 use common\modules\file\models\UserFile;
 use Yii;
@@ -64,10 +65,10 @@ class DefaultController extends Controller
     public function beforeAction($action)
     {
         $userRoles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
-        if (array_key_exists('nanny', $userRoles) && WidgetCarousel::findOne(['key' => 'nanny_account', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
+        if (array_key_exists('nanny', $userRoles)) {
             Yii::$app->view->params['offslide'] = true;
             Yii::$app->view->params['slider'] = 'nanny-account';
-        } elseif (array_key_exists('seeker', $userRoles) && WidgetCarousel::findOne(['key' => 'family_account', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
+        } elseif (array_key_exists('seeker', $userRoles)) {
             Yii::$app->view->params['offslide'] = true;
             Yii::$app->view->params['slider'] = 'family-account';
         }
@@ -123,8 +124,6 @@ class DefaultController extends Controller
                 'query' => Employment::find()->where(['email' => \Yii::$app->user->identity->email]),
                 'sort' => false
             ]);
-            Yii::$app->view->params['offslide'] = 1;
-            Yii::$app->view->params['slider'] = "nanny-account";
             return $this->render('user_index_nanny', ['model'=>$accountForm, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
         } else {
             if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) {
@@ -140,8 +139,6 @@ class DefaultController extends Controller
                 ]);
                 return $this->refresh();
             }
-            Yii::$app->view->params['offslide'] = 1;
-            Yii::$app->view->params['slider'] = "parent-account";
             return $this->render('user_index_parent', ['model'=>$accountForm]);
         }
         
@@ -360,6 +357,26 @@ class DefaultController extends Controller
 
         // print_r(Yii::$app->user);
     }
+
+    public function actionNotify($id = null)
+    {
+        if ($id) {
+            $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
+            if (!$model) {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+            return $this->render('notify_view', ['model' => $model]);
+        }
+        $dataProvider = new ActiveDataProvider([
+            'query' => UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]),
+//            'pagination' => [
+//                'pageSize' => 20
+//            ]
+        ]);
+        UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
+        return $this->render('notify', ['dataProvider' => $dataProvider]);
+    }
+    
     protected function findEmp($id)
     {
         if (($model = Employment::findOne($id)) !== null) {

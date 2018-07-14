@@ -186,12 +186,7 @@ label   {
 
 
 .logo  {
-    display:block;
-    width:211px;  height: 38px;margin-top:10px;
-    margin-left: 30px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: left center;
+    max-height: 112px;
 }
 .button  {
     background:#fff600;
