@@ -13,5 +13,5 @@ CREATE TABLE `queue` (
   KEY `channel` (`channel`),
   KEY `reserved_at` (`reserved_at`),
   KEY `priority` (`priority`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
 
