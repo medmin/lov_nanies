@@ -45,9 +45,9 @@ $this->registerJs(
         <div class="media-left">
             <p class="job-type"><?= Nannies::jobType()[$model->job_type]; ?></p>
             <p class="job-type-of-help"><?= Nannies::typeOfHelp()[$model->type_of_help]; ?></p>
-            <div class="job-contact">
-                <button type="button" class="btn theme-bg-color" id="job-contact">Contact</button>
-            </div>
+<!--            <div class="job-contact">-->
+<!--                <button type="button" class="btn theme-bg-color" id="job-contact">Contact</button>-->
+<!--            </div>-->
         </div>
         <div class="media-body">
             <h4 class="media-heading"><?= $model->summary?></h4>
@@ -63,19 +63,20 @@ $this->registerJs(
         </div>
     </div>
 </div>
-<div class="panel panel-default hidden job-contact-panel">
-    <div class="panel-heading">
-        Send message
-    </div>
-    <div class="panel-body">
-        <div class="form-group">
-            <label for="messageSubject">Subject</label>
-            <input type="text" class="form-control" name="subject" id="messageSubject" placeholder="subject" maxlength="1000">
-        </div>
-        <div class="form-group">
-            <label for="messageText">Content</label>
-            <textarea name="content" class="form-control" id="messageText" rows="10"></textarea>
-        </div>
-        <button type="button" class="btn theme-bg-color" id="sendMessage">Send</button>
-    </div>
-</div>
+
+<!--<div class="panel panel-default hidden job-contact-panel">-->
+<!--    <div class="panel-heading">-->
+<!--        Send message-->
+<!--    </div>-->
+<!--    <div class="panel-body">-->
+<!--        <div class="form-group">-->
+<!--            <label for="messageSubject">Subject</label>-->
+<!--            <input type="text" class="form-control" name="subject" id="messageSubject" placeholder="subject" maxlength="1000">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="messageText">Content</label>-->
+<!--            <textarea name="content" class="form-control" id="messageText" rows="10"></textarea>-->
+<!--        </div>-->
+<!--        <button type="button" class="btn theme-bg-color" id="sendMessage">Send</button>-->
+<!--    </div>-->
+<!--</div>-->
