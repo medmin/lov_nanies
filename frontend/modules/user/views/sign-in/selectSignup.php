@@ -10,7 +10,7 @@ $this->title = Yii::t('frontend', 'Sign Up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
-    <div class="site-signup"  style="background: #669999; margin:20px 0 0 0;">
+    <div class="site-signup"  style="background: #83a79d; margin:20px 0 0 0;">
         <div class="row row-height" style=" padding: 60px 0 40px 0; margin: 0;">
             <div class="col-lg-12 text-center ">
                 <h1>Sign Me Up</h1>

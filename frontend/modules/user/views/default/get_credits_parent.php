@@ -54,7 +54,7 @@ $this->registerCss('
     <li class="grey">$149</li>
     <li>100 credits</li>
     <li>Contact 100  Pre-screened <br />Nannies and Babysitters</li>
-    <li>Free 3 months Job Posting</li>
+    <li>Free 3 Month Job Posting </li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
         <script
@@ -81,7 +81,7 @@ $this->registerCss('
     <li class="grey">$479</li>
     <li>250 credits</li>
     <li>Contact 250  Pre-screened <br />Nannies and Babysitters</li>
-    <li>Free 12 months Job Posting</li>
+    <li>Free 12 Month Job Posting</li>
     <li class="grey">
       <form action="/pay/parent/stripe" method="POST">
         <script
