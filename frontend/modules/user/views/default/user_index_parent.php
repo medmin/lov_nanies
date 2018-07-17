@@ -61,7 +61,7 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
         </div>
 
         
-        <h3><span class="btn btn-inverse" style="background-color: #699;color:white;float:left">Nannies Selected:</span><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse" styel="float:right">Find A Nanny</a></span></h3>
+        <h3><span class="btn btn-inverse" style="background-color: #699;color:white;float:left">Nannies Selected:</span></h3>
         <div class="nannies-selected-table">
             <?php
             $id = Yii::$app->user->id;
@@ -92,6 +92,7 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
         <h3><b>Post A New Job:</b><span style="float: right;"><a href="/find-a-job/post" class="btn btn-inverse">Click</a></span></h3>
         <h3><b>Jobs Posted:</b><span style="float: right;"><a href="/find-a-job/posted" class="btn btn-inverse">Click</a></span></h3>
         <h3><b>Upload Files:</b><span style="float: right; min-width: 140px;"><a  data-toggle="modal" data-target="#FilesList" class="btn btn-inverse">Files List</a></span></h3>
+        <h3><span style="float: right;"><a href="/nannies/index" class="btn btn-inverse">Find A Nanny</a></span></h3>
         
     </div>
 </div>
