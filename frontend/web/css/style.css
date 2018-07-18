@@ -394,8 +394,8 @@ Navigation Bar
     padding-top: 15px;
     border-style: solid;
     border-top-width: 3px;
-    -o-border-image: url(../images/strip.png) 3;
-    border-image: url(../images/strip.png) 3 fill;
+    -o-border-image: url(../images/strip2.png) 3;
+    border-image: url(../images/strip2.png) 3 fill;
     border-bottom: 0;
     z-index: 99
 }
@@ -1383,7 +1383,7 @@ card grid/list view
     right: 0;
     width: 94px;
     height: 46px;
-    background-color: #6E6460;
+    background-color: #83a79d;
     color: #ffffff;
     font-size: 16px;
     font-weight: 700;
