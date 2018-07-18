@@ -61,6 +61,19 @@ $("#userDiscountModel").on("hidden.bs.modal", function(e) {
             'email:email',
             'address:text',
             [
+                'label' => 'city(zip_code)',
+                'attribute' => 'zip_code',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    if ($model->city->place_name == "N/A" && $model->zip_code != 0) {
+                        $html = Html::tag('span', $model->city->place_name, ['style' => 'color: red', 'title' => 'Error zip_code: ' . $model->zip_code]);
+                    } else {
+                        $html =  Html::tag('span', $model->city->place_name, ['title' => 'zip_code: ' . $model->zip_code]);
+                    }
+                    return $html ?? '';
+                }
+            ],
+            [
                 'class' => EnumColumn::className(),
                 'attribute' => 'status',
                 'enum' => UserProfile::statuses(),

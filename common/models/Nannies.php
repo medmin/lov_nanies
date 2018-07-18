@@ -269,8 +269,22 @@ class Nannies extends ActiveRecord
         // 先注释下边这个，用了一大堆放弃的mysql函数
 
         if($this->zip_code!=0){
-            $this->city = new PostalCode($this->zip_code);
-            $this->city->getCity();
+            if (Yii::$app->id === 'backend') {
+                try {
+                    $this->city = new PostalCode($this->zip_code);
+                    $this->city->getCity();
+                } catch (\Exception $e) {
+                    if ($e->getMessage() == Yii::t('frontend','Invalid location type',[], Yii::$app->language)) {
+                        $this->city = new PostalCode("92011");
+                        $this->city->place_name="N/A";
+                    } else {
+                        throw new $e;
+                    }
+                }
+            } else {
+                $this->city = new PostalCode($this->zip_code);
+                $this->city->getCity();
+            }
         }else{
             $this->city = new PostalCode("92011");
             $this->city->place_name="N/A";
