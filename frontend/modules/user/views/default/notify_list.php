@@ -17,8 +17,9 @@ $this->registerJs(
     'my-button-handler'
 );
 
-$this->title = Yii::t('frontend', 'Parent Account Page');
+$this->title = Yii::t('frontend', 'Parent Notifications');
 ?>
+<br>
 <?= \yii\widgets\ListView::widget([
     'dataProvider'=>$dataProvider,
     'pager'=>[
@@ -40,10 +41,12 @@ $this->title = Yii::t('frontend', 'Parent Account Page');
         return <<<HTML
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="notify?id={$model->id}">$model->subject</a>
+        Subject: <a href="notify?id={$model->id}">$model->subject (Click it to see the full message)</a><br>
+        <!-- Sender:  \common\Models\User::findById($model->sender_id)->username  -->
     </div>
     <div class="panel-body">
         $model->content
+        <!-- 这里加上一个判断，只显示前20个字符或50个字符，反正不能显示全部，否则家长不点击查看全文，自然就看不到“Reply”按钮 -->
     </div>
 </div>
 HTML;

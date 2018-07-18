@@ -36,19 +36,25 @@ $this->registerJs(
     'my-button-handler'
 );
 ?>
+<br>
 <div class="panel panel-success user-notify">
-    <div class="panel-heading"><?= $model->subject ?></div>
+    <div class="panel-heading">
+        Subject: <?= $model->subject ?> 
+    </div>
     <div class="panel-body">
         <?= \yii\helpers\Html::encode($model->content)?>
         <div class="notify-reply">
-            <button type="button" class="btn theme-bg-color btn-xs pull-right" id="reply">Reply</button>
+            <button type="button" class="btn btn-primary theme-bg-color  pull-right" id="reply">Reply</button>
         </div>
     </div>
 </div>
 
 <div class="panel panel-default hidden job-contact-panel">
     <div class="panel-heading">
-        Send message
+        Reply a message to the nanny: <?= \common\Models\User::findById($model->sender_id)->username ?> <br>
+        Attention:<br>
+        The nanny will get an email to notify her/him that you have sent a message.<br>
+        If you send spam messages, your account will be suspended.
     </div>
     <div class="panel-body">
         <div class="form-group">

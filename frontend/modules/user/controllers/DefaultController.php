@@ -374,7 +374,7 @@ class DefaultController extends Controller
 //            ]
         ]);
         UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
-        return $this->render('notify', ['dataProvider' => $dataProvider]);
+        return $this->render('notify_list', ['dataProvider' => $dataProvider]);
     }
     
     protected function findEmp($id)

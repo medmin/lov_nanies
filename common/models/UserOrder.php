@@ -82,7 +82,13 @@ class UserOrder extends \yii\db\ActiveRecord
 	 */
 	public static function NannyListingFeeStatus($nanny_id)
 	{
-		$payrecord = UserOrder::find()->where(['user_id'=> $nanny_id])->andWhere(['in', "service_money", [0, 999]])->orderBy('expired_at DESC')->one();
+        $payrecord = UserOrder::find()
+                    ->where(['user_id'=> $nanny_id])
+                    ->andWhere(['in', "service_money", [0, 999]])
+                    ->andWhere(['in',"service_plan", ['First-90-Days-Free-Listing','Listing Fee (Monthly Fee)']])
+                    ->orderBy('expired_at DESC')
+                    ->one();
+
 		if ($payrecord && $payrecord->expired_at > time() ) {
 			return $payrecord->expired_at;
 		} else {
