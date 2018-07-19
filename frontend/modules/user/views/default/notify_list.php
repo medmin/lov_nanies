@@ -38,15 +38,20 @@ $this->title = Yii::t('frontend', 'Parent Notifications');
     ],
     'summary'=>'',
     'itemView'=> function ($model, $key, $index, $widget) {
+        $sender = \common\models\User::findById($model->sender_id);
+        $url = \yii\helpers\Url::to(['/user/default/notify', 'id' => $model->id]);
+        $content = \yii\helpers\StringHelper::truncate($model->content, 10, Html::a(' . . .', $url, ['title' => 'Full Message']), null, true);
         return <<<HTML
 <div class="panel panel-default">
     <div class="panel-heading">
-        Subject: <a href="notify?id={$model->id}">$model->subject (Click it to see the full message)</a><br>
-        <!-- Sender:  \common\Models\User::findById($model->sender_id)->username  -->
+        <p style="padding: 0 0 5px 0">Subject: <a href="{$url}">$model->subject</a></p>
+        <p style="padding: 0">Sender: {$sender->username} </p>
     </div>
     <div class="panel-body">
-        $model->content
-        <!-- 这里加上一个判断，只显示前20个字符或50个字符，反正不能显示全部，否则家长不点击查看全文，自然就看不到“Reply”按钮 -->
+        $content
+        <div class="notify-reply">
+            <a href="{$url}"><button type="button" class="btn theme-btn pull-right">Reply</button></a>
+        </div>
     </div>
 </div>
 HTML;

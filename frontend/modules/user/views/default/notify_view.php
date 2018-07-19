@@ -10,9 +10,6 @@ $this->registerJs(
         console.log($("slide").height());
             });
      
-     $("#reply").click(function() {
-        $(".job-contact-panel").removeClass("hidden").addClass("show")
-     })
      $("#sendMessage").click(function() {
        var subject = $("input[name=subject]").val()
        var content = $("textarea[name=content]").val()
@@ -44,12 +41,12 @@ $this->registerJs(
     <div class="panel-body">
         <?= \yii\helpers\Html::encode($model->content)?>
         <div class="notify-reply">
-            <button type="button" class="btn btn-primary theme-bg-color  pull-right" id="reply">Reply</button>
+
         </div>
     </div>
 </div>
 
-<div class="panel panel-default hidden job-contact-panel">
+<div class="panel panel-default show job-contact-panel">
     <div class="panel-heading">
         Reply a message to the nanny: <?= \common\Models\User::findById($model->sender_id)->username ?> <br>
         Attention:<br>
@@ -65,6 +62,6 @@ $this->registerJs(
             <label for="messageText">Content</label>
             <textarea name="content" class="form-control" id="messageText" rows="10"></textarea>
         </div>
-        <button type="button" class="btn theme-bg-color" id="sendMessage">Send</button>
+        <button type="button" class="btn theme-btn" id="sendMessage">Send</button>
     </div>
 </div>

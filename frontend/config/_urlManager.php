@@ -32,5 +32,8 @@ return [
         'find-a-job/detail' => 'post-job/view',
         'find-a-job/posted' => 'post-job/posted',
         'find-a-job/contact' => 'post-job/contact',
+
+        // message (notify)
+        'user/default/message' => 'user/default/notify'
     ]
 ];
