@@ -92,15 +92,19 @@ class DefaultController extends Controller
          * Role对象是属性为角色表（rbac_auth_item）的字段值
          */
         $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
-        if(array_key_exists('nanny', $tmpArr)){
 
-            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) {
+        if(array_key_exists('nanny', $tmpArr))
+        {
+
+            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) 
+            {
 
                 (new \common\lib\SendEmail([
                     'subject' => Yii::t('frontend', 'Password changed for {name}', ['name'=>Yii::$app->name]),
                     'to' => Yii::$app->user->identity->email,
                     'body' => 'Hello ' . \yii\helpers\Html::encode(Yii::$app->user->identity->username) . ', Your password was successfully changed.'
                 ]))->handle();
+
                 Yii::$app->session->setFlash('forceUpdateLocale');
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-success'],
@@ -125,8 +129,11 @@ class DefaultController extends Controller
                 'sort' => false
             ]);
             return $this->render('user_index_nanny', ['model'=>$accountForm, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
-        } else {
-            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) {
+        } 
+        else 
+        {
+            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) 
+            {
                 (new \common\lib\SendEmail([
                     'subject' => Yii::t('frontend', 'Password changed for {name}', ['name'=>Yii::$app->name]),
                     'to' => Yii::$app->user->identity->email,
@@ -143,6 +150,8 @@ class DefaultController extends Controller
         }
         
     }
+
+    
     public function actionMain(){
         $user = Yii::$app->user->identity;
         $model= Nannies::findOne(Yii::$app->user->id);
