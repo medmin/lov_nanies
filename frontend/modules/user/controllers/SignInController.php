@@ -160,7 +160,7 @@ class SignInController extends \yii\web\Controller
                 {
                     return $this->redirect(['/user/default/index']);
                 }
-                
+
                 //没付款就重定向去付款页面
                 return $this->redirect(['/user/default/get-credits']);
             }
@@ -400,9 +400,14 @@ class SignInController extends \yii\web\Controller
             'options' => ['class' => 'alert-success']
         ]);
         $tmpArr2 = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()) ;
-        if(array_key_exists('nanny',$tmpArr2)){
-            return  Yii::$app->controller->redirect(['/user/sign-in/continue-registration']);
-        }else{
+
+        if(array_key_exists('nanny',$tmpArr2))
+        {
+            return $this->redirect(['/user/default/index']);
+            // return  Yii::$app->controller->redirect(['/user/sign-in/continue-registration']);
+        }
+        else
+        {
             return  Yii::$app->controller->redirect(['/user/sign-in/continue-family']);
         }
         
