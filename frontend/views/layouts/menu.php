@@ -80,7 +80,7 @@ NavBar::begin([
                         'visible' => array_key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))
                     ],
                     [
-                        'label' => Yii::t('frontend', 'Notification') . (isset($unread) && $unread ? "($unread)" : ''),
+                        'label' => Yii::t('frontend', 'Messages') . (isset($unread) && $unread ? "($unread)" : ''),
                         'url' => ['/user/default/notify'],
                         'visible' =>  !Yii::$app->user->isGuest //&& (bool)$unread
                     ],
