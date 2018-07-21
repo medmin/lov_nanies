@@ -1,7 +1,10 @@
 <?php
 use yii\web\View;
+use yii\helpers\Url;
 
 /* @var $model \common\models\UserNotify */
+
+$ajax_url = $model->job_post_id ? Url::to(['/find-a-job/contact']) : Url::to(['/user/default/contact']);
 
 $this->registerJs(
     '
@@ -13,12 +16,12 @@ $this->registerJs(
      $("#sendMessage").click(function() {
        var subject = $("input[name=subject]").val()
        var content = $("textarea[name=content]").val()
-       var post_id = '.$model->job_post_id.'
+       var post_id = '.(int)$model->job_post_id.'
        var pid = '.$model->id.'
        if (subject.trim() == "" || content.trim() == "") {
          return false;
        } else {
-         $.post("/find-a-job/contact", {subject:subject,content:content,post_id:post_id,pid:pid}, function(data){
+         $.post("'.$ajax_url.'", {subject:subject,content:content,post_id:post_id,pid:pid}, function(data){
            if (data.status) {
                location.reload()
            } else {
@@ -32,6 +35,8 @@ $this->registerJs(
     View::POS_READY,
     'my-button-handler'
 );
+
+$this->title = 'My message';
 ?>
 <br>
 <div class="panel panel-success user-notify">

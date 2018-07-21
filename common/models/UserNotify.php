@@ -104,9 +104,10 @@ class UserNotify extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         if ($insert) {
-            if ($this->job_post_id === NULL) {
-                // 如果没有job_post_id 说明是私信来自家长联系保姆页面（可以考虑加个字段来区分）
-                $email = Nannies::findOne($this->receiver_id)->email ?: User::findOne($this->receiver_id)->email;
+            if ($this->job_post_id === null) {
+                // 如果没有job_post_id 说明是私信来自家长联系保姆页面（至于是 「家长回复保姆」 还是 「保姆回复家长」 无法判断）
+                $nanny = Nannies::findOne($this->receiver_id);
+                $email = ($nanny && $nanny->email) ? $nanny->email : User::findOne($this->receiver_id)->email;
             } else {
                 $email = User::findOne($this->receiver_id)->email;
             }

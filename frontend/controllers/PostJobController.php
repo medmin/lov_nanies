@@ -234,7 +234,7 @@ class PostJobController extends Controller
 
         $model = new UserNotify();
 
-        if (parse_url(Yii::$app->request->referrer, PHP_URL_PATH) === Url::to(['user/default/notify'])) {
+        if (parse_url(Yii::$app->request->referrer, PHP_URL_PATH) === Url::to(['user/default/message'])) {
             $model->pid = Yii::$app->request->post('pid');
             $replyNotify = UserNotify::findOne(['id' => $model->pid, 'receiver_id' => Yii::$app->user->id]);
             if (!$replyNotify) {
