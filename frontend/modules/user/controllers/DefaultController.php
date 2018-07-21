@@ -395,22 +395,31 @@ class DefaultController extends Controller
 
         Yii::$app->response->format = 'json';
 
-        if (!ParentNanny::findOne(['parentid' => Yii::$app->user->id, 'nannyid' => Yii::$app->request->post('uid')])) {
-            return ['status' => false, 'message' => 'Invalid Nanny ID'];
-        } else {
-            $model = new UserNotify();
-            $model->receiver_id = Yii::$app->request->post('uid');
-            $model->content = Yii::$app->request->post('content');
-            $model->subject = Yii::$app->request->post('subject');
-            if ($model->save()) {
-                Yii::$app->session->setFlash('alert', [
-                    'options' => ['class'=>'alert-success'],
-                    'body' => Yii::t('frontend', 'The message has been sent', [], Yii::$app->user->identity->userProfile->locale)
-                ]);
-                return ['status' => true];
-            } else {
-                return ['status' => false, 'message' => 'Unknown Error'];
+        $model = new UserNotify();
+        if (parse_url(Yii::$app->request->referrer, PHP_URL_PATH) === \yii\helpers\Url::to(['/user/default/message'])) {
+            $model->pid = Yii::$app->request->post('pid');
+            $replyNotify = UserNotify::findOne(['id' => $model->pid, 'receiver_id' => Yii::$app->user->id]);
+            if (!$replyNotify) {
+                throw new NotFoundHttpException('The requested page does not exist.');
             }
+            $model->receiver_id = $replyNotify->sender_id;
+        } else {
+            if (!ParentNanny::findOne(['parentid' => Yii::$app->user->id, 'nannyid' => Yii::$app->request->post('uid')])) {
+                return ['status' => false, 'message' => 'Invalid Nanny ID'];
+            } else {
+                $model->receiver_id = Yii::$app->request->post('uid');
+            }
+        }
+        $model->content = Yii::$app->request->post('content');
+        $model->subject = Yii::$app->request->post('subject');
+        if ($model->save()) {
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class'=>'alert-success'],
+                'body' => Yii::t('frontend', 'The message has been sent', [], Yii::$app->user->identity->userProfile->locale)
+            ]);
+            return ['status' => true];
+        } else {
+            return ['status' => false, 'message' => 'Unknown Error'];
         }
     }
     
