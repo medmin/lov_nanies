@@ -14,6 +14,7 @@ use common\models\WidgetCarousel;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use common\models\ParentPost;
 use yii\web\NotFoundHttpException;
@@ -233,7 +234,7 @@ class PostJobController extends Controller
 
         $model = new UserNotify();
 
-        if (parse_url(Yii::$app->request->referrer, PHP_URL_PATH) === '/user/default/notify') {
+        if (parse_url(Yii::$app->request->referrer, PHP_URL_PATH) === Url::to(['user/default/notify'])) {
             $model->pid = Yii::$app->request->post('pid');
             $replyNotify = UserNotify::findOne(['id' => $model->pid, 'receiver_id' => Yii::$app->user->id]);
             if (!$replyNotify) {

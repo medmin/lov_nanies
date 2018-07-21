@@ -45,17 +45,16 @@ $this->registerJs(
         <div class="media-left">
             <p class="job-type"><?= Nannies::jobType()[$model->job_type]; ?></p>
             <p class="job-type-of-help"><?= Nannies::typeOfHelp()[$model->type_of_help]; ?></p>
-<!--            <div class="job-contact">-->
-<!--                <button type="button" class="btn theme-bg-color" id="job-contact">Contact</button>-->
-<!--            </div>-->
+            <?php if (!Yii::$app->user->isGuest && UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) : ?>
+           <div class="job-contact">
+                <button type="button" class="btn theme-bg-color" id="job-contact">Contact</button>
+            </div>
+            <?php endif; ?>
         </div>
         <div class="media-body">
             <h4 class="media-heading"><?= $model->summary?></h4>
             <div class="job-date">
                 Posted by <?= Html::encode($model->user->username) ?> on <?= date('n/j/Y', $model->created_at)?>
-                <?php if (!Yii::$app->user->isGuest && UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) : ?>
-                <span class="job-user-email" style="color:#2f628f;">Email: <?= Yii::$app->user->identity->email?></span>
-                <?php endif; ?>
             </div>
             <div class="job-detail-container">
                 <?= Html::decode($model->description) ?>
@@ -64,19 +63,22 @@ $this->registerJs(
     </div>
 </div>
 
-<!--<div class="panel panel-default hidden job-contact-panel">-->
-<!--    <div class="panel-heading">-->
-<!--        Send message-->
-<!--    </div>-->
-<!--    <div class="panel-body">-->
-<!--        <div class="form-group">-->
-<!--            <label for="messageSubject">Subject</label>-->
-<!--            <input type="text" class="form-control" name="subject" id="messageSubject" placeholder="subject" maxlength="1000">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="messageText">Content</label>-->
-<!--            <textarea name="content" class="form-control" id="messageText" rows="10"></textarea>-->
-<!--        </div>-->
-<!--        <button type="button" class="btn theme-bg-color" id="sendMessage">Send</button>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="panel panel-default hidden job-contact-panel">
+    <div class="panel-heading">
+        Send a message to the parent: <?= $model->user->username ?> <br>
+        Attention:<br>
+        The parent will get an email to notify him/her that you have sent a message.<br>
+        If you send spam messages, your account will be suspended.
+    </div>
+    <div class="panel-body">
+       <div class="form-group">
+           <label for="messageSubject">Subject</label>
+            <input type="text" class="form-control" name="subject" id="messageSubject" placeholder="subject" maxlength="1000">
+        </div>
+       <div class="form-group">
+            <label for="messageText">Content</label>
+            <textarea name="content" class="form-control" id="messageText" rows="10"></textarea>
+        </div>
+        <button type="button" class="btn theme-bg-color" id="sendMessage">Send</button>
+    </div>
+</div>

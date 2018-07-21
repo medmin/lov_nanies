@@ -4858,7 +4858,7 @@ Accordation (Faq,blog pages)
 .panel-body {
     text-align: left;
     color: #8a8888;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 400;
 }
 
@@ -7460,9 +7460,14 @@ Media Quaries
     background-color: white;
     border: 1px solid #699;
 }
-.theme-bg-color {
+.theme-bg-color, .theme-btn {
     background-color: #699;
     color: white;
+}
+.theme-btn:hover {
+    background-color: white;
+    color: #699;
+    border: solid 1px #699;
 }
 
 

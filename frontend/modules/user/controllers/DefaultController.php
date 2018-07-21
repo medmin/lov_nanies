@@ -2,6 +2,7 @@
 
 namespace frontend\modules\user\controllers;
 
+use common\models\ParentNanny;
 use common\models\UserNotify;
 use common\models\WidgetCarousel;
 use common\modules\file\models\UserFile;
@@ -92,15 +93,19 @@ class DefaultController extends Controller
          * Role对象是属性为角色表（rbac_auth_item）的字段值
          */
         $tmpArr = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId());
-        if(array_key_exists('nanny', $tmpArr)){
 
-            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) {
+        if(array_key_exists('nanny', $tmpArr))
+        {
+
+            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) 
+            {
 
                 (new \common\lib\SendEmail([
                     'subject' => Yii::t('frontend', 'Password changed for {name}', ['name'=>Yii::$app->name]),
                     'to' => Yii::$app->user->identity->email,
                     'body' => 'Hello ' . \yii\helpers\Html::encode(Yii::$app->user->identity->username) . ', Your password was successfully changed.'
                 ]))->handle();
+
                 Yii::$app->session->setFlash('forceUpdateLocale');
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-success'],
@@ -125,8 +130,11 @@ class DefaultController extends Controller
                 'sort' => false
             ]);
             return $this->render('user_index_nanny', ['model'=>$accountForm, 'dataProvider' => $dataProvider, 'dataProvider1' => $dataProvider1, 'refs'=>$refs]);
-        } else {
-            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) {
+        } 
+        else 
+        {
+            if ($accountForm->load(Yii::$app->request->post()) && $accountForm->save()) 
+            {
                 (new \common\lib\SendEmail([
                     'subject' => Yii::t('frontend', 'Password changed for {name}', ['name'=>Yii::$app->name]),
                     'to' => Yii::$app->user->identity->email,
@@ -143,6 +151,8 @@ class DefaultController extends Controller
         }
         
     }
+
+    
     public function actionMain(){
         $user = Yii::$app->user->identity;
         $model= Nannies::findOne(Yii::$app->user->id);
@@ -374,7 +384,34 @@ class DefaultController extends Controller
 //            ]
         ]);
         UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
-        return $this->render('notify', ['dataProvider' => $dataProvider]);
+        return $this->render('notify_list', ['dataProvider' => $dataProvider]);
+    }
+
+    public function actionContact()
+    {
+        if (!Yii::$app->request->isAjax) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        Yii::$app->response->format = 'json';
+
+        if (!ParentNanny::findOne(['parentid' => Yii::$app->user->id, 'nannyid' => Yii::$app->request->post('uid')])) {
+            return ['status' => false, 'message' => 'Invalid Nanny ID'];
+        } else {
+            $model = new UserNotify();
+            $model->receiver_id = Yii::$app->request->post('uid');
+            $model->content = Yii::$app->request->post('content');
+            $model->subject = Yii::$app->request->post('subject');
+            if ($model->save()) {
+                Yii::$app->session->setFlash('alert', [
+                    'options' => ['class'=>'alert-success'],
+                    'body' => Yii::t('frontend', 'The message has been sent', [], Yii::$app->user->identity->userProfile->locale)
+                ]);
+                return ['status' => true];
+            } else {
+                return ['status' => false, 'message' => 'Unknown Error'];
+            }
+        }
     }
     
     protected function findEmp($id)

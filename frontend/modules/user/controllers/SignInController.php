@@ -109,7 +109,8 @@ class SignInController extends \yii\web\Controller
             $login = Yii::$app->request->post('LoginForm')['identity'];
 
             $userStatus = User::find()
-                        ->where(['or',
+                        ->where([
+                                'or',
                                 ['username'=>$login ],
                                 ['email'=>$login] 
                             ])
@@ -123,26 +124,44 @@ class SignInController extends \yii\web\Controller
             }
         }
         
-        if (Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax) 
+        {
             $model->load($_POST);
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            /**这里，如果是nanny，刚注册，step是1，除非填写接下来的所有信息，step就一直小于6，直到完成所有表格，step才变为8
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) 
+        {
+            /**这里，如果是nanny，刚注册，step是1，
+             * 除非填写接下来的所有信息，step就一直小于6，
+             * 直到完成所有表格，step才变为8
              * 如果注册的时候，身份选的是parent，注册后，不管是否激活，step就是7
             */
+
             //这里，身份是注册了，激活了，但未填写信息的parent
-            if (Yii::$app->user->identity->step==7){
+            if ( Yii::$app->user->identity->step == 7 )
+            {
                 return $this->actionContinueRegistration();
             }
-            //刚注册且激活了的nanny，尚未付款
-            else if (Yii::$app->user->identity->step < 6 ){
+            //刚注册且激活了的nanny，是否付款未知
+            else if (Yii::$app->user->identity->step < 6 )
+            {
                 $userid = Yii::$app->user->id;
-                //判断保姆是否已经支付过了signup fee和monthly fee
-                if (User::findById($userid)->credits >= 9999 && UserOrder::NannyListingFeeStatus($userid)){
+                /**判断保姆是否已经支付过了signup fee和monthly fee
+                 * 为了便于阅读，搞成这样，请doze见谅
+                 * 
+                 * 下面这if是已经支付了注册费且月费没过期的保姆
+                 */ 
+                if (
+                    User::findById($userid)->credits >= 9999 
+                    && UserOrder::NannyListingFeeStatus($userid)
+                    )
+                {
                     return $this->redirect(['/user/default/index']);
                 }
+
+                //没付款就重定向去付款页面
                 return $this->redirect(['/user/default/get-credits']);
             }
 
@@ -381,9 +400,14 @@ class SignInController extends \yii\web\Controller
             'options' => ['class' => 'alert-success']
         ]);
         $tmpArr2 = Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()) ;
-        if(array_key_exists('nanny',$tmpArr2)){
-            return  Yii::$app->controller->redirect(['/user/sign-in/continue-registration']);
-        }else{
+
+        if(array_key_exists('nanny',$tmpArr2))
+        {
+            return $this->redirect(['/user/default/index']);
+            // return  Yii::$app->controller->redirect(['/user/sign-in/continue-registration']);
+        }
+        else
+        {
             return  Yii::$app->controller->redirect(['/user/sign-in/continue-family']);
         }
         

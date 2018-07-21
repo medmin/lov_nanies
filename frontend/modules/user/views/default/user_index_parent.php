@@ -31,6 +31,27 @@ $this->registerJs('
         $("#FilesList").modal("hide");
         $("#UploadFile").modal("show");
     })
+    $(".contact-nanny").click(function() {
+        $("#Contact").modal("show");
+        $("#Contact input[name=uid]").val($(this).data("uid"));
+        console.log()
+    })
+    $("#sendMessage").click(function() {
+       var subject = $("#Contact input[name=subject]").val()
+       var content = $("#Contact textarea[name=content]").val()
+       var uid = $("#Contact input[name=uid]").val()
+       if (uid == "" || subject.trim() == "" || content.trim() == "") {
+         return false;
+       } else {
+         $.post("/user/default/contact", {subject:subject,content:content,uid:uid}, function(data){
+           if (data.status) {
+               location.reload()
+           } else {
+             console.log(data.message)
+           }
+         }, "json")
+       }
+     })
 ', View::POS_END);
 $this->title = Yii::t('frontend', 'Parent Account Page')
 ?>
@@ -69,11 +90,11 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
             if (count($parentnannyrecords)) :
                 ?>
                 <table class="table table-hover">
-                    <thead><tr><th>Name</th><th>Email</th><th>Profile Link</th></tr></thead>
+                    <thead><tr><th>Name</th><th>Contact</th><th>Profile Link</th></tr></thead>
                     <tbody>
                     <?php
                     foreach ($parentnannyrecords as $record) {
-                        echo '<tr><td>'. preg_split('/\s+/', $record->nanny->name)[0] .'</td><td>'. $record->nanny->email .'</td><td>'. Html::a('Click Here', '/nannies/view?id=' . $record->nannyid) .'</td></tr>';
+                        echo '<tr><td>'. preg_split('/\s+/', $record->nanny->name)[0] .'</td><td>'. Html::button('Contact', ['class' => 'btn theme-btn contact-nanny', 'style' => 'cursor: pointer; padding: 3px 5px', 'data-uid' => $record->nanny->id]) .'</td><td>'. Html::a('Click Here', '/nannies/view?id=' . $record->nannyid) .'</td></tr>';
                     }
                     ?>
                     </tbody>
@@ -153,9 +174,35 @@ $this->title = Yii::t('frontend', 'Parent Account Page')
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">Upload</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancle</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
             </div>
             <?php ActiveForm::end() ?>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ContactModalLabel" id="Contact">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ContactModalLabel">Contact</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="messageSubject">Subject</label>
+                    <input type="text" class="form-control" name="subject" id="messageSubject" placeholder="subject" maxlength="1000">
+                </div>
+                <div class="form-group">
+                    <label for="messageText">Content</label>
+                    <textarea name="content" class="form-control" id="messageText" rows="10"></textarea>
+                </div>
+                <input type="hidden" name="uid" id="uid">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success " id="sendMessage">Send</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

@@ -67,7 +67,7 @@ NavBar::begin([
             ],
             
             [
-                'label' => Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->getPublicIdentity(), //. (($unread = \common\models\UserNotify::UnreadNotifyCount()) ? "<span class=\"badge theme-bg-color unread-badge\">$unread</span>" : '')
+                'label' => Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->getPublicIdentity() . (($unread = \common\models\UserNotify::UnreadNotifyCount()) ? "<span class=\"badge theme-bg-color unread-badge\">$unread</span>" : ''),
                 'visible'=>!Yii::$app->user->isGuest,
                 'items'=>[
                     [
@@ -80,9 +80,9 @@ NavBar::begin([
                         'visible' => array_key_exists('seeker', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))
                     ],
                     [
-                        'label' => Yii::t('frontend', 'Notify'),// . (isset($unread) && $unread ? "($unread)" : ''),
+                        'label' => Yii::t('frontend', 'Messages') . (isset($unread) && $unread ? "($unread)" : ''),
                         'url' => ['/user/default/notify'],
-                        'visible' => false // !Yii::$app->user->isGuest && (bool)$unread
+                        'visible' =>  !Yii::$app->user->isGuest //&& (bool)$unread
                     ],
                     [
                         'label' => Yii::t('frontend', 'Backend'),

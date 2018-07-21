@@ -17,8 +17,9 @@ $this->registerJs(
     'my-button-handler'
 );
 
-$this->title = Yii::t('frontend', 'Parent Account Page');
+$this->title = Yii::t('frontend', 'Parent Notifications');
 ?>
+<br>
 <?= \yii\widgets\ListView::widget([
     'dataProvider'=>$dataProvider,
     'pager'=>[
@@ -37,13 +38,22 @@ $this->title = Yii::t('frontend', 'Parent Account Page');
     ],
     'summary'=>'',
     'itemView'=> function ($model, $key, $index, $widget) {
+        $sender = \common\models\User::findById($model->sender_id);
+        $msg_created_at = date('Y-F-d H:i:s', $model->created_at);
+        $url = \yii\helpers\Url::to(['/user/default/notify', 'id' => $model->id]);
+        $content = \yii\helpers\StringHelper::truncate($model->content, 10, Html::a(' . . .', $url, ['title' => 'Full Message']), null, true);
         return <<<HTML
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="notify?id={$model->id}">$model->subject</a>
+        <p style="padding: 0 0 5px 0">Subject: <a href="{$url}">$model->subject</a></p>
+        <p style="padding: 0 0 5px 0">Sender: {$sender->username} </p>
+        <p style="padding: 0">Time: {$msg_created_at} </p>
     </div>
     <div class="panel-body">
-        $model->content
+        $content
+        <div class="notify-reply">
+            <a href="{$url}"><button type="button" class="btn theme-btn pull-right">Reply</button></a>
+        </div>
     </div>
 </div>
 HTML;
