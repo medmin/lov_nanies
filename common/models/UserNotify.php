@@ -114,7 +114,9 @@ class UserNotify extends \yii\db\ActiveRecord
             Yii::$app->queue->push(new EmailJob([
                 'email' => $email,
                 'subject' => $this->subject,
-                'body' => $this->content
+                'body' => $this->content,
+                'category' => self::class,
+                'callback_id' => $this->id
             ]));
         }
     }
