@@ -104,17 +104,15 @@ class UserNotify extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         if ($insert) {
-            if ($this->job_post_id === null) {
-                // 如果没有job_post_id 说明是私信来自家长联系保姆页面（至于是 「家长回复保姆」 还是 「保姆回复家长」 无法判断）
-                $nanny = Nannies::findOne($this->receiver_id);
-                $email = ($nanny && $nanny->email) ? $nanny->email : User::findOne($this->receiver_id)->email;
-            } else {
-                $email = User::findOne($this->receiver_id)->email;
-            }
+        
+            $email = User::findById($this->receiver_id)->email;
+
+            $sender_username = User::findById($this->sender_id)->username;
+
             Yii::$app->queue->push(new EmailJob([
                 'email' => $email,
-                'subject' => $this->subject,
-                'body' => $this->content
+                'subject' => $sender_username . " sent a new message: " .$this->subject,
+                'body' => "Full message: <br>". $this->content . "<br><br><strong>Please log in to send a reply</strong>: <a href='https://membership.nannycare.com'>https://membership.nannycare.com</a>."
             ]));
         }
     }
