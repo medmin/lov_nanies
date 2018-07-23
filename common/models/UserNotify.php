@@ -112,7 +112,9 @@ class UserNotify extends \yii\db\ActiveRecord
             Yii::$app->queue->push(new EmailJob([
                 'email' => $email,
                 'subject' => $sender_username . " sent a new message: " .$this->subject,
-                'body' => "Full message: <br>". $this->content . "<br><br><strong>Please log in to send a reply</strong>: <a href='https://membership.nannycare.com'>https://membership.nannycare.com</a>."
+                'body' => "Full message: <br>". $this->content . "<br><br><strong>Please log in to send a reply</strong>: <a href='https://membership.nannycare.com'>https://membership.nannycare.com</a>.",
+                'category' => self::class,
+                'callback_id' => $this->id
             ]));
         }
     }

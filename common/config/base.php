@@ -14,7 +14,8 @@ $config = [
             'db' => 'db',
             'tableName' => '{{%queue}}',
             'channel' => 'default',
-            'mutex' => \yii\mutex\MysqlMutex::class
+            'mutex' => \yii\mutex\MysqlMutex::class,
+            'as afterExec' => \common\behaviors\QueueAfterExecBehavior::class
         ],
 
         'authManager' => [

@@ -368,22 +368,37 @@ class DefaultController extends Controller
         // print_r(Yii::$app->user);
     }
 
-    public function actionNotify($id = null)
+    public function actionNotify($id = null, $role = null)
     {
         if ($id) {
-            $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
+            if ($role === 'send') {
+                $model = UserNotify::findOne(['sender_id' => Yii::$app->user->id, 'id' => $id]);
+            } else {
+                $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
+            }
             if (!$model) {
                 throw new NotFoundHttpException('The requested page does not exist.');
             }
             return $this->render('notify_view', ['model' => $model]);
         }
-        $dataProvider = new ActiveDataProvider([
-            'query' => UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]),
+        if ($role === 'send') {
+            $dataProvider = new ActiveDataProvider([
+               'query' => UserNotify::find()
+                   ->where(['sender_id' => Yii::$app->user->id])
+                   ->orderBy(['created_at' => SORT_DESC]),
+//                'pagination' => [
+//                    'pageSize' => 5
+//                ]
+            ]);
+        } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]),
 //            'pagination' => [
 //                'pageSize' => 20
 //            ]
-        ]);
-        UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
+            ]);
+            UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
+        }
         return $this->render('notify_list', ['dataProvider' => $dataProvider]);
     }
 
