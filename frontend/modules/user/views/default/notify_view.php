@@ -9,9 +9,11 @@ $ajax_url = $model->job_post_id ? Url::to(['/find-a-job/contact']) : Url::to(['/
 $this->registerJs(
     '
     $(document).ready(function () {
-        $("html, body").animate({scrollTop: $(".slide").height()+$(".navbar").height()},"slow");
-        console.log($("slide").height());
-            });
+        if (!window.location.hash) {
+            $("html, body").animate({scrollTop: $(".slide").height()+$(".navbar").height()},"slow");
+        }
+     });
+            
      
      $("#sendMessage").click(function() {
        var subject = $("input[name=subject]").val()
@@ -50,8 +52,8 @@ $this->title = 'My message';
         </div>
     </div>
 </div>
-
-<div class="panel panel-default show job-contact-panel">
+<?php if (Yii::$app->user->id != $model->sender_id): ?>
+<div class="panel panel-default show job-contact-panel" id="reply">
     <div class="panel-heading">
         Reply a message to the nanny: <?= \common\Models\User::findById($model->sender_id)->username ?> <br>
         Attention:<br>
@@ -70,3 +72,4 @@ $this->title = 'My message';
         <button type="button" class="btn theme-btn" id="sendMessage">Send</button>
     </div>
 </div>
+<?php endif; ?>
