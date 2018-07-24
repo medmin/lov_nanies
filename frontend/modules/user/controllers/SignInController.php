@@ -403,6 +403,7 @@ class SignInController extends \yii\web\Controller
 
         if(array_key_exists('nanny',$tmpArr2))
         {
+            Nannies::initialization();
             return $this->redirect(['/user/default/index']);
             // return  Yii::$app->controller->redirect(['/user/sign-in/continue-registration']);
         }
