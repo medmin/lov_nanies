@@ -7464,6 +7464,14 @@ Media Quaries
     background-color: #699;
     color: white;
 }
+.theme-a {
+    color: #699;
+    padding-left: 3px;
+}
+.theme-a:hover{
+    color: #3cc7c0;
+    text-decoration: underline;
+}
 
 
 /* Nanny Account */
