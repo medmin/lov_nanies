@@ -368,7 +368,7 @@ class DefaultController extends Controller
         // print_r(Yii::$app->user);
     }
 
-    public function actionNotify($id = null, $role = null)
+    public function actionNotify($id = null, $role = null, $group = null, $group_id = null)
     {
         if ($id) {
             if ($role === 'send') {
@@ -381,6 +381,14 @@ class DefaultController extends Controller
             }
             return $this->render('notify_view', ['model' => $model]);
         }
+        if ($group_id) {
+            $dataProvider = new ActiveDataProvider([
+                'query' => UserNotify::find()
+                    ->where(['sender_id' => $group_id, 'receiver_id' => Yii::$app->user->id])
+                    ->orderBy(['created_at' => SORT_DESC]),
+            ]);
+            return $this->render('notify_list', ['dataProvider' => $dataProvider]);
+        }
         if ($role === 'send') {
             $dataProvider = new ActiveDataProvider([
                'query' => UserNotify::find()
@@ -391,13 +399,19 @@ class DefaultController extends Controller
 //                ]
             ]);
         } else {
+            if ((boolean)$group) {
+                $query = (new \yii\db\Query())->select('tmp.*,username')->from("(select `sender_id`, count(*) as count FROM `user_notify` WHERE `receiver_id`=". Yii::$app->user->id ." GROUP BY `sender_id`) as tmp")->leftJoin('user','`sender_id` = `id`');
+//                "SELECT tmp.*,`username` from ("select `sender_id`, count(*) as count FROM `user_notify` WHERE `receiver_id`=". Yii::$app->user->id ." GROUP BY `sender_id`) as tmp" LEFT JOIN user ON `sender_id` = `id`"
+            } else {
+                $query = UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]);
+                UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
+            }
             $dataProvider = new ActiveDataProvider([
-                'query' => UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]),
+                'query' => $query,
 //            'pagination' => [
-//                'pageSize' => 20
+//                'pageSize' => 1
 //            ]
             ]);
-            UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
         }
         return $this->render('notify_list', ['dataProvider' => $dataProvider]);
     }
