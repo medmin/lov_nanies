@@ -55,9 +55,9 @@ $this->title = 'My message';
 <?php if (Yii::$app->user->id != $model->sender_id): ?>
 <div class="panel panel-default show job-contact-panel" id="reply">
     <div class="panel-heading">
-        Reply a message to the nanny: <?= \common\Models\User::findById($model->sender_id)->username ?> <br>
+        Reply to nanny: <?= \common\Models\User::findById($model->sender_id)->username ?> <br>
         Attention:<br>
-        The nanny will get an email to notify her/him that you have sent a message.<br>
+        The nanny will get a message in their inbox.<br>
         If you send spam messages, your account will be suspended.
     </div>
     <div class="panel-body">

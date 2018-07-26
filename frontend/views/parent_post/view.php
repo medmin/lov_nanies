@@ -65,9 +65,9 @@ $this->registerJs(
 
 <div class="panel panel-default hidden job-contact-panel">
     <div class="panel-heading">
-        Send a message to the parent: <?= $model->user->username ?> <br>
+        Reply to family:: <?= $model->user->username ?> <br>
         Attention:<br>
-        The parent will get an email to notify him/her that you have sent a message.<br>
+        The family will get a message in their inbox.<br>
         If you send spam messages, your account will be suspended.
     </div>
     <div class="panel-body">
