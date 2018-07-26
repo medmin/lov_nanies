@@ -20,20 +20,29 @@ $this->registerJs(
 $this->title = Yii::t('frontend', 'Parent Notifications');
 
 // 通过 url 参数来判断展示什么
-$params_role_send = Yii::$app->request->getQueryParam('role') === 'send';
+$params_role = Yii::$app->request->getQueryParam('role');
 $params_group_bool = (boolean)Yii::$app->request->getQueryParam('group');
 ?>
 <br>
 <ul class="nav nav-tabs nav-justified message-nav">
-    <li class="dropdown <?= $params_role_send ? '' : 'active' ?>">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Received <span class="caret"></span></a>
+    <!-- <li class="dropdown <?= $params_role == "received"  ? 'active' : '' ?>">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Received Messages<span class="caret"></span></a>
         <ul class="dropdown-menu">
-            <li><a href="<?= Url::to(['/user/default/notify'])?>">All messages</a></li>
-            <li><a href="<?= Url::to(['/user/default/notify', 'group' => 1])?>">Group by users</a></li>
+            <li><a href="<?= Url::to(['/user/default/notify' , 'role' => 'received'])?>">All messages</a></li>
+            <li><a href="<?= Url::to(['/user/default/notify', 'group' => 1, 'role' => 'received'])?>">Group by users</a></li>
         </ul>
+    </li> -->
+    <li class="<?= $params_role == "received" ? 'active' : '' ?>">
+        <a href="<?= $params_role == "received" ? 'javascript:void(0)' : Url::to(['/user/default/notify', 'role' => 'received'])?>">Received</a>
     </li>
-    <li class="<?= $params_role_send ? 'active' : '' ?>">
-        <a href="<?= $params_role_send ? 'javascript:void(0)' : Url::to(['/user/default/notify', 'role' => 'send'])?>">Sent</a>
+    <li class="<?= $params_role == "grouped_by_senders" ? 'active' : '' ?>">
+        <a href="<?= $params_role == "grouped_by_senders" ? 'javascript:void(0)' : Url::to(['/user/default/notify', 'role' => 'grouped_by_senders'])?>">Grouped By Senders</a>
+    </li>
+    <li class="<?= $params_role == "sent" ? 'active' : '' ?>">
+        <a href="<?= $params_role == "sent" ? 'javascript:void(0)' : Url::to(['/user/default/notify', 'role' => 'sent'])?>">Sent</a>
+    </li>
+    <li class="<?= $params_role == "all" ? 'active' : '' ?>">
+        <a href="<?= Url::to(['/user/default/notify' , 'role' => 'all'])?>">All messages</a>
     </li>
 </ul>
 <?= \yii\widgets\ListView::widget([
@@ -53,7 +62,7 @@ $params_group_bool = (boolean)Yii::$app->request->getQueryParam('group');
         'tag' => false
     ],
     'summary'=>'',
-    'itemView'=> function ($model, $key, $index, $widget) use ($params_role_send, $params_group_bool) {
+    'itemView'=> function ($model, $key, $index, $widget) use ($params_role, $params_group_bool) {
         if ($params_group_bool) {
             $url = Url::to(['/user/default/notify', 'group_id' => $model['sender_id']]);
             return <<<HTML
@@ -62,10 +71,10 @@ $params_group_bool = (boolean)Yii::$app->request->getQueryParam('group');
     <span class="badge pull-right theme-bg-color">{$model['count']}</span>
 </a>
 HTML;
-        } else if ($params_role_send) {
+        } else if ($params_role == "sent") {
             $msg_created_at = date('Y-F-d H:i:s', $model->created_at);
             $receiver = \common\models\User::findById($model->receiver_id);
-            $url = Url::to(['/user/default/notify', 'id' => $model->id, 'role' => 'send']);
+            $url = Url::to(['/user/default/notify', 'id' => $model->id, 'role' => 'sent']);
             $content = \yii\helpers\StringHelper::truncate($model->content, 350, Html::a(' . . .', $url, ['title' => 'Full Message']), null, true);
             return <<<HTML
 <div class="panel panel-default">

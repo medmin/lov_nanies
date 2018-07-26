@@ -370,10 +370,15 @@ class DefaultController extends Controller
 
     public function actionNotify($id = null, $role = null, $group = null, $group_id = null)
     {
-        if ($id) {
-            if ($role === 'send') {
+        // var_dump($id, $role,$group,$group_id);exit;
+        if ($id) 
+        {
+            if ($role == 'sent') {
                 $model = UserNotify::findOne(['sender_id' => Yii::$app->user->id, 'id' => $id]);
-            } else {
+            } else if ($role == 'received') {
+                $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
+            }
+            else{
                 $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
             }
             if (!$model) {
@@ -389,28 +394,60 @@ class DefaultController extends Controller
             ]);
             return $this->render('notify_list', ['dataProvider' => $dataProvider]);
         }
-        if ($role === 'send') {
+
+        if ($role == 'sent') 
+        {
             $dataProvider = new ActiveDataProvider([
                'query' => UserNotify::find()
                    ->where(['sender_id' => Yii::$app->user->id])
                    ->orderBy(['created_at' => SORT_DESC]),
-//                'pagination' => [
-//                    'pageSize' => 5
-//                ]
+               'pagination' => [
+                   'pageSize' => 5
+               ]
             ]);
-        } else {
-            if ((boolean)$group) {
+        }  
+        elseif ($role == 'all') 
+        {
+            $dataProvider = new ActiveDataProvider([
+               'query' => UserNotify::find()
+                   ->where(['sender_id' => Yii::$app->user->id])
+                   ->orWhere(['receiver_id' => Yii::$app->user->id])
+                   ->orderBy(['created_at' => SORT_DESC]),
+               'pagination' => [
+                   'pageSize' => 5
+               ]
+            ]);
+        } 
+        elseif ($role == 'grouped_by_senders') 
+        {
+            // if ((boolean)$group) {
+            if (true) 
+            {
                 $query = (new \yii\db\Query())->select('tmp.*,username')->from("(select `sender_id`, count(*) as count FROM `user_notify` WHERE `receiver_id`=". Yii::$app->user->id ." GROUP BY `sender_id`) as tmp")->leftJoin('user','`sender_id` = `id`');
-//                "SELECT tmp.*,`username` from ("select `sender_id`, count(*) as count FROM `user_notify` WHERE `receiver_id`=". Yii::$app->user->id ." GROUP BY `sender_id`) as tmp" LEFT JOIN user ON `sender_id` = `id`"
-            } else {
+            } 
+            else 
+            {
                 $query = UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]);
                 UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
             }
+
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
-//            'pagination' => [
-//                'pageSize' => 1
-//            ]
+                'pagination' => [
+                    'pageSize' => 5
+                ]
+            ]);
+        }
+        else 
+        {
+            //其实是默认什么参数都没有的情况下，显示‘received’
+            $dataProvider = new ActiveDataProvider([
+               'query' => UserNotify::find()
+                   ->where(['receiver_id' => Yii::$app->user->id])
+                   ->orderBy(['created_at' => SORT_DESC]),
+               'pagination' => [
+                   'pageSize' => 5
+               ]
             ]);
         }
         return $this->render('notify_list', ['dataProvider' => $dataProvider]);
