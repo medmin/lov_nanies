@@ -34,11 +34,11 @@ $params_group_bool = (boolean)Yii::$app->request->getQueryParam('group_id');
     <li class="<?= $params_role == "sent" ? 'active' : '' ?>">
         <a href="<?= $params_role == "sent" ? 'javascript:void(0)' : Url::to(['/user/default/notify', 'role' => 'sent'])?>">Sent</a>
     </li>
-    <li class="<?= $params_role == "all" ? 'active' : '' ?>">
-        <a href="<?= $params_role == "all" ? 'javascript:void(0)' : Url::to(['/user/default/notify' , 'role' => 'all'])?>">All messages</a>
-    </li>
     <li class="<?= $params_role == "grouped_by_receivers" ? 'active' : '' ?>">
         <a href="<?= $params_role == "grouped_by_receivers" ? 'javascript:void(0)' : Url::to(['/user/default/notify' , 'role' => 'grouped_by_receivers'])?>">Grouped By Receivers</a>
+    </li>
+    <li class="<?= $params_role == "all" ? 'active' : '' ?>">
+        <a href="<?= $params_role == "all" ? 'javascript:void(0)' : Url::to(['/user/default/notify' , 'role' => 'all'])?>">All messages</a>
     </li>
 </ul>
 <?= \yii\widgets\ListView::widget([
@@ -87,7 +87,7 @@ HTML;
 <div class="panel panel-default">
     <div class="panel-heading">
         <p style="padding: 0 0 5px 0">Subject: <a href="{$url}">$model->subject</a></p>
-        <p style="padding: 0 0 5px 0">Recipient: {$user_link} </p>
+        <p style="padding: 0 0 5px 0">Receiver: {$user_link} </p>
         <p style="padding: 0">Time: {$msg_created_at} </p>
     </div>
     <div class="panel-body">
