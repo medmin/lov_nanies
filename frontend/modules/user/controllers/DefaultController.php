@@ -368,17 +368,16 @@ class DefaultController extends Controller
         // print_r(Yii::$app->user);
     }
 
-    public function actionNotify($id = null, $role = null, $group = null, $group_id = null)
+    public function actionNotify($id = null, $role = null, $group_id = null)
     {
-        // var_dump($id, $role,$group,$group_id);exit;
-        if ($id) 
-        {
-            if ($role == 'sent') {
+        if ($id) {
+            if ($role == 'sent' || $role == 'grouped_by_receivers') {
                 $model = UserNotify::findOne(['sender_id' => Yii::$app->user->id, 'id' => $id]);
             } else if ($role == 'received') {
                 $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
-            }
-            else{
+            } else if ($role == 'all') {
+                $model = UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orWhere(['sender_id' => Yii::$app->user->id])->andWhere(['id' => $id])->one();
+            } else{
                 $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
             }
             if (!$model) {
@@ -387,69 +386,54 @@ class DefaultController extends Controller
             return $this->render('notify_view', ['model' => $model]);
         }
         if ($group_id) {
-            $dataProvider = new ActiveDataProvider([
-                'query' => UserNotify::find()
-                    ->where(['sender_id' => $group_id, 'receiver_id' => Yii::$app->user->id])
-                    ->orderBy(['created_at' => SORT_DESC]),
-            ]);
-            return $this->render('notify_list', ['dataProvider' => $dataProvider]);
-        }
-
-        if ($role == 'sent') 
-        {
-            $dataProvider = new ActiveDataProvider([
-               'query' => UserNotify::find()
-                   ->where(['sender_id' => Yii::$app->user->id])
-                   ->orderBy(['created_at' => SORT_DESC]),
-               'pagination' => [
-                   'pageSize' => 5
-               ]
-            ]);
-        }  
-        elseif ($role == 'all') 
-        {
-            $dataProvider = new ActiveDataProvider([
-               'query' => UserNotify::find()
-                   ->where(['sender_id' => Yii::$app->user->id])
-                   ->orWhere(['receiver_id' => Yii::$app->user->id])
-                   ->orderBy(['created_at' => SORT_DESC]),
-               'pagination' => [
-                   'pageSize' => 5
-               ]
-            ]);
-        } 
-        elseif ($role == 'grouped_by_senders') 
-        {
-            // if ((boolean)$group) {
-            if (true) 
-            {
-                $query = (new \yii\db\Query())->select('tmp.*,username')->from("(select `sender_id`, count(*) as count FROM `user_notify` WHERE `receiver_id`=". Yii::$app->user->id ." GROUP BY `sender_id`) as tmp")->leftJoin('user','`sender_id` = `id`');
-            } 
-            else 
-            {
-                $query = UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]);
-                UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
+            $query = UserNotify::find();
+            if ($role == 'grouped_by_senders') {
+                $query->where(['sender_id' => $group_id, 'receiver_id' => Yii::$app->user->id]);
+            } elseif ($role == 'grouped_by_receivers') {
+                $query->where(['receiver_id' => $group_id, 'sender_id' => Yii::$app->user->id]);
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
             }
-
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => [
                     'pageSize' => 5
                 ]
             ]);
+            return $this->render('notify_list', ['dataProvider' => $dataProvider]);
         }
-        else 
-        {
-            //其实是默认什么参数都没有的情况下，显示‘received’
-            $dataProvider = new ActiveDataProvider([
-               'query' => UserNotify::find()
-                   ->where(['receiver_id' => Yii::$app->user->id])
-                   ->orderBy(['created_at' => SORT_DESC]),
-               'pagination' => [
-                   'pageSize' => 5
-               ]
-            ]);
+
+        if ($role == 'sent') {
+            $query = UserNotify::find()
+                ->where(['sender_id' => Yii::$app->user->id])
+                ->orderBy(['created_at' => SORT_DESC]);
+        } elseif ($role == 'all') {
+            $query = UserNotify::find()
+                ->where(['sender_id' => Yii::$app->user->id])
+                ->orWhere(['receiver_id' => Yii::$app->user->id])
+                ->orderBy(['created_at' => SORT_DESC]);
+        } elseif ($role == 'grouped_by_senders') {
+            $query = (new \yii\db\Query())
+                ->select('tmp.*,username')
+                ->from("(select `sender_id`, count(*) as count FROM `user_notify` WHERE `receiver_id`=". Yii::$app->user->id ." GROUP BY `sender_id`) as tmp")
+                ->leftJoin('user','`sender_id` = `id`');
+        } elseif ($role == 'grouped_by_receivers') {
+            $query = (new \yii\db\Query())
+                ->select('tmp.*,username')
+                ->from("(select `receiver_id`, count(*) as count FROM `user_notify` WHERE `sender_id`=". Yii::$app->user->id ." GROUP BY `receiver_id`) as tmp")
+                ->leftJoin('user','`receiver_id` = `id`');
+        } else {
+            $query = UserNotify::find()
+                ->where(['receiver_id' => Yii::$app->user->id])
+                ->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]);
+            UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
         }
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 5
+            ]
+        ]);
         return $this->render('notify_list', ['dataProvider' => $dataProvider]);
     }
 
