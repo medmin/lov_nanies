@@ -3360,7 +3360,7 @@ pagination
 .pagination>li:first-child>a,
 .pagination>li:last-child>span,
 .pagination>li:first-child>span{
-    background: #6E6460;
+    background: #699;
     position: relative;
     border-radius: 5px;
     padding: 6px 24px;
@@ -3370,7 +3370,7 @@ pagination
 .pagination>li:first-child>a:hover,
 .pagination>li:first-child>span:hover,
 .pagination>li:last-child>span:hover{
-    background: #6E6460;
+    background: #699;
 }
 
 .pagination>li:last-child>a {
@@ -3384,7 +3384,7 @@ pagination
 
 .pagination>li:last-child>a:hover,
 .pagination>li:last-child>a:focus {
-    background: #6E6460;
+    background: #699;
     color: #ffffff;
     text-decoration: underline;
 }
@@ -3413,7 +3413,7 @@ pagination
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover{
-    color: #6E6460;
+    color: #699;
     text-decoration: underline;
     background: transparent;
 }
@@ -7464,10 +7464,20 @@ Media Quaries
     background-color: #699;
     color: white;
 }
+
 .theme-btn:hover {
     background-color: white;
     color: #699;
     border: solid 1px #699;
+}
+.theme-a {
+    color: #699;
+    padding-left: 3px;
+}
+.theme-a:hover{
+    color: #3cc7c0;
+    text-decoration: underline;
+
 }
 
 
