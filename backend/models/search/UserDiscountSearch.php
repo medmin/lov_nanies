@@ -18,8 +18,8 @@ class UserDiscountSearch extends UserDiscount
     public function rules()
     {
         return [
-            [['user_id', 'created_at', 'expired_at'], 'integer'],
-            [['discount'], 'number'],
+            [['user_id', 'type', 'created_at', 'expired_at'], 'integer'],
+            ['discount', 'integer', 'min' => 0, 'max' => 100],
         ];
     }
 
@@ -60,6 +60,7 @@ class UserDiscountSearch extends UserDiscount
         // grid filtering conditions
         $query->andFilterWhere([
             'user_id' => $this->user_id,
+            'type' => $this->type,
             'discount' => $this->discount,
             'created_at' => $this->created_at,
             'expired_at' => $this->expired_at,

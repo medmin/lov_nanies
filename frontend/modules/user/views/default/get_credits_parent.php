@@ -25,20 +25,53 @@ $this->registerCss('
 }
 
 ');
+
+$off = \common\models\UserDiscount::getPostDiscountForOneFamily();
+if ($off == null) {
+    // 没有折扣
+    $correct_post_price = 99;
+} elseif ($off == 100) {
+    // 0 元单
+    $correct_post_price = 0;
+} else {
+    // 打折
+    $correct_post_price = floor(99 * (100 - $off)) / 100;
+}
 ?>
 <div class="columns">
   <ul class="price">
     <li class="header">Job Posting</li>
-    <li class="grey"><del style="color: #ccc"> $99 </del>   $0</li>
+    <li class="grey">
+        <?php if ($off !== null) {
+            echo '<del style="color: #ccc"> $99 </del>   $'. number_format($correct_post_price, 2);
+        } else {
+            echo '$99';
+        } ?>
+    </li>
     <li>90 Days Job Posting</li>
     <li>Reaching qualified nannies with background checks</li>
     <li>Hiding real email addresses</li>
     <li class="grey">
-      <form action="/pay/parent/post-only" method="POST">
-        <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
-        <input type="hidden" name="money" value=0 />
-        <button type="submit" class="stripe-button-el"><span style="display: block; min-height: 30px;">Pay 0 dollar</span></button>
-      </form>
+        <form action="/pay/parent/post-only" method="POST">
+            <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
+            <?php if ($correct_post_price == 0) : ?>
+                <button type="submit" class="stripe-button-el"><span style="display: block; min-height: 30px;">Pay 0 dollar</span></button>
+            <?php else : ?>
+                <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key= <?= env('STRIPE_PK') ?>
+                        data-amount="<?= $correct_post_price * 100 ?>"
+                        data-zip-code="true"
+                        data-name="NannyCare.com"
+                        data-description="Nanny SignUp Fee (one time fee)"
+                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                        data-locale="auto">
+                </script>
+                <input type="hidden" name="plan" value="Nanny SignUp Fee" />
+                <input type="hidden" name="money" value=<?= $correct_post_price * 100 ?> />
+                <input type="hidden" name="userid" value=<?= Yii::$app->user->id // 删掉 isGuest 是因为支付页面不允许游客访问 ?> />
+            <?php endif; ?>
+        </form>
     </li>
   </ul>
 </div>

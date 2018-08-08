@@ -190,9 +190,20 @@ $bundle = BackendAsset::register($this);
                     [
                         'label' => Yii::t('backend', 'Discount'),
                         'icon' => '<i class="fa fa-dollar"></i>',
-                        'url' => ['/discount/index'],
-                        'badge' => 'new',
-                        'badgeBgClass' => 'bg-red'
+                        'options' => ['class' => 'treeview'],
+                        'items' => [
+                            [
+                                'label' => Yii::t('backend', 'Nanny'),
+                                'url' => ['/discount/nanny'],
+                                'icon' => '<i class="fa fa-circle-o"></i>'
+                            ],
+                            [
+                                'label' => Yii::t('backend', 'Family'),
+                                'url' => ['/discount/family'],
+                                'icon' => '<i class="fa fa-circle-o"></i>'
+                            ]
+                        ],
+                        'url' => ['#']
                     ],
                     [
                         'label' => Yii::t('backend', 'Files'),

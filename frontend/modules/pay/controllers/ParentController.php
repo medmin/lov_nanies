@@ -238,6 +238,40 @@ EOT
     {
         if (Yii::$app->request->isPost)
         {
+            // 判断折扣
+            $off = \common\models\UserDiscount::getPostDiscountForOneFamily();
+            if ($off == null) {
+                $correct_price = 9900;
+            } elseif ($off == 100) {
+                $correct_price = 0;
+            } else {
+                $correct_price = floor(9900 * (100 - $off) / 100);
+            }
+
+            $data = Yii::$app->request->post();
+            $service_plan = 'Ninety-Days-Posting'; //发帖服务都叫这个名字，不管时间长短
+            $email = $data['stripeEmail'] ?? Yii::$app->user->identity->email;
+
+            if ($correct_price == 0) {
+                // 0 元订单不走 stripe, 两个名字都叫做 free order
+                $payment_gateway = 'free order';
+                $payment_gateway_id = 'free order';
+            } else {
+                \Stripe\Stripe::setApiKey(env('STRIPE_SK'));
+
+                //order info
+                $charge = \Stripe\Charge::create([
+                    'amount' => $correct_price,
+                    'currency' => 'usd',
+                    'description' => $service_plan,
+                    'source' => Yii::$app->request->post('stripeToken'),
+                    'statement_descriptor' => 'NannyCare.com',
+                    'metadata' => ['user_id' =>Yii::$app->user->id, 'username' => Yii::$app->user->identity->username, "user_type" => 'nanny', 'email' => $email],
+                ]);
+                $payment_gateway_id = $charge->id;
+                $payment_gateway = 'stripe';
+            }
+
             // $expired_at = UserOrder::ParentPostStatus($user->id);
             // if ($expired_at) 
             // {
@@ -258,10 +292,10 @@ EOT
             $NinetyDaysPosting->setAttributes([
                 'user_id' => Yii::$app->user->id,
                 'user_type' => 'parent',
-                'payment_gateway' => 'stripe',
-                'payment_gateway_id' => 'free order', // 暂时先定用 free order
-                'service_plan' => 'Ninety-Days-Posting', //发帖服务都叫这个名字，不管时间长短
-                'service_money' => 0,
+                'payment_gateway' => $payment_gateway,
+                'payment_gateway_id' => $payment_gateway_id,
+                'service_plan' => $service_plan,
+                'service_money' => $correct_price,
                 'timestamp' => time(),
                 'expired_at' => $expired_at
             ]);

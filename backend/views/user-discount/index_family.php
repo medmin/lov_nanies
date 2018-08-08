@@ -5,34 +5,34 @@ use yii\grid\GridView;
 use common\Models\User;
 
 /* @var $this yii\web\View */
-/* @var $offForAllNannies */
+/* @var $offForAllFamiliesPost */
 /* @var $searchModel backend\models\search\UserDiscountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('backend', 'Discounts For Nannies');
+$this->title = Yii::t('backend', 'Discounts For Families');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-discount-index">
-    <div class="callout callout-<?= $offForAllNannies !== null ? 'success' : 'warning' ?>">
+    <div class="callout callout-<?= $offForAllFamiliesPost !== null ? 'success' : 'warning' ?>">
         <h4>
             <?php
-            if ($offForAllNannies !== null) {
-                echo 'Current Discount ( For All Nannies ): ' . $offForAllNannies. '% off &nbsp;&nbsp;&nbsp;' . Html::a('Update Discount For All Nannies ', ['create'], ['style' => 'font-size: 16px']);
+            if ($offForAllFamiliesPost !== null) {
+                echo 'Current Post-Discount ( For All Families ): ' . $offForAllFamiliesPost. '% off &nbsp;&nbsp;&nbsp;' . Html::a('Update Post-Discount For All Families ', ['create', 'type' => \common\models\UserDiscount::TYPE_FAMILY_POST], ['style' => 'font-size: 16px']);
             } else {
-                echo 'You have not set(or already expired) the Discount For All Nannies yet! ' . Html::a('Set the Discount For All Nannies now', ['create'], ['style' => 'font-size: 16px']);
+                echo 'You have not set(or already expired) the Post-Discount For All Families yet! ' . Html::a('Set the Post-Discount For All Families now', ['create', 'type' => \common\models\UserDiscount::TYPE_FAMILY_POST], ['style' => 'font-size: 16px']);
             }
             ?>
         </h4>
     </div>
     <hr>
     <div class="callout callout-info">
-        <h3>List of Discounts For Each Nanny <?= Html::a('Set A Discount For A Nanny', ['/nannies/index?NannySearch%5Bid%5D=&NannySearch%5Bname%5D=&NannySearch%5Bemail%5D=&NannySearch%5Baddress%5D=&NannySearch%5Bstatus%5D=&sort=-id'], ['style' => 'font-size: 16px']); ?></h3>
+        <h3>List of Post-Discounts For Each Family <?= Html::a('Set A Post-Discount For A Family', ['/family/index'], ['style' => 'font-size: 16px']); ?></h3>
     </div>
     <br>
     
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+//         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if ($model->user_id == 0) {
                         return Html::tag('span', 'All Nannies', ['style' => 'color: red']);
                     } else {
-                        return Html::a(User::findById($model->user_id)->username, Yii::$app->urlManagerFrontend->createAbsoluteUrl('/nannies/view?id='.$model->user_id), ['target' => '_blank']);
+                        return Html::a(User::findById($model->user_id)->username, Yii::$app->urlManagerBackend->createAbsoluteUrl('/family/view?id='.$model->user_id), ['target' => '_blank']);
                     }
                 }
             ],
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::tag('span', 'Expired', ['style' => 'color: red']);
                     }
                     else {
-                        return Html::tag('span', 'Not set and thus discount invalid', ['style' => 'color: red']);;
+                        return Html::tag('span', 'Not set and thus discount invalid', ['style' => 'color: red']);
                     }
                 
                 }
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'update' => function ($url, $model, $key) {
                         if ($model->user_id == 0) {
-                            $url = 'create';
+                            $url = 'create?type='.\common\models\UserDiscount::TYPE_FAMILY_POST;
                         }
                         return Html::a(Html::tag('span', '', ['class' => "glyphicon glyphicon-pencil"]), $url, ['title' => Yii::t('yii', 'Update'), 'aria-label' => Yii::t('yii', 'Update'), 'data-pjax' => '0',]);
                     }

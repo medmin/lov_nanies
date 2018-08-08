@@ -2,18 +2,25 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\UserDiscount;
 
 
 /* @var $this yii\web\View */
 /* @var $model common\models\UserDiscount */
 
 $this->title = 'Create User Discount';
-$this->params['breadcrumbs'][] = ['label' => 'User Discounts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'User Discounts', 'url' => [Yii::$app->request->getQueryParam('type', UserDiscount::TYPE_NANNY) == UserDiscount::TYPE_FAMILY_POST ? 'family' : 'nanny']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-discount-create">
 
-    <h1>Discount ( % off ) For All Nannies</h1>
+    <h1>
+        <?php if (Yii::$app->request->getQueryParam('type', UserDiscount::TYPE_NANNY) == UserDiscount::TYPE_FAMILY_POST){
+            echo 'Post-Discount ( % off ) For All Families';
+        } else {
+            echo 'Discount ( % off ) For All Nannies';
+        }?>
+    </h1>
 
     <div class="user-discount-form">
 
