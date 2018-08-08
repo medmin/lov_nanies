@@ -29,7 +29,7 @@ $this->registerCss('
 <div class="columns">
   <ul class="price">
     <li class="header">Job Posting</li>
-    <li class="grey"><del> $99 </del>   $0</li>
+    <li class="grey"><del style="color: #ccc"> $99 </del>   $0</li>
     <li>90 Days Job Posting</li>
     <li>Reaching qualified nannies with background checks</li>
     <li>Hiding real email addresses</li>

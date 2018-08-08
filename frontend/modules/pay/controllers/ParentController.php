@@ -253,13 +253,13 @@ EOT
              * 这个单独的服务，本意就是不用付款，就可以发帖了。
              */
             $expired_at = strtotime('+90 days');
-            
+
             $NinetyDaysPosting = new UserOrder();
             $NinetyDaysPosting->setAttributes([
-                'user_id' => $user->id,
+                'user_id' => Yii::$app->user->id,
                 'user_type' => 'parent',
                 'payment_gateway' => 'stripe',
-                'payment_gateway_id' => $charge->id,
+                'payment_gateway_id' => 'free order', // 暂时先定用 free order
                 'service_plan' => 'Ninety-Days-Posting', //发帖服务都叫这个名字，不管时间长短
                 'service_money' => 0,
                 'timestamp' => time(),
@@ -273,9 +273,9 @@ EOT
                     'event' => 'parent',
                     'data' => [
                         'public_identity' => Yii::$app->user->identity->getPublicIdentity(),
-                        'order_id' => $order->id,
-                        'user_id' => $order->user_id,
-                        'created_at' => $order->timestamp
+                        'order_id' => $NinetyDaysPosting->id,
+                        'user_id' => $NinetyDaysPosting->user_id,
+                        'created_at' => $NinetyDaysPosting->timestamp
                     ]
                 ]));
 
