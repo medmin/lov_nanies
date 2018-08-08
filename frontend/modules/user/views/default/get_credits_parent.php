@@ -17,10 +17,31 @@ $this->registerJs(
 );
 $this->registerCss('
 .columns {
-  width: 33%!important
+  width: 25% !important
 }
+
+#container {
+  padding-top: 35px
+}
+
 ');
 ?>
+<div class="columns">
+  <ul class="price">
+    <li class="header">Job Posting</li>
+    <li class="grey"><del> $99 </del>   $0</li>
+    <li>90 Days Job Posting</li>
+    <li>Reaching qualified nannies with background checks</li>
+    <li>Hiding real email addresses</li>
+    <li class="grey">
+      <form action="/pay/parent/post-only" method="POST">
+        <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
+        <input type="hidden" name="money" value=0 />
+        <button type="submit" class="stripe-button-el"><span style="display: block; min-height: 30px;">Pay 0 dollar</span></button>
+      </form>
+    </li>
+  </ul>
+</div>
 <div class="columns">
   <ul class="price">
     <li class="header">1 month</li>

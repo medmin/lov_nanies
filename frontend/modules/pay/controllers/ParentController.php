@@ -233,4 +233,59 @@ EOT
         }
         return 'OK';
     }
+
+    public function actionPostOnly()
+    {
+        if (Yii::$app->request->isPost)
+        {
+            // $expired_at = UserOrder::ParentPostStatus($user->id);
+            // if ($expired_at) 
+            // {
+            //     $expired_at = $expired_at + $expired_days * 86400;
+            // } 
+            // else 
+            // {
+            //     $expired_at = strtotime('+' . $expired_days . ' days');
+            // }
+
+            /**
+             * 不管那么多，就是单纯加90天。
+             * 这个单独的服务，本意就是不用付款，就可以发帖了。
+             */
+            $expired_at = strtotime('+90 days');
+            
+            $NinetyDaysPosting = new UserOrder();
+            $NinetyDaysPosting->setAttributes([
+                'user_id' => $user->id,
+                'user_type' => 'parent',
+                'payment_gateway' => 'stripe',
+                'payment_gateway_id' => $charge->id,
+                'service_plan' => 'Ninety-Days-Posting', //发帖服务都叫这个名字，不管时间长短
+                'service_money' => 0,
+                'timestamp' => time(),
+                'expired_at' => $expired_at
+            ]);
+
+            if ($NinetyDaysPosting->save())
+            {
+                Yii::$app->commandBus->handle(new AddToTimelineCommand([
+                    'category' => 'order',
+                    'event' => 'parent',
+                    'data' => [
+                        'public_identity' => Yii::$app->user->identity->getPublicIdentity(),
+                        'order_id' => $order->id,
+                        'user_id' => $order->user_id,
+                        'created_at' => $order->timestamp
+                    ]
+                ]));
+
+                return $this->redirect('/user/default/index');
+            }
+            else
+            {
+                throw new \Exception('Database Save Failure');
+            }
+        }
+        return $this->redirect('/user/default/get-credits');
+    }
 }
