@@ -9,7 +9,7 @@ use common\Models\User;
 /* @var $searchModel backend\models\search\UserDiscountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('backend', 'Discounts For Families');
+$this->title = Yii::t('backend', 'Discounts For Families ( Only For Post Service, For Now)');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-discount-index">
