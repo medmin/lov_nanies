@@ -50,7 +50,7 @@ if ($off == null) {
     </li>
     <li>90 Days Job Posting</li>
     <li>Reaching qualified nannies with background checks</li>
-    <li>Hiding real email addresses</li>
+    <li>Membership Not Included</li>
     <li class="grey">
         <form action="/pay/parent/post-only" method="POST">
             <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
