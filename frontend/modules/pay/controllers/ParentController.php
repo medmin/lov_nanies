@@ -312,7 +312,10 @@ EOT
                         'created_at' => $NinetyDaysPosting->timestamp
                     ]
                 ]));
-
+                Yii::$app->session->setFlash('alert', [
+                    'body'=>\Yii::t('frontend', 'Congratulations! Now you can Post A Job For Free. Click the button below!'),
+                    'options'=>['class'=>'alert-success']
+                ]);
                 return $this->redirect('/user/default/index');
             }
             else
