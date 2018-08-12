@@ -143,7 +143,7 @@ $this->registerJs(
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapseOne">
-                                Position apllying for
+                                Position applying for
                             </a>
                         </h4>
                     </div>
@@ -151,31 +151,23 @@ $this->registerJs(
                 <div class="panel-body table-responsive panel-collapse collapse" id="collapseOne" aria-expanded="true">
                         <ul class="panel-list">
                             <li><?php echo in_array('1', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Part Time Nanny':'<i class="fa fa-times"></i><span>Part Time Nanny</span>';?>
+                                '<i class="fa fa-check"></i>Nanny':'<i class="fa fa-times"></i><span>Nanny</span>';?>
                             </li>
                             <li><?php echo in_array('2', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Full Time Nanny':'<i class="fa fa-times"></i><span>Full Time Nanny</span>';?>
-                            </li>
-                            <li><?php echo in_array('3', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Live-in Nanny':'<i class="fa fa-times"></i><span>Live-in Nanny</span>';?>
-                            </li>
-                            <li><?php echo in_array('4', $model->position_for) ?
                                 '<i class="fa fa-check"></i>Babysitter':'<i class="fa fa-times"></i><span>Babysitter</span>';?>
                             </li>
-                            <li><?php echo in_array('5', $model->position_for) ?
+                            <li><?php echo in_array('3', $model->position_for) ?
                                 '<i class="fa fa-check"></i>Newborn Specialist':'<i class="fa fa-times"></i><span>Newborn Specialist</span>';?>
                             </li>
-                            <li><?php echo in_array('6', $model->position_for) ?
+                            <li><?php echo in_array('4', $model->position_for) ?
+                                '<i class="fa fa-check"></i>Special Needs':'<i class="fa fa-times"></i><span>Special Needs</span>';?>
+                            </li>
+                            <li><?php echo in_array('5', $model->position_for) ?
                                 '<i class="fa fa-check"></i>Caregiver':'<i class="fa fa-times"></i><span>Caregiver</span>';?>
                             </li>
-                            <li><?php echo in_array('7', $model->position_for) ?
+                            <li><?php echo in_array('6', $model->position_for) ?
                                 '<i class="fa fa-check"></i>Housekeeper':'<i class="fa fa-times"></i><span>Housekeeper</span>';?>
                             </li>
-                            <li><?php echo in_array('8', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Special Needs Nanny':'<i class="fa fa-times"></i><span>Special Needs Nanny</span>';?>
-                            </li>
-                            <li><?php echo in_array('9', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Elderly Care':'<i class="fa fa-times"></i><span>Elderly Care</span>';?>
                             </li>
                         </ul>
                 </div>
