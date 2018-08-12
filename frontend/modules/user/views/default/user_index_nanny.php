@@ -60,6 +60,9 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
                 <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn nav-btn btn-sticking-out"  ?>">Your monthly listing fee is expired.</a>
                 <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "btn nav-btn" : "hidden"  ?>"  style="background-color: #e39b79;border-color:#e39b79">Your monthly listing Fee will be expired at: <span><?=  date('Y-m-d', UserOrder::NannyListingFeeStatus(Yii::$app->user->id));  ?></span></a>
             </div>
+            <div class="form-group">
+                <?= Html::a(Html::tag('span', 'Search Jobs', ['class' => 'nav-btn']), ['/find-a-job/list']) ?>
+            </div>
     </div>
         <div class="col-md-6">
             <h3 style="color: #414141;">
@@ -78,7 +81,7 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
             
             <div class="form-group">
             <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 2</a>
-                <a href="create-reference"> <span class="nav-btn">Add References</span></a>
+                <a href="create-reference"> <span class="btn nav-btn">Add References</span></a>
             </div>
             <div class="form-group">
                 <a class="btn" style="background-color: #e39b79;border-color:#e39b79;color:white">Step 3</a>

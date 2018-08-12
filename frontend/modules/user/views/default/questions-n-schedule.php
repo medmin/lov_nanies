@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <a href="about-you"><li class="process-label2" id="label-5">About you<span><i class="fa fa-long-arrow-right"></i></span></li></a>
                                 <a href="upload-files"><li class="process-label2" id="label-6">Upload Files<span><i class="fa fa-long-arrow-right"></i></span></li></a>
                                 <a href="upload-files-list"><li class="process-label2" id="label-7">Files List<span><i class="fa fa-long-arrow-right"></i></span></li></a>
+                                <a href="/user/default/index"><li class="process-label2" id="label-7">Back to my account<span><i class="fa fa-long-arrow-right"></i></span></li></a>
                             </ul>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
