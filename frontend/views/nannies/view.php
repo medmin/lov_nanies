@@ -149,6 +149,8 @@ $this->registerJs(
                     </div>
                 </div>
                 <div class="panel-body table-responsive panel-collapse collapse" id="collapseOne" aria-expanded="true">
+                <div>
+                
                         <ul class="panel-list">
                             <li><?php echo in_array('1', $model->position_for) ?
                                 '<i class="fa fa-check"></i>Nanny':'<i class="fa fa-times"></i><span>Nanny</span>';?>
@@ -170,8 +172,49 @@ $this->registerJs(
                             </li>
                             </li>
                         </ul>
+                        </div>
+                        <hr>
+                        <div class="row">
+                    <div class="col-md-12" style="margin-bottom:20px;">
+                        <h4 class="panel-list-head">Availability</h4>
+                        <ul class="panel-list">
+                            <li><?php echo in_array('0', $model->availability) ?
+                                '<i class="fa fa-check"></i>Full time live in':'<i class="fa fa-times"></i><span>Full time live in</span>';?>
+                            </li>
+                            <li><?php echo in_array('1', $model->availability) ?
+                                '<i class="fa fa-check"></i>Full time live out':'<i class="fa fa-times"></i><span>Full time live out</span>';?>
+                            </li>
+                            <li><?php echo in_array('2', $model->availability) ?
+                                '<i class="fa fa-check"></i>Part time live out':'<i class="fa fa-times"></i><span>Part time live out</span>';?>
+                            </li>
+                            <li><?php echo in_array('3', $model->availability) ?
+                                '<i class="fa fa-check"></i>Part time live in':'<i class="fa fa-times"></i><span>Part time live in</span>';?>
+                            </li>
+                            <li><?php echo in_array('4', $model->availability) ?
+                                '<i class="fa fa-check"></i>Part Time Nanny':'<i class="fa fa-times"></i><span>Part Time Nanny</span>';?>
+                            </li>
+                            <li><?php echo in_array('5', $model->availability) ?
+                                '<i class="fa fa-check"></i>Babysitting':'<i class="fa fa-times"></i><span>Babysitting</span>';?>
+                            </li>
+                            <li><?php echo in_array('6', $model->availability) ?
+                                '<i class="fa fa-check"></i>Evenings':'<i class="fa fa-times"></i><span>Evenings</span>';?>
+                            </li>
+                            <li><?php echo in_array('7', $model->availability) ?
+                                '<i class="fa fa-check"></i>Weekends Only':'<i class="fa fa-times"></i><span>Weekends Only</span>';?>
+                            </li>
+                            <li><?php echo in_array('8', $model->availability) ?
+                                '<i class="fa fa-check"></i>Overnights':'<i class="fa fa-times"></i><span>Overnights</span>';?>
+                            </li>
+                            <li><?php echo in_array('9', $model->availability) ?
+                                '<i class="fa fa-check"></i>I`m flexible':'<i class="fa fa-times"></i><span>I`m flexible</span>';?>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
                 </div>
+                
             </div>
+            
         </div>
         <div class="col-lg-12">
             <div class="panel-group candidate">
@@ -259,43 +302,7 @@ $this->registerJs(
                             </div>
                         </div>
                     </div><br>
-                    <div class="row">
-                    <div class="col-md-12" style="margin-bottom:20px;">
-                        <h4 class="panel-list-head">Availability</h4>
-                        <ul class="panel-list">
-                            <li><?php echo in_array('0', $model->availability) ?
-                                '<i class="fa fa-check"></i>Full time live in':'<i class="fa fa-times"></i><span>Full time live in</span>';?>
-                            </li>
-                            <li><?php echo in_array('1', $model->availability) ?
-                                '<i class="fa fa-check"></i>Full time live out':'<i class="fa fa-times"></i><span>Full time live out</span>';?>
-                            </li>
-                            <li><?php echo in_array('2', $model->availability) ?
-                                '<i class="fa fa-check"></i>Part time live out':'<i class="fa fa-times"></i><span>Part time live out</span>';?>
-                            </li>
-                            <li><?php echo in_array('3', $model->availability) ?
-                                '<i class="fa fa-check"></i>Part time live in':'<i class="fa fa-times"></i><span>Part time live in</span>';?>
-                            </li>
-                            <li><?php echo in_array('4', $model->availability) ?
-                                '<i class="fa fa-check"></i>Part Time Nanny':'<i class="fa fa-times"></i><span>Part Time Nanny</span>';?>
-                            </li>
-                            <li><?php echo in_array('5', $model->availability) ?
-                                '<i class="fa fa-check"></i>Babysitting':'<i class="fa fa-times"></i><span>Babysitting</span>';?>
-                            </li>
-                            <li><?php echo in_array('6', $model->availability) ?
-                                '<i class="fa fa-check"></i>Evenings':'<i class="fa fa-times"></i><span>Evenings</span>';?>
-                            </li>
-                            <li><?php echo in_array('7', $model->availability) ?
-                                '<i class="fa fa-check"></i>Weekends Only':'<i class="fa fa-times"></i><span>Weekends Only</span>';?>
-                            </li>
-                            <li><?php echo in_array('8', $model->availability) ?
-                                '<i class="fa fa-check"></i>Overnights':'<i class="fa fa-times"></i><span>Overnights</span>';?>
-                            </li>
-                            <li><?php echo in_array('9', $model->availability) ?
-                                '<i class="fa fa-check"></i>I`m flexible':'<i class="fa fa-times"></i><span>I`m flexible</span>';?>
-                            </li>
-                        </ul>
-                    </div>
-                    </div>
+                    
                     <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
