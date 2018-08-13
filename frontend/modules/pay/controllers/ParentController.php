@@ -316,7 +316,8 @@ EOT
                     'body'=>\Yii::t('frontend', 'Congratulations! Now you can Post A Job For Free. Click the button below!'),
                     'options'=>['class'=>'alert-success']
                 ]);
-                return $this->redirect('/find-a-job/post');
+                return $this->redirect('/user/default/index');
+                // return $this->redirect('/find-a-job/post');
             }
             else
             {
