@@ -43,12 +43,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <?= $form->field($model, 'phone_home')->textInput(['required'=>'required']) ?>
                                             <?= $form->field($model, 'phone_cell')->textInput() ?>
                                             <?= $form->field($model, 'email')->textInput(['required'=>'required']) ?>
-                                            <?= $form->field($model, 'aviliable_for_interview')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>     
+                                            <?//= $form->field($model, 'aviliable_for_interview')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'over_18')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>     
                                             <?= $form->field($model, 'date_of_birth')->textInput() ?>
                                             <?= $form->field($model, 'eligible_to_work')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>             
-                                            <?= $form->field($model, 'have_work_visa')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?> 
-                                            <?= $form->field($model, 'personal_comments')->textArea() ?>
+                                            <?//= $form->field($model, 'have_work_visa')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?//= $form->field($model, 'personal_comments')->textArea() ?>
                                             
                                         </div>
                                         <div class="col-md-6">
@@ -61,12 +61,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 '6' => 'Housekeeper',
                                             ])?>    
                                             <?= $form->field($model, 'employed')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                            <?= $form->field($model, 'may_contact_employer')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?> 
+                                            <?//= $form->field($model, 'may_contact_employer')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'when_can_start')->textInput() ?>
-                                            <?= $form->field($model, 'hours_per_week')->input(['type' => 'number']) ?>
+                                            <?//= $form->field($model, 'hours_per_week')->input(['type' => 'number']) ?>
                                             <?= $form->field($model, 'hourly_rate')->textInput() ?>
-                                            <?= $form->field($model, 'weekly_salary')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                            <?= $form->field($model, 'wage_comment')->textArea() ?>  
+                                            <?//= $form->field($model, 'weekly_salary')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?//= $form->field($model, 'wage_comment')->textArea() ?>
                                             <?= $form->field($model, 'availability')->checkboxList([
                                                 '1' => 'Full time',
                                                 '2' => 'Part time',

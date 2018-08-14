@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= $form->field($model, 'best_describes_housekeeping')->checkboxList([
                                                         '1' => 'Extremely Thorough',
                                                         '2' => 'Neat & Orderly',
-                                                        '3' => 'It`s Good, Not Great'
+                                                        '3' => 'Brisk Clean'
                                                         
                                                     ], ['required' => 'required'])?>
                                         <?= $form->field($model, 'housekeep_communication_skills')->input(['type' => 'number']) ?>

@@ -44,36 +44,37 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="panel-body">
                                         <div class="col-md-6">
-                                        <?= $form->field($model, 'crp_certified')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'first_aid_certified')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'need_crp_fa_renew')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'tb_test')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'pet_allergies')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'smoking')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'work_if_parent_smokes')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'trawel_with_family')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'travel_restrictions')->textArea() ?>
-                                        <?= $form->field($model, 'states_lived_in')->textArea() ?> 
-                                        <?= $form->field($model, 'valid_passport')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'work_if_parent_at_home')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'miles_to_commute')->input(['type' => 'number']) ?>
-                                          
+                                            <?= $form->field($model, 'crp_certified')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'first_aid_certified')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'need_crp_fa_renew')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'tb_test')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'pet_allergies')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'smoking')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?//= $form->field($model, 'work_if_parent_smokes')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'trawel_with_family')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?//= $form->field($model, 'travel_restrictions')->textArea() ?>
+                                            <?= $form->field($model, 'valid_passport')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'work_if_parent_at_home')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+
+
                                         </div>
                                         <div class="col-md-6">
-                                        <?= $form->field($model, 'child_of_your_own')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'dog_cat_at_home')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'swim')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'uniform_dress_code')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                        <?= $form->field($model, 'crime')->textArea() ?> 
-                                        <?= $form->field($model, 'extra_activities')->textArea() ?> 
-                                        <?= $form->field($model, 'type_of_family')->textArea() ?> 
-                                        <?= $form->field($model, 'short_term_goals')->textArea() ?> 
-                                        <?= $form->field($model, 'why_qualified')->textArea() ?> 
-                                        <?= $form->field($model, 'languages')->textArea() ?> 
-                                       
-                                        <input type="hidden" name="step" value="5"/>    
+                                            <?//= $form->field($model, 'child_of_your_own')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'dog_cat_at_home')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'swim')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'uniform_dress_code')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
+                                            <?= $form->field($model, 'miles_to_commute')->input(['type' => 'number']) ?>
+                                            <?= $form->field($model, 'states_lived_in')->textArea() ?>
+                                            <?= $form->field($model, 'crime')->textArea() ?>
+                                            <?//= $form->field($model, 'extra_activities')->textArea() ?>
+                                            <?= $form->field($model, 'type_of_family')->textArea() ?>
+                                            <?//= $form->field($model, 'short_term_goals')->textArea() ?>
+                                            <?//= $form->field($model, 'why_qualified')->textArea() ?>
+                                            <?= $form->field($model, 'languages')->textArea() ?>
+
+                                            <input type="hidden" name="step" value="5"/>
                                         </div>
-                                        
+
                                     </div>
                                         <div class="form-group">
                                                 <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Save', ['class' => $model->isNewRecord ? 'btn btn-inverse next-step' : 'btn btn-inverse next-step']) ?>

@@ -53,19 +53,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= $form->field($model, 'characteristics_look_for')->textArea() ?>
                                         <?= $form->field($model, 'background_in_child_dev')->textArea() ?>
                                         <?= $form->field($model, 'number_of_children_care_for')->textArea() ?>
-                                        <?= $form->field($model, 'sick_children')->textArea() ?>                                        
+                                        <?//= $form->field($model, 'sick_children')->textArea() ?>
                                                 
                                          
                                         </div>
                                         <div class="col-md-6">
                                         
                                         <?= $form->field($model, 'assist_homework')->textArea() ?>
-                                        <?= $form->field($model, 'family_life')->textArea() ?>
+                                        <?//= $form->field($model, 'family_life')->textArea() ?>
                                         <?= $form->field($model, 'interests')->textArea() ?>
                                         <?= $form->field($model, 'philosophy')->textArea() ?>
                                         <?= $form->field($model, 'most_important')->textArea() ?>
                                         <?= $form->field($model, 'rate_communication_skills')->input(['type' => 'number']) ?>
-                                        <h2 style="color: #565656;">Schedule</h2>If you are flexible on the hours for that day write `Flexible`. If you have specific hours write those in. For e.g. 8-5. 
+                                        <h2 style="color: #565656;">Schedule</h2><p class="well well-sm">If you are flexible on the hours for that day write `Flexible`. If you have specific hours write those in. For e.g. 8-5. </p>
                                         <?= $form->field($model, 'sun')->textInput() ?>
                                         <?= $form->field($model, 'mon')->textInput() ?>
                                         <?= $form->field($model, 'tue')->textInput() ?>

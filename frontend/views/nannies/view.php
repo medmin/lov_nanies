@@ -168,7 +168,6 @@ $this->registerJs(
                             <li><?php echo in_array('6', $model->position_for) ?
                                 '<i class="fa fa-check"></i>Housekeeper':'<i class="fa fa-times"></i><span>Housekeeper</span>';?>
                             </li>
-                            </li>
                         </ul>
                 </div>
             </div>
