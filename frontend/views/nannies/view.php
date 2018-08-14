@@ -549,7 +549,7 @@ $this->registerJs(
                         </div>
                     </div>
                     <br>
-                    <h4>*skiped if not a housecleaner</h4>
+                    <h4>*Skip if not a housecleaner</h4>
                 </div>
             </div>
         </div>
