@@ -40,7 +40,7 @@ if ($off == null) {
 ?>
 <div class="columns">
   <ul class="price">
-    <li class="header">Job Posting</li>
+    <li class="header">Job Posting Only</li>
     <li class="grey">
         <?php if ($off !== null) {
             echo '<del style="color: #ccc"> $99 </del>   $'. number_format($correct_post_price, 2);
