@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                             <?= $form->field($model, 'traffic_citations')->textInput() ?>
                                             <?= $form->field($model, 'car_insurance')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
-                                            <?//= $form->field($model, 'company_car_insurance')->textInput() ?>
+                                            <!-- <?//= $form->field($model, 'company_car_insurance')->textInput() ?> -->
                                             <?= $form->field($model, 'valid_licence')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'use_car_for_work')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
                                             <?= $form->field($model, 'drive')->inline()->radioList(['1' => 'Yes', '0' => 'No'])?>
