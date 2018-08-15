@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <div class="col-md-6">
                                         
                                         <?= $form->field($model, 'assist_homework')->textArea() ?>
-                                        <?//= $form->field($model, 'family_life')->textArea() ?>
+                                        <!-- <?//= $form->field($model, 'family_life')->textArea() ?> -->
                                         <?= $form->field($model, 'interests')->textArea() ?>
                                         <?= $form->field($model, 'philosophy')->textArea() ?>
                                         <?= $form->field($model, 'most_important')->textArea() ?>
