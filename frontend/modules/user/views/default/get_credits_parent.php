@@ -49,7 +49,7 @@ if ($off == null) {
         } ?>
     </li>
     <li>90 Days Job Posting</li>
-    <li>Reaching qualified nannies with background checks</li>
+    <li>Have qualified nannies <br> contact you</li>
     <li>Membership Not Included</li>
     <li class="grey">
         <form action="/pay/parent/post-only" method="POST">
