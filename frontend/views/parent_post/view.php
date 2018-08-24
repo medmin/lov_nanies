@@ -69,7 +69,7 @@ $this->registerJs(
         <strong>Attention</strong>:<br>
         The family will get a message in their inbox. If you send spam messages, your account will be suspended. <br>
         <strong>*Special Note</strong>:<br> 
-        <p style="color:red">Never send or accept a check, money card or money wire from anyone you don’t know and never give anyone your social security number, credit card or bank account information! <br>Be weary of anyone that posts their phone # or email in their job ad since this is prohibited on our site. </p>
+        <p style="color:red">Never send or accept a check, money card or money wire from anyone you don’t know and never give anyone your social security number, credit card or bank account information! Be weary of anyone that posts their phone # or email in their job ad since this is prohibited on our site. </p>
     </div>
     <div class="panel-body">
        <div class="form-group">
