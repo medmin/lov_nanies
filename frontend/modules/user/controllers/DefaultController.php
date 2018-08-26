@@ -117,7 +117,8 @@ class DefaultController extends Controller
             if(count($refs)<3){
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-warning'],
-                    'body' => Yii::t('frontend', 'Thank you for registering wth NannyCare.com. To be accepted on our site, we require that our nannies & babysitters have a minimum of 2 years of childcare experience, excellent references, CPR/First Aid certification and pass our preliminary background check. Please complete your profile below (all 7 sections) and upload any files, such as CPR/First Aid, references letters, certifications and resumes. Don\'t forget to add your references and complete the background check form. We will contact you within 48 hours to go over your information with you. Thanks!~Team NannyCare.com', [], Yii::$app->user->identity->userProfile->locale)
+                    'body' => Yii::t('frontend', 'Thank you for registering wth NannyCare.com. Please follow the steps below to complete your profile. Nannies must complete the application, upload CPR/First Aid and fill out the background check form to be considered. You can also upload a resume and any references letters and/or certifications you have, since some families may ask us to verify your references (added service we offer families). We will contact you via email when your profile has been approved. As soon as you are approved, you\'re profile will be displayed on our site and you can start connecting with families.
+                    Thanks!~Team NannyCare.com', [], Yii::$app->user->identity->userProfile->locale)
                 ]);
             }
             $dataProvider = new ActiveDataProvider([
