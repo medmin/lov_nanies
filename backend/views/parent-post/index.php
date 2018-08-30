@@ -23,7 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
-            'user_id',
+            [
+                'label' => 'User',
+                'attribute' => 'user_id',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->user->username, \yii\helpers\Url::to(['/family/view', 'id' => $model->user_id]));
+                }
+            ],
             'zip_code',
 //            'job_type',
 //            'type_of_help',
@@ -44,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {approved}',
+                'template' => '{view} {update} {delete} {approved}',
                 'buttons' => [
                     'approved' => function ($url, $model, $key) {
                         $html = '';

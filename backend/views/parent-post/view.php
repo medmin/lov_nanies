@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'job_type',
             'type_of_help',
             'summary',
-            'description:ntext',
+            'description:html',
             'status',
             'created_at',
             'expired_at',

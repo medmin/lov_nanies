@@ -2,6 +2,7 @@
 
 namespace backend\models\search;
 
+use common\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -18,8 +19,8 @@ class ParentPostSearch extends ParentPost
     public function rules()
     {
         return [
-            [['id', 'user_id', 'zip_code', 'status', 'created_at', 'expired_at'], 'integer'],
-            [['job_type', 'type_of_help', 'summary', 'description'], 'safe'],
+            [['id', 'zip_code', 'status', 'created_at', 'expired_at'], 'integer'],
+            [['job_type', 'user_id', 'type_of_help', 'summary', 'description'], 'safe'],
         ];
     }
 
@@ -51,6 +52,9 @@ class ParentPostSearch extends ParentPost
             return $dataProvider;
         }
 
+        if ($user = User::findOne(['username' => $this->user_id])) {
+            $this->user_id = $user->id;
+        }
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
