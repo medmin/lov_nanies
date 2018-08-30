@@ -51,7 +51,7 @@ class PostJobController extends Controller
         if ($action->id === 'create' && !($this->expired_at = UserOrder::ParentPostStatus(Yii::$app->user->id))) {
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class'=>'alert-danger'],
-                'body' => Yii::t('frontend', 'Please buy bronze paln(279 USD) or higer.', [], Yii::$app->user->identity->userProfile->locale)
+                'body' => Yii::t('frontend', 'Please buy the Job Posting Only service, or a membership of 3 months or more. Thanks!', [], Yii::$app->user->identity->userProfile->locale)
             ]);
             $this->redirect(['user/default/get-credits']);
             return false;

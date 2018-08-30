@@ -54,7 +54,7 @@ $this->title = Yii::t('frontend', 'Nanny Settings')
         </div>
         
         <div class="form-group">
-                <a href="/user/default/get-credits"><span class="nav-btn btn-sticking-out">Buy Membership</span></a>
+                <a href="/user/default/get-credits"><span class="nav-btn btn-sticking-out">Get Membership</span></a>
         </div>
         <div class="form-group" id="listing-fee-expired">
                 <a class="<?= UserOrder::NannyListingFeeStatus(Yii::$app->user->id) ? "hidden" : "btn nav-btn btn-sticking-out"  ?>">Your monthly listing fee is expired.</a>

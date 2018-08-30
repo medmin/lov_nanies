@@ -72,14 +72,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= $form->field($model, 'characteristics_look_for')->textArea() ?>
                                         <?= $form->field($model, 'background_in_child_dev')->textArea() ?>
                                         <?= $form->field($model, 'number_of_children_care_for')->textArea() ?>
-                                        <?//= $form->field($model, 'sick_children')->textArea() ?>
+                                        <!-- <?//= $form->field($model, 'sick_children')->textArea() ?> -->
                                                 
                                          
                                         </div>
                                         <div class="col-md-6">
                                         
                                         <?= $form->field($model, 'assist_homework')->textArea() ?>
-                                        <?//= $form->field($model, 'family_life')->textArea() ?>
+                                        <!-- <?//= $form->field($model, 'family_life')->textArea() ?> -->
                                         <?= $form->field($model, 'interests')->textArea() ?>
                                         <?= $form->field($model, 'philosophy')->textArea() ?>
                                         <?= $form->field($model, 'most_important')->textArea() ?>
