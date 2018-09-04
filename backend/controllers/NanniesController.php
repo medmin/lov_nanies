@@ -101,6 +101,7 @@ class NanniesController extends Controller
     /**
      * Updates an existing User model.
      * @param integer $id
+     * @param string $step
      * @return mixed
      */
     public function actionUpdate($id,$step='')
@@ -133,6 +134,9 @@ class NanniesController extends Controller
             break;
             case 5:
                 return $this->render('aboutyou', ['model' => $model, 'dataProvider'=>$dataProvider]);
+            break;
+            case 'tag':
+                return $this->render('tag', ['model' => $model]);
             break;
             default:
                 return $this->render('main', ['model' => $model, 'dataProvider'=>$dataProvider]);

@@ -3,6 +3,9 @@ $config = [
     'modules' => [
         'file' => [
             'class' => 'common\modules\file\Module',
+        ],
+        'tag' => [
+            'class' => 'common\modules\tag\Module'
         ]
     ],
     'components' => [

@@ -218,6 +218,12 @@ $bundle = BackendAsset::register($this);
                         'visible' => Yii::$app->user->can('administrator')
                     ],
                     [
+                        'label' => Yii::t('backend', 'Tags'),
+                        'icon' => '<i class="fa fa-bookmark"></i>',
+                        'url' => ['/user-tag/index'],
+                        'visible' => Yii::$app->user->can('administrator')
+                    ],
+                    [
                         'label' => Yii::t('backend', 'Other'),
                         'url' => '#',
                         'icon' => '<i class="fa fa-cogs"></i>',

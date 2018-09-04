@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\service\models;
 
 use Yii;
 
@@ -13,7 +13,6 @@ use Yii;
  * @property integer $created_at
  *
  * @property Tag $tag
- * @property User $user
  */
 class UserTag extends \yii\db\ActiveRecord
 {
@@ -34,7 +33,6 @@ class UserTag extends \yii\db\ActiveRecord
             [['user_id', 'tag_id', 'created_at'], 'required'],
             [['user_id', 'tag_id', 'created_at'], 'integer'],
             [['tag_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tag::className(), 'targetAttribute' => ['tag_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -59,11 +57,4 @@ class UserTag extends \yii\db\ActiveRecord
         return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
 }
