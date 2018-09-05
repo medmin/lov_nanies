@@ -4955,6 +4955,13 @@ Accordation (Faq,blog pages)
     color: #6E6460;
 }
 
+.u-tags {
+    color: #699;
+    font-size: 28px;
+}
+.u-tags > span {
+    margin-right: 20px;
+}
 
 /* partners*/
 

@@ -3,7 +3,6 @@
 namespace common\modules\tag\controllers;
 
 use common\service\TagService;
-use yii\filters\AccessControl;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -38,7 +37,8 @@ class DefaultController extends Controller
 
     public function beforeAction($action)
     {
-        if (!\Yii::$app->user->can('administrator')) {
+        $except_actions = ['user-tag'];
+        if (!in_array($action->id, $except_actions) && !\Yii::$app->user->can('administrator')) {
             throw new NotFoundHttpException();
         }
         return parent::beforeAction($action);

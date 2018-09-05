@@ -46,6 +46,27 @@ $this->registerJs(
     View::POS_READY,
     'my-button-handler'
 );
+
+$user_id = $model->id;
+$js = <<<JS
+    $(function(){
+         $.get('/tag/default/user-tag', {user_id: $user_id}, function(data){
+             let str = '';
+             $.each(data, function(index, item) {
+               str += generateTagHtml(item.name, item.icon, item.info);
+             });
+             if (str.length > 0) {
+                 $('.u-tags').html(str);
+             }
+         }, 'json');
+    });
+    
+    function generateTagHtml(name, icon, info) {
+      return '<span title="'+ name +'"><i class="fa fa-'+ icon +'"></i></span>';
+    }
+JS;
+$this->registerJs($js, View::POS_END);
+
 ?> 
 <div class="row candidate">
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
@@ -65,6 +86,8 @@ $this->registerJs(
                 </div>
             </div>
         </div><div style="clear: both;"></div><br>
+            <div class="col-lg-12 u-tags">
+            </div>
             <div class="col-sm-6">
                 <ul class="candidate-features">
                     <li><i class="fa fa-check"></i>
