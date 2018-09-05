@@ -45,7 +45,7 @@ $(function() {
     $('#info').val(_tr.children("td:eq(2)").text());
     $('#id').val($(this).data('id'));
     $('#target').val(_tr.children("td:eq(3)").text());
-    $('#icon').val(_tr.children("td:eq(4)").children("i").attr("class").slice(6))
+    $('#icon').val(_tr.children("td:eq(4)").children("i").attr("class").slice(6));
     $('.modal-title').text('Update Tag');
     $("#tagModal").modal('show')
   });
@@ -61,11 +61,11 @@ $(function() {
           }
         })
     }
-  })
+  });
   
   $('#tagModal').on('hidden.bs.modal', function() {
-    $('#tagForm')[0].reset()
-    $("input[type='hidden']").val('')
+    $('#tagForm')[0].reset();
+    $("input[type='hidden']").val('');
   });
   
   $('.submit').click(function() {
