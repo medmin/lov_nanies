@@ -11,6 +11,7 @@ use Yii;
  * @property string $uid
  * @property string $target
  * @property string $name
+ * @property string $icon
  * @property string $info
  * @property integer $created_at
  *
@@ -38,6 +39,7 @@ class Tag extends \yii\db\ActiveRecord
             [['uid'], 'string', 'max' => 8],
             [['target'], 'string', 'max' => 100],
             [['name'], 'string', 'max' => 300],
+            [['icon'], 'string', 'max' => 60],
         ];
     }
 
@@ -51,6 +53,7 @@ class Tag extends \yii\db\ActiveRecord
             'uid' => 'Uid',
             'target' => 'Target',
             'name' => 'Name',
+            'icon' => 'Icon',
             'info' => 'Info',
             'created_at' => 'Created At',
         ];
@@ -62,5 +65,13 @@ class Tag extends \yii\db\ActiveRecord
     public function getUserTags()
     {
         return $this->hasMany(UserTag::className(), ['tag_id' => 'id']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (substr($this->icon,0,3) == 'fa-') {
+            $this->icon = substr($this->icon,3);
+        }
+        return parent::beforeSave($insert);
     }
 }

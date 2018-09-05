@@ -6,3 +6,5 @@ ALTER TABLE `user_tag` ADD FOREIGN KEY (`tag_id`) REFERENCES `tag`(`id`) ON DELE
 ALTER TABLE `user_tag` ADD FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE `user_tag` DROP FOREIGN KEY user_tag_ibfk_2;
+
+ALTER TABLE `tag` ADD `icon` VARCHAR(60) NOT NULL AFTER `name`;

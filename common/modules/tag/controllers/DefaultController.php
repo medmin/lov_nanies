@@ -64,14 +64,14 @@ class DefaultController extends Controller
         return TagService::getTags();
     }
 
-    public function actionCreate($target, $name, $info = null)
+    public function actionCreate($target, $name, $icon = null, $info = null)
     {
-        return TagService::createTag($target, $name, $info);
+        return TagService::createTag($target, $name, $icon, $info);
     }
 
-    public function actionUpdate($id, $target, $name, $info = null)
+    public function actionUpdate($id, $target, $name, $icon, $info = null)
     {
-        return TagService::updateTag($id, $target, $name, $info);
+        return TagService::updateTag($id, $target, $name, $icon, $info);
     }
 
     public function actionDelete($id)

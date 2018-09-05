@@ -22,6 +22,7 @@ $(function() {
          str += "<td>" + item.name + "</td>";
          str += "<td class='tag-info'>" + item.info + "</td>";
          str += "<td>" + item.target + "</td>";
+         str += "<td><i class='fa fa-"+ item.icon +"'></i></td>";
          str += "<td>" + timestampToTime(item.created_at) + "</td>";
          let delete_url = "/tag/default/delete?id=" + item.id;
          str += "<td><a class=\"edit-tag-a\" href=\"javascript:;\" title=\"Update\" aria-label=\"Update\" data-id="+ item.id +" data-pjax=\"0\"><span class=\"glyphicon glyphicon-pencil\"></span></a> <a class=\"delete-tag-a\" href=\"javascript:;\" title=\"Delete\" aria-label=\"Delete\" data-pjax=\"0\" data-url="+ delete_url +"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
@@ -44,6 +45,7 @@ $(function() {
     $('#info').val(_tr.children("td:eq(2)").text());
     $('#id').val($(this).data('id'));
     $('#target').val(_tr.children("td:eq(3)").text());
+    $('#icon').val(_tr.children("td:eq(4)").children("i").attr("class").slice(6))
     $('.modal-title').text('Update Tag');
     $("#tagModal").modal('show')
   });
@@ -100,7 +102,7 @@ $this->registerJs($js, \yii\web\View::POS_END);
     <div class="tag-list">
         <table class="table table-striped table-bordered">
             <thead>
-            <tr><th>ID</th><th>Name</th><th>Info</th><th>Target</th><th>Created At</th><th>Operate</th></tr>
+            <tr><th>ID</th><th>Name</th><th>Info</th><th>Target</th><th>Icon</th><th>Created At</th><th>Operate</th></tr>
             </thead>
             <tbody>
                 <tr><td colspan="6"><div class="empty">No results found.</div></td></tr>
@@ -134,6 +136,12 @@ $this->registerJs($js, \yii\web\View::POS_END);
                         <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="name" id="name" placeholder="tag name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="icon" class="col-sm-2 control-label">Icon</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="icon" id="icon" placeholder="Reference https://fontawesome.com/v4.7.0/icons/">
                         </div>
                     </div>
                     <div class="form-group">

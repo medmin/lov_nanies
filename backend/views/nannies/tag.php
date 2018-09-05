@@ -15,7 +15,7 @@ $(function() {
   $.get('/tag/default/user-tag', {user_id: $user_id}, function(data){
      let str = '';
      $.each(data, function(index, item) {
-       str += generateUserTagHtml(item.name, item.info, item.id);
+       str += generateUserTagHtml(item.name, item.icon, item.info, item.id);
      });
      if (str.length > 0) {
          $('.user-tag').html(str);
@@ -58,17 +58,17 @@ $(function() {
    $.post('/tag/default/create-user-tag?'+ $.param({user_id: $user_id, tag_id: tag_id}),function(data) {
      if (data) {
          $('.no-tag').hide();
-         $('.user-tag').append(generateUserTagHtml(data.name, data.info, data.id));
+         $('.user-tag').append(generateUserTagHtml(data.name, data.icon, data.info, data.id));
      } else {
          console.log('create fail')
      }
    })
  });
  
- function generateUserTagHtml(name, info, id) {
+ function generateUserTagHtml(name, icon, info, id) {
      let str = '';
       str += "<div class='col-md-3'><div class='info-box'>";
-      str += "<span class='info-box-icon bg-aqua'><i class='fa fa-envelope-o'></i></span>";
+      str += "<span class='info-box-icon bg-aqua'><i class='fa fa-"+ icon +"'></i></span>";
       str += "<div class='info-box-content'><span class='info-box-text'>"+ name +"</span><span class='info-box-info'>"+ info +"</span><button class='btn btn-flat btn-danger btn-xs pull-right delete-tag' type='button' data-id="+ id +">delete</button></div>";
       str += "</div></div>";
       return str;

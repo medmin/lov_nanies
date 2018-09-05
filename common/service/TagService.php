@@ -12,11 +12,12 @@ use common\service\models\Tag;
 
 class TagService {
 
-    public static function createTag($target, $name, $info = null) {
+    public static function createTag($target, $name, $icon = 'vcard', $info = null) {
         $tag = new Tag();
         $tag->target = $target;
         $tag->name = $name;
         $tag->info = $info;
+        $tag->icon = trim($icon);
         $tag->uid = substr(sha1($target . $name), 0, 8);
         $tag->created_at = time();
         if ($tag->save()) {
@@ -26,7 +27,7 @@ class TagService {
         }
     }
 
-    public static function updateTag($id, $target, $name, $info = null)
+    public static function updateTag($id, $target, $name, $icon = 'vcard', $info = null)
     {
         $tag = Tag::findOne($id);
         if ($tag) {
@@ -39,6 +40,7 @@ class TagService {
             if (!empty($info)) {
                 $tag->info = $info;
             }
+            $tag->icon = trim($icon);
             $tag->uid = substr(sha1($tag->target . $tag->name), 0, 8);
             if ($tag->save()) {
                 return $tag;
@@ -73,7 +75,13 @@ class TagService {
         $user_tag->created_at = time();
         if ($user_tag->save()) {
             $tag = Tag::findOne($tag_id);
-            return ['id' => $user_tag->id, 'name' => $tag->name, 'info' => $tag->info, 'uid' => $tag->uid];
+            return [
+                'id' => $user_tag->id,
+                'name' => $tag->name,
+                'info' => $tag->info,
+                'icon' => $tag->icon,
+                'uid' => $tag->uid
+            ];
         } else {
             return false;
         }
@@ -88,6 +96,7 @@ class TagService {
                 'id' => $model->id,
                 'name' => $model->tag->name,
                 'info' => $model->tag->info,
+                'icon' => $model->tag->icon,
                 'uid' => $model->tag->uid
             ];
         }
