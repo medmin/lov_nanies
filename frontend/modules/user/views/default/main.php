@@ -52,6 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <?= $form->field($model, 'picture')->widget(Upload::classname(), [
                                                 'url'=>['avatar-upload']
                                             ])->label('Upload your image')?>
+                                            <?= $form->field($model, 'name')->textInput(['required'=>'required']) ?>
+
                                             <?= $form->field($model, 'address')->textInput(['required'=>'required']) ?>
                                             <?= $form->field($model, 'zip_code')->textInput(['required'=>'required']) ?>
                                             <?= $form->field($model, 'phone_home')->textInput(['required'=>'required']) ?>
@@ -93,6 +95,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <input type="hidden" name="step" value="1"/>    
                                         </div>
                                         
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-md-12">
+                                            <?= $form->field($model, 'biography')->textArea(['required'=>'required','rows' => '6']) ?>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                                 <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Save', ['class' => $model->isNewRecord ? 'btn btn-inverse next-step' : 'btn btn-inverse next-step']) ?>
