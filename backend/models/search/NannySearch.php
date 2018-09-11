@@ -56,6 +56,9 @@ class NannySearch extends Nannies
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => Yii::$app->id === 'frontend' ? 9 : 20,
+            ]
         ]);
 
         if (!($this->load($params) && $this->validate())) {

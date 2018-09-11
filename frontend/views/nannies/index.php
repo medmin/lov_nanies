@@ -2,7 +2,7 @@
 /** @var $this yii\web\View
  * @var $searchModel backend\models\search\NannySearch
  * @var $error string 如果有的话，就是抛出的异常
- *
+ * @var $dataProvider Object
  */
 use yii\web\View;
 
@@ -15,12 +15,32 @@ $this->registerJs(
     '
     $(document).ready(function () {
         $("html, body").animate({scrollTop: $(".slide").height()+$(".navbar").height()},"slow");
-        console.log($("slide").height());
+//        console.log($("slide").height());
             });
     ',
     View::POS_READY,
     'my-button-handler'
 );
+$js = <<<JS
+  $(function() {
+    $('#babysitters-tab .card').each(function() {
+        let _this = $(this);
+        $.get('/tag/default/user-tag', {user_id: _this.data('user-id')}, function(data){
+           let str = '';
+           $.each(data, function(index, item) {
+             str += generateUserTagHtml(item.name, item.icon, item.info, item.id);
+           });
+           if (str.length > 0) {
+             _this.find('.tags-list').html(str);
+           }
+        }, 'json');
+    })
+  })
+  function generateUserTagHtml(name, icon, info, id) {
+    return '<li title="'+ name +'" data-toggle="tooltip" data-placement="'+ name +'"><i class="fa fa-'+ icon +'"></i></li>'
+  }
+JS;
+$this->registerJs($js, View::POS_END)
 ?>
 
 <section class="our-blog">

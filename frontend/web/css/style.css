@@ -1318,8 +1318,7 @@ card grid/list view
 .card-content {
     max-width: 400px;
     background-color: #f7f7f7;
-    padding: 30px;
-    padding-top: 27px;
+    padding: 0 30px 30px 30px;
 }
 
 .card-content .fa {
@@ -1504,6 +1503,14 @@ card grid/list view
     display: block;
 }
 
+.tags-list {
+    margin-top: 0;
+    min-height: 30px;
+}
+
+.tags-list .fa {
+    color: #669999;
+}
 
 /* ----------------------------------
 home-features (home page)
