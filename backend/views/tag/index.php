@@ -45,14 +45,14 @@ $(function() {
     $('#info').val(_tr.children("td:eq(2)").text());
     $('#id').val($(this).data('id'));
     $('#target').val(_tr.children("td:eq(3)").text());
-    $('#icon').val(_tr.children("td:eq(4)").children("i").attr("class").slice(6))
+    $('#icon').val(_tr.children("td:eq(4)").children("i").attr("class").slice(6));
     $('.modal-title').text('Update Tag');
     $("#tagModal").modal('show')
   });
   
   _body.on('click', '.delete-tag-a', function() {
     let _this = $(this);
-    if (confirm('Are you sure you want to delete this item?')){
+    if (confirm('If it\'s deleted, all user-related tags will be cancelled, continue?')){
         $.post(_this.data('url'), function(data) {
           if (data) {
               _this.parents('tr').hide();
@@ -61,11 +61,11 @@ $(function() {
           }
         })
     }
-  })
+  });
   
   $('#tagModal').on('hidden.bs.modal', function() {
-    $('#tagForm')[0].reset()
-    $("input[type='hidden']").val('')
+    $('#tagForm')[0].reset();
+    $("input[type='hidden']").val('');
   });
   
   $('.submit').click(function() {
@@ -105,7 +105,7 @@ $this->registerJs($js, \yii\web\View::POS_END);
             <tr><th>ID</th><th>Name</th><th>Info</th><th>Target</th><th>Icon</th><th>Created At</th><th>Operate</th></tr>
             </thead>
             <tbody>
-                <tr><td colspan="6"><div class="empty">No results found.</div></td></tr>
+                <tr><td colspan="7"><div class="empty">No results found.</div></td></tr>
             </tbody>
         </table>
     </div>

@@ -4964,10 +4964,20 @@ Accordation (Faq,blog pages)
 
 .u-tags {
     color: #699;
-    font-size: 28px;
+    font-size: 38px;
+    cursor: text;
 }
-.u-tags > span {
-    margin-right: 20px;
+.u-tags li {
+    float: left;
+    width: 12.5%;
+    line-height: 1.4;
+    text-align: center;
+}
+.u-tag-name {
+    text-align: center;
+    word-wrap: break-word;
+    display: block;
+    font-size: 12px;
 }
 
 /* partners*/
