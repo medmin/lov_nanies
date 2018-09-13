@@ -1,6 +1,6 @@
 <?php
 
-$localParams = require( __DIR__.'/../../env.local.php');
+$localParams = require( __DIR__.'/../../env.php');
 
 $config = [
     'name'=>'NannyCare.com',
