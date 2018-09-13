@@ -117,7 +117,8 @@ class DefaultController extends Controller
             if(count($refs)<3){
                 Yii::$app->session->setFlash('alert', [
                     'options' => ['class'=>'alert-warning'],
-                    'body' => Yii::t('frontend', 'Thank you for registering wth NannyCare.com. Please follow the steps below to complete your profile. Nannies must complete the application, upload CPR/First Aid and fill out the background check form to be considered. You can also upload a resume and any references letters and/or certifications you have, since some families may ask us to verify your references (added service we offer families). We will contact you via email when your profile has been approved. As soon as you are approved, you\'re profile will be displayed on our site and you can start connecting with families.
+                    'body' => Yii::t('frontend', 'Thank you for registering wth NannyCare.com. Please create your profile below. Nannies must complete all sections to be approved. Families appreciate it when nannies take their time to answer all the questions sincerely and thoroughly. This can usually be done in 15 minutes. Also, don\'t forget to upload a picture. If you have CPR and First Aid please upload them below to get badges. You can also upload any reference letters, resumes, certifications and credentials that you have. Lastly, don\'t forget to click on \'Get Membership\' when you\'re done to get started with your FREE 3 month all inclusive nanny membership. We hope you find a great job(s) through our site. Please let us know if you need help with anything. 
+                    
                     Thanks!~Team NannyCare.com', [], Yii::$app->user->identity->userProfile->locale)
                 ]);
             }
