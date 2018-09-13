@@ -1,6 +1,6 @@
 # Env
 /.env
-/env.local.php
+/env.php
 
 # Composer
 /vendor
