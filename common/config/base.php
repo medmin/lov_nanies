@@ -1,4 +1,7 @@
 <?php
+
+$localParams = require( __DIR__.'/../../env.local.php');
+
 $config = [
     'name'=>'NannyCare.com',
     'vendorPath'=>dirname(dirname(__DIR__)).'/vendor',
@@ -79,10 +82,10 @@ $config = [
         ],
         'db'=>[
             'class'=>'yii\db\Connection',
-            'dsn' => env('DB_DSN'),
-            'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD'),
-            'tablePrefix' => env('DB_TABLE_PREFIX'),
+            'dsn' => $localParams['DB_DSN'],
+            'username' => $localParams['DB_USERNAME'],
+            'password' => $localParams['DB_PASSWORD'],
+            'tablePrefix' => $localParams['DB_TABLE_PREFIX'],
             'charset' => 'utf8mb4',
             'enableSchemaCache' => YII_ENV_PROD,
         ],

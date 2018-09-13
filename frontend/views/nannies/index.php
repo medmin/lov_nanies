@@ -35,9 +35,12 @@ $js = <<<JS
            }
         }, 'json');
     })
-  })
+  });
+  $("body").tooltip({
+    selector: '[data-toggle="tooltip"]'
+  });
   function generateUserTagHtml(name, icon, info, id) {
-    return '<li title="'+ name +'" data-toggle="tooltip" data-placement="'+ name +'"><i class="fa fa-'+ icon +'"></i></li>'
+    return '<li title="'+ name +'" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-'+ icon +'"></i></li>'
   }
 JS;
 $this->registerJs($js, View::POS_END)
