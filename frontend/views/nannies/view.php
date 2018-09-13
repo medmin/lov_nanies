@@ -62,7 +62,7 @@ $js = <<<JS
     });
     
     function generateTagHtml(name, icon, info) {
-      return '<span title="'+ name +'"><i class="fa fa-'+ icon +'"></i></span>';
+      return '<li title="'+ info +'"><span><i class="fa fa-'+ icon +'"></i></span><span class="u-tag-name">'+ name +'</span></li>';
     }
 JS;
 $this->registerJs($js, View::POS_END);
@@ -86,8 +86,8 @@ $this->registerJs($js, View::POS_END);
                 </div>
             </div>
         </div><div style="clear: both;"></div><br>
-            <div class="col-lg-12 u-tags">
-            </div>
+            <ul class="col-lg-12 u-tags">
+            </ul>
             <div class="col-sm-6">
                 <ul class="candidate-features">
                     <li><i class="fa fa-check"></i>

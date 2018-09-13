@@ -74,4 +74,10 @@ class Tag extends \yii\db\ActiveRecord
         }
         return parent::beforeSave($insert);
     }
+
+    public function beforeDelete()
+    {
+        UserTag::deleteAll(['tag_id' => $this->id]);
+        return parent::beforeDelete();
+    }
 }
