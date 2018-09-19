@@ -38,7 +38,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = User::find()->where(['<>', 'status', self::STATUS_DELETED]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

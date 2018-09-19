@@ -3,6 +3,8 @@ namespace common\models;
 
 use common\commands\AddToTimelineCommand;
 use common\models\query\UserQuery;
+use common\modules\file\models\UserFile;
+use common\service\models\UserTag;
 use Yii;
 use yii\behaviors\AttributeBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -324,5 +326,18 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return $this->email;
     }
-    
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if (!$insert) {
+            if (isset($changedAttributes['status']) && $this->status == self::STATUS_DELETED) {
+                UserFile::updateAll(['status' => UserFile::STATUS_DELETED, 'deleted_at' => time()], ['user_id' => $this->id]); // delete user associated files
+                UserDiscount::deleteAll(['user_id' => $this->id]); // delete discount
+                UserNotify::updateAll(['status' => UserNotify::STATUS_DELETED], ['or', ['sender_id' => $this->id], ['receiver_id' => $this->id]]); // delete notify
+                ParentPost::updateAll(['status' => ParentPost::STATUS_DELETED], ['user_id' => $this->id]); // delete post
+                Nannies::updateAll(['status' => Nannies::STATUS_DELETED], ['id' => $this->id]); // delete nannies
+                UserTag::deleteAll(['user_id' => $this->id]);
+            }
+        }
+    }
 }

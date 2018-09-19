@@ -40,10 +40,9 @@ class NannySearch extends Nannies
      */
     public function search($params, $limit='')
     {
+        $query = $query = Nannies::find()->where(['<>', self::STATUS_DELETED, $this->status]);
         if($limit!=''){
-            $query = Nannies::find()->limit($limit);
-        }else{
-            $query = Nannies::find();
+            $query = $query->limit($limit);
         }
 
         if (Yii::$app->id === 'frontend') {

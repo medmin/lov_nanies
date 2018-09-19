@@ -25,6 +25,10 @@ use common\queue\EmailJob;
  */
 class UserNotify extends \yii\db\ActiveRecord
 {
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_DELETED = 0;
+
     /**
      * @inheritdoc
      */
