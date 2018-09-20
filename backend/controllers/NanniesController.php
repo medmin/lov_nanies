@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\Nannies;
 use common\models\Refs;
@@ -154,8 +155,8 @@ class NanniesController extends Controller
     public function actionDelete($id)
     {
         Yii::$app->authManager->revokeAll($id);
-        $model=$this->findModel($id);
-        $model->status=-10;
+        $model = User::findOne($id);
+        $model->status=User::STATUS_DELETED;
         $model->save();
         return $this->goBack();
     }

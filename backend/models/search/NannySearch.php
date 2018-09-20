@@ -40,7 +40,7 @@ class NannySearch extends Nannies
      */
     public function search($params, $limit='')
     {
-        $query = $query = Nannies::find()->where(['<>', self::STATUS_DELETED, $this->status]);
+        $query = $query = Nannies::find()->where(['<>', 'status', self::STATUS_DELETED]);
         if($limit!=''){
             $query = $query->limit($limit);
         }

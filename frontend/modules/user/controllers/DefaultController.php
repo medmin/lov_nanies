@@ -374,13 +374,13 @@ class DefaultController extends Controller
     {
         if ($id) {
             if ($role == 'sent' || $role == 'grouped_by_receivers') {
-                $model = UserNotify::findOne(['sender_id' => Yii::$app->user->id, 'id' => $id]);
+                $model = UserNotify::findOne(['sender_id' => Yii::$app->user->id, 'id' => $id, 'status' => UserNotify::STATUS_ACTIVE]);
             } else if ($role == 'received') {
-                $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
+                $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id, 'status' => UserNotify::STATUS_ACTIVE]);
             } else if ($role == 'all') {
-                $model = UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orWhere(['sender_id' => Yii::$app->user->id])->andWhere(['id' => $id])->one();
+                $model = UserNotify::find()->where(['receiver_id' => Yii::$app->user->id])->orWhere(['sender_id' => Yii::$app->user->id])->andWhere(['id' => $id, 'status' => UserNotify::STATUS_ACTIVE])->one();
             } else{
-                $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id]);
+                $model = UserNotify::findOne(['receiver_id' => Yii::$app->user->id, 'id' => $id, 'status' => UserNotify::STATUS_ACTIVE]);
             }
             if (!$model) {
                 throw new NotFoundHttpException('The requested page does not exist.');
@@ -388,11 +388,11 @@ class DefaultController extends Controller
             return $this->render('notify_view', ['model' => $model]);
         }
         if ($group_id) {
-            $query = UserNotify::find();
+            $query = UserNotify::find()->where(['status' => UserNotify::STATUS_ACTIVE]);
             if ($role == 'grouped_by_senders') {
-                $query->where(['sender_id' => $group_id, 'receiver_id' => Yii::$app->user->id]);
+                $query->andWhere(['sender_id' => $group_id, 'receiver_id' => Yii::$app->user->id]);
             } elseif ($role == 'grouped_by_receivers') {
-                $query->where(['receiver_id' => $group_id, 'sender_id' => Yii::$app->user->id]);
+                $query->andWhere(['receiver_id' => $group_id, 'sender_id' => Yii::$app->user->id]);
             } else {
                 throw new NotFoundHttpException('The requested page does not exist.');
             }
@@ -407,26 +407,26 @@ class DefaultController extends Controller
 
         if ($role == 'sent') {
             $query = UserNotify::find()
-                ->where(['sender_id' => Yii::$app->user->id])
+                ->where(['sender_id' => Yii::$app->user->id, 'status' => UserNotify::STATUS_ACTIVE])
                 ->orderBy(['created_at' => SORT_DESC]);
         } elseif ($role == 'all') {
             $query = UserNotify::find()
-                ->where(['sender_id' => Yii::$app->user->id])
+                ->where(['sender_id' => Yii::$app->user->id, 'status' => UserNotify::STATUS_ACTIVE])
                 ->orWhere(['receiver_id' => Yii::$app->user->id])
                 ->orderBy(['created_at' => SORT_DESC]);
         } elseif ($role == 'grouped_by_senders') {
             $query = (new \yii\db\Query())
                 ->select('tmp.*,username')
-                ->from("(select `sender_id`, count(*) as count FROM `user_notify` WHERE `receiver_id`=". Yii::$app->user->id ." GROUP BY `sender_id`) as tmp")
+                ->from("(select `sender_id`, count(*) as count FROM `user_notify` WHERE `receiver_id`=". Yii::$app->user->id ." AND `status`=". UserNotify::STATUS_ACTIVE ." GROUP BY `sender_id`) as tmp")
                 ->leftJoin('user','`sender_id` = `id`');
         } elseif ($role == 'grouped_by_receivers') {
             $query = (new \yii\db\Query())
                 ->select('tmp.*,username')
-                ->from("(select `receiver_id`, count(*) as count FROM `user_notify` WHERE `sender_id`=". Yii::$app->user->id ." GROUP BY `receiver_id`) as tmp")
+                ->from("(select `receiver_id`, count(*) as count FROM `user_notify` WHERE `sender_id`=". Yii::$app->user->id ." AND `status`=". UserNotify::STATUS_ACTIVE ." GROUP BY `receiver_id`) as tmp")
                 ->leftJoin('user','`receiver_id` = `id`');
         } else {
             $query = UserNotify::find()
-                ->where(['receiver_id' => Yii::$app->user->id])
+                ->where(['receiver_id' => Yii::$app->user->id, 'status' => UserNotify::STATUS_ACTIVE])
                 ->orderBy(['is_read' => SORT_ASC, 'created_at' => SORT_DESC]);
             UserNotify::updateAll(['is_read' => 1], ['receiver_id' => Yii::$app->user->id, 'is_read' => 0]);
         }

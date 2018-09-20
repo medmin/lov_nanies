@@ -180,7 +180,7 @@ class UserController extends Controller
             ],
         ]);
 
-        $user_file = UserFile::findOne(['file_uuid' => $file_uuid]);
+        $user_file = UserFile::findOne(['file_uuid' => $file_uuid, 'status' => UserFile::STATUS_ACTIVE]);
         try {
             // Get the object.
             $file = $client->getObject([

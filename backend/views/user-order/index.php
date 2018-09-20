@@ -21,7 +21,17 @@ $this->params['breadcrumbs'][] = $this->title;
             // ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
-            'user_id',
+            [
+                'attribute' => 'user_id',
+                'format' => 'raw',
+                'value' => function($model) {
+                    if (!($model->user) || $model->user->status == \common\models\User::STATUS_DELETED) {
+                        return '<span style="color: red;" title="Invalid user">'. $model->user_id .'</span>';
+                    } else {
+                        return Html::a($model->user->username,['/user/view', 'id' => $model->user_id]);
+                    }
+                }
+            ],
             'user_type',
             'attribute' => 'payment_gateway',
             'payment_gateway_id',
