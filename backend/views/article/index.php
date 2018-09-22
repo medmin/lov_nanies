@@ -2,9 +2,9 @@
 
 use common\grid\EnumColumn;
 use common\models\ArticleCategory;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\ArticleSearch */
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
 
     <p>
         <?= Html::a(
@@ -25,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => [
-            'class' => 'grid-view table-responsive'
+        'filterModel'  => $searchModel,
+        'options'      => [
+            'class' => 'grid-view table-responsive',
         ],
         'columns' => [
 
@@ -36,24 +36,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute' => 'category_id',
-                'value' => function ($model) {
+                'value'     => function ($model) {
                     return $model->category ? $model->category->title : null;
                 },
-                'filter' => ArrayHelper::map(ArticleCategory::find()->all(), 'id', 'title')
+                'filter' => ArrayHelper::map(ArticleCategory::find()->all(), 'id', 'title'),
             ],
             [
                 'attribute' => 'created_by',
-                'value' => function ($model) {
+                'value'     => function ($model) {
                     return $model->author->username;
-                }
+                },
             ],
             [
-                'class' => EnumColumn::className(),
+                'class'     => EnumColumn::className(),
                 'attribute' => 'status',
-                'enum' => [
+                'enum'      => [
                     Yii::t('backend', 'Not Published'),
-                    Yii::t('backend', 'Published')
-                ]
+                    Yii::t('backend', 'Published'),
+                ],
             ],
             'published_at:datetime',
             'created_at:datetime',
@@ -61,9 +61,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete}'
-            ]
-        ]
+                'class'    => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
+        ],
     ]); ?>
 </div>

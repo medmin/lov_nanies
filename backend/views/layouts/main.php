@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $this yii\web\View
+ * @var yii\web\View
  */
 ?>
 <?php $this->beginContent('@backend/views/layouts/common.php'); ?>

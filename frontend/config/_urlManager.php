@@ -1,16 +1,17 @@
 <?php
+
 return [
-    'class'=>'yii\web\UrlManager',
-    'enablePrettyUrl'=>true,
-    'showScriptName'=>false,
-    'rules'=> [
+    'class'          => 'yii\web\UrlManager',
+    'enablePrettyUrl'=> true,
+    'showScriptName' => false,
+    'rules'          => [
         // Pages
         ['pattern'=>'page/<slug>', 'route'=>'page/view'],
 
         // Articles
         ['pattern'=>'article/index', 'route'=>'article/index'],
-        ['pattern'=>'article/attachment-download', 'route'=>'article/attachment-download'],
-        ['pattern'=>'/<slug>', 'route'=>'article/view'],
+        ['pattern'=> 'article/attachment-download', 'route'=>'article/attachment-download'],
+        ['pattern'=> '/<slug>', 'route'=>'article/view'],
 
         // Api
         ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/article', 'only' => ['index', 'view', 'options']],
@@ -19,21 +20,21 @@ return [
         // City Search
         [
             'pattern' => 'find-a-nanny/<city:[\w-]+>-nanny',
-            'route' => 'nannies/index',
-            'suffix' => '/'         // 虽然能达到效果,但感觉这种方式不可取,相当于直接加了个后缀,并不是真正的 url 地址
+            'route'   => 'nannies/index',
+            'suffix'  => '/',         // 虽然能达到效果,但感觉这种方式不可取,相当于直接加了个后缀,并不是真正的 url 地址
         ],
         ['pattern' => 'find-a-nanny/<city:[\w-]+>', 'route' => 'nannies/index', 'suffix' => '/'],
 
         // Find Job
-        'find-a-job/post' => 'post-job/create',
-        'find-a-job/list' => 'post-job/index',
-        'find-a-job/update' => 'post-job/update',
-        'find-a-job/delete' => 'post-job/delete',
-        'find-a-job/detail' => 'post-job/view',
-        'find-a-job/posted' => 'post-job/posted',
+        'find-a-job/post'    => 'post-job/create',
+        'find-a-job/list'    => 'post-job/index',
+        'find-a-job/update'  => 'post-job/update',
+        'find-a-job/delete'  => 'post-job/delete',
+        'find-a-job/detail'  => 'post-job/view',
+        'find-a-job/posted'  => 'post-job/posted',
         'find-a-job/contact' => 'post-job/contact',
 
         // message (notify)
-        'user/default/message' => 'user/default/notify'
-    ]
+        'user/default/message' => 'user/default/notify',
+    ],
 ];

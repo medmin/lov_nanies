@@ -1,10 +1,11 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
-use common\models\Families;
 use common\grid\EnumColumn;
+use common\models\Families;
 use common\models\User;
+use yii\grid\GridView;
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\FamilySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -28,7 +29,7 @@ $("#discount-submit").click(function() {
       alert("Please Set the expiration date!");
   }
   else{
-        $.post("/discount/add?type='. \common\models\UserDiscount::TYPE_FAMILY_POST .'", {user_id: user_id, off : off, expired_at : expired_at}, function(data) {
+        $.post("/discount/add?type='.\common\models\UserDiscount::TYPE_FAMILY_POST.'", {user_id: user_id, off : off, expired_at : expired_at}, function(data) {
             if (data) {
             $("#userDiscountModel").modal("hide");
             }
@@ -48,20 +49,20 @@ $("#userDiscountModel").on("hidden.bs.modal", function(e) {
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => [
-            'class' => 'grid-view table-responsive'
+        'filterModel'  => $searchModel,
+        'options'      => [
+            'class' => 'grid-view table-responsive',
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
             [
-                'content'=>function($data){
-                 return User::findById($data->id) ?  User::findById($data->id)->email : "";
+                'content'=> function ($data) {
+                    return User::findById($data->id) ? User::findById($data->id)->email : '';
                 },
                 'attribute' => 'email',
             ],
-             
+
 //            [
 //                'class' => EnumColumn::className(),
 //                'attribute' => 'status',
@@ -80,13 +81,13 @@ $("#userDiscountModel").on("hidden.bs.modal", function(e) {
             // 'how_heared_about_us:ntext',
 
             [
-                'class' => 'yii\grid\ActionColumn',
+                'class'    => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete} {discount}',
-                'buttons' => [
+                'buttons'  => [
                     'discount' => function ($url, $model) {
-                        return Html::tag('span', '', ['style' => 'color: #3c8dbc; cursor: pointer', 'class' => 'glyphicon glyphicon-tag user-discount', 'title' => Yii::t('app', 'Set Discount'), 'data-username' => $model->name ,' data-id' => $model->id]);
-                    }
-                ]
+                        return Html::tag('span', '', ['style' => 'color: #3c8dbc; cursor: pointer', 'class' => 'glyphicon glyphicon-tag user-discount', 'title' => Yii::t('app', 'Set Discount'), 'data-username' => $model->name, ' data-id' => $model->id]);
+                    },
+                ],
             ],
         ],
     ]); ?>
@@ -105,12 +106,12 @@ $("#userDiscountModel").on("hidden.bs.modal", function(e) {
                     'name' => 'expired_at',
 //                    'value' => date('Y-m-d H:i:s', strtotime('+1 day')),
                     'options' => [
-                        'placeholder' => 'select expired_at'
+                        'placeholder' => 'select expired_at',
                     ],
                     'pluginOptions' => [
                         'autoclose' => true,
-                        'format' => 'yyyy-mm-dd hh:ii:ss'
-                    ]
+                        'format'    => 'yyyy-mm-dd hh:ii:ss',
+                    ],
                 ]) ?>
                 <input type="hidden" name="user_id">
             </div>

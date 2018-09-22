@@ -10,11 +10,11 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "widget_menu".
  *
- * @property integer $id
+ * @property int $id
  * @property string $key
  * @property string $title
  * @property string $items
- * @property integer $status
+ * @property int $status
  */
 class WidgetMenu extends ActiveRecord
 {
@@ -22,7 +22,7 @@ class WidgetMenu extends ActiveRecord
     const STATUS_DRAFT = 0;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -33,22 +33,22 @@ class WidgetMenu extends ActiveRecord
     {
         return [
             'cacheInvalidate' => [
-                'class' => CacheInvalidateBehavior::className(),
+                'class'          => CacheInvalidateBehavior::className(),
                 'cacheComponent' => 'frontendCache',
-                'keys' => [
+                'keys'           => [
                     function ($model) {
                         return [
                             get_class($model),
-                            $model->key
+                            $model->key,
                         ];
-                    }
-                ]
-            ]
+                    },
+                ],
+            ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -58,21 +58,21 @@ class WidgetMenu extends ActiveRecord
             [['items'], JsonValidator::className()],
             [['status'], 'integer'],
             [['key'], 'string', 'max' => 32],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'key' => Yii::t('common', 'Key'),
-            'title' => Yii::t('common', 'Title'),
-            'items' => Yii::t('common', 'Config'),
-            'status' => Yii::t('common', 'Status')
+            'id'     => Yii::t('common', 'ID'),
+            'key'    => Yii::t('common', 'Key'),
+            'title'  => Yii::t('common', 'Title'),
+            'items'  => Yii::t('common', 'Config'),
+            'status' => Yii::t('common', 'Status'),
         ];
     }
 }

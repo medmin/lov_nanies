@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\UserOrder;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\UserOrder;
 
 /**
  * UserOrderSearch represents the model behind the search form about `common\models\UserOrder`.
@@ -13,7 +12,7 @@ use common\models\UserOrder;
 class UserOrderSearch extends UserOrder
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class UserOrderSearch extends UserOrder
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,7 +32,7 @@ class UserOrderSearch extends UserOrder
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -45,9 +44,9 @@ class UserOrderSearch extends UserOrder
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => [
-                'defaultOrder' => ['timestamp' => SORT_DESC]
-            ]
+            'sort'  => [
+                'defaultOrder' => ['timestamp' => SORT_DESC],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -55,10 +54,10 @@ class UserOrderSearch extends UserOrder
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
+            'id'            => $this->id,
+            'user_id'       => $this->user_id,
             'service_money' => $this->service_money,
-            'timestamp' => $this->timestamp,
+            'timestamp'     => $this->timestamp,
         ]);
 
         $query->andFilterWhere(['like', 'user_type', $this->user_type])

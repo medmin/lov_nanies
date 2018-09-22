@@ -2,11 +2,10 @@
 
 namespace backend\models\search;
 
+use common\models\ParentPost;
 use common\models\User;
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\ParentPost;
 
 /**
  * ParentPostSearch represents the model behind the search form about `common\models\ParentPost`.
@@ -14,7 +13,7 @@ use common\models\ParentPost;
 class ParentPostSearch extends ParentPost
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -25,7 +24,7 @@ class ParentPostSearch extends ParentPost
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -34,7 +33,7 @@ class ParentPostSearch extends ParentPost
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -56,10 +55,10 @@ class ParentPostSearch extends ParentPost
             $this->user_id = $user->id;
         }
         $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'zip_code' => $this->zip_code,
-            'status' => $this->status,
+            'id'         => $this->id,
+            'user_id'    => $this->user_id,
+            'zip_code'   => $this->zip_code,
+            'status'     => $this->status,
             'created_at' => $this->created_at,
             'expired_at' => $this->expired_at,
         ]);

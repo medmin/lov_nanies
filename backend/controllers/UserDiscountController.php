@@ -2,13 +2,13 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\UserDiscount;
 use backend\models\search\UserDiscountSearch;
+use common\models\UserDiscount;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UserDiscountController implements the CRUD actions for UserDiscount model.
@@ -16,13 +16,13 @@ use yii\filters\VerbFilter;
 class UserDiscountController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -32,6 +32,7 @@ class UserDiscountController extends Controller
 
     /**
      * Lists all Nannies Discount models.
+     *
      * @return mixed
      */
     public function actionNanny()
@@ -43,8 +44,8 @@ class UserDiscountController extends Controller
         $offForAllNannies = UserDiscount::getDiscountForAllNannies();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel'      => $searchModel,
+            'dataProvider'     => $dataProvider,
             'offForAllNannies' => $offForAllNannies,
         ]);
     }
@@ -59,16 +60,18 @@ class UserDiscountController extends Controller
         $offForAllFamiliesPost = UserDiscount::getPostDiscountForAllFamilies();
 
         return $this->render('index_family', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel'           => $searchModel,
+            'dataProvider'          => $dataProvider,
             'offForAllFamiliesPost' => $offForAllFamiliesPost,
         ]);
     }
 
     /**
      * Displays a single UserDiscount model.
-     * @param integer $user_id
-     * @param integer $type
+     *
+     * @param int $user_id
+     * @param int $type
+     *
      * @return mixed
      */
     public function actionView($user_id, $type)
@@ -79,14 +82,14 @@ class UserDiscountController extends Controller
     }
 
     /**
-     * 创建或者更新全体折扣
+     * 创建或者更新全体折扣.
      *
-     * @param integer $type 折扣类型
+     * @param int $type 折扣类型
+     *
      * @return mixed
      */
     public function actionCreate($type = UserDiscount::TYPE_NANNY)
     {
-
         $model = UserDiscount::findOne(['user_id' => 0, 'type' => $type]);
         if (!$model) {
             $model = new UserDiscount();
@@ -94,10 +97,11 @@ class UserDiscountController extends Controller
             $model->type = $type;
         }
         $model->created_at = time();
-        
+
         if ($model->load(Yii::$app->request->post())) {
             $model->expired_at = $model->expired_at ? strtotime($model->expired_at) : null;
             $model->save();
+
             return $this->redirect([$type == UserDiscount::TYPE_FAMILY_POST ? 'family' : 'nanny']);
         } else {
             return $this->render('create', [
@@ -107,14 +111,15 @@ class UserDiscountController extends Controller
     }
 
     /**
-     * 给用户添加折扣
+     * 给用户添加折扣.
      *
-     * @param integer $type 折扣类型
+     * @param int $type 折扣类型
+     *
      * @return bool
      */
     public function actionAdd($type = UserDiscount::TYPE_NANNY)
     {
-        if (Yii::$app->request->isAjax){
+        if (Yii::$app->request->isAjax) {
             $user_id = Yii::$app->request->post('user_id');
             $model = UserDiscount::findOne(['user_id' => $user_id, 'type' => $type]);
             if (!$model) {
@@ -125,16 +130,20 @@ class UserDiscountController extends Controller
             }
             $model->discount = Yii::$app->request->post('off');
             $model->expired_at = strtotime(Yii::$app->request->post('expired_at')) ?: null;
+
             return $model->save();
         }
+
         return false;
     }
-    
+
     /**
      * Updates an existing UserDiscount model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $user_id
-     * @param integer $type
+     *
+     * @param int $user_id
+     * @param int $type
+     *
      * @return mixed
      */
     public function actionUpdate($user_id, $type)
@@ -144,6 +153,7 @@ class UserDiscountController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->expired_at = $model->expired_at ? strtotime($model->expired_at) : null;
             $model->save();
+
             return $this->redirect(['view', 'user_id' => $model->user_id, 'type' => $type]);
         } else {
             return $this->render('update', [
@@ -155,8 +165,10 @@ class UserDiscountController extends Controller
     /**
      * Deletes an existing UserDiscount model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $user_id
-     * @param integer $type
+     *
+     * @param int $user_id
+     * @param int $type
+     *
      * @return mixed
      */
     public function actionDelete($user_id, $type)
@@ -169,10 +181,13 @@ class UserDiscountController extends Controller
     /**
      * Finds the UserDiscount model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $user_id
-     * @param integer $type
-     * @return UserDiscount the loaded model
+     *
+     * @param int $user_id
+     * @param int $type
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return UserDiscount the loaded model
      */
     protected function findModel($user_id, $type)
     {

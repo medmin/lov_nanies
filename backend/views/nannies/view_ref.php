@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Update', ['update_ref', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
     <?= DetailView::widget([
-        'model' => $model,
+        'model'      => $model,
         'attributes' => [
             'reference_name:ntext',
             'reference_address:ntext',

@@ -3,6 +3,7 @@
 /* @var $model common\models\Article */
 use yii\helpers\Html;
 use yii\web\View;
+
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Articles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,7 +32,7 @@ $this->registerJs(
                                 'path' => $model->thumbnail_path,
                             ], true),
                             ['class' => 'article-thumb img-rounded pull-left']
-                        ) , ['view', 'slug'=>$model->slug, ]); ?>
+                        ), ['view', 'slug'=>$model->slug]); ?>
                         </div>
                     <?php endif; ?>
                 </div>

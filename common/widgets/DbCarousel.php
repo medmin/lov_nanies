@@ -1,6 +1,6 @@
 <?php
 /**
- * Eugine Terentev <eugine@terentev.net>
+ * Eugine Terentev <eugine@terentev.net>.
  */
 
 namespace common\widgets;
@@ -13,8 +13,7 @@ use yii\bootstrap\Carousel;
 use yii\helpers\Html;
 
 /**
- * Class DbCarousel
- * @package common\widgets
+ * Class DbCarousel.
  */
 class DbCarousel extends Carousel
 {
@@ -37,11 +36,11 @@ class DbCarousel extends Carousel
     public function init()
     {
         if (!$this->key) {
-            throw new InvalidConfigException;
+            throw new InvalidConfigException();
         }
         $cacheKey = [
             WidgetCarousel::className(),
-            $this->key
+            $this->key,
         ];
         $items = Yii::$app->cache->get($cacheKey);
         if ($items === false) {
@@ -50,9 +49,9 @@ class DbCarousel extends Carousel
                 ->joinWith('carousel')
                 ->where([
                     '{{%widget_carousel_item}}.status' => 1,
-                    '{{%widget_carousel}}.status' => WidgetCarousel::STATUS_ACTIVE,
+                    '{{%widget_carousel}}.status'      => WidgetCarousel::STATUS_ACTIVE,
                 ])
-                ->andWhere(['REGEXP', '{{%widget_carousel}}.key', '^'.str_replace(['_','-'], '[-|_]' ,$this->key).'$'])
+                ->andWhere(['REGEXP', '{{%widget_carousel}}.key', '^'.str_replace(['_', '-'], '[-|_]', $this->key).'$'])
                 ->orderBy(['order' => SORT_ASC]);
             foreach ($query->all() as $k => $item) {
                 /** @var $item \common\models\WidgetCarouselItem */
@@ -68,7 +67,7 @@ class DbCarousel extends Carousel
                     $items[$k]['caption'] = $item->caption;
                 }
             }
-            Yii::$app->cache->set($cacheKey, $items, 60*60*24*365);
+            Yii::$app->cache->set($cacheKey, $items, 60 * 60 * 24 * 365);
         }
         $this->items = $items;
         parent::init();
@@ -85,9 +84,10 @@ class DbCarousel extends Carousel
             $content = implode("\n", [
                 $this->renderIndicators(),
                 $this->renderItems(),
-                $this->renderControls()
+                $this->renderControls(),
             ]);
         }
+
         return Html::tag('div', $content, $this->options);
     }
 }

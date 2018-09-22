@@ -9,25 +9,23 @@ class SignupCest
 {
     public function _before($event)
     {
-
     }
 
     public function _after($event)
     {
         User::deleteAll([
-            'email' => 'tester.email@example.com',
+            'email'    => 'tester.email@example.com',
             'username' => 'tester',
         ]);
     }
 
     public function _fail()
     {
-
     }
 
     /**
      * @param \tests\codeception\frontend\AcceptanceTester $I
-     * @param \Codeception\Scenario $scenario
+     * @param \Codeception\Scenario                        $scenario
      */
     public function testUserSignup($I, $scenario)
     {
@@ -48,7 +46,7 @@ class SignupCest
         $I->amGoingTo('submit signup form with not correct email');
         $signupPage->submit([
             'username' => 'tester',
-            'email' => 'tester.email',
+            'email'    => 'tester.email',
             'password' => 'tester_password',
         ]);
 
@@ -60,7 +58,7 @@ class SignupCest
         $I->amGoingTo('submit signup form with correct email');
         $signupPage->submit([
             'username' => 'tester',
-            'email' => 'tester.email@example.com',
+            'email'    => 'tester.email@example.com',
             'password' => 'tester_password',
         ]);
         if (method_exists($I, 'wait')) {
@@ -68,7 +66,7 @@ class SignupCest
         }
 
         $I->expectTo('see that user logged in');
-        $I->click("tester","a");
-        $I->see("Logout","a");
+        $I->click('tester', 'a');
+        $I->see('Logout', 'a');
     }
 }

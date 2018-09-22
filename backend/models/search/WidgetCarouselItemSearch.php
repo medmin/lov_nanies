@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\WidgetCarouselItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\WidgetCarouselItem;
 
 /**
  * WidgetCarouselItemSearch represents the model behind the search form about `common\models\WidgetCarouselItem`.
@@ -13,7 +12,7 @@ use common\models\WidgetCarouselItem;
 class WidgetCarouselItemSearch extends WidgetCarouselItem
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class WidgetCarouselItemSearch extends WidgetCarouselItem
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,8 +32,10 @@ class WidgetCarouselItemSearch extends WidgetCarouselItem
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params = null)
@@ -50,10 +51,10 @@ class WidgetCarouselItemSearch extends WidgetCarouselItem
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'          => $this->id,
             'carousel_id' => $this->carousel_id,
-            'status' => $this->status,
-            'order' => $this->order,
+            'status'      => $this->status,
+            'order'       => $this->order,
         ]);
 
         $query->andFilterWhere(['like', 'path', $this->path])

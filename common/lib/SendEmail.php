@@ -1,12 +1,16 @@
 <?php
+
 namespace common\lib;
 
-use yii\base\Object;
 use Mailgun\Mailgun;
+use yii\base\Object;
 
 class SendEmail extends Object
 {
-    public $from, $to, $subject, $body;
+    public $from;
+    public $to;
+    public $subject;
+    public $body;
 
     public function init()
     {
@@ -14,11 +18,14 @@ class SendEmail extends Object
     }
 
     /**
-     * @return \Exception|\Mailgun\Model\Message\SendResponse|boolean
+     * @return \Exception|\Mailgun\Model\Message\SendResponse|bool
      */
     public function handle()
     {
-        if (env('IS_SEND') === false) return false;
+        if (env('IS_SEND') === false) {
+            return false;
+        }
+
         try {
             $mg = Mailgun::create(env('MAILGUN_KEY'));
 //            $mg->setSslEnabled(!env('YII_DEBUG'));
@@ -27,11 +34,10 @@ class SendEmail extends Object
                 'from'    => env('NOREPLY_EMAIL'),
                 'to'      => $this->to,
                 'subject' => $this->subject,
-                'html'    => $this->body
+                'html'    => $this->body,
             ]);
         } catch (\Exception $e) {
             return $e;
         }
-
     }
 }

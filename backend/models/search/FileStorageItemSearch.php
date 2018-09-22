@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\FileStorageItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\FileStorageItem;
 
 /**
  * FileStorageItemSearch represents the model behind the search form about `common\models\FileStorageItem`.
@@ -13,7 +12,7 @@ use common\models\FileStorageItem;
 class FileStorageItemSearch extends FileStorageItem
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class FileStorageItemSearch extends FileStorageItem
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,7 +32,7 @@ class FileStorageItemSearch extends FileStorageItem
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -52,8 +51,8 @@ class FileStorageItemSearch extends FileStorageItem
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'size' => $this->size,
+            'id'         => $this->id,
+            'size'       => $this->size,
             'created_at' => $this->created_at,
         ]);
 

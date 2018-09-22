@@ -1,7 +1,6 @@
 <?php
-use yii\helpers\Html;
-use yii\widgets\DetailView;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
@@ -14,13 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php $form = ActiveForm::begin(['action' =>['update?id='.$model->id.'&step=5']]); ?>   
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <ul class="process-label">
-                                <a href="update?id=<?php echo $model->id;?>&step=1"><li class="process-label2" id="label-1">Main </li></a>
-                                <a href="update?id=<?php echo $model->id;?>&step=2"><li class="process-label2" id="label-2">Questions & Schedule</li></a>
-                                <a href="update?id=<?php echo $model->id;?>&step=3"><li class="process-label2" id="label-3">Education & Driving</li></a>
-                                <a href="update?id=<?php echo $model->id;?>&step=4"><li class="process-label2" id="label-4">Housekeeping</li></a>
-                                <a href="update?id=<?php echo $model->id;?>&step=5"><li class="process-label2 active" id="label-5">About you</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=1"><li class="process-label2" id="label-1">Main </li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=2"><li class="process-label2" id="label-2">Questions & Schedule</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=3"><li class="process-label2" id="label-3">Education & Driving</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=4"><li class="process-label2" id="label-4">Housekeeping</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=5"><li class="process-label2 active" id="label-5">About you</li></a>
                                 <br>
-                                <a href="update?id=<?php echo $model->id;?>&step=tag"><li class="process-label2" id="label-tag">Nanny Tag</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=tag"><li class="process-label2" id="label-tag">Nanny Tag</li></a>
                             </ul>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">

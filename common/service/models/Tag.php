@@ -2,25 +2,22 @@
 
 namespace common\service\models;
 
-use Yii;
-
 /**
  * This is the model class for table "tag".
  *
- * @property integer $id
+ * @property int $id
  * @property string $uid
  * @property string $target
  * @property string $name
  * @property string $icon
  * @property string $info
- * @property integer $created_at
- *
+ * @property int $created_at
  * @property UserTag[] $userTags
  */
 class Tag extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -28,7 +25,7 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -44,17 +41,17 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'uid' => 'Uid',
-            'target' => 'Target',
-            'name' => 'Name',
-            'icon' => 'Icon',
-            'info' => 'Info',
+            'id'         => 'ID',
+            'uid'        => 'Uid',
+            'target'     => 'Target',
+            'name'       => 'Name',
+            'icon'       => 'Icon',
+            'info'       => 'Info',
             'created_at' => 'Created At',
         ];
     }
@@ -69,15 +66,17 @@ class Tag extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        if (substr($this->icon,0,3) == 'fa-') {
-            $this->icon = substr($this->icon,3);
+        if (substr($this->icon, 0, 3) == 'fa-') {
+            $this->icon = substr($this->icon, 3);
         }
+
         return parent::beforeSave($insert);
     }
 
     public function beforeDelete()
     {
         UserTag::deleteAll(['tag_id' => $this->id]);
+
         return parent::beforeDelete();
     }
 }

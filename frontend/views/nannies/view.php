@@ -1,10 +1,8 @@
 <?php
-use yii\helpers\Html;
-use yii\widgets\DetailView;
-use trntv\filekit\widget\Upload;
-use yii\bootstrap\ActiveForm;
-use yii\web\View;
 use common\models\User;
+use yii\helpers\Html;
+use yii\web\View;
+
 $this->registerJs(
     '
     if($(".profile-picture").height()<$(".hideContent").height()){
@@ -73,7 +71,7 @@ $this->registerJs($js, View::POS_END);
         <div class=" row-margin">
         <div class="col-lg-12">
         <div class="col-lg-5 col-md-3 col-sm-12 profile-picture">
-            <img src="<?= $model->avatar_base_url."/".$model->avatar_path ?>" alt="" class="img-responsive nanny-profile-pic">
+            <img src="<?= $model->avatar_base_url.'/'.$model->avatar_path ?>" alt="" class="img-responsive nanny-profile-pic">
         </div>
         <div class="col-lg-7 col-md-9 col-sm-12">
             <h4 class="vtab-head" style="margin-top: 0px;"><?= preg_split('/\s+/', $model->name)[0] ?> seeks loving family<span style="float: right;"><a style="  color: #434343;" href="./?city=<?= $model->city->place_name ?>"><b style="color: #2DD1AF;"><i class="fa fa-map-marker"></i>  </b><?= $model->city->place_name ?> </a></span></h4>
@@ -96,10 +94,10 @@ $this->registerJs($js, View::POS_END);
                     <li><i class="fa fa-check"></i>
                         <?= $model->childcare_exp ?> years of childcare experience
                     </li>
-                    <li><?php echo $model->eligible_to_work==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                    <li><?php echo $model->eligible_to_work == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                         Eligible to work in the U.S
                     </li>
-                    <li><?php echo $model->aviliable_for_interview==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                    <li><?php echo $model->aviliable_for_interview == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                         Available for interview
                     </li>
                 </ul><br>
@@ -107,16 +105,16 @@ $this->registerJs($js, View::POS_END);
             </div>                
             <div class="col-sm-6">
                 <ul class="candidate-features">
-                    <li><?php echo $model->have_work_visa==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                    <li><?php echo $model->have_work_visa == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                         Have work visa
                     </li>
-                    <li><?php echo $model->valid_licence==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                    <li><?php echo $model->valid_licence == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                         Valid driver's licence
                     </li>
-                    <li><?php echo $model->employed==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                    <li><?php echo $model->employed == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                         Currently employed
                     </li>
-                    <li><?php echo $model->may_contact_employer==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                    <li><?php echo $model->may_contact_employer == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                         May we contactyour employer?
                     </li>
                 </ul>
@@ -136,10 +134,10 @@ $this->registerJs($js, View::POS_END);
                             <p><?= $model->when_can_start?></p>
                         </div>
                 <?php
-                    echo $model->personal_comments!='' ?'<div class="form-group">
+                    echo $model->personal_comments != '' ? '<div class="form-group">
                             <label>Personal comments</label>
                             <p>'.$model->personal_comments.'</p>
-                        </div>' :'';
+                        </div>' : '';
                 ?>
             </div>
             <div class="col-sm-6">
@@ -149,7 +147,7 @@ $this->registerJs($js, View::POS_END);
                 </div>
                 <div class="form-group">
                     <label>Weekly salary requested</label>
-                    <p><?php echo $model->weekly_salary==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                    <p><?php echo $model->weekly_salary == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                 </div>
                 <div class="form-group">
                     <label>Additional wage comment</label>
@@ -158,7 +156,7 @@ $this->registerJs($js, View::POS_END);
             </div>
         </div>
         <div class="col-lg-12 popup1">
-            <a href=<?= Yii::$app->user->isGuest ? "#login-popup" : ( User::findById(Yii::$app->user->id)->credits > 0 ? "#contact-nanny-popup" : "#buy-credit-popup" ) ?>   data-effect="mfp-zoom-in" style="line-height: 60px;" class="btn btn-inverse btn-contact open-popup-link mfp-zoom-in">Contact Candidate</a>
+            <a href=<?= Yii::$app->user->isGuest ? '#login-popup' : (User::findById(Yii::$app->user->id)->credits > 0 ? '#contact-nanny-popup' : '#buy-credit-popup') ?>   data-effect="mfp-zoom-in" style="line-height: 60px;" class="btn btn-inverse btn-contact open-popup-link mfp-zoom-in">Contact Candidate</a>
         </div>
         <div class="col-lg-12">
             <div class="panel-group candidate">
@@ -176,22 +174,22 @@ $this->registerJs($js, View::POS_END);
                 
                         <ul class="panel-list">
                             <li><?php echo in_array('1', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Nanny':'<i class="fa fa-times"></i><span>Nanny</span>';?>
+                                '<i class="fa fa-check"></i>Nanny' : '<i class="fa fa-times"></i><span>Nanny</span>'; ?>
                             </li>
                             <li><?php echo in_array('2', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Babysitter':'<i class="fa fa-times"></i><span>Babysitter</span>';?>
+                                '<i class="fa fa-check"></i>Babysitter' : '<i class="fa fa-times"></i><span>Babysitter</span>'; ?>
                             </li>
                             <li><?php echo in_array('3', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Newborn Specialist':'<i class="fa fa-times"></i><span>Newborn Specialist</span>';?>
+                                '<i class="fa fa-check"></i>Newborn Specialist' : '<i class="fa fa-times"></i><span>Newborn Specialist</span>'; ?>
                             </li>
                             <li><?php echo in_array('4', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Special Needs':'<i class="fa fa-times"></i><span>Special Needs</span>';?>
+                                '<i class="fa fa-check"></i>Special Needs' : '<i class="fa fa-times"></i><span>Special Needs</span>'; ?>
                             </li>
                             <li><?php echo in_array('5', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Caregiver':'<i class="fa fa-times"></i><span>Caregiver</span>';?>
+                                '<i class="fa fa-check"></i>Caregiver' : '<i class="fa fa-times"></i><span>Caregiver</span>'; ?>
                             </li>
                             <li><?php echo in_array('6', $model->position_for) ?
-                                '<i class="fa fa-check"></i>Housekeeper':'<i class="fa fa-times"></i><span>Housekeeper</span>';?>
+                                '<i class="fa fa-check"></i>Housekeeper' : '<i class="fa fa-times"></i><span>Housekeeper</span>'; ?>
                             </li>
                         </ul>
                         </div>
@@ -201,34 +199,34 @@ $this->registerJs($js, View::POS_END);
                         <h4 class="panel-list-head">Availability</h4>
                         <ul class="panel-list">
                             <li><?php echo in_array('0', $model->availability) ?
-                                '<i class="fa fa-check"></i>Full time live in':'<i class="fa fa-times"></i><span>Full time live in</span>';?>
+                                '<i class="fa fa-check"></i>Full time live in' : '<i class="fa fa-times"></i><span>Full time live in</span>'; ?>
                             </li>
                             <li><?php echo in_array('1', $model->availability) ?
-                                '<i class="fa fa-check"></i>Full time live out':'<i class="fa fa-times"></i><span>Full time live out</span>';?>
+                                '<i class="fa fa-check"></i>Full time live out' : '<i class="fa fa-times"></i><span>Full time live out</span>'; ?>
                             </li>
                             <li><?php echo in_array('2', $model->availability) ?
-                                '<i class="fa fa-check"></i>Part time live out':'<i class="fa fa-times"></i><span>Part time live out</span>';?>
+                                '<i class="fa fa-check"></i>Part time live out' : '<i class="fa fa-times"></i><span>Part time live out</span>'; ?>
                             </li>
                             <li><?php echo in_array('3', $model->availability) ?
-                                '<i class="fa fa-check"></i>Part time live in':'<i class="fa fa-times"></i><span>Part time live in</span>';?>
+                                '<i class="fa fa-check"></i>Part time live in' : '<i class="fa fa-times"></i><span>Part time live in</span>'; ?>
                             </li>
                             <li><?php echo in_array('4', $model->availability) ?
-                                '<i class="fa fa-check"></i>Part Time Nanny':'<i class="fa fa-times"></i><span>Part Time Nanny</span>';?>
+                                '<i class="fa fa-check"></i>Part Time Nanny' : '<i class="fa fa-times"></i><span>Part Time Nanny</span>'; ?>
                             </li>
                             <li><?php echo in_array('5', $model->availability) ?
-                                '<i class="fa fa-check"></i>Babysitting':'<i class="fa fa-times"></i><span>Babysitting</span>';?>
+                                '<i class="fa fa-check"></i>Babysitting' : '<i class="fa fa-times"></i><span>Babysitting</span>'; ?>
                             </li>
                             <li><?php echo in_array('6', $model->availability) ?
-                                '<i class="fa fa-check"></i>Evenings':'<i class="fa fa-times"></i><span>Evenings</span>';?>
+                                '<i class="fa fa-check"></i>Evenings' : '<i class="fa fa-times"></i><span>Evenings</span>'; ?>
                             </li>
                             <li><?php echo in_array('7', $model->availability) ?
-                                '<i class="fa fa-check"></i>Weekends Only':'<i class="fa fa-times"></i><span>Weekends Only</span>';?>
+                                '<i class="fa fa-check"></i>Weekends Only' : '<i class="fa fa-times"></i><span>Weekends Only</span>'; ?>
                             </li>
                             <li><?php echo in_array('8', $model->availability) ?
-                                '<i class="fa fa-check"></i>Overnights':'<i class="fa fa-times"></i><span>Overnights</span>';?>
+                                '<i class="fa fa-check"></i>Overnights' : '<i class="fa fa-times"></i><span>Overnights</span>'; ?>
                             </li>
                             <li><?php echo in_array('9', $model->availability) ?
-                                '<i class="fa fa-check"></i>I`m flexible':'<i class="fa fa-times"></i><span>I`m flexible</span>';?>
+                                '<i class="fa fa-check"></i>I`m flexible' : '<i class="fa fa-times"></i><span>I`m flexible</span>'; ?>
                             </li>
                         </ul>
                     </div>
@@ -253,28 +251,28 @@ $this->registerJs($js, View::POS_END);
                     <div class="row">
                     <div class="col-md-12">
                         <ul class="panel-list">
-                            <li><?php echo $model->crp_certified==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                            <li><?php echo $model->crp_certified == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                                 CPR certified
                             </li>
-                            <li><?php echo $model->first_aid_certified==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                            <li><?php echo $model->first_aid_certified == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                                 First Aid Certified
                             </li>
-                            <li><?php echo $model->need_crp_fa_renew!=1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                            <li><?php echo $model->need_crp_fa_renew != 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                                 CPR\First Aid up to date
                             </li>
-                            <li><?php echo $model->tb_test==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                            <li><?php echo $model->tb_test == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                                 TB test done
                             </li>
-                            <li><?php echo $model->pet_allergies==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                            <li><?php echo $model->pet_allergies == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                                 Pet allergies
                             </li>
-                            <li><?php echo $model->smoking==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                            <li><?php echo $model->smoking == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                                 Smoking
                             </li>
-                            <li><?php echo $model->valid_passport==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                            <li><?php echo $model->valid_passport == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                                 Have a valid passport
                             </li>
-                            <li><?php echo $model->swim==1 ? '<i class="fa fa-check"></i>': '<i class="fa fa-times"></i> ' ?>
+                            <li><?php echo $model->swim == 1 ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i> ' ?>
                                 Swimmer
                             </li>
                         </ul>
@@ -284,11 +282,11 @@ $this->registerJs($js, View::POS_END);
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Will you work at home with a parent that smokes?</label>
-                                <p><?php echo $model->work_if_parent_smokes==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->work_if_parent_smokes == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                             <div class="form-group">
                                 <label>Will you travel with the family?</label>
-                                <p><?php echo $model->trawel_with_family==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->trawel_with_family == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                             <div class="form-group">
                                 <label>Any travel restrictions?</label>
@@ -304,7 +302,7 @@ $this->registerJs($js, View::POS_END);
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Will you work in a home with a parent that is home?</label>
-                                <p><?php echo $model->work_if_parent_at_home==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->work_if_parent_at_home == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                             <div class="form-group">
                                 <label>Miles you are willing to commute:</label>
@@ -312,15 +310,15 @@ $this->registerJs($js, View::POS_END);
                             </div>
                             <div class="form-group">
                                 <label>Do you have a child of your own you need to bring?</label>
-                                <p><?php echo $model->child_of_your_own==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->child_of_your_own == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                             <div class="form-group">
                                 <label>Work with a dog or cat at home?</label>
-                                <p><?php echo $model->dog_cat_at_home==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->dog_cat_at_home == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                             <div class="form-group">
                                 <label>Would you wear a uniform or dress code?</label>
-                                <p><?php echo $model->uniform_dress_code==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->uniform_dress_code == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                         </div>
                     </div><br>
@@ -428,25 +426,25 @@ $this->registerJs($js, View::POS_END);
                         <tr>
                             <td>Availability</td>
                             <td>
-                                <?php echo ($model->sun!='') ?'<i class="fa fa-check"></i> '.$model->sun: ''?>
+                                <?php echo ($model->sun != '') ? '<i class="fa fa-check"></i> '.$model->sun : ''?>
                             </td>
                             <td>
-                                <?php echo ($model->mon!='') ?'<i class="fa fa-check"></i> '.$model->mon: ''?>
+                                <?php echo ($model->mon != '') ? '<i class="fa fa-check"></i> '.$model->mon : ''?>
                             </td>
                             <td>
-                                <?php echo ($model->tue!='') ?'<i class="fa fa-check"></i> '.$model->tue: ''?>
+                                <?php echo ($model->tue != '') ? '<i class="fa fa-check"></i> '.$model->tue : ''?>
                             </td>
                             <td>
-                                <?php echo ($model->wed!='') ?'<i class="fa fa-check"></i> '.$model->wed: ''?>
+                                <?php echo ($model->wed != '') ? '<i class="fa fa-check"></i> '.$model->wed : ''?>
                             </td>
                             <td>
-                                <?php echo ($model->thu!='') ?'<i class="fa fa-check"></i> '.$model->thu: ''?>
+                                <?php echo ($model->thu != '') ? '<i class="fa fa-check"></i> '.$model->thu : ''?>
                             </td>
                             <td>
-                                <?php echo ($model->fri!='') ?'<i class="fa fa-check"></i> '.$model->fri: ''?>
+                                <?php echo ($model->fri != '') ? '<i class="fa fa-check"></i> '.$model->fri : ''?>
                             </td>
                             <td>
-                                <?php echo ($model->sat!='') ?'<i class="fa fa-check"></i> '.$model->sat: ''?>
+                                <?php echo ($model->sat != '') ? '<i class="fa fa-check"></i> '.$model->sat : ''?>
                             </td>
                         </tr>
                     </tbody></table>
@@ -470,34 +468,34 @@ $this->registerJs($js, View::POS_END);
                         <div class="col-md-12">
                                 <ul class="panel-list">
                                 <li><?php echo in_array('1', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>Clean main living areas':'<i class="fa fa-times"></i><span>Clean main living areas</span>';?>
+                                    '<i class="fa fa-check"></i>Clean main living areas' : '<i class="fa fa-times"></i><span>Clean main living areas</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('2', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>Clean bathrooms':'<i class="fa fa-times"></i><span>Clean bathrooms</span>';?>
+                                    '<i class="fa fa-check"></i>Clean bathrooms' : '<i class="fa fa-times"></i><span>Clean bathrooms</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('3', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>Clean children`s rooms':'<i class="fa fa-times"></i><span>Clean children`s rooms</span>';?>
+                                    '<i class="fa fa-check"></i>Clean children`s rooms' : '<i class="fa fa-times"></i><span>Clean children`s rooms</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('4', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>Vacuum':'<i class="fa fa-times"></i><span>Vacuum</span>';?>
+                                    '<i class="fa fa-check"></i>Vacuum' : '<i class="fa fa-times"></i><span>Vacuum</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('5', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>Wipe down kitchen counters':'<i class="fa fa-times"></i><span>Wipe down kitchen counters</span>';?>
+                                    '<i class="fa fa-check"></i>Wipe down kitchen counters' : '<i class="fa fa-times"></i><span>Wipe down kitchen counters</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('6', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>Clean dishes/put dishes away':'<i class="fa fa-times"></i><span>Clean dishes/put dishes away</span>';?>
+                                    '<i class="fa fa-check"></i>Clean dishes/put dishes away' : '<i class="fa fa-times"></i><span>Clean dishes/put dishes away</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('7', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>Mop floors':'<i class="fa fa-times"></i><span>Mop floors</span>';?>
+                                    '<i class="fa fa-check"></i>Mop floors' : '<i class="fa fa-times"></i><span>Mop floors</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('8', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>I am fine with heavy cleaning':'<i class="fa fa-times"></i><span>I am fine with heavy cleaning</span>';?>
+                                    '<i class="fa fa-check"></i>I am fine with heavy cleaning' : '<i class="fa fa-times"></i><span>I am fine with heavy cleaning</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('9', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>Light housekeeping only':'<i class="fa fa-times"></i><span>Light housekeeping only</span>';?>
+                                    '<i class="fa fa-check"></i>Light housekeeping only' : '<i class="fa fa-times"></i><span>Light housekeeping only</span>'; ?>
                                 </li>
                                 <li><?php echo in_array('0', $model->houskeeping) ?
-                                    '<i class="fa fa-check"></i>I will not do ANY housekeeping':'<i class="fa fa-times"></i><span>I will not do ANY housekeeping</span>';?>
+                                    '<i class="fa fa-check"></i>I will not do ANY housekeeping' : '<i class="fa fa-times"></i><span>I will not do ANY housekeeping</span>'; ?>
                                 </li>
                             </ul>
                         </div>
@@ -515,18 +513,18 @@ $this->registerJs($js, View::POS_END);
                             </div>
                             <div class="form-group">
                                 <label>Will you perform laundry and ironing?</label>
-                                <p><?php echo $model->laundry_and_ironing==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->laundry_and_ironing == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                             <div class="form-group">
                                 <label>What best describes your housekeeping standards?</label>
                                 <?php echo in_array('1', $model->best_describes_housekeeping) ?
-                                            '<i class="fa fa-check"></i>Extremely Thorough':'<i class="fa fa-times"></i><span>Extremely Thorough</span>';?>
+                                            '<i class="fa fa-check"></i>Extremely Thorough' : '<i class="fa fa-times"></i><span>Extremely Thorough</span>'; ?>
                                 <br>
                                 <?php echo in_array('2', $model->best_describes_housekeeping) ?
-                                        '<i class="fa fa-check"></i>Neat & Orderly':'<i class="fa fa-times"></i><span>Neat & Orderly</span>';?>
+                                        '<i class="fa fa-check"></i>Neat & Orderly' : '<i class="fa fa-times"></i><span>Neat & Orderly</span>'; ?>
                                 <br>
                                 <?php echo in_array('3', $model->best_describes_housekeeping) ?
-                                        '<i class="fa fa-check"></i>It`s Good, Not Great':'<i class="fa fa-times"></i><span>It`s Good, Not Great</span>';?>
+                                        '<i class="fa fa-check"></i>It`s Good, Not Great' : '<i class="fa fa-times"></i><span>It`s Good, Not Great</span>'; ?>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -541,15 +539,15 @@ $this->registerJs($js, View::POS_END);
                             <div class="form-group">
                                 <label>What is your personal style of service? </label>
                                 <?php
-                                    if($model->personal_style_of_service==1){
-                                                echo '<p><i class="fa fa-check"></i>Professional</p>';
+                                    if ($model->personal_style_of_service == 1) {
+                                        echo '<p><i class="fa fa-check"></i>Professional</p>';
                                     }
-                                    if($model->personal_style_of_service==2){
-                                                echo '<p><i class="fa fa-check"></i>Laid Back but professional</p>';
+                                    if ($model->personal_style_of_service == 2) {
+                                        echo '<p><i class="fa fa-check"></i>Laid Back but professional</p>';
                                     }
-                                    if($model->personal_style_of_service==3){
-                                                echo '<p><i class="fa fa-check"></i>Part of Family</p>';
-                                    } 
+                                    if ($model->personal_style_of_service == 3) {
+                                        echo '<p><i class="fa fa-check"></i>Part of Family</p>';
+                                    }
                                 ?>
                             </div>
                             <div class="form-group">
@@ -558,11 +556,11 @@ $this->registerJs($js, View::POS_END);
                             </div>
                             <div class="form-group">
                                 <label>Are you willing to work at home with a child?</label>
-                                <p><?php echo $model->work_at_home_with_child==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->work_at_home_with_child == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                             <div class="form-group">
                                 <label>Are you willing to help the family with childcare when needed?</label>
-                                <p><?php echo $model->help_with_childcare==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                                <p><?php echo $model->help_with_childcare == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                             </div>
                             <div class="form-group">
                                 <label>Describe the type of household duties you are NOT willing to perform:</label>
@@ -591,11 +589,11 @@ $this->registerJs($js, View::POS_END);
                     <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <label>Do you drive?</label>
-                            <p><?php echo $model->drive==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                            <p><?php echo $model->drive == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                         </div>
                         <div class="form-group">
                             <label>Have a car?</label>
-                            <p><?php echo $model->have_car==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                            <p><?php echo $model->have_car == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                         </div>
                         <div class="form-group">
                             <label>Car make, model and year:</label>
@@ -607,7 +605,7 @@ $this->registerJs($js, View::POS_END);
                         </div>
                         <div class="form-group">
                             <label>Have car insurance?</label>
-                            <p><?php echo $model->car_insurance==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                            <p><?php echo $model->car_insurance == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                         </div>
                         <div class="form-group">
                             <label>What company?</label>
@@ -625,11 +623,11 @@ $this->registerJs($js, View::POS_END);
                         </div>
                         <div class="form-group">
                             <label>Do you have a license that is valid and not under suspension?</label>
-                            <p><?php echo $model->valid_licence==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                            <p><?php echo $model->valid_licence == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                         </div>
                         <div class="form-group">
                             <label>Will you use your car for work purposes?</label>
-                            <p><?php echo $model->use_car_for_work==1 ? '<i class="fa fa-check"></i>Yes': '<i class="fa fa-times"></i>No' ?></p>
+                            <p><?php echo $model->use_car_for_work == 1 ? '<i class="fa fa-check"></i>Yes' : '<i class="fa fa-times"></i>No' ?></p>
                         </div>
                         <div class="form-group">
                             <label>Have you had traffic citations in the last 5 years? If so, please list:</label>
@@ -684,7 +682,7 @@ $this->registerJs($js, View::POS_END);
         </div>
         </div>
     </div>
-<?php require_once('sidebar.php');?>
+<?php require_once 'sidebar.php'; ?>
 </div>
 </div>
 <div id="login-popup" class="white-popup mfp-with-anim mfp-hide">

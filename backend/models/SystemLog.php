@@ -2,24 +2,24 @@
 
 namespace backend\models;
 
-use backend\models\query\SystemLogQuery;
 use Yii;
 
 /**
  * This is the model class for table "system_log".
  *
- * @property integer $id
- * @property integer $level
+ * @property int $id
+ * @property int $level
  * @property string $category
- * @property integer $log_time
+ * @property int $log_time
  * @property string $prefix
- * @property integer $message
+ * @property int $message
  */
 class SystemLog extends \yii\db\ActiveRecord
 {
     const CATEGORY_NOTIFICATION = 'notification';
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -27,7 +27,7 @@ class SystemLog extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -35,22 +35,22 @@ class SystemLog extends \yii\db\ActiveRecord
             [['level', 'log_time', 'message'], 'integer'],
             [['log_time'], 'required'],
             [['prefix'], 'string'],
-            [['category'], 'string', 'max' => 255]
+            [['category'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('backend', 'ID'),
-            'level' => Yii::t('backend', 'Level'),
+            'id'       => Yii::t('backend', 'ID'),
+            'level'    => Yii::t('backend', 'Level'),
             'category' => Yii::t('backend', 'Category'),
             'log_time' => Yii::t('backend', 'Log Time'),
-            'prefix' => Yii::t('backend', 'Prefix'),
-            'message' => Yii::t('backend', 'Message'),
+            'prefix'   => Yii::t('backend', 'Prefix'),
+            'message'  => Yii::t('backend', 'Message'),
         ];
     }
 }

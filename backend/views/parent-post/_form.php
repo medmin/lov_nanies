@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ParentPost */
@@ -38,9 +38,9 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?php // echo $form->field($model, 'status')->textInput() ?>
+    <?php // echo $form->field($model, 'status')->textInput()?>
 
-    <?php // echo $form->field($model, 'expired_at')->textInput() ?>
+    <?php // echo $form->field($model, 'expired_at')->textInput()?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

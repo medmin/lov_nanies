@@ -1,8 +1,8 @@
 <?php
 
+use common\models\UserDiscount;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use common\models\UserDiscount;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\UserDiscount */
@@ -17,15 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Update', ['update', 'user_id' => $model->user_id, 'type' => Yii::$app->request->getQueryParam('type', UserDiscount::TYPE_NANNY)], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'user_id' => $model->user_id, 'type' => Yii::$app->request->getQueryParam('type', UserDiscount::TYPE_NANNY)], [
             'class' => 'btn btn-danger',
-            'data' => [
+            'data'  => [
                 'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
+                'method'  => 'post',
             ],
         ]) ?>
     </p>
 
     <?= DetailView::widget([
-        'model' => $model,
+        'model'      => $model,
         'attributes' => [
             'user_id',
             'discount',

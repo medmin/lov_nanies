@@ -2,11 +2,10 @@
 /**
  * User: xczizz
  * Date: 2018/6/16
- * Time: 22:02
+ * Time: 22:02.
  */
-
-use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model \common\models\ParentPost */
@@ -23,11 +22,11 @@ $this->registerJs(
     '
 );
 $action_id = Yii::$app->controller->action->id;
-$this->title =  $action_id == 'create' ? Yii::t('frontend', 'Post a job') : Yii::t('frontend', 'Update Job');
+$this->title = $action_id == 'create' ? Yii::t('frontend', 'Post a job') : Yii::t('frontend', 'Update Job');
 ?>
 <div class="post-job">
     <?php $form = ActiveForm::begin(); ?>
-    <?= $action_id== 'update' ? $form->field($model, 'id')->hiddenInput()->label(false) : '' ?>
+    <?= $action_id == 'update' ? $form->field($model, 'id')->hiddenInput()->label(false) : '' ?>
     <?= $form->field($model, 'zip_code')->input('number') ?>
     <?= $form->field($model, 'job_type')->dropDownList([
         '1' => 'Full time',

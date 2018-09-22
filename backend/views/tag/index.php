@@ -2,9 +2,8 @@
 /**
  * User: xczizz
  * Date: 2018/9/4
- * Time: 14:08
+ * Time: 14:08.
  */
-
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */

@@ -9,13 +9,13 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "key_storage_item".
  *
- * @property integer $key
- * @property integer $value
+ * @property int $key
+ * @property int $value
  */
 class KeyStorageItem extends ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -32,7 +32,7 @@ class KeyStorageItem extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -40,18 +40,18 @@ class KeyStorageItem extends ActiveRecord
             [['key', 'value'], 'required'],
             [['key'], 'string', 'max' => 128],
             [['value', 'comment'], 'safe'],
-            [['key'], 'unique']
+            [['key'], 'unique'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'key' => Yii::t('common', 'Key'),
-            'value' => Yii::t('common', 'Value'),
+            'key'     => Yii::t('common', 'Key'),
+            'value'   => Yii::t('common', 'Value'),
             'comment' => Yii::t('common', 'Comment'),
         ];
     }

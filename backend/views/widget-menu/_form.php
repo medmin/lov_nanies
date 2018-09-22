@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\WidgetMenu */
@@ -21,7 +21,7 @@ use yii\bootstrap\ActiveForm;
     <?php echo $form->field($model, 'items')->widget(
         trntv\aceeditor\AceEditor::className(),
         [
-            'mode' => 'json'
+            'mode' => 'json',
         ]
     ) ?>
 

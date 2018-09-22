@@ -1,14 +1,15 @@
 <?php
+
 namespace backend\models;
 
 use common\models\User;
+use Yii;
 use yii\base\Exception;
 use yii\base\Model;
-use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
- * Create user form
+ * Create user form.
  */
 class UserForm extends Model
 {
@@ -21,7 +22,7 @@ class UserForm extends Model
     private $model;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -52,27 +53,28 @@ class UserForm extends Model
                 'rule' => ['in', 'range' => ArrayHelper::getColumn(
                     Yii::$app->authManager->getRoles(),
                     'name'
-                )]
+                )],
             ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
             'username' => Yii::t('common', 'Username'),
-            'email' => Yii::t('common', 'Email'),
-            'status' => Yii::t('common', 'Status'),
+            'email'    => Yii::t('common', 'Email'),
+            'status'   => Yii::t('common', 'Status'),
             'password' => Yii::t('common', 'Password'),
-            'roles' => Yii::t('common', 'Roles')
+            'roles'    => Yii::t('common', 'Roles'),
         ];
     }
 
     /**
      * @param User $model
+     *
      * @return mixed
      */
     public function setModel($model)
@@ -85,6 +87,7 @@ class UserForm extends Model
             Yii::$app->authManager->getRolesByUser($model->getId()),
             'name'
         );
+
         return $this->model;
     }
 
@@ -96,13 +99,16 @@ class UserForm extends Model
         if (!$this->model) {
             $this->model = new User();
         }
+
         return $this->model;
     }
 
     /**
      * Signs user up.
-     * @return User|null the saved model or null if saving fails
+     *
      * @throws Exception
+     *
+     * @return User|null the saved model or null if saving fails
      */
     public function save()
     {
@@ -132,6 +138,5 @@ class UserForm extends Model
 
             return !$model->hasErrors();
         }
-        return null;
     }
 }

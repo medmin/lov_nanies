@@ -8,7 +8,7 @@
                         <!-- form >>Search For Babysitter-->
                         <form action="/nannies/" method="get" class="form-search">
                             <div class="input-group">
-                                <input type="text" placeholder="Enter Your Zip Code" value="<?= $_GET['zip'] ?? '';?>" name="zip" class="form-control">
+                                <input type="text" placeholder="Enter Your Zip Code" value="<?= $_GET['zip'] ?? ''; ?>" name="zip" class="form-control">
                             </div>
                             <select class="select-picker select2-hidden-accessible" name="availability" tabindex="-1" aria-hidden="true">
                                 <option selected="" disabled="" value="">Job Type</option>

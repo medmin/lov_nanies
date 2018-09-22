@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\Article;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Article;
 
 /**
  * ArticleSearch represents the model behind the search form about `common\models\Article`.
@@ -13,7 +12,7 @@ use common\models\Article;
 class ArticleSearch extends Article
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class ArticleSearch extends Article
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,7 +32,8 @@ class ArticleSearch extends Article
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -49,15 +49,15 @@ class ArticleSearch extends Article
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'slug' => $this->slug,
-            'created_by' => $this->created_by,
-            'category_id' => $this->category_id,
-            'updated_by' => $this->updated_by,
-            'status' => $this->status,
+            'id'           => $this->id,
+            'slug'         => $this->slug,
+            'created_by'   => $this->created_by,
+            'category_id'  => $this->category_id,
+            'updated_by'   => $this->updated_by,
+            'status'       => $this->status,
             'published_at' => $this->published_at,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at'   => $this->created_at,
+            'updated_at'   => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'slug', $this->slug])

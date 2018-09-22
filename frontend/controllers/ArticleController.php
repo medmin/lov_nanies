@@ -17,12 +17,13 @@ class ArticleController extends Controller
 {
     /**
      * @param $c string category
+     *
      * @return string
      */
     public function actionIndex($c = '')
     {
         Yii::$app->view->params['offslide'] = 1;
-        Yii::$app->view->params['slider'] =  $c != '' ? $c : "top_banner";
+        Yii::$app->view->params['slider'] = $c != '' ? $c : 'top_banner';
 
         $query = Article::find()->where(['status' => Article::STATUS_PUBLISHED]);
         if ($c && $category = ArticleCategory::findOne(['slug' => $c])) {
@@ -30,22 +31,25 @@ class ArticleController extends Controller
         }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => [
+            'sort'  => [
                 'defaultOrder' => [
-                    'created_at' => SORT_DESC
-                ]
+                    'created_at' => SORT_DESC,
+                ],
             ],
             'pagination' => [
-                'pageSize' => 10
-            ]
+                'pageSize' => 10,
+            ],
         ]);
+
         return $this->render('index', ['dataProvider'=>$dataProvider]);
     }
 
     /**
      * @param $slug
-     * @return string
+     *
      * @throws NotFoundHttpException
+     *
+     * @return string
      */
     public function actionView($slug)
     {
@@ -55,17 +59,20 @@ class ArticleController extends Controller
         }
 
         Yii::$app->view->params['offslide'] = 1;
-        Yii::$app->view->params['slider'] =  $model->category->slug;
+        Yii::$app->view->params['slider'] = $model->category->slug;
 
         $viewFile = $model->view ?: 'view';
+
         return $this->render($viewFile, ['model'=>$model]);
     }
 
     /**
      * @param $id
-     * @return $this
+     *
      * @throws NotFoundHttpException
      * @throws \yii\web\HttpException
+     *
+     * @return $this
      */
     public function actionAttachmentDownload($id)
     {

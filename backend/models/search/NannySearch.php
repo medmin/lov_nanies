@@ -2,10 +2,10 @@
 
 namespace backend\models\search;
 
+use common\models\Nannies;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Nannies;
 use yii\db\Query;
 
 /**
@@ -14,19 +14,19 @@ use yii\db\Query;
 class NannySearch extends Nannies
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['id', 'status'], 'integer'],
             [['name', 'address',  'email', 'position_for', 'availability'], 'string'],
-            [['zip_code'], 'each', 'rule' => ['integer']]
+            [['zip_code'], 'each', 'rule' => ['integer']],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -35,13 +35,14 @@ class NannySearch extends Nannies
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @return ActiveDataProvider
      */
-    public function search($params, $limit='')
+    public function search($params, $limit = '')
     {
         $query = $query = Nannies::find()->where(['<>', 'status', self::STATUS_DELETED]);
-        if($limit!=''){
+        if ($limit != '') {
             $query = $query->limit($limit);
         }
 
@@ -54,17 +55,17 @@ class NannySearch extends Nannies
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
             'pagination' => [
                 'pageSize' => Yii::$app->id === 'frontend' ? 9 : 20,
-            ]
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'     => $this->id,
             'status' => $this->status,
         ]);
 
@@ -74,6 +75,7 @@ class NannySearch extends Nannies
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'position_for', $this->position_for])
             ->andFilterWhere(['like', 'availability', $this->availability]);
+
         return $dataProvider;
     }
 }

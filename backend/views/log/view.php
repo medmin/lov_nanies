@@ -17,21 +17,21 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php echo DetailView::widget([
-        'model' => $model,
+        'model'      => $model,
         'attributes' => [
             'id',
             'level',
             'category',
             [
                 'attribute' => 'log_time',
-                'format' => 'datetime',
-                'value' => (int) $model->log_time
+                'format'    => 'datetime',
+                'value'     => (int) $model->log_time,
             ],
             'prefix:ntext',
             [
-                'attribute'=>'message',
-                'format'=>'raw',
-                'value'=>Html::tag('pre', $model->message, ['style'=>'white-space: pre-wrap'])
+                'attribute'=> 'message',
+                'format'   => 'raw',
+                'value'    => Html::tag('pre', $model->message, ['style'=>'white-space: pre-wrap']),
             ],
         ],
     ]) ?>

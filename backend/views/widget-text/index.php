@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel \backend\models\search\WidgetTextSearch */
@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="text-block-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
 
     <p>
         <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
@@ -22,25 +22,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+        'filterModel'  => $searchModel,
+        'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'key',
             'title',
             [
-                'class'=>\common\grid\EnumColumn::className(),
-                'attribute'=>'status',
-                'enum'=>[
+                'class'    => \common\grid\EnumColumn::className(),
+                'attribute'=> 'status',
+                'enum'     => [
                     Yii::t('backend', 'Disabled'),
-                    Yii::t('backend', 'Enabled')
+                    Yii::t('backend', 'Enabled'),
                 ],
             ],
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update}{delete}'
+                'class'   => 'yii\grid\ActionColumn',
+                'template'=> '{update}{delete}',
             ],
         ],
     ]); ?>

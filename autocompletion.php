@@ -3,7 +3,7 @@
  * Yii bootstrap file.
  * Used for enhanced IDE code autocompletion.
  * Note: To avoid "Multiple Implementations" PHPStorm warning and make autocomplete faster
- * exclude or "Mark as Plain Text" vendor/yiisoft/yii2/Yii.php file
+ * exclude or "Mark as Plain Text" vendor/yiisoft/yii2/Yii.php file.
  */
 class Yii extends \yii\BaseYii
 {
@@ -15,7 +15,7 @@ class Yii extends \yii\BaseYii
 
 /**
  * Class BaseApplication
- * Used for properties that are identical for both WebApplication and ConsoleApplication
+ * Used for properties that are identical for both WebApplication and ConsoleApplication.
  *
  * @property trntv\filekit\Storage $fileStorage
  * @property common\components\keyStorage\KeyStorage $keyStorage
@@ -31,7 +31,7 @@ abstract class BaseApplication extends yii\base\Application
 
 /**
  * Class WebApplication
- * Include only Web application related components here
+ * Include only Web application related components here.
  *
  * @property User $user User component.
  */
@@ -41,7 +41,7 @@ class WebApplication extends yii\web\Application
 
 /**
  * Class ConsoleApplication
- * Include only Console application related components here
+ * Include only Console application related components here.
  */
 class ConsoleApplication extends yii\console\Application
 {
@@ -49,9 +49,10 @@ class ConsoleApplication extends yii\console\Application
 
 /**
  * User component
- * Include only Web application related components here
+ * Include only Web application related components here.
  *
  * @property \common\models\User $identity User model.
+ *
  * @method \common\models\User getIdentity() returns User model.
  */
 class User extends \yii\web\User

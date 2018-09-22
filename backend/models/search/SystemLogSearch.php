@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use backend\models\SystemLog;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\SystemLog;
 
 /**
  * SystemLogSearch represents the model behind the search form about `backend\models\SystemLog`.
@@ -13,7 +12,7 @@ use backend\models\SystemLog;
 class SystemLogSearch extends SystemLog
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class SystemLogSearch extends SystemLog
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,7 +32,8 @@ class SystemLogSearch extends SystemLog
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -49,10 +49,10 @@ class SystemLogSearch extends SystemLog
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'level' => $this->level,
+            'id'       => $this->id,
+            'level'    => $this->level,
             'log_time' => $this->log_time,
-            'message' => $this->message,
+            'message'  => $this->message,
         ]);
 
         $query->andFilterWhere(['like', 'category', $this->category])

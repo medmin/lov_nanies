@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\widgets;
 
 use yii\helpers\ArrayHelper;
@@ -6,8 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
- * Class Menu
- * @package backend\components\widget
+ * Class Menu.
  */
 class Menu extends \yii\widgets\Menu
 {
@@ -39,7 +39,7 @@ class Menu extends \yii\widgets\Menu
     public $parentRightIcon = '<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function renderItem($item)
     {
@@ -65,10 +65,10 @@ class Menu extends \yii\widgets\Menu
                         ['class' => 'pull-right-container']
                     )
                     : '',
-                '{icon}'=>isset($item['icon']) ? $item['icon'] : '',
-                '{right-icon}'=>isset($item['right-icon']) ? $item['right-icon'] : '',
-                '{url}' => Url::to($item['url']),
-                '{label}' => $item['label'],
+                '{icon}'      => isset($item['icon']) ? $item['icon'] : '',
+                '{right-icon}'=> isset($item['right-icon']) ? $item['right-icon'] : '',
+                '{url}'       => Url::to($item['url']),
+                '{label}'     => $item['label'],
             ]);
         } else {
             $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
@@ -77,9 +77,9 @@ class Menu extends \yii\widgets\Menu
                 '{badge}'=> isset($item['badge'])
                     ? Html::tag('small', $item['badge'], $item['badgeOptions'])
                     : '',
-                '{icon}'=>isset($item['icon']) ? $item['icon'] : '',
-                '{right-icon}'=>isset($item['right-icon']) ? $item['right-icon'] : '',
-                '{label}' => $item['label'],
+                '{icon}'      => isset($item['icon']) ? $item['icon'] : '',
+                '{right-icon}'=> isset($item['right-icon']) ? $item['right-icon'] : '',
+                '{label}'     => $item['label'],
             ]);
         }
     }

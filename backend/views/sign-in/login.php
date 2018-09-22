@@ -1,6 +1,6 @@
 <?php
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -25,7 +25,7 @@ $this->params['body-class'] = 'login-page';
         <div class="footer">
             <?php echo Html::submitButton(Yii::t('backend', 'Sign me in'), [
                 'class' => 'btn btn-primary btn-flat btn-block',
-                'name' => 'login-button'
+                'name'  => 'login-button',
             ]) ?>
         </div>
         <?php ActiveForm::end(); ?>

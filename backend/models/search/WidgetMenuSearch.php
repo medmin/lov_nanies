@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\WidgetMenu;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\WidgetMenu;
 
 /**
  * WidgetMenuSearch represents the model behind the search form about `common\models\WidgetMenu`.
@@ -13,7 +12,7 @@ use common\models\WidgetMenu;
 class WidgetMenuSearch extends WidgetMenu
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class WidgetMenuSearch extends WidgetMenu
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,7 +32,8 @@ class WidgetMenuSearch extends WidgetMenu
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -49,7 +49,7 @@ class WidgetMenuSearch extends WidgetMenu
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'     => $this->id,
             'status' => $this->status,
         ]);
 

@@ -1,8 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = Yii::$app->name;
-$dataProvider->pagination=false;
-$dataProvider->totalCount=10;
+$dataProvider->pagination = false;
+$dataProvider->totalCount = 10;
 ?>
 <!--
 <div class="site-index">
@@ -16,7 +16,7 @@ $dataProvider->totalCount=10;
                             'prevPageLabel'=>'Prev',
                             'nextPageLabel'=>'Next',
                             'options'=>[
-                              'class'=>'pagination',  
+                              'class'=>'pagination',
                             ],
                         ],
                         'options'=>[

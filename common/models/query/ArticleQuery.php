@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: zein
  * Date: 7/4/14
- * Time: 2:31 PM
+ * Time: 2:31 PM.
  */
 
 namespace common\models\query;
@@ -17,6 +17,7 @@ class ArticleQuery extends ActiveQuery
     {
         $this->andWhere(['status' => Article::STATUS_PUBLISHED]);
         $this->andWhere(['<', '{{%article}}.published_at', time()]);
+
         return $this;
     }
 }

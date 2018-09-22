@@ -2,8 +2,8 @@
 
 use common\grid\EnumColumn;
 use common\models\User;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\UserSearch */
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
 
     <p>
         <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
@@ -24,19 +24,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => [
-            'class' => 'grid-view table-responsive'
+        'filterModel'  => $searchModel,
+        'options'      => [
+            'class' => 'grid-view table-responsive',
         ],
         'columns' => [
             'id',
             'username',
             'email:email',
             [
-                'class' => EnumColumn::className(),
+                'class'     => EnumColumn::className(),
                 'attribute' => 'status',
-                'enum' => User::statuses(),
-                'filter' => User::statuses()
+                'enum'      => User::statuses(),
+                'filter'    => User::statuses(),
             ],
             'created_at:datetime',
             'logged_at:datetime',

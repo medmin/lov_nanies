@@ -2,7 +2,7 @@
 /**
  * User: xczizz
  * Date: 2018/6/16
- * Time: 22:02
+ * Time: 22:02.
  */
 
 /* @var $this yii\web\View */
@@ -19,23 +19,23 @@ $this->registerJs(
 
 <div class="job-list">
     <?= \yii\widgets\ListView::widget([
-        'dataProvider'=>$dataProvider,
-        'pager'=>[
-            'hideOnSinglePage'=>true,
-            'prevPageLabel'=>'Prev',
-            'nextPageLabel'=>'Next',
-            'options'=>[
-                'class'=>'pagination',
+        'dataProvider'=> $dataProvider,
+        'pager'       => [
+            'hideOnSinglePage'=> true,
+            'prevPageLabel'   => 'Prev',
+            'nextPageLabel'   => 'Next',
+            'options'         => [
+                'class'=> 'pagination',
             ],
         ],
-        'options'=>[
-            'class'=>'tab-pane fade active in',
+        'options'=> [
+            'class'=> 'tab-pane fade active in',
         ],
         'itemOptions' => [
-            'tag' => false
+            'tag' => false,
         ],
-        'summary'=>'',
-        'itemView'=>'jobs_item'
+        'summary' => '',
+        'itemView'=> 'jobs_item',
     ])?>
 </div>
 

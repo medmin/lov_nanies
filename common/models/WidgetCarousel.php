@@ -9,10 +9,9 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "widget_carousel".
  *
- * @property integer $id
+ * @property int $id
  * @property string $key
- * @property integer $status
- *
+ * @property int $status
  * @property WidgetCarouselItem[] $items
  */
 class WidgetCarousel extends ActiveRecord
@@ -21,7 +20,7 @@ class WidgetCarousel extends ActiveRecord
     const STATUS_ACTIVE = 1;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -29,28 +28,28 @@ class WidgetCarousel extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
             'cacheInvalidate' => [
-                'class' => CacheInvalidateBehavior::className(),
+                'class'          => CacheInvalidateBehavior::className(),
                 'cacheComponent' => 'frontendCache',
-                'keys' => [
+                'keys'           => [
                     function ($model) {
                         return [
                             self::className(),
-                            $model->key
+                            $model->key,
                         ];
-                    }
-                ]
-            ]
+                    },
+                ],
+            ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -58,18 +57,18 @@ class WidgetCarousel extends ActiveRecord
             [['key'], 'required'],
             [['key'], 'unique'],
             [['status'], 'integer'],
-            [['key'], 'string', 'max' => 255]
+            [['key'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'key' => Yii::t('common', 'Key'),
+            'id'     => Yii::t('common', 'ID'),
+            'key'    => Yii::t('common', 'Key'),
             'status' => Yii::t('common', 'Active'),
         ];
     }

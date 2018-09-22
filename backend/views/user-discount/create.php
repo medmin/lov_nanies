@@ -1,9 +1,8 @@
 <?php
 
+use common\models\UserDiscount;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\UserDiscount;
-
 
 /* @var $this yii\web\View */
 /* @var $model common\models\UserDiscount */
@@ -15,11 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-discount-create">
 
     <h1>
-        <?php if (Yii::$app->request->getQueryParam('type', UserDiscount::TYPE_NANNY) == UserDiscount::TYPE_FAMILY_POST){
-            echo 'Post-Discount ( % off ) For All Families';
-        } else {
-            echo 'Discount ( % off ) For All Nannies';
-        }?>
+        <?php if (Yii::$app->request->getQueryParam('type', UserDiscount::TYPE_NANNY) == UserDiscount::TYPE_FAMILY_POST) {
+    echo 'Post-Discount ( % off ) For All Families';
+} else {
+    echo 'Discount ( % off ) For All Nannies';
+}?>
     </h1>
 
     <div class="user-discount-form">
@@ -31,14 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
          <?= $form->field($model, 'expired_at')->widget(\kartik\datetime\DateTimePicker::className(), [
                  'options' => [
                      'placeholder' => 'select date',
-                     'value' => date('Y-m-d H:i:s', $model->expired_at ?: strtotime('+1 day'))
+                     'value'       => date('Y-m-d H:i:s', $model->expired_at ?: strtotime('+1 day')),
                  ],
                 'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd hh:ii:ss',
-                    'initialDate' => date('Y-m-d H:i:s', $model->expired_at ?: strtotime('+1 day')),
-                    'todayHighlight' => true
-                ]
+                    'autoclose'      => true,
+                    'format'         => 'yyyy-mm-dd hh:ii:ss',
+                    'initialDate'    => date('Y-m-d H:i:s', $model->expired_at ?: strtotime('+1 day')),
+                    'todayHighlight' => true,
+                ],
          ]) ?>
 
         <div class="form-group">

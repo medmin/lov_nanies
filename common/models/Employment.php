@@ -2,19 +2,17 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "employment".
  *
- * @property integer $id
+ * @property int $id
  * @property string $email
  * @property string $employer_name
  * @property string $employer_address
  * @property string $from_date
  * @property string $to_date
  * @property string $position_type
- * @property integer $number_of_children
+ * @property int $number_of_children
  * @property string $ages_of_children_started
  * @property string $ages_of_children_left
  * @property string $responsibilities
@@ -31,7 +29,7 @@ use Yii;
 class Employment extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -39,7 +37,7 @@ class Employment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -51,31 +49,31 @@ class Employment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'email' => 'Email',
-            'employer_name' => 'Employer Name',
-            'employer_address' => 'Employer Address',
-            'from_date' => 'From Date',
-            'to_date' => 'To Date',
-            'position_type' => 'Position Type',
-            'number_of_children' => 'Number Of Children',
-            'ages_of_children_started' => 'Ages Of Children Started',
-            'ages_of_children_left' => 'Ages Of Children Left',
-            'responsibilities' => 'Responsibilities',
-            'salary_starting' => 'Salary Starting',
-            'salary_ending' => 'Salary Ending',
-            'may_we_contact' => 'May We Contact',
-            'contact_phone' => 'Contact Phone',
-            'contact_email' => 'Contact Email',
-            'reason_for_leaving' => 'Reason For Leaving',
-            'hours_worked' => 'Hours Worked',
+            'id'                          => 'ID',
+            'email'                       => 'Email',
+            'employer_name'               => 'Employer Name',
+            'employer_address'            => 'Employer Address',
+            'from_date'                   => 'From Date',
+            'to_date'                     => 'To Date',
+            'position_type'               => 'Position Type',
+            'number_of_children'          => 'Number Of Children',
+            'ages_of_children_started'    => 'Ages Of Children Started',
+            'ages_of_children_left'       => 'Ages Of Children Left',
+            'responsibilities'            => 'Responsibilities',
+            'salary_starting'             => 'Salary Starting',
+            'salary_ending'               => 'Salary Ending',
+            'may_we_contact'              => 'May We Contact',
+            'contact_phone'               => 'Contact Phone',
+            'contact_email'               => 'Contact Email',
+            'reason_for_leaving'          => 'Reason For Leaving',
+            'hours_worked'                => 'Hours Worked',
             'was_this_a_live_in_position' => 'Was This A Live In Position',
-            'emloyer_comment' => 'Emloyer Comment',
+            'emloyer_comment'             => 'Emloyer Comment',
         ];
     }
 }
