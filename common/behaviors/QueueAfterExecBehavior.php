@@ -2,17 +2,17 @@
 /**
  * User: xczizz
  * Date: 2018/7/21
- * Time: 14:00
+ * Time: 14:00.
  */
 
 namespace common\behaviors;
 
+use common\queue\EmailJob;
 use yii\base\Behavior;
 use yii\queue\ExecEvent;
-use yii\queue\JobEvent;
 use yii\queue\Job;
+use yii\queue\JobEvent;
 use yii\queue\Queue;
-use common\queue\EmailJob;
 
 class QueueAfterExecBehavior extends Behavior
 {
@@ -38,7 +38,7 @@ class QueueAfterExecBehavior extends Behavior
     protected function getEventTitle(JobEvent $event)
     {
         $title = strtr('[id] name', [
-            'id' => $event->id,
+            'id'   => $event->id,
             'name' => $event->job instanceof Job ? get_class($event->job) : 'mixed data',
         ]);
         if ($event instanceof ExecEvent) {

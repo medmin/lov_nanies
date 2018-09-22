@@ -4,7 +4,7 @@
  */
 return [
     [
-        'key' => 'frontend.maintenance',
-        'value' => 'disable'
-    ]
+        'key'   => 'frontend.maintenance',
+        'value' => 'disable',
+    ],
 ];

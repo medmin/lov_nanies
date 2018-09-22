@@ -1,4 +1,5 @@
-<?php   echo "<script src='".Yii::$app->homeUrl."/js/jquery.mixitup.js'></script>";
+<?php
+  echo "<script src='".Yii::$app->homeUrl."/js/jquery.mixitup.js'></script>";
         echo "<script src='".Yii::$app->homeUrl."/js/datepicker.js'></script>";
         echo "<script src='".Yii::$app->homeUrl."/js/app.js'></script>";
         echo "<script src='".Yii::$app->homeUrl."/js/main.js'></script>";

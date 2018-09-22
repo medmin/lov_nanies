@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Refs */
 
-$this->title = 'Update Refs: ' . $model->id;
+$this->title = 'Update Refs: '.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Refs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

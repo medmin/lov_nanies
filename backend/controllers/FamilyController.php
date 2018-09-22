@@ -2,25 +2,23 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\Families;
 use backend\models\search\FamilySearch;
-use yii\data\ActiveDataProvider;
+use common\models\Families;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * FamilyController implements the CRUD actions for Families model.
  */
 class FamilyController extends Controller
 {
-    
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -30,22 +28,25 @@ class FamilyController extends Controller
 
     /**
      * Lists all Families models.
+     *
      * @return mixed
      */
     public function actionIndex()
     {
         $searchModel = new FamilySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-
     }
 
     /**
      * Displays a single Families model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -58,6 +59,7 @@ class FamilyController extends Controller
     /**
      * Creates a new Families model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -76,7 +78,9 @@ class FamilyController extends Controller
     /**
      * Updates an existing Families model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -95,13 +99,15 @@ class FamilyController extends Controller
     /**
      * Deletes an existing Families model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $model=$this->findModel($id);
-        $model->status=-10;
+        $model = $this->findModel($id);
+        $model->status = -10;
         $model->save(false);
 
         return $this->redirect(['index']);
@@ -110,9 +116,12 @@ class FamilyController extends Controller
     /**
      * Finds the Families model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Families the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return Families the loaded model
      */
     protected function findModel($id)
     {
@@ -122,14 +131,14 @@ class FamilyController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
+
     public static function statuses()
     {
         return [
-            self::STATUS_APPROVED => Yii::t('common', 'Approved'),
+            self::STATUS_APPROVED   => Yii::t('common', 'Approved'),
             self::STATUS_UNAPPROVED => Yii::t('common', 'Unapproved'),
-            self::STATUS_INACTIVE => Yii::t('common', 'Inactive'),
-            self::STATUS_DELETED => Yii::t('common', 'Deleted')
+            self::STATUS_INACTIVE   => Yii::t('common', 'Inactive'),
+            self::STATUS_DELETED    => Yii::t('common', 'Deleted'),
         ];
     }
 }

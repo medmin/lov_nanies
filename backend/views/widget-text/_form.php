@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\WidgetText */
@@ -19,7 +19,7 @@ use yii\bootstrap\ActiveForm;
     <?php echo $form->field($model, 'body')->widget(
         trntv\aceeditor\AceEditor::className(),
         [
-            'mode' => 'html'
+            'mode' => 'html',
         ]
     ) ?>
 

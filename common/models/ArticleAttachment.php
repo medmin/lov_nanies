@@ -9,22 +9,21 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "{{%article_attachment}}".
  *
- * @property integer $id
- * @property integer $article_id
+ * @property int $id
+ * @property int $article_id
  * @property string $base_url
  * @property string $path
  * @property string $url
  * @property string $name
  * @property string $type
  * @property string $size
- * @property integer $order
- *
+ * @property int $order
  * @property Article $article
  */
 class ArticleAttachment extends ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -32,44 +31,44 @@ class ArticleAttachment extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
             [
-                'class' => TimestampBehavior::className(),
-                'updatedAtAttribute' => false
-            ]
+                'class'              => TimestampBehavior::className(),
+                'updatedAtAttribute' => false,
+            ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['article_id', 'path'], 'required'],
             [['article_id', 'size', 'order'], 'integer'],
-            [['base_url', 'path', 'type', 'name'], 'string', 'max' => 255]
+            [['base_url', 'path', 'type', 'name'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
+            'id'         => Yii::t('common', 'ID'),
             'article_id' => Yii::t('common', 'Article ID'),
-            'base_url' => Yii::t('common', 'Base Url'),
-            'path' => Yii::t('common', 'Path'),
-            'size' => Yii::t('common', 'Size'),
-            'order' => Yii::t('common', 'Order'),
-            'type' => Yii::t('common', 'Type'),
-            'name' => Yii::t('common', 'Name')
+            'base_url'   => Yii::t('common', 'Base Url'),
+            'path'       => Yii::t('common', 'Path'),
+            'size'       => Yii::t('common', 'Size'),
+            'order'      => Yii::t('common', 'Order'),
+            'type'       => Yii::t('common', 'Type'),
+            'name'       => Yii::t('common', 'Name'),
         ];
     }
 
@@ -83,6 +82,6 @@ class ArticleAttachment extends ActiveRecord
 
     public function getUrl()
     {
-        return $this->base_url . '/' . $this->path;
+        return $this->base_url.'/'.$this->path;
     }
 }

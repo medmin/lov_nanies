@@ -2,8 +2,9 @@
 
 use common\grid\EnumColumn;
 use common\models\UserProfile;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -45,67 +46,67 @@ $("#userDiscountModel").on("hidden.bs.modal", function(e) {
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => [
-            'class' => 'grid-view table-responsive'
+        'filterModel'  => $searchModel,
+        'options'      => [
+            'class' => 'grid-view table-responsive',
         ],
         'columns' => [
             'id',
             [
                 'attribute' => 'name',
-                'format' => 'raw',
-                'value' => function ($model) {
+                'format'    => 'raw',
+                'value'     => function ($model) {
                     return Html::a($model->name, Yii::$app->urlManagerFrontend->createAbsoluteUrl('/nannies/view?id='.$model->id), ['target' => '_blank']);
-                }
+                },
             ],
             'email:email',
             'address:text',
             [
-                'label' => 'city(zip_code)',
+                'label'     => 'city(zip_code)',
                 'attribute' => 'zip_code',
-                'format' => 'raw',
-                'value' => function ($model) {
-                    if ($model->city->place_name == "N/A" && $model->zip_code != 0) {
-                        $html = Html::tag('span', $model->city->place_name, ['style' => 'color: red', 'title' => 'Error zip_code: ' . $model->zip_code]);
+                'format'    => 'raw',
+                'value'     => function ($model) {
+                    if ($model->city->place_name == 'N/A' && $model->zip_code != 0) {
+                        $html = Html::tag('span', $model->city->place_name, ['style' => 'color: red', 'title' => 'Error zip_code: '.$model->zip_code]);
                     } else {
-                        $html =  Html::tag('span', $model->city->place_name, ['title' => 'zip_code: ' . $model->zip_code]);
+                        $html = Html::tag('span', $model->city->place_name, ['title' => 'zip_code: '.$model->zip_code]);
                     }
+
                     return $html ?? '';
-                }
+                },
             ],
             [
-                'class' => EnumColumn::className(),
+                'class'     => EnumColumn::className(),
                 'attribute' => 'status',
-                'enum' => UserProfile::statuses(),
-                'filter' => UserProfile::statuses()
+                'enum'      => UserProfile::statuses(),
+                'filter'    => UserProfile::statuses(),
             ],
             /*'created_at:datetime',
             'logged_at:datetime',
             // 'updated_at',*/
 
-            ['class' => 'yii\grid\ActionColumn',
+            ['class'   => 'yii\grid\ActionColumn',
              'buttons' => [
                 'dereactivation' => function ($url, $model) {
-                    return ($model->status==-1|| $model->status==-10) ? Html::a('<span class="glyphicon glyphicon-refresh"></span>', $url, [
+                    return ($model->status == -1 || $model->status == -10) ? Html::a('<span class="glyphicon glyphicon-refresh"></span>', $url, [
                                 'title' => Yii::t('app', 'Reactivate'),
-                    ]) : "";
-                    
+                    ]) : '';
                 },
                  'approve' => function ($url, $model) {
-                    return $model->status==0 ? Html::a('<span class="glyphicon glyphicon-check"></span>', $url, [
+                     return $model->status == 0 ? Html::a('<span class="glyphicon glyphicon-check"></span>', $url, [
                                 'title' => Yii::t('app', 'Approve'),
-                    ]): "";
-                },
+                    ]) : '';
+                 },
                  'deactivate' => function ($url, $model) {
-                    return $model->status==1 ? Html::a('<span class="glyphicon glyphicon-eye-close"></span>', $url, [
+                     return $model->status == 1 ? Html::a('<span class="glyphicon glyphicon-eye-close"></span>', $url, [
                                 'title' => Yii::t('app', 'Deactivate'),
-                    ]): "";
-                },
+                    ]) : '';
+                 },
                  'discount' => function ($url, $model) {
-                    return Html::tag('span', '', ['style' => 'color: #3c8dbc; cursor: pointer', 'class' => 'glyphicon glyphicon-tag user-discount', 'title' => Yii::t('app', 'Set Discount'), 'data-username' => $model->name ,' data-id' => $model->id]);
-                 }
+                     return Html::tag('span', '', ['style' => 'color: #3c8dbc; cursor: pointer', 'class' => 'glyphicon glyphicon-tag user-discount', 'title' => Yii::t('app', 'Set Discount'), 'data-username' => $model->name, ' data-id' => $model->id]);
+                 },
             ],
-             'template' => '{update} {approve} {dereactivation} {deactivate} {delete} {discount}'],
+             'template' => '{update} {approve} {dereactivation} {deactivate} {delete} {discount}', ],
         ],
     ]); ?>
 
@@ -124,12 +125,12 @@ $("#userDiscountModel").on("hidden.bs.modal", function(e) {
                     'name' => 'expired_at',
 //                    'value' => date('Y-m-d H:i:s', strtotime('+1 day')),
                     'options' => [
-                        'placeholder' => 'select expired_at'
+                        'placeholder' => 'select expired_at',
                     ],
                     'pluginOptions' => [
                         'autoclose' => true,
-                        'format' => 'yyyy-mm-dd hh:ii:ss'
-                    ]
+                        'format'    => 'yyyy-mm-dd hh:ii:ss',
+                    ],
                 ]) ?>
                 <input type="hidden" name="user_id">
             </div>

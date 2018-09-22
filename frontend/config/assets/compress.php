@@ -1,6 +1,7 @@
 <?php
 /**
  * Configuration file for the "yii asset" console command.
+ *
  * @author Eugene Terentev <eugene@terentev.net>
  */
 
@@ -24,17 +25,17 @@ return [
     // Asset bundle for compression output:
     'targets' => [
         'all' => [
-            'class' => 'yii\web\AssetBundle',
+            'class'    => 'yii\web\AssetBundle',
             'basePath' => '@webroot',
-            'baseUrl' => '@web',
-            'js' => 'bundle/{hash}.js',
-            'css' => 'bundle/{hash}.css',
+            'baseUrl'  => '@web',
+            'js'       => 'bundle/{hash}.js',
+            'css'      => 'bundle/{hash}.css',
         ],
     ],
 
     // Asset manager configuration:
     'assetManager' => [
         'basePath' => '@webroot/assets',
-        'baseUrl' => '@web/assets'
+        'baseUrl'  => '@web/assets',
     ],
 ];

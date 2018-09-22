@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="text-block-create">
 
     <?php echo $this->render('_form', [
-        'model' => $model
+        'model' => $model,
     ]) ?>
 
 </div>

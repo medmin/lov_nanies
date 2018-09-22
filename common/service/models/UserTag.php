@@ -2,22 +2,19 @@
 
 namespace common\service\models;
 
-use Yii;
-
 /**
  * This is the model class for table "user_tag".
  *
- * @property integer $id
- * @property integer $user_id
- * @property integer $tag_id
- * @property integer $created_at
- *
+ * @property int $id
+ * @property int $user_id
+ * @property int $tag_id
+ * @property int $created_at
  * @property Tag $tag
  */
 class UserTag extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -25,7 +22,7 @@ class UserTag extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -37,14 +34,14 @@ class UserTag extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'tag_id' => 'Tag ID',
+            'id'         => 'ID',
+            'user_id'    => 'User ID',
+            'tag_id'     => 'Tag ID',
             'created_at' => 'Created At',
         ];
     }
@@ -56,5 +53,4 @@ class UserTag extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tag::className(), ['id' => 'tag_id']);
     }
-
 }

@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\search\UserFileSearch */
@@ -25,15 +25,15 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'ext') ?>
 
-    <?php // echo $form->field($model, 'link') ?>
+    <?php // echo $form->field($model, 'link')?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?php // echo $form->field($model, 'status')?>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+    <?php // echo $form->field($model, 'created_at')?>
 
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?php // echo $form->field($model, 'updated_at')?>
 
-    <?php // echo $form->field($model, 'deleted_at') ?>
+    <?php // echo $form->field($model, 'deleted_at')?>
 
     <div class="form-group">
         <?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -2,12 +2,12 @@
 
 namespace frontend\controllers;
 
-use Yii;
 use common\models\Employment;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * EmploymentController implements the CRUD actions for Employment model.
@@ -15,13 +15,13 @@ use yii\filters\VerbFilter;
 class EmploymentController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -31,6 +31,7 @@ class EmploymentController extends Controller
 
     /**
      * Lists all Employment models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -46,7 +47,9 @@ class EmploymentController extends Controller
 
     /**
      * Displays a single Employment model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -59,6 +62,7 @@ class EmploymentController extends Controller
     /**
      * Creates a new Employment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -77,7 +81,9 @@ class EmploymentController extends Controller
     /**
      * Updates an existing Employment model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -96,7 +102,9 @@ class EmploymentController extends Controller
     /**
      * Deletes an existing Employment model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -109,9 +117,12 @@ class EmploymentController extends Controller
     /**
      * Finds the Employment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Employment the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return Employment the loaded model
      */
     protected function findModel($id)
     {

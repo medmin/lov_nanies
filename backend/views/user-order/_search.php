@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\search\UserOrderSearch */
@@ -25,11 +25,11 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'payment_gateway_id') ?>
 
-    <?php // echo $form->field($model, 'service_plan') ?>
+    <?php // echo $form->field($model, 'service_plan')?>
 
-    <?php // echo $form->field($model, 'service_money') ?>
+    <?php // echo $form->field($model, 'service_money')?>
 
-    <?php // echo $form->field($model, 'timestamp') ?>
+    <?php // echo $form->field($model, 'timestamp')?>
 
     <div class="form-group">
         <?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

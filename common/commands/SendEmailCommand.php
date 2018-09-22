@@ -2,9 +2,9 @@
 
 namespace common\commands;
 
+use trntv\bus\interfaces\SelfHandlingCommand;
 use yii\base\Object;
 use yii\swiftmailer\Message;
-use trntv\bus\interfaces\SelfHandlingCommand;
 
 /**
  * @author Eugene Terentev <eugene@terentev.net>
@@ -41,7 +41,7 @@ class SendEmailCommand extends Object implements SelfHandlingCommand
     public $html = true;
 
     /**
-     * Command init
+     * Command init.
      */
     public function init()
     {
@@ -58,6 +58,7 @@ class SendEmailCommand extends Object implements SelfHandlingCommand
 
     /**
      * @param \common\commands\SendEmailCommand $command
+     *
      * @return bool
      */
     public function handle($command)
@@ -75,6 +76,7 @@ class SendEmailCommand extends Object implements SelfHandlingCommand
         $message->setFrom($command->from);
         $message->setTo($command->to ?: \Yii::$app->params['robotEmail']);
         $message->setSubject($command->subject);
+
         return $message->send();
     }
 }

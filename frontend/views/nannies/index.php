@@ -1,14 +1,14 @@
 <?php
-/** @var $this yii\web\View
- * @var $searchModel backend\models\search\NannySearch
- * @var $error string 如果有的话，就是抛出的异常
+/** @var yii\web\View
+ * @var $searchModel  backend\models\search\NannySearch
+ * @var $error        string 如果有的话，就是抛出的异常
  * @var $dataProvider Object
  */
 use yii\web\View;
 
-if (isset($_GET['city'])){
-    $this->title = Yii::t('frontend', 'Nannies in ' . $_GET['city']);
-}else{
+if (isset($_GET['city'])) {
+    $this->title = Yii::t('frontend', 'Nannies in '.$_GET['city']);
+} else {
     $this->title = Yii::t('frontend', 'Nannies');
 }
 $this->registerJs(
@@ -21,7 +21,7 @@ $this->registerJs(
     View::POS_READY,
     'my-button-handler'
 );
-$js = <<<JS
+$js = <<<'JS'
   $(function() {
     $('#babysitters-tab .card').each(function() {
         let _this = $(this);
@@ -54,28 +54,28 @@ $this->registerJs($js, View::POS_END)
             <div class="tab-content tabpill-content">
             <div id="babysitters-tab" class="tab-pane fade active in">
             <?= $error !== '' ? $error : \yii\widgets\ListView::widget([
-                'dataProvider'=>$dataProvider,
-                'pager'=>[
-                    'hideOnSinglePage'=>true,
-                    'prevPageLabel'=>'Prev',
-                    'nextPageLabel'=>'Next',
-                    'options'=>[
-                      'class'=>'pagination',  
+                'dataProvider'=> $dataProvider,
+                'pager'       => [
+                    'hideOnSinglePage'=> true,
+                    'prevPageLabel'   => 'Prev',
+                    'nextPageLabel'   => 'Next',
+                    'options'         => [
+                      'class'=> 'pagination',
                     ],
                 ],
-                'options'=>[
-                    'class'=>'tab-pane fade active in',
+                'options'=> [
+                    'class'=> 'tab-pane fade active in',
                 ],
                 'itemOptions' => [
-                    'tag' => false
+                    'tag' => false,
                 ],
-                'summary'=>'',
-                'itemView'=>'list_item'
+                'summary' => '',
+                'itemView'=> 'list_item',
             ])?>
             </div>
             </div>
         </div>
     </div>
-    <?php require_once('sidebar.php');?>
+    <?php require_once 'sidebar.php'; ?>
     </div>
 </section>

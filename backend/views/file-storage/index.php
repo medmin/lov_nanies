@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -14,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="file-storage-item-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
     <div class="row text-right">
         <div class="pull-right">
             <div class="col-xs-12">
@@ -46,16 +45,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => [
-            'class' => 'grid-view table-responsive'
+        'filterModel'  => $searchModel,
+        'options'      => [
+            'class' => 'grid-view table-responsive',
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             [
                 'attribute' => 'component',
-                'filter' => $components
+                'filter'    => $components,
             ],
             'path',
             'type',
@@ -65,10 +64,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {delete}'
-            ]
-        ]
+                'class'    => 'yii\grid\ActionColumn',
+                'template' => '{view} {delete}',
+            ],
+        ],
     ]); ?>
 
 </div>

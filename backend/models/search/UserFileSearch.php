@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\modules\file\models\UserFile;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\modules\file\models\UserFile;
 
 /**
  * UserFileSearch represents the model behind the search form about `common\modules\file\models\UserFile`.
@@ -13,7 +12,7 @@ use common\modules\file\models\UserFile;
 class UserFileSearch extends UserFile
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class UserFileSearch extends UserFile
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,7 +32,7 @@ class UserFileSearch extends UserFile
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -45,11 +44,11 @@ class UserFileSearch extends UserFile
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => [
+            'sort'  => [
                 'defaultOrder' => [
-                    'created_at' => SORT_DESC
-                ]
-            ]
+                    'created_at' => SORT_DESC,
+                ],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -57,9 +56,9 @@ class UserFileSearch extends UserFile
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'status' => $this->status,
+            'id'         => $this->id,
+            'user_id'    => $this->user_id,
+            'status'     => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,

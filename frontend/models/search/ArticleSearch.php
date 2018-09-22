@@ -12,7 +12,7 @@ use yii\data\ActiveDataProvider;
 class ArticleSearch extends Article
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -23,7 +23,7 @@ class ArticleSearch extends Article
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -32,7 +32,8 @@ class ArticleSearch extends Article
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -48,8 +49,8 @@ class ArticleSearch extends Article
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'slug' => $this->slug,
+            'id'          => $this->id,
+            'slug'        => $this->slug,
             'category_id' => $this->category_id,
         ]);
 

@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\modules\file\models\UserFile;
 use backend\models\search\UserFileSearch;
+use common\modules\file\models\UserFile;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UserFileController implements the CRUD actions for UserFile model.
@@ -18,7 +18,7 @@ class UserFileController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -28,6 +28,7 @@ class UserFileController extends Controller
 
     /**
      * Lists all UserFile models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -36,14 +37,16 @@ class UserFileController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
      * Displays a single UserFile model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -56,6 +59,7 @@ class UserFileController extends Controller
     /**
      * Creates a new UserFile model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -74,7 +78,9 @@ class UserFileController extends Controller
     /**
      * Updates an existing UserFile model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -93,7 +99,9 @@ class UserFileController extends Controller
     /**
      * Deletes an existing UserFile model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -109,9 +117,12 @@ class UserFileController extends Controller
     /**
      * Finds the UserFile model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return UserFile the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return UserFile the loaded model
      */
     protected function findModel($id)
     {

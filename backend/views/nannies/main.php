@@ -1,9 +1,9 @@
 <?php
-use yii\helpers\Html;
-use yii\widgets\DetailView;
 use trntv\filekit\widget\Upload;
 use yii\bootstrap\ActiveForm;
 use yii\grid\GridView;
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $model \frontend\modules\user\models\SignupForm */
@@ -15,13 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php $form = ActiveForm::begin(['action' =>['update?id='.$model->id.'&step=1']]); ?>   
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <ul class="process-label">
-                                <a href="update?id=<?php echo $model->id;?>&step=1"><li class="process-label2" id="label-1">Main </li></a>
-                                <a href="update?id=<?php echo $model->id;?>&step=2"><li class="process-label2" id="label-2">Questions & Schedule</li></a>
-                                <a href="update?id=<?php echo $model->id;?>&step=3"><li class="process-label2" id="label-3">Education & Driving</li></a>
-                                <a href="update?id=<?php echo $model->id;?>&step=4"><li class="process-label2" id="label-4">Housekeeping</li></a>
-                                <a href="update?id=<?php echo $model->id;?>&step=5"><li class="process-label2 active" id="label-5">About you</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=1"><li class="process-label2" id="label-1">Main </li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=2"><li class="process-label2" id="label-2">Questions & Schedule</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=3"><li class="process-label2" id="label-3">Education & Driving</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=4"><li class="process-label2" id="label-4">Housekeeping</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=5"><li class="process-label2 active" id="label-5">About you</li></a>
                                 <br>
-                                <a href="update?id=<?php echo $model->id;?>&step=tag"><li class="process-label2" id="label-tag">Nanny Tag</li></a>
+                                <a href="update?id=<?php echo $model->id; ?>&step=tag"><li class="process-label2" id="label-tag">Nanny Tag</li></a>
                             </ul>
                         </div>
                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <?php echo $form->field($model, 'picture')->widget(
                                                 Upload::classname(),
                                                 [
-                                                    'url' => ['avatar-upload']
+                                                    'url' => ['avatar-upload'],
                                                 ]
                                             )->label('Upload your image')?>
                                             <?= $form->field($model, 'name')->textInput(['required'=>'required']) ?>
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h2 style="color: #000;">References</h2>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'columns' => [
+        'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
@@ -106,19 +106,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'years_known:ntext',
 
             ['class' => 'yii\grid\ActionColumn',
-             
-              'template' => '{view_ref} {update_ref}',
+
+              'template'  => '{view_ref} {update_ref}',
                 'buttons' => [
                 'view_ref' => function ($url, $model) {
                     return Html::a('<span class="fa fa-eye"></span> View', $url, [
                                 'title' => Yii::t('app', 'View'),
-                                'class'=>'btn btn-primary btn-xs',                                  
+                                'class' => 'btn btn-primary btn-xs',
                     ]);
                 },
                 'update_ref' => function ($url, $model) {
                     return Html::a('<span class="fa fa-edit"></span> Update', $url, [
                                 'title' => Yii::t('app', 'View'),
-                                'class'=>'btn btn-primary btn-xs',                                  
+                                'class' => 'btn btn-primary btn-xs',
                     ]);
                 },
             ],

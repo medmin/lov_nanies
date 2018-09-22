@@ -18,7 +18,7 @@ class AppController extends Controller
         '@backend/runtime',
         '@backend/web/assets',
         '@storage/cache',
-        '@storage/web/source'
+        '@storage/web/source',
     ];
 
     public $executablePaths = [
@@ -28,7 +28,7 @@ class AppController extends Controller
     ];
 
     public $generateKeysPaths = [
-        '@base/.env'
+        '@base/.env',
     ];
 
     public function actionSetup()
@@ -82,6 +82,7 @@ class AppController extends Controller
             $content = preg_replace_callback('/<generated_key>/', function () {
                 $length = 32;
                 $bytes = openssl_random_pseudo_bytes(32, $cryptoStrong);
+
                 return strtr(substr(base64_encode($bytes), 0, $length), '+/', '_-');
             }, $content);
             file_put_contents($file, $content);

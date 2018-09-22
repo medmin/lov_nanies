@@ -2,15 +2,14 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\User;
-use backend\models\UserForm;
 use backend\models\search\UserSearch;
-use backend\models\search\NannySearch;
+use backend\models\UserForm;
+use common\models\User;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -21,7 +20,7 @@ class UserController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -31,22 +30,25 @@ class UserController extends Controller
 
     /**
      * Lists all User models.
+     *
      * @return mixed
      */
     public function actionIndex()
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-    
 
     /**
      * Displays a single User model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -59,6 +61,7 @@ class UserController extends Controller
     /**
      * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -71,13 +74,15 @@ class UserController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'roles' => ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'name')
+            'roles' => ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'name'),
         ]);
     }
 
     /**
      * Updates an existing User model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -90,14 +95,16 @@ class UserController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'roles' => ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'name')
+            'roles' => ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'name'),
         ]);
     }
 
     /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -113,9 +120,12 @@ class UserController extends Controller
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return User the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return User the loaded model
      */
     protected function findModel($id)
     {

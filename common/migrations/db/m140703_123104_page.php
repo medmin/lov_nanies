@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m140703_123104_page extends Migration
@@ -13,12 +12,12 @@ class m140703_123104_page extends Migration
         }
 
         $this->createTable('{{%page}}', [
-            'id' => $this->primaryKey(),
-            'slug' => $this->string(2048)->notNull(),
-            'title' => $this->string(512)->notNull(),
-            'body' => $this->text()->notNull(),
-            'view' => $this->string(),
-            'status' => $this->smallInteger()->notNull(),
+            'id'         => $this->primaryKey(),
+            'slug'       => $this->string(2048)->notNull(),
+            'title'      => $this->string(512)->notNull(),
+            'body'       => $this->text()->notNull(),
+            'view'       => $this->string(),
+            'status'     => $this->smallInteger()->notNull(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $tableOptions);

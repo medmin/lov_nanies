@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\UserFileSearch */
@@ -12,22 +12,22 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-file-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);?>
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+        'filterModel'  => $searchModel,
+        'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
 
 //            'id',
             'title',
             [
                 'attribute' => 'user_id',
-                'format' => 'raw',
-                'value' => function ($model) {
+                'format'    => 'raw',
+                'value'     => function ($model) {
                     return Html::a($model->user_id, \yii\helpers\Url::to(['/user/view', 'id' => $model->user_id]));
-                }
+                },
             ],
 //            [
 //                'label' => 'Family/Nanny',
@@ -55,14 +55,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'deleted_at',
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'header' => Yii::t('backend', 'Operate'),
+                'class'    => 'yii\grid\ActionColumn',
+                'header'   => Yii::t('backend', 'Operate'),
                 'template' => '{download} &nbsp;&nbsp; {delete}',
-                'buttons' => [
+                'buttons'  => [
                         'download' => function ($url, $model, $key) {
-                            return Html::a(Html::tag('span','',['class' => 'glyphicon glyphicon-download-alt']), \yii\helpers\Url::to(['/file/user/download', 'user_id' => $model->user_id, 'file_uuid' => $model->file_uuid]), ['title' => 'Download']);
-                        }
-                ]
+                            return Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-download-alt']), \yii\helpers\Url::to(['/file/user/download', 'user_id' => $model->user_id, 'file_uuid' => $model->file_uuid]), ['title' => 'Download']);
+                        },
+                ],
             ],
         ],
     ]); ?>

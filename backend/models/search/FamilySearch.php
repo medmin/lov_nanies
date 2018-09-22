@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\Families;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Families;
 
 /**
  * UserSearch represents the model behind the search form about `common\models\User`.
@@ -13,18 +12,18 @@ use common\models\Families;
 class FamilySearch extends Families
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['id', 'status'], 'integer'],
-            [['name', 'address' ], 'string']
+            [['name', 'address'], 'string'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,17 +32,17 @@ class FamilySearch extends Families
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @return ActiveDataProvider
      */
-    public function search($params, $limit='')
+    public function search($params, $limit = '')
     {
-        if($limit!=''){
+        if ($limit != '') {
             $query = Families::find()->limit($limit);
-        }else{
+        } else {
             $query = Families::find();
         }
-        
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -54,7 +53,7 @@ class FamilySearch extends Families
         }
         //echo var_dump($this->zip_code);
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'     => $this->id,
             'status' => $this->status,
             /*'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
@@ -63,12 +62,12 @@ class FamilySearch extends Families
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'address', $this->address]);
-            /*->andFilterWhere(['in', 'zip_code', $this->zip_code])
-            /*->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'position_for', $this->position_for]);
+        /*->andFilterWhere(['in', 'zip_code', $this->zip_code])
+        /*->andFilterWhere(['like', 'email', $this->email])
+        ->andFilterWhere(['like', 'position_for', $this->position_for]);
 ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])*/
+        ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+        ->andFilterWhere(['like', 'password_hash', $this->password_hash])*/
         return $dataProvider;
     }
 }

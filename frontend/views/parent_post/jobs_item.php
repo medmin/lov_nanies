@@ -2,13 +2,12 @@
 /**
  * User: xczizz
  * Date: 2018/6/16
- * Time: 23:49
+ * Time: 23:49.
  */
-
-use yii\helpers\Html;
 use common\models\Nannies;
-use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\helpers\StringHelper;
+use yii\helpers\Url;
 
 /* @var $model \common\models\ParentPost */
 ?>

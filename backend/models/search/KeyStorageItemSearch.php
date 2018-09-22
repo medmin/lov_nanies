@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\KeyStorageItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\KeyStorageItem;
 
 /**
  * KeyStorageItemSearch represents the model behind the search form about `common\models\KeyStorageItem`.
@@ -13,7 +12,7 @@ use common\models\KeyStorageItem;
 class KeyStorageItemSearch extends KeyStorageItem
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -23,7 +22,7 @@ class KeyStorageItemSearch extends KeyStorageItem
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -32,7 +31,7 @@ class KeyStorageItemSearch extends KeyStorageItem
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -51,10 +50,10 @@ class KeyStorageItemSearch extends KeyStorageItem
         }
 
         $query->andFilterWhere([
-            'like', 'key', $this->key
+            'like', 'key', $this->key,
         ]);
         $query->andFilterWhere([
-            'like', 'value', $this->value
+            'like', 'value', $this->value,
         ]);
 
         return $dataProvider;

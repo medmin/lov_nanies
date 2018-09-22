@@ -3,11 +3,11 @@
 namespace backend\controllers;
 
 use backend\models\search\WidgetTextSearch;
-use Yii;
 use common\models\WidgetText;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * WidgetTextController implements the CRUD actions for WidgetText model.
@@ -18,7 +18,7 @@ class WidgetTextController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -28,6 +28,7 @@ class WidgetTextController extends Controller
 
     /**
      * Lists all WidgetText models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -36,7 +37,7 @@ class WidgetTextController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -44,6 +45,7 @@ class WidgetTextController extends Controller
     /**
      * Creates a new WidgetText model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -62,7 +64,9 @@ class WidgetTextController extends Controller
     /**
      * Updates an existing WidgetText model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -81,7 +85,9 @@ class WidgetTextController extends Controller
     /**
      * Deletes an existing WidgetText model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -94,9 +100,12 @@ class WidgetTextController extends Controller
     /**
      * Finds the WidgetText model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return WidgetText the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return WidgetText the loaded model
      */
     protected function findModel($id)
     {

@@ -2,12 +2,13 @@
 /**
  * User: xczizz
  * Date: 2018/9/4
- * Time: 14:08
+ * Time: 14:08.
  */
+
 namespace backend\controllers;
 
-use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\Controller;
 
 class UserTagController extends Controller
 {
@@ -15,7 +16,7 @@ class UserTagController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -30,5 +31,4 @@ class UserTagController extends Controller
     {
         return $this->render('/tag/index');
     }
-
 }

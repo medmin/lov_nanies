@@ -2,10 +2,9 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\User;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\User;
 
 /**
  * UserSearch represents the model behind the search form about `common\models\User`.
@@ -13,7 +12,7 @@ use common\models\User;
 class UserSearch extends User
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class UserSearch extends User
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -33,7 +32,8 @@ class UserSearch extends User
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -49,11 +49,11 @@ class UserSearch extends User
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
+            'id'         => $this->id,
+            'status'     => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'logged_at' => $this->logged_at
+            'logged_at'  => $this->logged_at,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])

@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\search\ArticleSearch */
@@ -25,13 +25,13 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'user_id') ?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?php // echo $form->field($model, 'status')?>
 
-    <?php // echo $form->field($model, 'published_at') ?>
+    <?php // echo $form->field($model, 'published_at')?>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+    <?php // echo $form->field($model, 'created_at')?>
 
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?php // echo $form->field($model, 'updated_at')?>
 
     <div class="form-group">
         <?php echo Html::submitButton(Yii::t('backend', 'Search'), ['class' => 'btn btn-primary']) ?>

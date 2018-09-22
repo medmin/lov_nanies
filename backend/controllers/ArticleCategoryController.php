@@ -2,13 +2,13 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\ArticleCategory;
 use backend\models\search\ArticleCategorySearch;
+use common\models\ArticleCategory;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ArticleCategoryController implements the CRUD actions for ArticleCategory model.
@@ -19,7 +19,7 @@ class ArticleCategoryController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -29,6 +29,7 @@ class ArticleCategoryController extends Controller
 
     /**
      * Lists all ArticleCategory models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -37,14 +38,16 @@ class ArticleCategoryController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
      * Displays a single ArticleCategory model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -57,6 +60,7 @@ class ArticleCategoryController extends Controller
     /**
      * Creates a new ArticleCategory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -70,7 +74,7 @@ class ArticleCategoryController extends Controller
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'      => $model,
                 'categories' => $categories,
             ]);
         }
@@ -79,7 +83,9 @@ class ArticleCategoryController extends Controller
     /**
      * Updates an existing ArticleCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -89,12 +95,11 @@ class ArticleCategoryController extends Controller
         $categories = ArticleCategory::find()->noParents()->andWhere(['not', ['id' => $id]])->all();
         $categories = ArrayHelper::map($categories, 'id', 'title');
 
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model'      => $model,
                 'categories' => $categories,
             ]);
         }
@@ -103,7 +108,9 @@ class ArticleCategoryController extends Controller
     /**
      * Deletes an existing ArticleCategory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -116,9 +123,12 @@ class ArticleCategoryController extends Controller
     /**
      * Finds the ArticleCategory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return ArticleCategory the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return ArticleCategory the loaded model
      */
     protected function findModel($id)
     {

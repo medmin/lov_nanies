@@ -2,12 +2,10 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "refs".
  *
- * @property integer $id
+ * @property int $id
  * @property string $email
  * @property string $reference_name
  * @property string $reference_address
@@ -19,7 +17,7 @@ use Yii;
 class Refs extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -27,31 +25,31 @@ class Refs extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [[ 'reference_name', 'reference_address', 'contact_number', 'ref_contact_email', 'how_do_you_know', 'years_known'], 'required'],
+            [['reference_name', 'reference_address', 'contact_number', 'ref_contact_email', 'how_do_you_know', 'years_known'], 'required'],
             [['id'], 'integer'],
             [['email', 'reference_name', 'reference_address', 'contact_number', 'ref_contact_email', 'how_do_you_know', 'years_known'], 'string'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'email' => 'Email',
-            'reference_name' => 'Reference Name',
+            'id'                => 'ID',
+            'email'             => 'Email',
+            'reference_name'    => 'Reference Name',
             'reference_address' => 'Reference Address',
-            'contact_number' => 'Contact Number',
+            'contact_number'    => 'Contact Number',
             'ref_contact_email' => 'Ref Contact Email',
-            'how_do_you_know' => 'How Do You Know',
-            'years_known' => 'Please describe your past job. Include  the ages of the child(ren) when you started, the job duties, whether it was full time, part time, live in/out and anything else you`ve like to include about this position. ',
+            'how_do_you_know'   => 'How Do You Know',
+            'years_known'       => 'Please describe your past job. Include  the ages of the child(ren) when you started, the job duties, whether it was full time, part time, live in/out and anything else you`ve like to include about this position. ',
         ];
     }
 }

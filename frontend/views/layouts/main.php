@@ -1,9 +1,8 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use common\widgets\DbText;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -17,7 +16,7 @@ use common\widgets\DbText;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <?php include(Yii::getAlias('@frontend/views/layouts/css.php'));?>
+    <?php include Yii::getAlias('@frontend/views/layouts/css.php'); ?>
     <?php echo Html::csrfMetaTags() ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-25957518-1"></script>
@@ -91,39 +90,36 @@ use common\widgets\DbText;
 </head>
 <body>
 <?php $this->beginBody() ?>
-    <?php include(Yii::getAlias('@frontend/views/layouts/menu.php'));?>
-    <?php if(!isset($this->params['offslide']))
-        {
+    <?php include Yii::getAlias('@frontend/views/layouts/menu.php'); ?>
+    <?php if (!isset($this->params['offslide'])) {
+    echo \common\widgets\DbCarousel::widget([
+                'key'     => 'top_banner',
+                'options' => [
+                    'class' => 'slide', // enables slide effect
+                ],
+            ]);
+}
+        if (isset($this->params['slider'])) {
             echo \common\widgets\DbCarousel::widget([
-                'key'=>'top_banner',
+                'key'     => $this->params['slider'],
                 'options' => [
                     'class' => 'slide', // enables slide effect
                 ],
             ]);
         }
-        if(isset($this->params['slider'])){
-            echo \common\widgets\DbCarousel::widget([
-                'key'=>$this->params['slider'],
-                'options' => [
-                    'class' => 'slide', // enables slide effect
-                ],
-            ]);
-        }
-        
-    
-    
+
     ?>
      
     <div class="container<?= isset($this->params['fluid']) ? '-fluid' : ''?>" id="container">
 
         <?php //echo Breadcrumbs::widget([
             //'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-       // ]) ?>
+       // ])?>
 
-        <?php if(Yii::$app->session->hasFlash('alert')):?>
+        <?php if (Yii::$app->session->hasFlash('alert')):?>
             <?php echo \yii\bootstrap\Alert::widget([
-                'body'=>ArrayHelper::getValue(Yii::$app->session->getFlash('alert'), 'body'),
-                'options'=>ArrayHelper::getValue(Yii::$app->session->getFlash('alert'), 'options'),
+                'body'   => ArrayHelper::getValue(Yii::$app->session->getFlash('alert'), 'body'),
+                'options'=> ArrayHelper::getValue(Yii::$app->session->getFlash('alert'), 'options'),
             ])?>
         <?php endif; ?>
 
@@ -235,7 +231,7 @@ use common\widgets\DbText;
         <div class="back-to-top"><a href="#" title="Move to top">TOP</a> </div>
     </section>
 <?php $this->endBody() ?>
-<?php include(Yii::getAlias('@frontend/views/layouts/js.php'));?>
+<?php include Yii::getAlias('@frontend/views/layouts/js.php'); ?>
 </body>
 </html>
 <?php $this->endPage() ?>

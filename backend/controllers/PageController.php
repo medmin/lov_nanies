@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\Page;
 use backend\models\search\PageSearch;
+use common\models\Page;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PageController implements the CRUD actions for Page model.
@@ -18,7 +18,7 @@ class PageController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -28,6 +28,7 @@ class PageController extends Controller
 
     /**
      * Lists all Page models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -36,7 +37,7 @@ class PageController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -44,6 +45,7 @@ class PageController extends Controller
     /**
      * Creates a new Page model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -62,7 +64,9 @@ class PageController extends Controller
     /**
      * Updates an existing Page model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -81,7 +85,9 @@ class PageController extends Controller
     /**
      * Deletes an existing Page model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -94,9 +100,12 @@ class PageController extends Controller
     /**
      * Finds the Page model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Page the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return Page the loaded model
      */
     protected function findModel($id)
     {

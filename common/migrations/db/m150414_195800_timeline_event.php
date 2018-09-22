@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m150414_195800_timeline_event extends Migration
@@ -13,12 +12,12 @@ class m150414_195800_timeline_event extends Migration
         }
 
         $this->createTable('{{%timeline_event}}', [
-            'id' => $this->primaryKey(),
+            'id'          => $this->primaryKey(),
             'application' => $this->string(64)->notNull(),
-            'category' => $this->string(64)->notNull(),
-            'event' => $this->string(64)->notNull(),
-            'data' => $this->text(),
-            'created_at' => $this->integer()->notNull()
+            'category'    => $this->string(64)->notNull(),
+            'event'       => $this->string(64)->notNull(),
+            'data'        => $this->text(),
+            'created_at'  => $this->integer()->notNull(),
         ], $tableOptions);
 
         $this->createIndex('idx_created_at', '{{%timeline_event}}', 'created_at');
@@ -29,7 +28,7 @@ class m150414_195800_timeline_event extends Migration
             [
                 ['frontend', 'user', 'signup', json_encode(['public_identity' => 'webmaster', 'user_id' => 1, 'created_at' => time()]), time()],
                 ['frontend', 'user', 'signup', json_encode(['public_identity' => 'manager', 'user_id' => 2, 'created_at' => time()]), time()],
-                ['frontend', 'user', 'signup', json_encode(['public_identity' => 'user', 'user_id' => 3, 'created_at' => time()]), time()]
+                ['frontend', 'user', 'signup', json_encode(['public_identity' => 'user', 'user_id' => 3, 'created_at' => time()]), time()],
             ]
         );
     }

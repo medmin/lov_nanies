@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\ParentPost;
 use backend\models\search\ParentPostSearch;
+use common\models\ParentPost;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ParentPostController implements the CRUD actions for ParentPost model.
@@ -18,7 +18,7 @@ class ParentPostController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -28,6 +28,7 @@ class ParentPostController extends Controller
 
     /**
      * Lists all ParentPost models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -36,14 +37,16 @@ class ParentPostController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
      * Displays a single ParentPost model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -56,6 +59,7 @@ class ParentPostController extends Controller
     /**
      * Creates a new ParentPost model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -74,7 +78,9 @@ class ParentPostController extends Controller
     /**
      * Updates an existing ParentPost model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -93,7 +99,9 @@ class ParentPostController extends Controller
     /**
      * Deletes an existing ParentPost model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -106,9 +114,10 @@ class ParentPostController extends Controller
     }
 
     /**
-     * 审核通过
+     * 审核通过.
      *
      * @param $id
+     *
      * @return mixed
      */
     public function actionApproved($id)
@@ -121,9 +130,10 @@ class ParentPostController extends Controller
     }
 
     /**
-     * 审核失败
+     * 审核失败.
      *
      * @param $id
+     *
      * @return mixed
      */
     public function actionUnApproved($id)
@@ -141,9 +151,12 @@ class ParentPostController extends Controller
     /**
      * Finds the ParentPost model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return ParentPost the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return ParentPost the loaded model
      */
     protected function findModel($id)
     {

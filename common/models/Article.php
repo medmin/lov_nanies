@@ -2,9 +2,9 @@
 
 namespace common\models;
 
-use Yii;
 use common\models\query\ArticleQuery;
 use trntv\filekit\behaviors\UploadBehavior;
+use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "article".
  *
- * @property integer $id
+ * @property int $id
  * @property string $slug
  * @property string $title
  * @property string $body
@@ -21,14 +21,13 @@ use yii\db\ActiveRecord;
  * @property string $thumbnail_base_url
  * @property string $thumbnail_path
  * @property array $attachments
- * @property integer $category_id
- * @property integer $status
- * @property integer $published_at
- * @property integer $created_by
- * @property integer $updated_by
- * @property integer $created_at
- * @property integer $updated_at
- *
+ * @property int $category_id
+ * @property int $status
+ * @property int $published_at
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int $created_at
+ * @property int $updated_at
  * @property User $author
  * @property User $updater
  * @property ArticleCategory $category
@@ -50,7 +49,7 @@ class Article extends ActiveRecord
     public $thumbnail;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -66,7 +65,7 @@ class Article extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -74,33 +73,33 @@ class Article extends ActiveRecord
             TimestampBehavior::className(),
             BlameableBehavior::className(),
             [
-                'class' => SluggableBehavior::className(),
+                'class'     => SluggableBehavior::className(),
                 'attribute' => 'title',
-                'immutable' => true
+                'immutable' => true,
             ],
             [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'attachments',
-                'multiple' => true,
-                'uploadRelation' => 'articleAttachments',
-                'pathAttribute' => 'path',
+                'class'            => UploadBehavior::className(),
+                'attribute'        => 'attachments',
+                'multiple'         => true,
+                'uploadRelation'   => 'articleAttachments',
+                'pathAttribute'    => 'path',
                 'baseUrlAttribute' => 'base_url',
-                'orderAttribute' => 'order',
-                'typeAttribute' => 'type',
-                'sizeAttribute' => 'size',
-                'nameAttribute' => 'name',
+                'orderAttribute'   => 'order',
+                'typeAttribute'    => 'type',
+                'sizeAttribute'    => 'size',
+                'nameAttribute'    => 'name',
             ],
             [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'thumbnail',
-                'pathAttribute' => 'thumbnail_path',
-                'baseUrlAttribute' => 'thumbnail_base_url'
-            ]
+                'class'            => UploadBehavior::className(),
+                'attribute'        => 'thumbnail',
+                'pathAttribute'    => 'thumbnail_path',
+                'baseUrlAttribute' => 'thumbnail_base_url',
+            ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -117,29 +116,29 @@ class Article extends ActiveRecord
             [['slug', 'thumbnail_base_url', 'thumbnail_path'], 'string', 'max' => 1024],
             [['title'], 'string', 'max' => 512],
             [['view'], 'string', 'max' => 255],
-            [['attachments', 'thumbnail'], 'safe']
+            [['attachments', 'thumbnail'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'slug' => Yii::t('common', 'Slug'),
-            'title' => Yii::t('common', 'Title'),
-            'body' => Yii::t('common', 'Body'),
-            'view' => Yii::t('common', 'Article View'),
-            'thumbnail' => Yii::t('common', 'Thumbnail'),
-            'category_id' => Yii::t('common', 'Category'),
-            'status' => Yii::t('common', 'Published'),
+            'id'           => Yii::t('common', 'ID'),
+            'slug'         => Yii::t('common', 'Slug'),
+            'title'        => Yii::t('common', 'Title'),
+            'body'         => Yii::t('common', 'Body'),
+            'view'         => Yii::t('common', 'Article View'),
+            'thumbnail'    => Yii::t('common', 'Thumbnail'),
+            'category_id'  => Yii::t('common', 'Category'),
+            'status'       => Yii::t('common', 'Published'),
             'published_at' => Yii::t('common', 'Published At'),
-            'created_by' => Yii::t('common', 'Author'),
-            'updated_by' => Yii::t('common', 'Updater'),
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At')
+            'created_by'   => Yii::t('common', 'Author'),
+            'updated_by'   => Yii::t('common', 'Updater'),
+            'created_at'   => Yii::t('common', 'Created At'),
+            'updated_at'   => Yii::t('common', 'Updated At'),
         ];
     }
 

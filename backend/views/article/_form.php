@@ -2,8 +2,8 @@
 
 use trntv\filekit\widget\Upload;
 use trntv\yii\datetime\DateTimeWidget;
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
@@ -32,20 +32,20 @@ use yii\bootstrap\ActiveForm;
         [
             'plugins' => ['fullscreen', 'fontcolor', 'video'],
             'options' => [
-                'minHeight' => 400,
-                'maxHeight' => 400,
-                'buttonSource' => true,
-                'convertDivs' => false,
+                'minHeight'       => 400,
+                'maxHeight'       => 400,
+                'buttonSource'    => true,
+                'convertDivs'     => false,
                 'removeEmptyTags' => false,
-                'imageUpload' => Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi'])
-            ]
+                'imageUpload'     => Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi']),
+            ],
         ]
     ) ?>
 
     <?php echo $form->field($model, 'thumbnail')->widget(
         Upload::className(),
         [
-            'url' => ['/file-storage/upload'],
+            'url'         => ['/file-storage/upload'],
             'maxFileSize' => 5000000, // 5 MiB
         ]);
     ?>
@@ -53,10 +53,10 @@ use yii\bootstrap\ActiveForm;
     <?php echo $form->field($model, 'attachments')->widget(
         Upload::className(),
         [
-            'url' => ['/file-storage/upload'],
-            'sortable' => true,
-            'maxFileSize' => 10000000, // 10 MiB
-            'maxNumberOfFiles' => 10
+            'url'              => ['/file-storage/upload'],
+            'sortable'         => true,
+            'maxFileSize'      => 10000000, // 10 MiB
+            'maxNumberOfFiles' => 10,
         ]);
     ?>
 
@@ -67,7 +67,7 @@ use yii\bootstrap\ActiveForm;
     <?php echo $form->field($model, 'published_at')->widget(
         DateTimeWidget::className(),
         [
-            'phpDatetimeFormat' => 'yyyy-MM-dd\'T\'HH:mm:ssZZZZZ'
+            'phpDatetimeFormat' => 'yyyy-MM-dd\'T\'HH:mm:ssZZZZZ',
         ]
     ) ?>
 

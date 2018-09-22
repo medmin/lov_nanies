@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('backend', 'Update {modelClass}: ', [
     'modelClass' => 'Widget Carousel',
-]) . ' ' . $model->key;
+]).' '.$model->key;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Widget Carousels'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
 ?>
@@ -26,30 +26,30 @@ $this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
 
     <?php echo GridView::widget([
         'dataProvider' => $carouselItemsProvider,
-        'options' => [
-            'class' => 'grid-view table-responsive'
+        'options'      => [
+            'class' => 'grid-view table-responsive',
         ],
         'columns' => [
             'order',
             [
                 'attribute' => 'path',
-                'format' => 'raw',
-                'value' => function ($model) {
+                'format'    => 'raw',
+                'value'     => function ($model) {
                     return $model->path ? Html::img($model->getImageUrl(), ['style'=>'width: 100%']) : null;
-                }
+                },
             ],
             'url:url',
             [
-                'format' => 'html',
+                'format'    => 'html',
                 'attribute' => 'caption',
-                'options' => ['style' => 'width: 20%']
+                'options'   => ['style' => 'width: 20%'],
             ],
             'status',
 
             [
-                'class' => 'yii\grid\ActionColumn',
+                'class'      => 'yii\grid\ActionColumn',
                 'controller' => '/widget-carousel-item',
-                'template' => '{update} {delete}'
+                'template'   => '{update} {delete}',
             ],
         ],
     ]); ?>

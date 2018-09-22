@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\FileStorageItem;
 use backend\models\search\FileStorageItemSearch;
+use common\models\FileStorageItem;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * FileStorageController implements the CRUD actions for FileStorageItem model.
@@ -18,38 +18,38 @@ class FileStorageController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
-                    'upload-delete' => ['delete']
-                ]
-            ]
+                    'delete'        => ['post'],
+                    'upload-delete' => ['delete'],
+                ],
+            ],
         ];
     }
-
 
     public function actions()
     {
         return [
             'upload' => [
-                'class' => 'trntv\filekit\actions\UploadAction',
-                'deleteRoute' => 'upload-delete'
+                'class'       => 'trntv\filekit\actions\UploadAction',
+                'deleteRoute' => 'upload-delete',
             ],
             'upload-delete' => [
-                'class' => 'trntv\filekit\actions\DeleteAction'
+                'class' => 'trntv\filekit\actions\DeleteAction',
             ],
             'upload-imperavi' => [
-                'class' => 'trntv\filekit\actions\UploadAction',
-                'fileparam' => 'file',
+                'class'           => 'trntv\filekit\actions\UploadAction',
+                'fileparam'       => 'file',
                 'responseUrlParam'=> 'filelink',
-                'multiple' => false,
-                'disableCsrf' => true
-            ]
+                'multiple'        => false,
+                'disableCsrf'     => true,
+            ],
         ];
     }
 
     /**
      * Lists all FileStorageItem models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -57,7 +57,7 @@ class FileStorageController extends Controller
         $searchModel = new FileStorageItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->sort = [
-            'defaultOrder'=>['created_at'=>SORT_DESC]
+            'defaultOrder'=> ['created_at'=>SORT_DESC],
         ];
         $components = \yii\helpers\ArrayHelper::map(
             FileStorageItem::find()->select('component')->distinct()->all(),
@@ -67,29 +67,33 @@ class FileStorageController extends Controller
         $totalSize = FileStorageItem::find()->sum('size') ?: 0;
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-            'components' => $components,
-            'totalSize' => $totalSize
+            'components'   => $components,
+            'totalSize'    => $totalSize,
         ]);
     }
 
     /**
      * Displays a single FileStorageItem model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id)
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
      * Deletes an existing FileStorageItem model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -102,9 +106,12 @@ class FileStorageController extends Controller
     /**
      * Finds the FileStorageItem model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return FileStorageItem the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return FileStorageItem the loaded model
      */
     protected function findModel($id)
     {

@@ -2,23 +2,22 @@
 /**
  * User: xczizz
  * Date: 2018/6/16
- * Time: 21:12
+ * Time: 21:12.
  */
-
 
 namespace frontend\controllers;
 
+use common\models\ParentPost;
 use common\models\UserNotify;
 use common\models\UserOrder;
 use common\models\WidgetCarousel;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
-use common\models\ParentPost;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 class PostJobController extends Controller
 {
@@ -30,18 +29,18 @@ class PostJobController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'update', 'delete'],
+                'only'  => ['create', 'update', 'delete'],
                 'rules' => [
-                    ['allow' => true, 'roles' => ['@']]
-                ]
+                    ['allow' => true, 'roles' => ['@']],
+                ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'update' => ['post'],
-                    'delete' => ['post']
-                ]
-            ]
+                    'delete' => ['post'],
+                ],
+            ],
         ];
     }
 
@@ -51,9 +50,10 @@ class PostJobController extends Controller
         if ($action->id === 'create' && !($this->expired_at = UserOrder::ParentPostStatus(Yii::$app->user->id))) {
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class'=>'alert-danger'],
-                'body' => Yii::t('frontend', 'Please buy the Job Posting Only service, or a membership of 3 months or more. Thanks!', [], Yii::$app->user->identity->userProfile->locale)
+                'body'    => Yii::t('frontend', 'Please buy the Job Posting Only service, or a membership of 3 months or more. Thanks!', [], Yii::$app->user->identity->userProfile->locale),
             ]);
             $this->redirect(['user/default/get-credits']);
+
             return false;
         }
 //        if (($action->id === 'index' || $action->id === 'view') && key_exists('nanny', $this->user_roles) && !UserOrder::NannyListingFeeStatus(Yii::$app->user->id)) {
@@ -63,19 +63,20 @@ class PostJobController extends Controller
 //            ]);
 //            return $this->redirect(['user/default/get-credits'])->send();
 //        }
-        if ($action->id === 'posted' && !key_exists('seeker', $this->user_roles)) {
+        if ($action->id === 'posted' && !array_key_exists('seeker', $this->user_roles)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
         if (WidgetCarousel::findOne(['key' => 'job', 'status' => WidgetCarousel::STATUS_ACTIVE])) {
             Yii::$app->view->params['offslide'] = true;
             Yii::$app->view->params['slider'] = 'job';
         }
+
         return parent::beforeAction($action);
     }
 
     /**
      * job 列表页面
-     * 返回所有未到期并且状态正常的job
+     * 返回所有未到期并且状态正常的job.
      *
      * @return string|\yii\web\Response
      */
@@ -88,18 +89,17 @@ class PostJobController extends Controller
         $query = ParentPost::find()->where(['status' => ParentPost::STATUS_ACTIVE])->andWhere(['>', 'expired_at', time()])->orderBy('created_at DESC');
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
         ]);
 
         Yii::$app->view->params['offslide'] = true;
         Yii::$app->view->params['slider'] = 'find-a-job';
 
         return $this->render('/parent_post/index', ['dataProvider' => $dataProvider]);
-
     }
 
     /**
-     * 获取用户自己的post
+     * 获取用户自己的post.
      *
      * @return string
      */
@@ -107,7 +107,7 @@ class PostJobController extends Controller
     {
         $query = ParentPost::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['<>', 'status', ParentPost::STATUS_DELETED])->orderBy('created_at DESC');
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
         ]);
 
         Yii::$app->view->params['offslide'] = true;
@@ -117,7 +117,7 @@ class PostJobController extends Controller
     }
 
     /**
-     * 新建
+     * 新建.
      *
      * @return string|\yii\web\Response
      */
@@ -133,18 +133,20 @@ class PostJobController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
+
         return $this->render('/parent_post/create', [
             'model' => $model,
         ]);
-
     }
 
     /**
-     * 详情页
+     * 详情页.
      *
      * @param $id
-     * @return string
+     *
      * @throws NotFoundHttpException
+     *
+     * @return string
      */
     public function actionView($id)
     {
@@ -156,11 +158,12 @@ class PostJobController extends Controller
         if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
         return $this->render('/parent_post/view', ['model' => $model]);
     }
 
     /**
-     * 更新
+     * 更新.
      *
      * @return string|\yii\web\Response
      */
@@ -168,6 +171,7 @@ class PostJobController extends Controller
     {
         if ($id = Yii::$app->request->post('id')) {
             $model = $this->findModel($id);
+
             return $this->render('/parent_post/create', ['model' => $model]);
         } elseif ($form = Yii::$app->request->post('ParentPost')) {
             $model = $this->findModel($form['id']);
@@ -183,7 +187,7 @@ class PostJobController extends Controller
     }
 
     /**
-     * 删除
+     * 删除.
      *
      * @return \yii\web\Response
      */
@@ -194,16 +198,19 @@ class PostJobController extends Controller
             $model->status = ParentPost::STATUS_DELETED;
             $model->save();
         }
+
         return $this->redirect(['index']);
     }
 
     /**
-     * 通过 id 获取 model
+     * 通过 id 获取 model.
      *
      * @param $id
      * @param $only_id bool 是否只查询id
-     * @return array|null|\yii\db\ActiveRecord
+     *
      * @throws NotFoundHttpException
+     *
+     * @return array|null|\yii\db\ActiveRecord
      */
     protected function findModel($id, $only_id = false)
     {
@@ -224,7 +231,7 @@ class PostJobController extends Controller
     }
 
     /**
-     * 联系job
+     * 联系job.
      */
     public function actionContact()
     {
@@ -251,8 +258,9 @@ class PostJobController extends Controller
         if ($model->save()) {
             Yii::$app->session->setFlash('alert', [
                 'options' => ['class'=>'alert-success'],
-                'body' => Yii::t('frontend', 'The message has been sent', [], Yii::$app->user->identity->userProfile->locale)
+                'body'    => Yii::t('frontend', 'The message has been sent', [], Yii::$app->user->identity->userProfile->locale),
             ]);
+
             return ['status' => true];
         } else {
             return ['status' => false, 'message' => 'error'];

@@ -2,15 +2,14 @@
 
 namespace backend\models\search;
 
-use Yii;
+use common\models\WidgetText;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\WidgetText;
 
 class WidgetTextSearch extends WidgetText
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -21,7 +20,7 @@ class WidgetTextSearch extends WidgetText
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -30,7 +29,8 @@ class WidgetTextSearch extends WidgetText
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -46,7 +46,7 @@ class WidgetTextSearch extends WidgetText
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'     => $this->id,
             'status' => $this->status,
         ]);
 

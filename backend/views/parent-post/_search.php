@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\search\ParentPostSearch */
@@ -25,15 +25,15 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'type_of_help') ?>
 
-    <?php // echo $form->field($model, 'summary') ?>
+    <?php // echo $form->field($model, 'summary')?>
 
-    <?php // echo $form->field($model, 'description') ?>
+    <?php // echo $form->field($model, 'description')?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?php // echo $form->field($model, 'status')?>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+    <?php // echo $form->field($model, 'created_at')?>
 
-    <?php // echo $form->field($model, 'expired_at') ?>
+    <?php // echo $form->field($model, 'expired_at')?>
 
     <div class="form-group">
         <?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

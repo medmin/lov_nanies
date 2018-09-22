@@ -1,8 +1,8 @@
 <?php
 
 use common\models\UserProfile;
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\UserProfile */
@@ -16,7 +16,7 @@ $this->title = Yii::t('backend', 'Edit profile')
     <?php $form = ActiveForm::begin(); ?>
 
     <?php echo $form->field($model, 'picture')->widget(\trntv\filekit\widget\Upload::classname(), [
-        'url'=>['avatar-upload']
+        'url'=> ['avatar-upload'],
     ]) ?>
 
 
@@ -24,7 +24,7 @@ $this->title = Yii::t('backend', 'Edit profile')
 
     <?php echo $form->field($model, 'gender')->dropDownlist([
         UserProfile::GENDER_FEMALE => Yii::t('backend', 'Female'),
-        UserProfile::GENDER_MALE => Yii::t('backend', 'Male')
+        UserProfile::GENDER_MALE   => Yii::t('backend', 'Male'),
     ]) ?>
 
     <div class="form-group">

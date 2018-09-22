@@ -3,7 +3,6 @@
 namespace backend\models\search;
 
 use common\models\TimelineEvent;
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -13,7 +12,7 @@ use yii\data\ActiveDataProvider;
 class TimelineEventSearch extends TimelineEvent
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -23,7 +22,7 @@ class TimelineEventSearch extends TimelineEvent
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -32,7 +31,7 @@ class TimelineEventSearch extends TimelineEvent
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -51,7 +50,7 @@ class TimelineEventSearch extends TimelineEvent
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'         => $this->id,
             'created_at' => $this->created_at,
         ]);
 

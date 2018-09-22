@@ -11,14 +11,13 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "{{%user_token}}".
  *
- * @property integer $id
- * @property integer $user_id
+ * @property int $id
+ * @property int $user_id
  * @property string $type
  * @property string $token
- * @property integer $expire_at
- * @property integer $created_at
- * @property integer $updated_at
- *
+ * @property int $expire_at
+ * @property int $created_at
+ * @property int $updated_at
  * @property User $user
  */
 class UserToken extends ActiveRecord
@@ -28,7 +27,7 @@ class UserToken extends ActiveRecord
     const TYPE_PASSWORD_RESET = 'password_reset';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -41,7 +40,7 @@ class UserToken extends ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
         ];
     }
 
@@ -53,9 +52,8 @@ class UserToken extends ActiveRecord
         return new UserTokenQuery(get_called_class());
     }
 
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -63,21 +61,21 @@ class UserToken extends ActiveRecord
             [['user_id', 'type', 'token'], 'required'],
             [['user_id', 'expire_at'], 'integer'],
             [['type'], 'string', 'max' => 255],
-            [['token'], 'string', 'max' => self::TOKEN_LENGTH]
+            [['token'], 'string', 'max' => self::TOKEN_LENGTH],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'user_id' => Yii::t('common', 'User ID'),
-            'type' => Yii::t('common', 'Type'),
-            'token' => Yii::t('common', 'Token'),
-            'expire_at' => Yii::t('common', 'Expire At'),
+            'id'         => Yii::t('common', 'ID'),
+            'user_id'    => Yii::t('common', 'User ID'),
+            'type'       => Yii::t('common', 'Type'),
+            'token'      => Yii::t('common', 'Token'),
+            'expire_at'  => Yii::t('common', 'Expire At'),
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Updated At'),
         ];
@@ -92,27 +90,27 @@ class UserToken extends ActiveRecord
     }
 
     /**
-     * @param mixed $user_id
-     * @param string $type
+     * @param mixed    $user_id
+     * @param string   $type
      * @param int|null $duration
+     *
      * @return bool|UserToken
      */
     public static function create($user_id, $type, $duration = null)
     {
-        $model = new self;
+        $model = new self();
         $model->setAttributes([
-            'user_id' => $user_id,
-            'type' => $type,
-            'token' => Yii::$app->security->generateRandomString(self::TOKEN_LENGTH),
-            'expire_at' => $duration ? time() + $duration : null
+            'user_id'   => $user_id,
+            'type'      => $type,
+            'token'     => Yii::$app->security->generateRandomString(self::TOKEN_LENGTH),
+            'expire_at' => $duration ? time() + $duration : null,
         ]);
 
         if (!$model->save()) {
-            throw new InvalidCallException;
-        };
+            throw new InvalidCallException();
+        }
 
         return $model;
-
     }
 
     /**
@@ -121,7 +119,7 @@ class UserToken extends ActiveRecord
     public function renew($duration)
     {
         $this->updateAttributes([
-            'expire_at' => $duration ? time() + $duration : null
+            'expire_at' => $duration ? time() + $duration : null,
         ]);
     }
 

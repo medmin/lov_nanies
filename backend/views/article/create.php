@@ -12,8 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="article-create">
 
     <?php echo $this->render('_form', [
-        'model' => $model,
-        'categories' => $categories
+        'model'      => $model,
+        'categories' => $categories,
     ]) ?>
 
 </div>

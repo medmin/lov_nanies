@@ -10,11 +10,11 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "text_block".
  *
- * @property integer $id
+ * @property int $id
  * @property string $key
  * @property string $title
  * @property string $body
- * @property integer $status
+ * @property int $status
  */
 class WidgetText extends ActiveRecord
 {
@@ -22,7 +22,7 @@ class WidgetText extends ActiveRecord
     const STATUS_DRAFT = 0;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -30,29 +30,29 @@ class WidgetText extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
             'cacheInvalidate' => [
-                'class' => CacheInvalidateBehavior::className(),
+                'class'          => CacheInvalidateBehavior::className(),
                 'cacheComponent' => 'frontendCache',
-                'keys' => [
+                'keys'           => [
                     function ($model) {
                         return [
                             self::className(),
-                            $model->key
+                            $model->key,
                         ];
-                    }
-                ]
-            ]
+                    },
+                ],
+            ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -61,20 +61,20 @@ class WidgetText extends ActiveRecord
             [['key'], 'unique'],
             [['body'], 'string'],
             [['status'], 'integer'],
-            [['title', 'key'], 'string', 'max' => 255]
+            [['title', 'key'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'key' => Yii::t('common', 'Key'),
-            'title' => Yii::t('common', 'Title'),
-            'body' => Yii::t('common', 'Body'),
+            'id'     => Yii::t('common', 'ID'),
+            'key'    => Yii::t('common', 'Key'),
+            'title'  => Yii::t('common', 'Title'),
+            'body'   => Yii::t('common', 'Body'),
             'status' => Yii::t('common', 'Active'),
         ];
     }

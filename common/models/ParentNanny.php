@@ -11,13 +11,12 @@ use Yii;
  * @property int $parentid
  * @property int $nannyid
  * @property int $timestamp
- *
  * @property Nannies $nanny
  */
 class ParentNanny extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -25,7 +24,7 @@ class ParentNanny extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -36,14 +35,14 @@ class ParentNanny extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'parentid' => Yii::t('app', 'Parent ID'),
-            'nannyid' => Yii::t('app', 'Nanny ID'),
+            'id'        => Yii::t('app', 'ID'),
+            'parentid'  => Yii::t('app', 'Parent ID'),
+            'nannyid'   => Yii::t('app', 'Nanny ID'),
             'timestamp' => Yii::t('app', 'Timestamp'),
         ];
     }
@@ -52,6 +51,4 @@ class ParentNanny extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Nannies::className(), ['id' => 'nannyid']);
     }
-
 }
-

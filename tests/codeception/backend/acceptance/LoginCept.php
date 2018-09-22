@@ -1,7 +1,7 @@
 <?php
 
-use tests\codeception\backend\AcceptanceTester;
 use tests\codeception\backend\_pages\LoginPage;
+use tests\codeception\backend\AcceptanceTester;
 
 /* @var $scenario Codeception\Scenario */
 
@@ -36,7 +36,7 @@ if (method_exists($I, 'wait')) {
 $I->expectTo('see that user is logged');
 $I->seeLink('Logout');
 
-/** Uncomment if using WebDriver
+/* Uncomment if using WebDriver
  * $I->click('Logout (erau)');
  * $I->dontSeeLink('Logout (erau)');
  * $I->seeLink('Login');

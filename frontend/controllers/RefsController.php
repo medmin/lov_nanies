@@ -2,12 +2,12 @@
 
 namespace frontend\controllers;
 
-use Yii;
 use common\models\Refs;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * RefsController implements the CRUD actions for Refs model.
@@ -15,13 +15,13 @@ use yii\filters\VerbFilter;
 class RefsController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -31,6 +31,7 @@ class RefsController extends Controller
 
     /**
      * Lists all Refs models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -46,7 +47,9 @@ class RefsController extends Controller
 
     /**
      * Displays a single Refs model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -59,20 +62,21 @@ class RefsController extends Controller
     /**
      * Creates a new Refs model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
     {
         $model = new Refs();
         if ($model->load(Yii::$app->request->post())) {
-            $model->email=\Yii::$app->user->identity->email;
-            if($model->save()){
-                
-            }else{
+            $model->email = \Yii::$app->user->identity->email;
+            if ($model->save()) {
+            } else {
                 return $this->render('create', [
                 'model' => $model,
             ]);
             }
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -84,7 +88,9 @@ class RefsController extends Controller
     /**
      * Updates an existing Refs model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -103,7 +109,9 @@ class RefsController extends Controller
     /**
      * Deletes an existing Refs model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -116,9 +124,12 @@ class RefsController extends Controller
     /**
      * Finds the Refs model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Refs the loaded model
+     *
+     * @param int $id
+     *
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return Refs the loaded model
      */
     protected function findModel($id)
     {

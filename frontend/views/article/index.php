@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 use yii\web\View;
+
 $this->title = Yii::t('frontend', 'Articles');
 $this->registerJs(
     '
@@ -17,12 +18,12 @@ $this->registerJs(
     <div class="row row-margin article">
     <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
         <?php echo \yii\widgets\ListView::widget([
-            'dataProvider'=>$dataProvider,
-            'pager'=>[
-                'hideOnSinglePage'=>true,
+            'dataProvider'=> $dataProvider,
+            'pager'       => [
+                'hideOnSinglePage'=> true,
             ],
-            'summary'=>'',
-            'itemView'=>'_item'
+            'summary' => '',
+            'itemView'=> '_item',
         ])?>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">

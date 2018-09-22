@@ -5,12 +5,12 @@ namespace common\models;
 use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 use yii\db\ActiveRecord;
-use common\models\PostalCode;
+
 /**
  * This is the model class for table "user_profile".
  *
- * @property integer $user_id
- * @property integer $locale
+ * @property int $user_id
+ * @property int $locale
  * @property string $firstname
  * @property string $middlename
  * @property string $lastname
@@ -18,8 +18,7 @@ use common\models\PostalCode;
  * @property string $avatar
  * @property string $avatar_path
  * @property string $avatar_base_url
- * @property integer $gender
- *
+ * @property int $gender
  * @property User $user
  */
 class UserProfile extends ActiveRecord
@@ -33,7 +32,9 @@ class UserProfile extends ActiveRecord
     /**
      * @var
      */
-    public $picture, $age, $city;
+    public $picture;
+    public $age;
+    public $city;
 
     /**
      * @return array
@@ -42,17 +43,16 @@ class UserProfile extends ActiveRecord
     {
         return [
             'picture' => [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'picture',
-                'pathAttribute' => 'avatar_path',
-                'baseUrlAttribute' => 'avatar_base_url'
-            ],   
+                'class'            => UploadBehavior::className(),
+                'attribute'        => 'picture',
+                'pathAttribute'    => 'avatar_path',
+                'baseUrlAttribute' => 'avatar_base_url',
+            ],
         ];
     }
 
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -60,7 +60,7 @@ class UserProfile extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -74,19 +74,19 @@ class UserProfile extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'user_id' => 'User ID',
-            'firstname' => 'First Name',
-            'middlename' => 'Middle Name',
-            'lastname' => 'Last Name',
-            'avatar_path' => 'Avatar Path',
+            'user_id'         => 'User ID',
+            'firstname'       => 'First Name',
+            'middlename'      => 'Middle Name',
+            'lastname'        => 'Last Name',
+            'avatar_path'     => 'Avatar Path',
             'avatar_base_url' => 'Avatar Base Url',
-            'locale' => 'Locale',
-            'gender' => 'Gender',
+            'locale'          => 'Locale',
+            'gender'          => 'Gender',
         ];
     }
 
@@ -185,6 +185,7 @@ class UserProfile extends ActiveRecord
 //        }
 //        return $age;
 //    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -192,37 +193,38 @@ class UserProfile extends ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
-    
+
     /**
      * @return null|string
      */
     public function getFullName()
     {
-        
-        return null;
     }
 
     /**
      * @param null $default
+     *
      * @return bool|null|string
      */
     public function getAvatar($default = null)
     {
         return $this->avatar_path
-            ? Yii::getAlias($this->avatar_base_url . '/' . $this->avatar_path)
+            ? Yii::getAlias($this->avatar_base_url.'/'.$this->avatar_path)
             : $default;
     }
+
     public function getPublicIdentity()
     {
         return $this->email;
     }
+
     public static function statuses()
     {
         return [
-            self::STATUS_APPROVED => Yii::t('common', 'Approved'),
+            self::STATUS_APPROVED   => Yii::t('common', 'Approved'),
             self::STATUS_UNAPPROVED => Yii::t('common', 'Unapproved'),
-            self::STATUS_INACTIVE => Yii::t('common', 'Inactive'),
-            self::STATUS_DELETED => Yii::t('common', 'Deleted')
+            self::STATUS_INACTIVE   => Yii::t('common', 'Inactive'),
+            self::STATUS_DELETED    => Yii::t('common', 'Deleted'),
         ];
     }
 }

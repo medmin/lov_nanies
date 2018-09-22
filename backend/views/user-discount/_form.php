@@ -21,14 +21,14 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'expired_at')->widget(\kartik\datetime\DateTimePicker::className(), [
         'options' => [
             'placeholder' => 'select date',
-            'value' => date('Y-m-d H:i:s', $model->expired_at ?: time() + 24*3600)
+            'value'       => date('Y-m-d H:i:s', $model->expired_at ?: time() + 24 * 3600),
         ],
         'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'yyyy-mm-dd hh:ii:ss',
-            'initialDate' => date('Y-m-d H:i:s', $model->expired_at ?: time()+ 24*3600),
-            'todayHighlight' => true
-        ]
+            'autoclose'      => true,
+            'format'         => 'yyyy-mm-dd hh:ii:ss',
+            'initialDate'    => date('Y-m-d H:i:s', $model->expired_at ?: time() + 24 * 3600),
+            'todayHighlight' => true,
+        ],
     ]) ?>
 
     <div class="form-group">

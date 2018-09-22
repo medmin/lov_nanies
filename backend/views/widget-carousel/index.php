@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\WidgetCarouselSearch */
@@ -20,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => [
-            'class' => 'grid-view table-responsive'
+        'filterModel'  => $searchModel,
+        'options'      => [
+            'class' => 'grid-view table-responsive',
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -30,17 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'key',
             [
-                'class'=>\common\grid\EnumColumn::className(),
-                'attribute'=>'status',
-                'enum'=>[
+                'class'    => \common\grid\EnumColumn::className(),
+                'attribute'=> 'status',
+                'enum'     => [
                     Yii::t('backend', 'Disabled'),
-                    Yii::t('backend', 'Enabled')
+                    Yii::t('backend', 'Enabled'),
                 ],
             ],
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update} {delete}'
+                'class'   => 'yii\grid\ActionColumn',
+                'template'=> '{update} {delete}',
             ],
         ],
     ]); ?>
