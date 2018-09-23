@@ -24,7 +24,7 @@ $this->registerJs(
     <form class="form-inline" action="/user/sign-in/manual-activation" method="post">
         <div class="form-group">
             <label for="myEmail" class="sr-only">My Email</label>
-            <input type="email" class="form-control" id="myEmail" name="myEmail" placeholder="email">
+            <?= Html::input('email', 'myEmail', Yii::$app->request->getQueryParam('email') ?? '', ['id' => 'myEmail', 'class' => 'form-control', 'placeholder' => 'email']) ?>
         </div>
         <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
         <button type="submit" class="btn btn-primary">Activate My Account</button>

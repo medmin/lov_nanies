@@ -105,22 +105,29 @@ class SignInController extends \yii\web\Controller
         Yii::$app->view->params['slider'] = "login";
 
         if(Yii::$app->request->post()){
-
+            $model->load($_POST);
             $login = Yii::$app->request->post('LoginForm')['identity'];
 
-            $userStatus = User::find()
+            $user = User::find()
                         ->where([
                                 'or',
                                 ['username'=>$login ],
                                 ['email'=>$login] 
                             ])
-                        ->one()
-                        ->status;
-
-            if ($userStatus !== 2 )
-            {
-                Yii::$app->session->setFlash('LOGIN_ERROR');
-                return $this->render('login', ['model' => $model]);
+                        ->one();
+            if ($user) {
+                if ($user->status == User::STATUS_DELETED)
+                {
+                    Yii::$app->session->setFlash('alert', [
+                        'options'=>['class'=>'alert-danger'],
+                        'body'=>Yii::t('frontend', 'Sorry, user was disabled', [])
+                    ]);
+                    return $this->render('login', ['model' => $model]);
+                }
+                if ($user->status == User::STATUS_NOT_ACTIVE) {
+                    Yii::$app->session->setFlash('LOGIN_ERROR');
+                    return $this->render('login', ['model' => $model]);
+                }
             }
         }
         

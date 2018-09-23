@@ -24,7 +24,7 @@ $this->registerJs(
     <?php if (Yii::$app->session->getFlash('LOGIN_ERROR')) : ?>
         <p class="bg-warning">
             Your account is not activated yet. <br />
-            <a href="/user/sign-in/manual-activation">Please click here to activate it!</a>
+            <?= Html::a('Please click here to activate it!', '/user/sign-in/manual-activation' . (filter_var($model->identity, FILTER_VALIDATE_EMAIL) ? ('?email=' . $model->identity) : ''))?>
         </p>
     <?php endif ?>
     <h1><?= Html::encode($this->title) ?></h1>
@@ -48,6 +48,9 @@ $this->registerJs(
                         <?= Yii::t('frontend', 'Need an account? <a href="{link}">Register a new one.</a>', [
                             'link'=>Url::to(['sign-in/signup'])
                         ]) ?>
+                    </p>
+                    <p class="pull-left">
+                        <?= Html::a('Click here to read the Terms and Conditions and Privacy Policy', 'https://nannycare.nyc3.digitaloceanspaces.com/assets/NCTerms2018Revised.pdf', ['target' => '_blank'])?>
                     </p>
                 </div>
 
